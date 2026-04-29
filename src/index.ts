@@ -77,6 +77,62 @@ app.use(express.static(path.join(process.cwd(), 'web', 'dist')))
 // KNOWLEDGE BROWSER API
 // ---------------------------------------------------------
 
+async function scanAtomsFallback(gksRoot: string) {
+  const atoms: any[] = []
+  const gksDir = path.join(gksRoot, 'gks')
+  let types: string[] = []
+  try {
+    types = await fs.readdir(gksDir)
+  } catch (e) {
+    return atoms // No gks dir
+  }
+
+  for (const typeFolder of types) {
+    if (typeFolder === '00_index' || typeFolder === 'hotfix') continue
+    const typePath = path.join(gksDir, typeFolder)
+    try {
+      const stat = await fs.stat(typePath)
+      if (!stat.isDirectory()) continue
+      
+      const files = await fs.readdir(typePath)
+      for (const file of files) {
+        if (!file.endsWith('.md')) continue
+        try {
+          const content = await fs.readFile(path.join(typePath, file), 'utf-8')
+          const match = content.match(/^---\n([\s\S]*?)\n---/)
+          if (!match) continue
+          
+          const fmStr = match[1]
+          const lines = fmStr.split('\n')
+          let entry: any = { type: typeFolder.toUpperCase() }
+          let currentArray: string[] | null = null
+          
+          for (const line of lines) {
+            if (line.startsWith('  - ')) {
+              if (currentArray) currentArray.push(line.replace('  - ', '').trim())
+              continue
+            }
+            const colonIdx = line.indexOf(':')
+            if (colonIdx > -1) {
+              const key = line.slice(0, colonIdx).trim()
+              const val = line.slice(colonIdx + 1).trim()
+              if (!val) {
+                currentArray = []
+                entry[key] = currentArray
+              } else {
+                entry[key] = val
+                currentArray = null
+              }
+            }
+          }
+          atoms.push(entry)
+        } catch (e) {}
+      }
+    } catch (e) {}
+  }
+  return atoms
+}
+
 app.get('/api/atoms', async (req, res) => {
   try {
     const typeFilter = req.query.type as string | undefined
@@ -97,9 +153,13 @@ app.get('/api/atoms', async (req, res) => {
         } catch (e) {}
       }
     } catch (e) {
-      // Fallback: scan directories if index not found (simplified)
-      // This is a minimal fallback, ideally the index exists.
-      console.warn('Index not found, fallback scanning not fully implemented', e)
+      // Fallback: scan directories if index not found
+      const scanned = await scanAtomsFallback(GKS_ROOT)
+      for (const entry of scanned) {
+        if (typeFilter && entry.type !== typeFilter) continue
+        if (statusFilter && entry.status !== statusFilter) continue
+        atoms.push(entry)
+      }
     }
     
     res.json(atoms)
@@ -165,20 +225,27 @@ app.get('/api/graph', async (req, res) => {
     const indexPath = path.join(GKS_ROOT, 'gks', '00_index', 'atomic_index.jsonl')
     const nodes: any[] = []
     const edges: any[] = []
+    let atomEntries: any[] = []
     
-    const data = await fs.readFile(indexPath, 'utf-8')
-    const lines = data.split('\n').filter(l => l.trim())
+    try {
+      const data = await fs.readFile(indexPath, 'utf-8')
+      const lines = data.split('\n').filter(l => l.trim())
+      for (const line of lines) {
+        try {
+          atomEntries.push(JSON.parse(line))
+        } catch (e) {}
+      }
+    } catch (e) {
+      atomEntries = await scanAtomsFallback(GKS_ROOT)
+    }
     
-    for (const line of lines) {
-      try {
-        const entry = JSON.parse(line)
-        nodes.push({ id: entry.id, type: entry.type, title: entry.title })
-        if (entry.links && Array.isArray(entry.links)) {
-          for (const target of entry.links) {
-            edges.push({ source: entry.id, target })
-          }
+    for (const entry of atomEntries) {
+      nodes.push({ id: entry.id, type: entry.type, title: entry.title })
+      if (entry.links && Array.isArray(entry.links)) {
+        for (const target of entry.links) {
+          edges.push({ source: entry.id, target })
         }
-      } catch (e) {}
+      }
     }
     
     res.json({ nodes, edges })
