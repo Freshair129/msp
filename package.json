@@ -1,0 +1,31 @@
+{
+  "name": "msp",
+  "version": "0.1.0",
+  "description": "Memory & Soul Passport — gatekeeper layer over @freshair129/gks",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "msp:propose": "gks propose-inbound",
+    "msp:list": "gks inbound list",
+    "msp:promote": "gks inbound promote",
+    "msp:index": "gks validate --links --root=.",
+    "msp:verify": "gks verify-flow",
+    "msp:validate": "tsx src/validator/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@freshair129/gks": "^3.5.6",
+    "yaml": "^2.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  }
+}
