@@ -9,6 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [20, 22]
     steps:
@@ -36,8 +37,12 @@ jobs:
       - name: msp:validate (whole tree)
         run: npm run msp:validate -- --all --root=.
 
-      - name: msp:backlinks (drift assertion)
-        run: npm run msp:backlinks -- --check
+      - name: msp:backlinks (rebuild + determinism check)
+        run: |
+          # The .jsonl is gitignored — fresh checkout has no file to compare against.
+          # Build it once, then run --check to assert a second pass is no-op (deterministic).
+          npm run msp:backlinks
+          npm run msp:backlinks -- --check
 
       - name: msp:check-links (gks crosslink integrity)
         run: npm run msp:check-links
