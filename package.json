@@ -18,7 +18,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "msp:backlinks": "tsx src/memory/backlinks/cli.ts"
+    "msp:backlinks": "tsx src/memory/backlinks/cli.ts",
+    "msp:run-task": "tsx src/codegen/cli.ts"
   },
   "dependencies": {
     "@freshair129/gks": "^3.5.6",
