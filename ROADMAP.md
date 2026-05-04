@@ -2,7 +2,7 @@
 
 > **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md) (atom in the canonical knowledge graph). This file is a public-facing summary; for the full plan including atom counts, dependencies, and revision policy, read the atom.
 
-## Status (latest: PR #8 / M7-prep)
+## Status (latest: PR #9 / M7a)
 
 | Milestone | What | Status |
 |---|---|---|
@@ -12,13 +12,14 @@
 | M5 a-f | Pre-push hook + hotfix wrapper + 3 anti-hallucination rules + required-fields contract + ADR--HUMAN-REVIEW-GATES + shellcheck CI | ✅ merged |
 | M6 | `msp-mcp-server` (6 tools over stdio MCP) | ✅ merged |
 | M7-prep | Architecture v2 + spec 2.0.0 (passport over Obsidian-backed GKS) | ✅ merged (PR #8) |
-| **M7-prep follow-up** | **GKS audit alignment** — graph→GKS, embedding model parity, env var rename, 4 upstream drafts | 🟢 in progress |
+| M7-prep follow-up | GKS audit alignment + 5 upstream drafts + v0.2.0 | ✅ merged (PR #9) |
+| **M7a** | **Obsidian client wrapper (GKS REST adapter delegate + filesystem fallback)** | 🟢 in progress (PR #12) |
 
 ## Coming up
 
 ### M7 — passport core
 Make MSP actually carry memory + soul + retrieval (not just gatekeep writes).
-- M7a — Wrap GKS `RestObsidianAdapter` + Smart Connections probe (small — GKS provides the adapter)
+- M7a — Wrap GKS `RestObsidianAdapter` + filesystem fallback ✅
 - M7b — Consolidator (importance + summarise)
 - M7c — Retrieval orchestration (`msp_recall` fuses GKS vector + episodic + backlinks via RRF)
 - M7d — Context compression (token-budget aware)
