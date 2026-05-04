@@ -1,3 +1,5 @@
+import { basename } from 'node:path'
+
 import { createRestObsidianAdapter } from '@freshair129/gks/memory'
 
 import { isLoopback } from './env.js'
@@ -12,6 +14,15 @@ interface RestOpts {
 
 function smartViewDeepLink(atomId: string): string {
   return `obsidian://advanced-uri?vault=&filename=${encodeURIComponent(atomId)}`
+}
+
+/**
+ * Convert a relative file path into the wikilink target shape that
+ * GKS's `resolveWikilink` expects (basename, no .md extension).
+ * Exported for unit tests.
+ */
+export function wikilinkTargetFor(relPath: string): string {
+  return basename(relPath).replace(/\.md$/i, '')
 }
 
 export function makeRestClient(opts: RestOpts): ObsidianClient {
@@ -36,7 +47,9 @@ export function makeRestClient(opts: RestOpts): ObsidianClient {
       }))
     },
     async readFile(relPath: string) {
-      const note = await adapter.resolveWikilink(relPath.replace(/\.md$/i, ''))
+      // resolveWikilink expects a wikilink target (basename / atom id),
+      // not a full path. e.g. 'gks/adr/ADR--FOO.md' → 'ADR--FOO'.
+      const note = await adapter.resolveWikilink(wikilinkTargetFor(relPath))
       if (!note) throw new Error(`obsidian rest: file not found: ${relPath}`)
       return note.body
     },
@@ -67,10 +80,16 @@ export async function probe(opts: {
   timeoutMs: number
   fetchImpl: typeof fetch
 }): Promise<boolean> {
-  if (!isLoopback(opts.url) && opts.url.startsWith('https://')) {
-    if (process.env.OBSIDIAN_INSECURE !== 'true') {
-      // Non-loopback HTTPS without explicit override is rejected per ADR.
-    }
+  // Per ADR--MSP-OBSIDIAN-INTEGRATION §TLS: TLS bypass is only allowed
+  // for loopback hosts. Non-loopback HTTPS requires OBSIDIAN_INSECURE=true
+  // for explicit local-dev override; otherwise we refuse to probe and let
+  // the caller fall through to filesystem mode.
+  if (
+    !isLoopback(opts.url) &&
+    opts.url.startsWith('https://') &&
+    process.env.OBSIDIAN_INSECURE !== 'true'
+  ) {
+    return false
   }
   const ctrl = new AbortController()
   const t = setTimeout(() => ctrl.abort(), opts.timeoutMs)
@@ -82,7 +101,10 @@ export async function probe(opts: {
       },
       signal: ctrl.signal,
     })
-    return res.ok || res.status === 401
+    // 200/204 = healthy. 401 means server is up but our key is wrong —
+    // continuing into REST mode would just fail every call, so fall back
+    // to filesystem instead. Other 4xx/5xx → also fall back.
+    return res.ok
   } catch {
     return false
   } finally {

@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { createObsidianClient } from '../../src/obsidian/client.js'
 import { _resetWarnedForTests, resolveEnv, isLoopback } from '../../src/obsidian/env.js'
 import { makeFilesystemClient } from '../../src/obsidian/filesystem.js'
-import { makeRestClient, probe } from '../../src/obsidian/rest.js'
+import { makeRestClient, probe, wikilinkTargetFor } from '../../src/obsidian/rest.js'
 
 async function fixtureVault(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), 'msp-obsidian-'))
@@ -118,7 +118,7 @@ describe('createObsidianClient — rest mode', () => {
     expect(c.mode).toBe('filesystem')
   })
 
-  it('treats 401 as a healthy probe (server responded)', async () => {
+  it('treats 401 as unhealthy (wrong key → fall back to filesystem)', async () => {
     process.env.OBSIDIAN_URL = 'http://127.0.0.1:27124'
     process.env.OBSIDIAN_API_KEY = 'wrong-token'
     const ok = await probe({
@@ -128,7 +128,50 @@ describe('createObsidianClient — rest mode', () => {
       fetchImpl: (async () =>
         new Response('unauthorized', { status: 401 })) as unknown as typeof fetch,
     })
+    expect(ok).toBe(false)
+  })
+
+  it('rejects non-loopback HTTPS without OBSIDIAN_INSECURE (no fetch made)', async () => {
+    delete process.env.OBSIDIAN_INSECURE
+    let fetchCalled = false
+    const ok = await probe({
+      url: 'https://example.com:27124',
+      apiKey: 'k',
+      timeoutMs: 100,
+      fetchImpl: (async () => {
+        fetchCalled = true
+        return new Response('{}', { status: 200 })
+      }) as unknown as typeof fetch,
+    })
+    expect(ok).toBe(false)
+    expect(fetchCalled).toBe(false)
+  })
+
+  it('allows non-loopback HTTPS when OBSIDIAN_INSECURE=true', async () => {
+    process.env.OBSIDIAN_INSECURE = 'true'
+    let fetchCalled = false
+    const ok = await probe({
+      url: 'https://example.com:27124',
+      apiKey: 'k',
+      timeoutMs: 100,
+      fetchImpl: (async () => {
+        fetchCalled = true
+        return new Response('{}', { status: 200 })
+      }) as unknown as typeof fetch,
+    })
     expect(ok).toBe(true)
+    expect(fetchCalled).toBe(true)
+    delete process.env.OBSIDIAN_INSECURE
+  })
+
+  it('falls back to filesystem on 401 (REST mode never engaged)', async () => {
+    process.env.OBSIDIAN_URL = 'http://127.0.0.1:27124'
+    process.env.OBSIDIAN_API_KEY = 'wrong-token'
+    const root = await fixtureVault()
+    const fakeFetch = (async () =>
+      new Response('unauthorized', { status: 401 })) as unknown as typeof fetch
+    const c = await createObsidianClient({ root, fetch: fakeFetch })
+    expect(c.mode).toBe('filesystem')
   })
 })
 
@@ -190,5 +233,13 @@ describe('smartViewDeepLink + helpers', () => {
     const c = makeFilesystemClient({ root: process.cwd() })
     expect(c.mode).toBe('filesystem')
     expect(c.smartViewDeepLink).toBeUndefined()
+  })
+
+  it('wikilinkTargetFor extracts basename + strips .md (paths → ids)', () => {
+    expect(wikilinkTargetFor('gks/adr/ADR--FOO.md')).toBe('ADR--FOO')
+    expect(wikilinkTargetFor('gks/concept/CONCEPT--BAR.md')).toBe('CONCEPT--BAR')
+    expect(wikilinkTargetFor('ADR--BARE.md')).toBe('ADR--BARE')
+    expect(wikilinkTargetFor('FRAME--NO-EXT')).toBe('FRAME--NO-EXT')
+    expect(wikilinkTargetFor('deep/nested/path/AUDIT--X.MD')).toBe('AUDIT--X')
   })
 })
