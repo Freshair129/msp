@@ -13,7 +13,10 @@ interface RestOpts {
 }
 
 function smartViewDeepLink(atomId: string): string {
-  return `obsidian://advanced-uri?vault=&filename=${encodeURIComponent(atomId)}`
+  // Use obsidian://open?file= (resolves in the user's currently-active
+  // vault, no vault-name config needed). Avoids the advanced-uri form
+  // which requires a vault parameter the wrapper has no way to know.
+  return `obsidian://open?file=${encodeURIComponent(atomId)}`
 }
 
 /**

@@ -209,7 +209,7 @@ describe('smartViewDeepLink + helpers', () => {
   beforeEach(clearEnv)
   afterEach(clearEnv)
 
-  it('builds an obsidian:// deep link from an atom id', () => {
+  it('builds an obsidian://open deep link from an atom id (active-vault form)', () => {
     const c = makeRestClient({
       url: 'http://127.0.0.1:27124',
       apiKey: 'k',
@@ -217,8 +217,18 @@ describe('smartViewDeepLink + helpers', () => {
       fetchImpl: fetch,
     })
     const link = c.smartViewDeepLink!('FRAME--MSP-ARCHITECTURE-V2')
-    expect(link.startsWith('obsidian://')).toBe(true)
-    expect(link).toContain('FRAME--MSP-ARCHITECTURE-V2')
+    expect(link).toBe('obsidian://open?file=FRAME--MSP-ARCHITECTURE-V2')
+  })
+
+  it('URL-encodes atom ids that contain special characters', () => {
+    const c = makeRestClient({
+      url: 'http://127.0.0.1:27124',
+      apiKey: 'k',
+      timeoutMs: 100,
+      fetchImpl: fetch,
+    })
+    const link = c.smartViewDeepLink!('ADR--FOO BAR/BAZ')
+    expect(link).toBe('obsidian://open?file=ADR--FOO%20BAR%2FBAZ')
   })
 
   it('isLoopback recognises 127.0.0.1 / localhost / ::1', () => {
