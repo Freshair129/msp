@@ -18,6 +18,8 @@ created_at: 2026-05-04T02:02:48.728Z
 
 # ADR — embedding model parity
 
+> **Status note (validated 2026-05-04)**: GKS 3.6.0 + `createNomicEmbedder()` are **unreleased on npm** at the time of this ADR — `npm view @freshair129/gks` returns 3.5.6 latest, which exports providers `'ollama' | 'openai' | 'mock'` only (no nomic). 3.6.0 source exists on `Freshair129/GksV3` (CHANGELOG documents `createNomicEmbedder`) but has not been published. This ADR records the **target architecture once 3.6.0 ships**. Until then, MSP uses GKS 3.5.6 with `provider: 'ollama'` (BGE-M3 default) or `'mock'` for tests — see fallback section. Tracked at `upstream/gks-proposals/05-publish-3.6.0.md`.
+
 ## Context
 
 GksV3 3.6.0 ships `createNomicEmbedder()` — a Node-side local embedder running `nomic-ai/nomic-embed-text-v1.5` via `@huggingface/transformers`. 768-dim, Thai+English, fully local, no external service.
@@ -92,12 +94,28 @@ Allowed but documented as a deviation. Update `MSP_EMBEDDER_MODEL` env var (or G
 3. **Use Ollama BGE-M3 as canonical (the GKS 3.5.x default).** Rejected — Ollama is an extra install requirement; nomic via Node-side `@huggingface/transformers` runs without Ollama.
 4. **Use OpenAI text-embedding-3-small.** Rejected — sends content to API; not local; cost.
 
+## Fallback while GKS 3.6.0 is unpublished
+
+Until `@freshair129/gks@3.6.0` lands on npm:
+
+| Path | Today (3.5.6) | After 3.6.0 publish |
+|---|---|---|
+| Agent-facing semantic recall | `provider: 'ollama'` (BGE-M3, requires Ollama install) **or** `provider: 'mock'` (tests / dev) | `createNomicEmbedder()` (no Ollama needed) |
+| Smart Connections in Obsidian | configure to match GKS provider — if GKS uses Ollama BGE-M3, set Smart Connections to BGE-M3 | switch both to `nomic-embed-text-v1.5` |
+| Vector dimension | depends on Ollama model (typical 1024 for BGE-M3) | 768 (nomic) |
+
+When 3.6.0 publishes:
+1. `npm install @freshair129/gks@^3.6.0` (already covered by `^3.5.6` semver — auto-picks)
+2. Run `npm run gks re-embed` to migrate vectors from old model to nomic
+3. User reconfigures Smart Connections to match
+4. This ADR's "Status note" is removed via `update_atomic`
+
 ## What this ADR does NOT change
 
-- `ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS` framing about Smart Connections being the in-Obsidian path remains valid — but **Smart Connections is no longer the canonical writer**. That ADR gets clarified in this PR.
+- `ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS` framing about Smart Connections being the in-Obsidian path remains valid — but **Smart Connections is no longer the canonical writer** (once 3.6.0 ships). That ADR gets clarified in this PR.
 - GKS upstream patch for backlinks API / phase 6 — separate concerns.
 - M7c retrieval orchestration design — primary semantic source switches to GKS vector store; Smart Connections probe becomes secondary.
 
 ## Source
 
-GksV3 3.6.0 CHANGELOG (introduces `createNomicEmbedder`); audit during M7-prep follow-up; user direction for model parity to avoid re-embedding cost.
+GksV3 3.6.0 CHANGELOG (introduces `createNomicEmbedder`); audit during M7-prep follow-up; user direction for model parity to avoid re-embedding cost. Validation against published `@freshair129/gks@3.5.6` performed 2026-05-04 (M7-prep follow-up review).
