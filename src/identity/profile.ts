@@ -1,104 +1,36 @@
-import { mkdir, readFile, rename, writeFile } from 'node:fs/promises'
-import { dirname, resolve } from 'node:path'
-
-import { parse as parseYaml, stringify as stringifyYaml } from 'yaml'
-import { z } from 'zod'
-
-import { PreferencesSchema, type Preferences } from './preferences.js'
-import { VoiceSchema, type Voice } from './voice.js'
-
-export const DEFAULT_NAMESPACE = 'evaAI'
-
-export const IdentityProfileSchema = z
-  .object({
-    name: z.string().min(1).optional(),
-    voice: VoiceSchema.optional(),
-    preferences: PreferencesSchema.optional(),
-    origin_story: z.string().optional(),
-  })
-  .strict()
-
-export type IdentityProfile = z.infer<typeof IdentityProfileSchema>
-
-export class IdentityParseError extends Error {
-  constructor(public readonly path: string, cause: unknown) {
-    super(`identity.yaml at ${path} is invalid: ${(cause as Error).message}`)
-    this.name = 'IdentityParseError'
-  }
-}
-
-export function identityFilePath(root: string, namespace: string): string {
-  return resolve(root, '.brain/msp/projects', namespace, 'identity.yaml')
-}
-
-/** Returns null if the file does not exist; throws on parse/schema error. */
-export async function loadProfile(
-  root: string,
-  namespace: string = DEFAULT_NAMESPACE,
-): Promise<IdentityProfile | null> {
-  const path = identityFilePath(root, namespace)
-  let raw: string
-  try {
-    raw = await readFile(path, 'utf8')
-  } catch (err) {
-    if ((err as NodeJS.ErrnoException).code === 'ENOENT') return null
-    throw err
-  }
-
-  let parsed: unknown
-  try {
-    parsed = parseYaml(raw)
-  } catch (err) {
-    throw new IdentityParseError(path, err)
-  }
-  if (parsed === null || parsed === undefined) return {}
-
-  try {
-    return IdentityProfileSchema.parse(parsed)
-  } catch (err) {
-    throw new IdentityParseError(path, err)
-  }
-}
+import { readIdentity, writeIdentity } from './store.js'
+import type { IdentityOptions, Profile } from './types.js'
 
 /**
- * Atomically replace the identity file. Validates against the schema before
- * writing so a malformed profile cannot land on disk.
+ * Set (partial-merge) the profile sub-field.
+ *
+ * Behaviour per BLUEPRINT / FEAT:
+ *   - Reads the on-disk identity (default-constructed if missing).
+ *   - `partial` fields overwrite; unspecified fields are preserved.
+ *   - `createdAt` is **set-once**: empty `createdAt` → stamped `now()` on this
+ *     write; non-empty → preserved (caller cannot overwrite via `partial`).
+ *
+ * Per CONCEPT, `name`/`role`/`tier`/`originStory` are conventionally append-
+ * mostly but the API does NOT enforce immutability — callers can rename
+ * deliberately if needed.
  */
-export async function saveProfile(
-  root: string,
-  namespace: string,
-  profile: IdentityProfile,
+export async function setProfile(
+  opts: IdentityOptions | undefined,
+  partial: Partial<Profile>,
+  now: () => Date = () => new Date(),
 ): Promise<void> {
-  const validated = IdentityProfileSchema.parse(profile)
-  const path = identityFilePath(root, namespace)
-  await mkdir(dirname(path), { recursive: true })
-  const tmp = `${path}.tmp.${process.pid}.${Date.now()}`
-  const yaml = stringifyYaml(validated)
-  await writeFile(tmp, yaml, 'utf8')
-  await rename(tmp, path)
-}
+  const identity = await readIdentity(opts)
 
-export function emptyProfile(): IdentityProfile {
-  return {}
-}
+  // Capture the prior createdAt before the merge so `partial.createdAt`
+  // cannot override set-once semantics.
+  const priorCreatedAt = identity.profile.createdAt
 
-/**
- * Merge a partial profile onto an existing one. `voice` and `preferences`
- * merge field-by-field; everything else replaces wholesale. Undefined fields
- * in `patch` leave the prior value untouched.
- */
-export function mergeProfile(
-  prior: IdentityProfile,
-  patch: Partial<IdentityProfile>,
-): IdentityProfile {
-  const next: IdentityProfile = { ...prior }
-  if (patch.name !== undefined) next.name = patch.name
-  if (patch.origin_story !== undefined) next.origin_story = patch.origin_story
-  if (patch.voice !== undefined) {
-    next.voice = { ...(prior.voice ?? { tone: [] }), ...patch.voice } as Voice
+  const merged: Profile = {
+    ...identity.profile,
+    ...partial,
+    createdAt: priorCreatedAt || now().toISOString(),
   }
-  if (patch.preferences !== undefined) {
-    next.preferences = { ...(prior.preferences ?? {}), ...patch.preferences } as Preferences
-  }
-  return IdentityProfileSchema.parse(next)
+
+  identity.profile = merged
+  await writeIdentity(opts, identity)
 }

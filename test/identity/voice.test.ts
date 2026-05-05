@@ -1,55 +1,117 @@
+import { mkdtemp } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+
 import { describe, expect, it } from 'vitest'
 
-import { emptyVoice, mergeVoice, VoiceSchema } from '../../src/identity/voice.js'
+import { setProfile } from '../../src/identity/profile.js'
+import { readIdentity } from '../../src/identity/store.js'
+import { setVoice } from '../../src/identity/voice.js'
 
-describe('VoiceSchema', () => {
-  it('defaults tone to []', () => {
-    expect(VoiceSchema.parse({}).tone).toEqual([])
-  })
+async function freshRoot(): Promise<string> {
+  return mkdtemp(join(tmpdir(), 'msp-identity-voice-'))
+}
 
-  it('accepts the documented shape', () => {
-    expect(() =>
-      VoiceSchema.parse({
-        tone: ['analytical', 'warm', 'concise'],
-        language_preference: 'thai+english',
-      }),
-    ).not.toThrow()
-  })
-
-  it('rejects unknown keys (strict)', () => {
-    expect(() => VoiceSchema.parse({ tone: [], unknown: 'x' })).toThrow()
-  })
-
-  it('rejects empty tone strings', () => {
-    expect(() => VoiceSchema.parse({ tone: [''] })).toThrow()
-  })
-})
-
-describe('mergeVoice', () => {
-  it('takes prior fields when patch is empty', () => {
-    const m = mergeVoice({ tone: ['warm'], language_preference: 'en' }, {})
-    expect(m.tone).toEqual(['warm'])
-    expect(m.language_preference).toBe('en')
-  })
-
-  it('overwrites only the fields in patch', () => {
-    const m = mergeVoice(
-      { tone: ['warm'], language_preference: 'en' },
-      { tone: ['concise'] },
+describe('setVoice', () => {
+  it('replaces the entire voice object on first write', async () => {
+    const root = await freshRoot()
+    await setVoice(
+      { root, namespace: 'evaAI' },
+      {
+        tone: ['analytical', 'concise'],
+        formality: 'neutral',
+        languagePreference: 'thai+english',
+        responseCadence: 'terse',
+      },
     )
-    expect(m.tone).toEqual(['concise'])
-    expect(m.language_preference).toBe('en')
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.voice.tone).toEqual(['analytical', 'concise'])
+    expect(id.voice.formality).toBe('neutral')
+    expect(id.voice.languagePreference).toBe('thai+english')
+    expect(id.voice.responseCadence).toBe('terse')
   })
 
-  it('drops undefined patch fields rather than nulling prior', () => {
-    const m = mergeVoice(
-      { tone: ['warm'], language_preference: 'en' },
-      { language_preference: undefined },
+  it('full-replace: a second setVoice call wipes prior tone array', async () => {
+    const root = await freshRoot()
+    await setVoice(
+      { root, namespace: 'evaAI' },
+      {
+        tone: ['warm', 'analytical'],
+        formality: 'casual',
+        languagePreference: 'en',
+        responseCadence: 'verbose',
+      },
     )
-    expect(m.language_preference).toBe('en')
+    // Second call with a wholly different voice — prior tone must NOT leak.
+    await setVoice(
+      { root, namespace: 'evaAI' },
+      {
+        tone: ['terse'],
+        formality: 'formal',
+        languagePreference: 'th',
+        responseCadence: 'terse',
+      },
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.voice.tone).toEqual(['terse'])
+    expect(id.voice.formality).toBe('formal')
+    expect(id.voice.languagePreference).toBe('th')
+    expect(id.voice.responseCadence).toBe('terse')
   })
 
-  it('starts from empty when prior is undefined', () => {
-    expect(mergeVoice(undefined, { tone: ['warm'] })).toEqual(emptyVoice() && { tone: ['warm'] })
+  it('accepts free-form languagePreference (no enum validation)', async () => {
+    const root = await freshRoot()
+    // CONCEPT / BLUEPRINT: languagePreference is intentionally free-form.
+    await setVoice(
+      { root, namespace: 'evaAI' },
+      {
+        tone: [],
+        formality: 'neutral',
+        languagePreference: 'klingon-en-pidgin',
+        responseCadence: 'normal',
+      },
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.voice.languagePreference).toBe('klingon-en-pidgin')
+  })
+
+  it('accepts free-form tone strings (no enum validation)', async () => {
+    const root = await freshRoot()
+    await setVoice(
+      { root, namespace: 'evaAI' },
+      {
+        // Arbitrary tone descriptors — implementation must not gatekeep.
+        tone: ['inquisitive', 'pedagogical', 'gentle-skeptic'],
+        formality: 'casual',
+        languagePreference: 'en',
+        responseCadence: 'verbose',
+      },
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.voice.tone).toEqual(['inquisitive', 'pedagogical', 'gentle-skeptic'])
+  })
+
+  it('does not touch profile or preferences', async () => {
+    const root = await freshRoot()
+    // Seed a profile first.
+    await setProfile(
+      { root, namespace: 'evaAI' },
+      { name: 'EVA', role: 'research' },
+    )
+    // Now setVoice — profile must remain.
+    await setVoice(
+      { root, namespace: 'evaAI' },
+      {
+        tone: ['concise'],
+        formality: 'neutral',
+        languagePreference: 'auto',
+        responseCadence: 'normal',
+      },
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.profile.name).toBe('EVA')
+    expect(id.profile.role).toBe('research')
+    expect(id.voice.tone).toEqual(['concise'])
+    expect(id.preferences).toEqual({})
   })
 })

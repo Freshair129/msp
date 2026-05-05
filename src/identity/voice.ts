@@ -1,34 +1,21 @@
-import { z } from 'zod'
+import { readIdentity, writeIdentity } from './store.js'
+import { defaultVoice, type IdentityOptions, type Voice } from './types.js'
 
 /**
- * Voice / style descriptors that shape how the agent speaks. The agent reads
- * these on session start and can refresh them across turns.
+ * Set the entire voice sub-field (full replace per BLUEPRINT — voice is small,
+ * full replace is simpler than partial-merge).
  *
- * `tone` is an ordered list — earlier items dominate. `language_preference`
- * is free-form (e.g. `"thai+english"`, `"en-US"`) so projects can encode
- * mixed-language conventions without a fixed enum.
+ * Missing fields in the supplied voice are filled from `defaultVoice()` so the
+ * persisted shape is always complete.
+ *
+ * Per CONCEPT / BLUEPRINT, `tone` and `languagePreference` are free-form —
+ * implementation does NOT validate against an enum.
  */
-export const VoiceSchema = z
-  .object({
-    tone: z.array(z.string().min(1)).default([]),
-    language_preference: z.string().min(1).optional(),
-    formality: z.string().min(1).optional(),
-    response_cadence: z.string().min(1).optional(),
-    vocabulary_preferences: z.array(z.string().min(1)).optional(),
-  })
-  .strict()
-
-export type Voice = z.infer<typeof VoiceSchema>
-
-export function emptyVoice(): Voice {
-  return { tone: [] }
-}
-
-/** Shallow merge — `patch` fields overwrite, undefined fields keep prior. */
-export function mergeVoice(prior: Voice | undefined, patch: Partial<Voice>): Voice {
-  const base = prior ?? emptyVoice()
-  return VoiceSchema.parse({
-    ...base,
-    ...Object.fromEntries(Object.entries(patch).filter(([, v]) => v !== undefined)),
-  })
+export async function setVoice(
+  opts: IdentityOptions | undefined,
+  voice: Voice,
+): Promise<void> {
+  const identity = await readIdentity(opts)
+  identity.voice = { ...defaultVoice(), ...voice }
+  await writeIdentity(opts, identity)
 }

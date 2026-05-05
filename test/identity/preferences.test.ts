@@ -1,74 +1,208 @@
+import { mkdtemp, readFile, stat } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+
 import { describe, expect, it } from 'vitest'
 
 import {
-  isExpired,
-  makeEntry,
-  PreferenceEntrySchema,
+  getPreference,
+  prunePreferences,
+  setPreference,
 } from '../../src/identity/preferences.js'
+import { identityPath, readIdentity } from '../../src/identity/store.js'
 
-describe('makeEntry', () => {
-  it('produces a non-expiring entry when ttl is omitted', () => {
-    const e = makeEntry(5)
-    expect(e.value).toBe(5)
-    expect(e.expires_at).toBeNull()
+async function freshRoot(): Promise<string> {
+  return mkdtemp(join(tmpdir(), 'msp-identity-prefs-'))
+}
+
+describe('setPreference / getPreference (no TTL)', () => {
+  it('sets a value and reads it back', async () => {
+    const root = await freshRoot()
+    await setPreference({ root, namespace: 'evaAI' }, 'top_k', 5)
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'top_k')).toBe(5)
+    // expiresAt is null when no TTL given.
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.preferences.top_k).toEqual({ value: 5, expiresAt: null })
   })
 
-  it('produces a non-expiring entry when ttl is null', () => {
-    expect(makeEntry('hi', null).expires_at).toBeNull()
-  })
-
-  it('encodes ttl as ISO timestamp now+ttl', () => {
-    const now = new Date('2026-01-01T00:00:00.000Z')
-    const e = makeEntry('x', 60_000, now)
-    expect(e.expires_at).toBe('2026-01-01T00:01:00.000Z')
-  })
-
-  it('validates against the entry schema', () => {
-    expect(() => PreferenceEntrySchema.parse(makeEntry({ nested: [1, 2] }))).not.toThrow()
-  })
-})
-
-describe('isExpired', () => {
-  it('returns false for null expires_at', () => {
-    expect(isExpired({ value: 0, expires_at: null })).toBe(false)
-  })
-
-  it('returns true once the timestamp is in the past', () => {
-    const past = new Date(Date.now() - 1000).toISOString()
-    expect(isExpired({ value: 0, expires_at: past })).toBe(true)
-  })
-
-  it('returns false while the timestamp is in the future', () => {
-    const future = new Date(Date.now() + 60_000).toISOString()
-    expect(isExpired({ value: 0, expires_at: future })).toBe(false)
+  it('returns null for a missing key', async () => {
+    const root = await freshRoot()
+    const v = await getPreference({ root, namespace: 'evaAI' }, 'nope')
+    expect(v).toBeNull()
   })
 })
 
-describe('PreferenceEntrySchema', () => {
-  it('accepts primitives, arrays, and nested objects as values', () => {
-    expect(() =>
-      PreferenceEntrySchema.parse({ value: 'a', expires_at: null }),
-    ).not.toThrow()
-    expect(() =>
-      PreferenceEntrySchema.parse({ value: [1, 2, 3], expires_at: null }),
-    ).not.toThrow()
-    expect(() =>
-      PreferenceEntrySchema.parse({
-        value: { a: { b: [true, null] } },
-        expires_at: null,
-      }),
-    ).not.toThrow()
+describe('setPreference with TTL', () => {
+  it('expiresInMs computes correct expiresAt relative to now', async () => {
+    const root = await freshRoot()
+    const fixed = new Date('2026-05-04T12:00:00.000Z')
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'session_verbose',
+      true,
+      { expiresInMs: 60 * 60 * 1000 }, // 1h
+      () => fixed,
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.preferences.session_verbose.value).toBe(true)
+    expect(id.preferences.session_verbose.expiresAt).toBe(
+      '2026-05-04T13:00:00.000Z',
+    )
   })
 
-  it('rejects unknown top-level keys', () => {
-    expect(() =>
-      PreferenceEntrySchema.parse({ value: 1, expires_at: null, extra: 'no' }),
-    ).toThrow()
+  it('expiresAt (ISO) wins over expiresInMs when both given', async () => {
+    const root = await freshRoot()
+    const fixed = new Date('2026-05-04T12:00:00.000Z')
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'k',
+      'v',
+      {
+        expiresAt: '2030-01-01T00:00:00.000Z',
+        expiresInMs: 1000,
+      },
+      () => fixed,
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.preferences.k.expiresAt).toBe('2030-01-01T00:00:00.000Z')
+  })
+})
+
+describe('lazy expiry', () => {
+  it('getPreference returns null for an expired entry but does NOT mutate the file', async () => {
+    const root = await freshRoot()
+    const setAt = new Date('2026-05-04T12:00:00.000Z')
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'short',
+      'value',
+      { expiresInMs: 1000 },
+      () => setAt,
+    )
+    const path = identityPath(root, 'evaAI')
+    const mtimeBefore = (await stat(path)).mtimeMs
+
+    // Read 1h after expiry — must return null.
+    const readAt = new Date('2026-05-04T13:00:00.000Z')
+    const v = await getPreference(
+      { root, namespace: 'evaAI' },
+      'short',
+      () => readAt,
+    )
+    expect(v).toBeNull()
+
+    // File must not have been re-written (lazy expiry).
+    const mtimeAfter = (await stat(path)).mtimeMs
+    expect(mtimeAfter).toBe(mtimeBefore)
+    // The entry is still on disk.
+    const text = await readFile(path, 'utf8')
+    expect(text).toContain('"short"')
   })
 
-  it('rejects non-ISO expires_at strings', () => {
-    expect(() =>
-      PreferenceEntrySchema.parse({ value: 1, expires_at: 'soon' }),
-    ).toThrow()
+  it('non-expired entry returns its value', async () => {
+    const root = await freshRoot()
+    const setAt = new Date('2026-05-04T12:00:00.000Z')
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'k',
+      42,
+      { expiresInMs: 60 * 60 * 1000 }, // 1h
+      () => setAt,
+    )
+    const readAt = new Date('2026-05-04T12:30:00.000Z')
+    const v = await getPreference(
+      { root, namespace: 'evaAI' },
+      'k',
+      () => readAt,
+    )
+    expect(v).toBe(42)
+  })
+})
+
+describe('value shapes', () => {
+  it('accepts arbitrary JSON-serialisable values (number, string, bool, object, array, null)', async () => {
+    const root = await freshRoot()
+    await setPreference({ root, namespace: 'evaAI' }, 'num', 42)
+    await setPreference({ root, namespace: 'evaAI' }, 'str', 'hello')
+    await setPreference({ root, namespace: 'evaAI' }, 'bool', true)
+    await setPreference({ root, namespace: 'evaAI' }, 'obj', { a: 1, b: 'x' })
+    await setPreference({ root, namespace: 'evaAI' }, 'arr', [1, 2, 3])
+    await setPreference({ root, namespace: 'evaAI' }, 'null', null)
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'num')).toBe(42)
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'str')).toBe('hello')
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'bool')).toBe(true)
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'obj')).toEqual({ a: 1, b: 'x' })
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'arr')).toEqual([1, 2, 3])
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'null')).toBeNull()
+  })
+
+  it('setPreference replaces an existing entry (last-writer-wins per key)', async () => {
+    const root = await freshRoot()
+    await setPreference({ root, namespace: 'evaAI' }, 'k', 'v1')
+    await setPreference({ root, namespace: 'evaAI' }, 'k', 'v2')
+    expect(await getPreference({ root, namespace: 'evaAI' }, 'k')).toBe('v2')
+  })
+})
+
+describe('prunePreferences', () => {
+  it('removes expired entries, keeps non-expired, returns count', async () => {
+    const root = await freshRoot()
+    const setAt = new Date('2026-05-04T12:00:00.000Z')
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'expired1',
+      'a',
+      { expiresInMs: 1000 },
+      () => setAt,
+    )
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'expired2',
+      'b',
+      { expiresInMs: 2000 },
+      () => setAt,
+    )
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'alive',
+      'c',
+      { expiresInMs: 60 * 60 * 1000 }, // 1h
+      () => setAt,
+    )
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'never',
+      'd',
+      // no TTL
+      undefined,
+      () => setAt,
+    )
+
+    const pruneAt = new Date('2026-05-04T12:30:00.000Z')
+    const count = await prunePreferences(
+      { root, namespace: 'evaAI' },
+      () => pruneAt,
+    )
+    expect(count).toBe(2)
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(Object.keys(id.preferences).sort()).toEqual(['alive', 'never'])
+  })
+
+  it('returns 0 and does not rewrite when nothing is expired', async () => {
+    const root = await freshRoot()
+    const setAt = new Date('2026-05-04T12:00:00.000Z')
+    await setPreference(
+      { root, namespace: 'evaAI' },
+      'forever',
+      'x',
+      undefined,
+      () => setAt,
+    )
+    const path = identityPath(root, 'evaAI')
+    const mtimeBefore = (await stat(path)).mtimeMs
+    const count = await prunePreferences({ root, namespace: 'evaAI' })
+    expect(count).toBe(0)
+    const mtimeAfter = (await stat(path)).mtimeMs
+    expect(mtimeAfter).toBe(mtimeBefore)
   })
 })

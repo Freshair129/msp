@@ -1,65 +1,94 @@
-import { z } from 'zod'
+import { readIdentity, writeIdentity } from './store.js'
+import type { IdentityOptions, Preference } from './types.js'
 
 /**
- * A single preference entry. `value` is JSON-serialisable; the schema permits
- * primitives, arrays, and plain objects — anything yaml.stringify can round-
- * trip without a custom tag.
- *
- * `expires_at` is an ISO-8601 timestamp string or null (never expires).
- * Expired entries are pruned lazily on read; a separate sweep is intentionally
- * not provided — the cost of keeping stale rows on disk is negligible and a
- * sweep would race with concurrent writers.
+ * TTL options for `setPreference`. Either `expiresAt` (absolute ISO 8601
+ * timestamp) or `expiresInMs` (relative milliseconds from now). If both are
+ * supplied, `expiresAt` wins (more specific). If neither, the entry never
+ * expires.
  */
-const PrefValueSchema: z.ZodType<PrefValue> = z.lazy(() =>
-  z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.null(),
-    z.array(PrefValueSchema),
-    z.record(PrefValueSchema),
-  ]),
-)
+export interface PreferenceTtl {
+  expiresAt?: string
+  expiresInMs?: number
+}
 
-export type PrefValue =
-  | string
-  | number
-  | boolean
-  | null
-  | PrefValue[]
-  | { [key: string]: PrefValue }
+function computeExpiresAt(
+  ttl: PreferenceTtl | undefined,
+  now: () => Date,
+): string | null {
+  if (!ttl) return null
+  if (typeof ttl.expiresAt === 'string') return ttl.expiresAt
+  if (typeof ttl.expiresInMs === 'number') {
+    return new Date(now().getTime() + ttl.expiresInMs).toISOString()
+  }
+  return null
+}
 
-export const PreferenceEntrySchema = z
-  .object({
-    value: PrefValueSchema,
-    expires_at: z.string().datetime().nullable(),
-  })
-  .strict()
-
-export type PreferenceEntry = z.infer<typeof PreferenceEntrySchema>
-
-export const PreferencesSchema = z.record(PreferenceEntrySchema)
-export type Preferences = z.infer<typeof PreferencesSchema>
-
-export function isExpired(entry: PreferenceEntry, now: Date = new Date()): boolean {
-  if (entry.expires_at === null) return false
-  const exp = Date.parse(entry.expires_at)
-  if (!Number.isFinite(exp)) return false
-  return exp <= now.getTime()
+function isExpired(expiresAt: string | null, now: () => Date): boolean {
+  if (!expiresAt) return false
+  const t = Date.parse(expiresAt)
+  if (!Number.isFinite(t)) return false
+  return t <= now().getTime()
 }
 
 /**
- * Build an entry. `ttlMs` is milliseconds from now; omit or pass null for a
- * non-expiring entry.
+ * Set or replace a single preference, optionally with a TTL.
+ *
+ * - `expiresAt` (ISO string) takes precedence over `expiresInMs`.
+ * - With neither, the entry never expires.
+ * - Replaces any existing entry for the same key.
  */
-export function makeEntry(
-  value: PrefValue,
-  ttlMs?: number | null,
-  now: Date = new Date(),
-): PreferenceEntry {
-  const expires_at =
-    ttlMs === undefined || ttlMs === null
-      ? null
-      : new Date(now.getTime() + ttlMs).toISOString()
-  return { value, expires_at }
+export async function setPreference(
+  opts: IdentityOptions | undefined,
+  key: string,
+  value: unknown,
+  ttl?: PreferenceTtl,
+  now: () => Date = () => new Date(),
+): Promise<void> {
+  const identity = await readIdentity(opts)
+  const expiresAt = computeExpiresAt(ttl, now)
+  identity.preferences[key] = { value, expiresAt }
+  await writeIdentity(opts, identity)
+}
+
+/**
+ * Read a preference value with **lazy expiry**: an expired entry returns null
+ * but is NOT removed from disk. Caller can run `prunePreferences` to do eager
+ * cleanup.
+ *
+ * Missing key → null. Expired entry → null. Otherwise → `value`.
+ */
+export async function getPreference(
+  opts: IdentityOptions | undefined,
+  key: string,
+  now: () => Date = () => new Date(),
+): Promise<unknown | null> {
+  const identity = await readIdentity(opts)
+  const entry: Preference | undefined = identity.preferences[key]
+  if (!entry) return null
+  if (isExpired(entry.expiresAt, now)) return null
+  return entry.value
+}
+
+/**
+ * Eagerly remove every expired preference. Returns the count of removed
+ * entries. Only writes to disk if at least one entry was pruned (avoids
+ * unnecessary file churn).
+ */
+export async function prunePreferences(
+  opts: IdentityOptions | undefined,
+  now: () => Date = () => new Date(),
+): Promise<number> {
+  const identity = await readIdentity(opts)
+  let removed = 0
+  for (const [key, entry] of Object.entries(identity.preferences)) {
+    if (isExpired(entry.expiresAt, now)) {
+      delete identity.preferences[key]
+      removed += 1
+    }
+  }
+  if (removed > 0) {
+    await writeIdentity(opts, identity)
+  }
+  return removed
 }

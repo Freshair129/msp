@@ -1,139 +1,100 @@
-import { mkdtemp, readFile, writeFile, mkdir } from 'node:fs/promises'
+import { mkdtemp } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import {
-  identityFilePath,
-  IdentityParseError,
-  loadProfile,
-  mergeProfile,
-  saveProfile,
-} from '../../src/identity/profile.js'
+import { setProfile } from '../../src/identity/profile.js'
+import { readIdentity } from '../../src/identity/store.js'
 
 async function freshRoot(): Promise<string> {
-  return mkdtemp(join(tmpdir(), 'msp-identity-'))
+  return mkdtemp(join(tmpdir(), 'msp-identity-profile-'))
 }
 
-describe('loadProfile', () => {
-  it('returns null when identity.yaml is absent', async () => {
+describe('setProfile', () => {
+  it('writes a profile with set-once createdAt on first write', async () => {
     const root = await freshRoot()
-    expect(await loadProfile(root, 'evaAI')).toBeNull()
-  })
-
-  it('parses a complete profile', async () => {
-    const root = await freshRoot()
-    const path = identityFilePath(root, 'evaAI')
-    await mkdir(join(root, '.brain/msp/projects/evaAI'), { recursive: true })
-    await writeFile(
-      path,
-      [
-        'name: EVA',
-        'voice:',
-        '  tone: [analytical, warm]',
-        '  language_preference: thai+english',
-        'preferences:',
-        '  default_top_k:',
-        '    value: 5',
-        '    expires_at: null',
-        'origin_story: born in May',
-      ].join('\n'),
-      'utf8',
+    const fixed = new Date('2026-05-04T12:00:00.000Z')
+    await setProfile(
+      { root, namespace: 'evaAI' },
+      { name: 'EVA', role: 'research assistant', tier: 'T3' },
+      () => fixed,
     )
-    const p = await loadProfile(root, 'evaAI')
-    expect(p?.name).toBe('EVA')
-    expect(p?.voice?.tone).toEqual(['analytical', 'warm'])
-    expect(p?.preferences?.default_top_k.value).toBe(5)
-    expect(p?.preferences?.default_top_k.expires_at).toBeNull()
-    expect(p?.origin_story).toBe('born in May')
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.profile.name).toBe('EVA')
+    expect(id.profile.role).toBe('research assistant')
+    expect(id.profile.tier).toBe('T3')
+    expect(id.profile.createdAt).toBe('2026-05-04T12:00:00.000Z')
   })
 
-  it('treats an empty file as an empty profile', async () => {
+  it('preserves createdAt on subsequent writes', async () => {
     const root = await freshRoot()
-    const path = identityFilePath(root, 'evaAI')
-    await mkdir(join(root, '.brain/msp/projects/evaAI'), { recursive: true })
-    await writeFile(path, '', 'utf8')
-    expect(await loadProfile(root, 'evaAI')).toEqual({})
-  })
-
-  it('throws IdentityParseError on bad YAML', async () => {
-    const root = await freshRoot()
-    const path = identityFilePath(root, 'evaAI')
-    await mkdir(join(root, '.brain/msp/projects/evaAI'), { recursive: true })
-    await writeFile(path, 'voice:\n  tone: [unterminated', 'utf8')
-    await expect(loadProfile(root, 'evaAI')).rejects.toBeInstanceOf(IdentityParseError)
-  })
-
-  it('throws IdentityParseError on schema-invalid content', async () => {
-    const root = await freshRoot()
-    const path = identityFilePath(root, 'evaAI')
-    await mkdir(join(root, '.brain/msp/projects/evaAI'), { recursive: true })
-    // `name` must be a non-empty string when present
-    await writeFile(path, 'name: ""', 'utf8')
-    await expect(loadProfile(root, 'evaAI')).rejects.toBeInstanceOf(IdentityParseError)
-  })
-})
-
-describe('saveProfile', () => {
-  it('creates the namespace directory and writes valid YAML', async () => {
-    const root = await freshRoot()
-    await saveProfile(root, 'evaAI', {
-      name: 'EVA',
-      voice: { tone: ['warm'] },
-    })
-    const text = await readFile(identityFilePath(root, 'evaAI'), 'utf8')
-    expect(text).toContain('name: EVA')
-    expect(text).toContain('tone:')
-  })
-
-  it('round-trips through loadProfile', async () => {
-    const root = await freshRoot()
-    const profile = {
-      name: 'EVA',
-      voice: {
-        tone: ['analytical', 'concise'],
-        language_preference: 'en',
-      },
-      preferences: {
-        x: { value: 42, expires_at: null },
-      },
-      origin_story: 'one line',
-    }
-    await saveProfile(root, 'evaAI', profile)
-    expect(await loadProfile(root, 'evaAI')).toEqual(profile)
-  })
-
-  it('rejects an invalid profile before writing', async () => {
-    const root = await freshRoot()
-    await expect(
-      saveProfile(root, 'evaAI', { name: '' as unknown as string }),
-    ).rejects.toThrow()
-    // file must not have been created
-    await expect(readFile(identityFilePath(root, 'evaAI'))).rejects.toThrow()
-  })
-})
-
-describe('mergeProfile', () => {
-  it('overwrites top-level scalars', () => {
-    const next = mergeProfile({ name: 'old' }, { name: 'new' })
-    expect(next.name).toBe('new')
-  })
-
-  it('merges voice fields without losing prior fields', () => {
-    const next = mergeProfile(
-      { voice: { tone: ['warm'], language_preference: 'en' } },
-      { voice: { tone: ['concise'] } as never },
+    const first = new Date('2026-05-04T12:00:00.000Z')
+    const second = new Date('2026-06-15T15:30:00.000Z')
+    await setProfile(
+      { root, namespace: 'evaAI' },
+      { name: 'EVA' },
+      () => first,
     )
-    expect(next.voice?.tone).toEqual(['concise'])
-    expect(next.voice?.language_preference).toBe('en')
+    // Second call uses a different `now`; createdAt must be the FIRST one.
+    await setProfile(
+      { root, namespace: 'evaAI' },
+      { role: 'updated' },
+      () => second,
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.profile.createdAt).toBe('2026-05-04T12:00:00.000Z')
+    expect(id.profile.name).toBe('EVA')
+    expect(id.profile.role).toBe('updated')
   })
 
-  it('merges preferences key-by-key', () => {
-    const next = mergeProfile(
-      { preferences: { a: { value: 1, expires_at: null } } },
-      { preferences: { b: { value: 2, expires_at: null } } },
+  it('partial merge keeps unspecified fields', async () => {
+    const root = await freshRoot()
+    await setProfile(
+      { root, namespace: 'evaAI' },
+      { name: 'EVA', role: 'research', originStory: 'born in May' },
     )
-    expect(Object.keys(next.preferences ?? {}).sort()).toEqual(['a', 'b'])
+    // Only update role; name + originStory must persist.
+    await setProfile({ root, namespace: 'evaAI' }, { role: 'orchestrator' })
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.profile.name).toBe('EVA')
+    expect(id.profile.role).toBe('orchestrator')
+    expect(id.profile.originStory).toBe('born in May')
+  })
+
+  it('refuses caller-supplied createdAt (set-once defends against override)', async () => {
+    const root = await freshRoot()
+    const real = new Date('2026-05-04T12:00:00.000Z')
+    await setProfile({ root, namespace: 'evaAI' }, { name: 'EVA' }, () => real)
+    // Caller tries to overwrite createdAt via partial — must be ignored.
+    await setProfile(
+      { root, namespace: 'evaAI' },
+      {
+        role: 'r',
+        createdAt: '1999-01-01T00:00:00.000Z',
+      } as unknown as Partial<import('../../src/identity/types.js').Profile>,
+    )
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.profile.createdAt).toBe('2026-05-04T12:00:00.000Z')
+  })
+
+  it('does not touch voice or preferences', async () => {
+    const root = await freshRoot()
+    await setProfile({ root, namespace: 'evaAI' }, { name: 'EVA' })
+    const id = await readIdentity({ root, namespace: 'evaAI' })
+    // Voice + preferences are still default after setProfile
+    expect(id.voice.formality).toBe('neutral')
+    expect(id.voice.tone).toEqual([])
+    expect(id.preferences).toEqual({})
+  })
+
+  it('accepts tier override (T1 / T2 / T3)', async () => {
+    const root = await freshRoot()
+    await setProfile({ root, namespace: 'evaAI' }, { tier: 'T1' })
+    let id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.profile.tier).toBe('T1')
+    await setProfile({ root, namespace: 'evaAI' }, { tier: 'T2' })
+    id = await readIdentity({ root, namespace: 'evaAI' })
+    expect(id.profile.tier).toBe('T2')
   })
 })
