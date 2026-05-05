@@ -48,7 +48,7 @@ function callServer(messages: JsonRpc[]): Promise<JsonRpc[]> {
 }
 
 describe('msp-mcp-server bin (spawned)', () => {
-  it('responds to initialize + tools/list with all 10 tools', async () => {
+  it('responds to initialize + tools/list with all 11 tools', async () => {
     const responses = await callServer([
       {
         jsonrpc: '2.0',
@@ -70,6 +70,7 @@ describe('msp-mcp-server bin (spawned)', () => {
     const tools = (list!.result as { tools: Array<{ name: string }> }).tools
     expect(tools.map((t) => t.name).sort()).toEqual([
       'msp_backlinks_rebuild',
+      'msp_compress',
       'msp_episode_append',
       'msp_identity_get',
       'msp_identity_set',
