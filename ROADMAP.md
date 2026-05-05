@@ -1,8 +1,8 @@
 # MSP Roadmap
 
-> **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md) (atom in the canonical knowledge graph). This file is a public-facing summary; for the full plan including atom counts, dependencies, and revision policy, read the atom. For the v0.3.0 close-out audit, see [`gks/audit/AUDIT--ALL-M-MILESTONES.md`](./gks/audit/AUDIT--ALL-M-MILESTONES.md).
+> **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md). For close-out audits: [`AUDIT--ALL-M-MILESTONES`](./gks/audit/AUDIT--ALL-M-MILESTONES.md) (v0.3.0) + [`AUDIT--V0-4-0`](./gks/audit/AUDIT--V0-4-0.md) (v0.4.0).
 
-## Status — v0.3.0 (passport core complete)
+## Status — v0.4.0 (governance mechanism complete)
 
 ### Tier 1 — shipped + impl
 
@@ -24,16 +24,16 @@
 | **M8a** | PROTO pattern foundation (atom type + loader scaffold) | ✅ merged |
 | **M9f** | Session lock max-age safeguard (Windows / zombie-PID parity) | ✅ merged |
 
-### Tier 2 — atoms shipped, impl deferred
+### Tier 2 — draft PROTOs (predicates running, awaiting promotion to stable)
 
 | Milestone | Status |
 |---|---|
-| M8b — `PROTO--PHASE-GATES` | 🟡 scoped (CONCEPT) |
-| M8c — `PROTO--SCALING-LEVEL-GATE` | 🟡 scoped (CONCEPT) |
-| M8d — `PROTO--ALGO-PARAM-COUPLING` (post-audit-scoped smaller) | 🟡 scoped (CONCEPT) |
-| M8e — `PROTO--AUTHORITY-ENFORCEMENT` | 🟡 scoped (CONCEPT) |
-| M8f — Audit existing rules → promote to PROTOs | 🟡 scoped (CONCEPT) |
-| M9a — Decision atrophy guards (`valid_until` enforcement) | 🟡 scoped (CONCEPT) |
+| M8b — `PROTO--PHASE-GATES` | 🟡 draft impl (predicate runs, no fail-exit) |
+| M8c — `PROTO--SCALING-LEVEL-GATE` | 🟡 draft impl |
+| M8d — `PROTO--ALGO-PARAM-COUPLING` (post-audit-scoped smaller) | 🟡 draft impl |
+| M8e — `PROTO--AUTHORITY-ENFORCEMENT` | 🟡 draft impl |
+| M8f — Promote 3 existing rules → PROTOs (SUMMARY-MIN, ADR-MONOTONIC, EVIDENCE-FOR-DECISIONS) | 🟡 draft impl (overlap with core) |
+| M9a — `PROTO--VALID-UNTIL` (decision atrophy guards) | 🟡 draft impl |
 | M9b — Delegation policy (L2 = 2 senior, L3 = Boss-only) | ✅ shipped (ADR-only — pure policy) |
 
 ### Tier 3 — explicitly deferred (external triggers)
@@ -47,9 +47,13 @@
 | M10b — Optional Kuzu/Neo4j | trigger: crosslinks > 50,000 |
 | M10c — RRF tuning + benchmarks | trigger: retrieval quality plateau |
 
-## What v0.3.0 enables
+## What v0.4.0 enables (vs v0.3.0)
 
-11 MCP tools; agent connects via stdio.
+11 MCP tools (unchanged) — **PLUS** mechanical governance via PROTO loader. v0.3.0 had passport core; v0.4.0 adds:
+
+- **Generic PROTO loader** — any `gks/proto/PROTO--*.md` atom + linked TS predicate runs as part of `msp:validate --all`
+- **9 PROTOs** shipped at `status: draft` (predicates run, observe, no fail-exit yet): SAMPLE-RULE, PHASE-GATES, SCALING-LEVEL-GATE, ALGO-PARAM-COUPLING, AUTHORITY-ENFORCEMENT, VALID-UNTIL, SUMMARY-MIN, ADR-MONOTONIC, EVIDENCE-FOR-DECISIONS
+- **Cutover machinery** — when a PROTO is promoted to `stable`, `severity: error` violations fail-exit CI
 
 **Gatekeeper (M6)**: `msp_validate`, `msp_propose`, `msp_run_task`, `msp_session_append`, `msp_episode_append`, `msp_backlinks_rebuild`
 
@@ -57,12 +61,13 @@
 
 **Killer demo**: `msp_recall("how did we decide rate limiting?")` returns ranked + provenance hits from GKS vector + Obsidian text + episodic + backlinks merged via RRF.
 
-## Counts at v0.3.0
+## Counts at v0.4.0
 
-- **142 atoms** in `gks/`
-- **478 passing tests**
-- **64 test files**
-- **23 AUDIT atoms**
+- **159 atoms** in `gks/`
+- **535 passing tests**
+- **71 test files**
+- **27 AUDIT atoms**
+- **9 PROTO atoms** (1 sample + 8 governance, all draft)
 - **5 upstream proposals** drafted for `Freshair129/GksV3`
 
 ## Configuration to start using MSP
