@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 
 import * as backlinksRebuild from './tools/backlinks-rebuild.js'
+import * as compressTool from './tools/compress.js'
 import * as episodeAppend from './tools/episode-append.js'
 import * as identityGet from './tools/identity-get.js'
 import * as identitySet from './tools/identity-set.js'
@@ -26,6 +27,7 @@ const TOOLS = [
   backlinksRebuild,
   recallTool,
   remember,
+  compressTool,
   identityGet,
   identitySet,
 ] as const
