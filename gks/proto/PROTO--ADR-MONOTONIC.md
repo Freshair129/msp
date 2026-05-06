@@ -1,0 +1,51 @@
+---
+id: PROTO--ADR-MONOTONIC
+phase: 2
+type: proto
+status: draft
+severity: error
+vault_id: default
+title: PROTO--ADR-MONOTONIC — new ADR-NNN must equal max(existing) + 1
+tags:
+  - msp
+  - proto
+  - adr
+  - validator
+  - m8f
+crosslinks: {"enforces":["FRAME--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--PROTO-PATTERN","CONCEPT--PROTO-AUDIT-EXISTING-RULES","FEAT--PROTO-LOADER","ADR--ANTI-HALLUCINATION-RULES"]}
+linked_symbols:
+  - {"file":"src/validator/proto/adr-monotonic.ts"}
+created_at: 2026-05-05T13:00:00.000Z
+---
+
+# PROTO — ADR-MONOTONIC
+
+## Rule
+
+For atoms with id matching `ADR-NNN` (numeric form): the next-allocated number must equal `max(existing-numbers) + 1` (or 1 if none).
+
+Slug-form `ADR--<NAME>` IDs are skipped — they don't carry an integer to monotonically check.
+
+## Schema
+
+Per-atom frontmatter `id`; cross-referenced against the atomic index for the running max.
+
+## Predicate
+
+Wraps existing core rule `adrMonotonic` from `src/validator/rules/adr-monotonic.ts` via `ruleAdapter`. Filter: only invokes on atoms with `type: adr`.
+
+## Trigger
+
+`msp:validate --all`.
+
+## Severity
+
+`error` — out-of-sequence numbers create review confusion + version-history breaks.
+
+## Status
+
+`draft` — overlap with core rule until cutover (M8f-2).
+
+## Source
+
+`CONCEPT--PROTO-AUDIT-EXISTING-RULES`, `ADR--ANTI-HALLUCINATION-RULES`.

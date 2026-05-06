@@ -1,0 +1,60 @@
+import { resolve } from 'node:path'
+
+import { z } from 'zod'
+
+import { loadAtomicIndex, validate, validateAll } from '../../validator/index.js'
+import { loadContract } from '../../validator/contract.js'
+import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
+
+export const name = 'msp_validate'
+
+export const description =
+  'Run the MSP validator on one or more atom files (or the whole tree with --all). Returns per-file errors and warnings. Use this before committing or proposing atom changes.'
+
+export const inputSchema = {
+  files: z
+    .array(z.string())
+    .optional()
+    .describe('Absolute or root-relative paths to atom .md files. Mutually exclusive with `all`.'),
+  all: z.boolean().optional().describe('If true, walks gks/ + .brain/.../inbound/. Default false.'),
+  root: z.string().optional().describe('Project root (default: server context root).'),
+}
+
+export function handler(ctx: ToolHandlerCtx) {
+  return async (args: { files?: string[]; all?: boolean; root?: string }): Promise<ToolTextResult> => {
+    const root = resolve(args.root ?? ctx.root)
+    const indexPath = resolve(root, 'gks/00_index/atomic_index.jsonl')
+
+    let atomicIndex
+    try {
+      atomicIndex = await loadAtomicIndex(indexPath)
+    } catch (err) {
+      return errorResult(`atomic index unreadable: ${(err as Error).message}`)
+    }
+
+    const contract = await loadContract(root)
+    const validationCtx = {
+      atomicIndex,
+      forbiddenFields: contract.forbiddenFields,
+      requiredFields: contract.requiredFields,
+    }
+
+    let results
+    if (args.all) {
+      results = await validateAll(
+        [resolve(root, 'gks'), resolve(root, '.brain/msp/projects')],
+        validationCtx,
+      )
+    } else if (args.files && args.files.length > 0) {
+      results = []
+      for (const f of args.files) {
+        results.push(await validate(resolve(root, f), validationCtx))
+      }
+    } else {
+      return errorResult('must supply either `files` or `all: true`')
+    }
+
+    const ok = results.every((r) => r.errors.length === 0)
+    return jsonResult({ ok, results })
+  }
+}

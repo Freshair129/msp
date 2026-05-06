@@ -1,0 +1,54 @@
+---
+id: CONCEPT--ATOMIC-WRITE-CONTRACT
+phase: 1
+type: concept
+status: stable
+vault_id: default
+title: Atomic write contract — the schema every gks/ atom obeys
+tags:
+  - msp
+  - contract
+  - schema
+  - atomic
+crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--INBOUND-QUEUE"]}
+created_at: 2026-05-03T07:01:51.814Z
+---
+
+# CONCEPT — atomic write contract
+
+Every file in `gks/<type>/` obeys a single schema: required frontmatter fields, conditional fields based on `type`, a forbidden-fields blacklist, and field-level constraints. The validator (`src/validator/`) enforces it.
+
+## The contract has five parts
+
+| Part | Source | Atom |
+|---|---|---|
+| Required fields | §4.1 | `ADR--ATOMIC-CONTRACT-SCHEMA` (TBD M3) |
+| Conditional fields | §4.2 | same |
+| Forbidden fields | §4.3 | `ADR--FORBIDDEN-FIELDS-LIST` |
+| Field constraints | §4.4 | same |
+| Anti-hallucination rules | §4.5 | `ADR--ANTI-HALLUCINATION-RULES` |
+| Epistemic + crosslinks block | §4.6 | `CONCEPT--EPISTEMIC-METADATA` + `FRAME--CROSSLINKS-VOCABULARY` |
+
+## What "atomic" means here
+
+An *atom* in MSP terminology is a single markdown file under `gks/<type>/<ID>.md` carrying:
+
+1. **A frontmatter block** between two `---` delimiters with declarative metadata (id, phase, type, status, vault_id, summary, created_at/by, optional crosslinks/linked_symbols/geography).
+2. **A body** in markdown that humans can read.
+3. **A unique ID** that matches the filename and the canonical pattern (`TYPE--SLUG` uppercase, or `ADR-NNN` numeric).
+
+Atoms are **content-addressable through the index** — `gks/00_index/atomic_index.jsonl` is a derived flat list of every atom's frontmatter (rebuilt by `npm run msp:index`).
+
+## What MSP does NOT contractually enforce
+
+- **Quality of the body text.** The validator only inspects frontmatter shape + wikilink integrity. Whether an ADR's "Decision" section is well-reasoned is a human review concern.
+- **Code-symbol existence.** `linked_symbols` claims are not verified against the actual codebase — that's GitNexus / `gks lookup-by-symbol` territory.
+- **Cross-tenant authority.** Multi-tenancy is the orchestrator's job above MSP.
+
+## Why a contract at all
+
+Without one, four predictable failure modes appear (see `CONCEPT--INBOUND-QUEUE`). The contract makes each failure mode mechanically detectable.
+
+## Source
+
+`msp_spec.md` §4 (Atomic Write Contract).
