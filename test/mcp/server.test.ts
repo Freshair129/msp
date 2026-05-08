@@ -8,9 +8,10 @@ describe('createMspMcpServer', () => {
     expect(server).toBeDefined()
   })
 
-  it('registers exactly the 11 MSP-specific tools, no more no less', () => {
+  it('registers exactly the 12 MSP-specific tools, no more no less', () => {
     expect([...REGISTERED_TOOL_NAMES].sort()).toEqual([
       'msp_backlinks_rebuild',
+      'msp_candidate',
       'msp_compress',
       'msp_episode_append',
       'msp_identity_get',
