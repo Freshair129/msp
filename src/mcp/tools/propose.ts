@@ -1,11 +1,18 @@
 import { spawnSync } from 'node:child_process'
-import { resolve } from 'node:path'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import { z } from 'zod'
 
 import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
 
 export const name = 'msp_propose'
+
+// scripts/msp/propose.mjs ships with this package alongside dist/mcp/tools/propose.js,
+// so resolve it relative to this file — not the runtime project root (which may be the
+// caller's cwd, e.g. C:\Windows\system32 when MCP is launched from Claude Desktop).
+const here = dirname(fileURLToPath(import.meta.url))
+const WRAPPER_PATH = resolve(here, '../../../scripts/msp/propose.mjs')
 
 export const description =
   'Propose a new atom to the MSP inbound queue. Handles phase 0..6 (the wrapper translates phase 6 to GKS phase 5 then patches the file). Returns the proposed_id and inbound file path.'
@@ -31,12 +38,11 @@ export function handler(ctx: ToolHandlerCtx) {
     root?: string
   }): Promise<ToolTextResult> => {
     const root = resolve(args.root ?? ctx.root)
-    const wrapper = resolve(root, 'scripts/msp/propose.mjs')
 
     const r = spawnSync(
       'node',
       [
-        wrapper,
+        WRAPPER_PATH,
         args.id,
         `--title=${args.title}`,
         `--body=${args.body}`,
