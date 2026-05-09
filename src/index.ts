@@ -4,6 +4,7 @@ import { retain, recall } from '@freshair129/gks/memory'
 import { getStore } from './memory.js'
 import { CandidateWriter } from './memory/candidates/writer.js'
 import { CandidateNotFoundError } from './memory/candidates/types.js'
+import { registerSymbolApi } from './symbols/api.js'
 
 const app = express()
 app.use(express.json())
@@ -315,6 +316,9 @@ app.delete('/api/candidates/:id', async (req, res) => {
     res.status(400).json({ error: error.message })
   }
 })
+
+// Symbol Graph API (PR-5 of 6) — see src/symbols/api.ts.
+registerSymbolApi(app, getActiveRoot)
 
 app.get('/api/hotfixes', async (req, res) => {
   try {
