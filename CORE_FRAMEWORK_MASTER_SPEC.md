@@ -4,10 +4,10 @@
 > สถาปัตยกรรมตั้งต้น (Meta-Architecture) สำหรับโปรเจกต์ที่ขับเคลื่อนด้วย Multi-Agent + Doc-Before-Code
 > สกัดจาก GKS v3 — ลบ business logic ออกทั้งหมด คงไว้เฉพาะ "กฎของระบบ" ที่ใช้ซ้ำได้กับทุกโปรเจกต์
 >
-> **Version:** 1.1.0 (Candidates layer)
+> **Version:** 1.3.0 (Master Block — 3-tier knowledge model loader)
 > **License intent:** Boilerplate — fork แล้วแทนที่ `YourProject` / `ExampleFeature` ได้ทันที
 > **สถานะ:** ACTIVE — Master Reference สำหรับแตกออกเป็น Atomic (ADR / Protocol) ต่อไป
-> **Last updated:** 2026-05-08 — added candidates write-path layer (§3.2, §4.2, §7.2, §7.5)
+> **Last updated:** 2026-05-09 — added Master Block (§3.6: 3-tier knowledge model + `msp:master compose` loader)
 
 > 📌 **Companion document (exploratory):** [`SPEC--ARCHITECTURE-V2.md`](./SPEC--ARCHITECTURE-V2.md) — alternate cognitive-concerns framing (`msp_observe` hot-path extraction, MSP-only MCP layer, named-project registry). Status `🟡 draft, pending review`. **This doc (CORE_FRAMEWORK) remains the active master**; SPEC v2 is sibling exploration not yet adopted.
 
@@ -104,6 +104,38 @@ GUI และ API สำหรับ agent อ่านเขียน
 
 ### 🚀 3.5 Workflow — Five Phases, Four Gates
 ลำดับงาน Discover → Define → Design → Deliver → Verify (ดู §4 + §6)
+
+### 🧠 3.6 Master Block — Cross-cutting Knowledge Loader
+
+**Definition:** Master atoms are the stable, cross-cutting knowledge layer of the **3-tier knowledge model** (Safety / Master / Genesis) — see [`FRAME--KNOWLEDGE-3-TIER`](./gks/frame/FRAME--KNOWLEDGE-3-TIER.md) for the full contract. They carry **absolute meaning** — true regardless of session, project, or context — and are intended for **prompt injection at session start**.
+
+**Where they live:** `gks/master/<MASTER--ID>.md`. Frontmatter must include `tier: master`, `promoted_from`, `promoted_at`, `promotion_adr`.
+
+**Body schema (5 H2 sections, fixed order):**
+
+```markdown
+## Intent       <!-- 1–2 sentences — what behavior this Master enforces -->
+## Why          <!-- rationale — for human review -->
+## Directives   <!-- numbered, imperative — what agent must do -->
+## Apply when   <!-- triggers — when this Master is relevant -->
+## Conflicts with <!-- atom IDs that may contradict — for resolution -->
+```
+
+**Token cap:** body ≤ **400 tokens warn** / ≤ **600 tokens error** (heuristic: whitespace-split words × 1.3, rounded). Master atoms must stay prompt-injectable — keep them short.
+
+**Promotion (not authoring):** Master atoms are **promoted from Genesis** via an `ADR--MASTER-PROMOTION-<SLUG>` evidence ADR — they are *not* authored directly. See `ADR--MASTER-PROMOTION-*` atoms and §3.6 of `FRAME--KNOWLEDGE-3-TIER` for the rationale (cross-context stability over time). The Genesis atom keeps the audit trail; Master itself is treated as origin-less ("instinct").
+
+**How to compose at session start:**
+
+```bash
+npm run msp:master compose MASTER--FOO MASTER--BAR
+# or, after build:
+msp-master compose MASTER--FOO MASTER--BAR --root=<dir>
+```
+
+The composer reads each id from `gks/master/<id>.md`, validates `tier: master`, concatenates bodies with `\n\n---\n\n` separators (each prefixed with `<!-- {id} -->`), writes the fragment to **stdout**, and writes a summary line + any missing-ids list to **stderr**. Exit code: `0` on full success, `1` if any id is missing or non-Master, `2` on internal error.
+
+**Auto-injection:** out of scope for v1 — the loader is the foundation; downstream auto-inject hooks (Claude Code / Gemini CLI / Codex) are post-roadmap. Today, copy the stdout fragment into your agent's system prompt.
 
 ---
 

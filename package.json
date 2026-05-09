@@ -12,6 +12,7 @@
     "msp-validate": "./dist/validator/cli.js",
     "msp-backlinks": "./dist/memory/backlinks/cli.js",
     "msp-run-task": "./dist/codegen/cli.js",
+    "msp-master": "./dist/codegen/master/cli.js",
     "msp-propose": "./scripts/msp/propose.mjs",
     "msp-mcp-server": "./dist/mcp/bin.js"
   },
@@ -35,6 +36,7 @@
     "msp:validate": "tsx src/validator/cli.ts",
     "msp:backlinks": "tsx src/memory/backlinks/cli.ts",
     "msp:run-task": "tsx src/codegen/cli.ts",
+    "msp:master": "tsx src/codegen/master/cli.ts",
     "msp:hotfix:open": "gks hotfix open",
     "msp:hotfix:list": "gks hotfix list",
     "msp:hotfix:close": "gks hotfix close",

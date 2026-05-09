@@ -9,6 +9,7 @@ const targets = [
   'dist/validator/cli.js',
   'dist/memory/backlinks/cli.js',
   'dist/codegen/cli.js',
+  'dist/codegen/master/cli.js',
   'dist/mcp/bin.js',
 ]
 
