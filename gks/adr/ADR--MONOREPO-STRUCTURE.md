@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: draft
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Monorepo structure — npm workspaces with `packages/gks/` + `packages/msp/`, GKS still publishes to npm
 tags:
   - monorepo

@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: msp:hotfix:* scripts + pre-commit gate via gks hotfix check
 tags:
   - msp

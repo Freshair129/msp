@@ -10,10 +10,12 @@ import { forbiddenFields } from './rules/forbidden-fields.js'
 import { futureDate } from './rules/future-date.js'
 import { idFilenameMatch } from './rules/id-filename-match.js'
 import { idFormat } from './rules/id-format.js'
+import { masterRequiresPromotion } from './rules/master-requires-promotion.js'
 import { noInventedVersions } from './rules/no-invented-versions.js'
 import { phaseStatus } from './rules/phase-status.js'
 import { requiredFields } from './rules/required-fields.js'
 import { summaryMin } from './rules/summary-min.js'
+import { tierEnum } from './rules/tier-enum.js'
 import {
   ValidatorIOError,
   type Rule,
@@ -33,10 +35,11 @@ export const HARD_RULES: Rule[] = [
   phaseStatus,
   noInventedVersions,
   evidenceForDecisions,
+  masterRequiresPromotion,
 ]
 
 // Soft rules (warnings only; don't fail exit code)
-export const SOFT_RULES: Rule[] = [citeOrMarkInferred]
+export const SOFT_RULES: Rule[] = [citeOrMarkInferred, tierEnum]
 
 const MAX_ERRORS_PER_FILE = 50
 

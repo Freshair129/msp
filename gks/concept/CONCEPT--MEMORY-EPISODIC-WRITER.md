@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Memory episodic writer — emit episode summaries from session ranges
 tags:
   - msp

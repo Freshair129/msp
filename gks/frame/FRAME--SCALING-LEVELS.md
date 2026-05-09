@@ -4,6 +4,8 @@ phase: 0
 type: frame
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Scaling levels — L1/L2/L3 minimum artifact sets
 tags:
   - msp

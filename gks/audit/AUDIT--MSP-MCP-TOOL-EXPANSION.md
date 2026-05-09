@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M7f — MCP tool expansion (4 of 5 passport tools shipped; msp_compress deferred pending M7d)
 tags:
   - msp

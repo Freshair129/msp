@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M5c — anti-hallucination rules complete (3/6 → 6/6)
 tags:
   - msp

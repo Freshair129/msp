@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: MSP memory subsystem — sessions / episodic / vector for audit-grade recall
 tags:
   - msp

@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Pre-push hook walks touched FEAT files only (no reverse traversal)
 tags:
   - msp

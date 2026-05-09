@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Semantic search — GKS canonical, Smart Connections in-Obsidian browse (parity-locked model)
 tags:
   - msp

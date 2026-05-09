@@ -5,6 +5,8 @@ type: proto
 status: draft
 severity: error
 vault_id: default
+tier: safety
+source_type: axiomatic
 title: PROTO--SUMMARY-MIN — summary length bounds + placeholder ban
 tags:
   - msp

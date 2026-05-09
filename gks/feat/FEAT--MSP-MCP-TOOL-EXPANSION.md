@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: MSP MCP tools — recall / remember / compress / identity-get / identity-set
 tags:
   - msp

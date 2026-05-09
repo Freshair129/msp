@@ -4,6 +4,8 @@ phase: 5
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Knowledge base completion audit — 41 atoms covering msp_spec.md §2-§13
 tags:
   - msp

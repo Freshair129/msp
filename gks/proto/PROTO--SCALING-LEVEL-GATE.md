@@ -5,6 +5,8 @@ type: proto
 status: draft
 severity: warning
 vault_id: default
+tier: safety
+source_type: axiomatic
 title: PROTO--SCALING-LEVEL-GATE — enforce L1/L2/L3 chain consistency on FEAT atoms (M8c)
 tags:
   - msp

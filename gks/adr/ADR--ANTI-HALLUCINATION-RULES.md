@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Anti-hallucination rules — six guards on atom writes
 tags:
   - msp

@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: PROTO--PHASE-GATES — enforce P0 → P6 ordering at PR-time
 tags:
   - msp

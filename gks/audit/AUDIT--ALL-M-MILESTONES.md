@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Master audit — every M milestone status as of v0.3.0
 tags:
   - msp

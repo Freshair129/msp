@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M7e — identity layer implementation (profile / voice / preferences with atomic JSON store)
 tags:
   - msp

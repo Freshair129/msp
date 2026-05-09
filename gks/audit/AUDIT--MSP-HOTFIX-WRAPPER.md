@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M5b hotfix wrapper acceptance audit + id-format hex fix
 tags:
   - msp

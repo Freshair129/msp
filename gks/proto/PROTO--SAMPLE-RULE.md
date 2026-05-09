@@ -5,6 +5,8 @@ type: proto
 status: draft
 severity: warning
 vault_id: default
+tier: safety
+source_type: axiomatic
 title: PROTO--SAMPLE-RULE — trivial demo predicate (M8a)
 tags:
   - msp

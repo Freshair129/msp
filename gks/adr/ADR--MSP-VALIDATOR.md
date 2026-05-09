@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: MSP validator runs as a CLI gate over inbound + the whole gks/ tree
 tags:
   - msp

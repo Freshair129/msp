@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: draft
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Contradiction detection stack — 5 layers (human rule + reciprocal supersession + domain uniqueness + embedding hint + LLM judge)
 tags:
   - msp

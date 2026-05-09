@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Delegation policy — L2 atoms auto-approved by 2 senior, L3 Boss-only
 tags:
   - msp

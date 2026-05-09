@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: draft
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Monorepo migration — collapse `Freshair129/msp` + `Freshair129/GksV3` into one workspace while still publishing `@freshair129/gks` separately
 tags:
   - monorepo

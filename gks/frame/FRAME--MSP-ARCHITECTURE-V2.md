@@ -4,6 +4,8 @@ phase: 0
 type: frame
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: MSP architecture v2 — passport-orchestrator over Obsidian-backed GKS
 tags:
   - msp

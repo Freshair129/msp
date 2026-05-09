@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Identity layer — what makes "this agent is this agent" across sessions
 tags:
   - msp

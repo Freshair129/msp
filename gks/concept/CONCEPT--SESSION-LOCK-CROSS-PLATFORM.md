@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Session lock cross-platform parity — max-age safeguard for Windows + zombie PIDs
 tags:
   - msp

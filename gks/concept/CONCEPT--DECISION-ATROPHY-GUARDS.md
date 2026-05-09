@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Decision atrophy — valid_until enforcement + scheduled review report
 tags:
   - msp

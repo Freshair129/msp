@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Memory vector / backlinks — edge graph for hybrid retrieval
 tags:
   - msp

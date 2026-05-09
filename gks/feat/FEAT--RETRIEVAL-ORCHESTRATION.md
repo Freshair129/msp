@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Retrieval orchestration — recall(query) fans out across 4 sources, fuses via RRF
 tags:
   - msp
