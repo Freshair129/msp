@@ -2,16 +2,21 @@
 id: CONCEPT--PROPOSAL-TYPES
 phase: 1
 type: concept
-status: stable
+status: superseded
+tier: genesis
+source_type: axiomatic
 vault_id: default
 title: Proposal types — new_atomic / update_atomic / supersede / deprecate
 tags:
   - msp
   - inbound
   - proposal-types
-crosslinks: {"references":["CONCEPT--INBOUND-QUEUE","CONCEPT--SUBMISSION-ENVELOPE"]}
+  - superseded
+crosslinks: {"references":["CONCEPT--SUBMISSION-ENVELOPE"],"superseded_by":["CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-03T07:01:51.322Z
 ---
+
+> ⚠️ **Superseded by [`CONCEPT--KNOWLEDGE-LAYERS-V2`](./CONCEPT--KNOWLEDGE-LAYERS-V2.md)** (Phase 4 of `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION`, 2026-05-09). The new candidates layer doesn't use a proposal-type discriminator — every candidate is just a `${proposed_id}.md` file in `.brain/.../candidates/`. Body preserved as historical context.
 
 # CONCEPT — proposal types
 

@@ -2,7 +2,9 @@
 id: CONCEPT--SUBMISSION-ENVELOPE
 phase: 1
 type: concept
-status: stable
+status: superseded
+tier: genesis
+source_type: axiomatic
 vault_id: default
 title: Submission envelope — provenance frontmatter wrapping every inbound atom
 tags:
@@ -10,9 +12,12 @@ tags:
   - inbound
   - envelope
   - provenance
-crosslinks: {"references":["CONCEPT--INBOUND-QUEUE","CONCEPT--PROPOSAL-TYPES"]}
+  - superseded
+crosslinks: {"references":[],"superseded_by":["CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-03T07:01:50.823Z
 ---
+
+> ⚠️ **Superseded by [`CONCEPT--KNOWLEDGE-LAYERS-V2`](./CONCEPT--KNOWLEDGE-LAYERS-V2.md)** (Phase 4 of `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION`, 2026-05-09). `CandidateWriter` writes a plain atom directly to `.brain/.../candidates/${proposed_id}.md` — no envelope wrapper, no `proposal_id`, no `proposal_type`. Body preserved as historical context.
 
 # CONCEPT — submission envelope
 

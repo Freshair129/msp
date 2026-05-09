@@ -10,7 +10,7 @@ tags:
   - m5
   - m5e
   - audit
-crosslinks: {"references":["ADR--HUMAN-REVIEW-GATES","ADR--PATH-ENCODING","ADR--PROMOTION-WORKFLOW"]}
+crosslinks: {"references":["ADR--HUMAN-REVIEW-GATES","ADR--PATH-ENCODING","ADR--AGENT-WRITE-BOUNDARIES"]}
 linked_symbols:
   - {"file":"msp_spec.md"}
 created_at: 2026-05-03T11:01:43.397Z

@@ -11,7 +11,7 @@ tags:
   - hook
   - validator
   - automation
-crosslinks: {"references":["FEAT--MSP-VALIDATOR","ADR--PROMOTION-WORKFLOW"]}
+crosslinks: {"references":["FEAT--MSP-VALIDATOR","ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-03T07:39:04.340Z
 ---
 
