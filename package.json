@@ -13,12 +13,10 @@
     "msp-backlinks": "./dist/memory/backlinks/cli.js",
     "msp-run-task": "./dist/codegen/cli.js",
     "msp-master": "./dist/codegen/master/cli.js",
-    "msp-propose": "./scripts/msp/propose.mjs",
     "msp-mcp-server": "./dist/mcp/bin.js"
   },
   "files": [
     "dist/",
-    "scripts/msp/propose.mjs",
     "scripts/msp/re-indexer.ts",
     ".brain/msp/LLM_Contract/atomic_contract.yaml",
     "examples/hooks/",
