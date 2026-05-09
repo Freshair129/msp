@@ -2,7 +2,9 @@
 id: ADR--AGENT-WRITE-BOUNDARIES
 phase: 2
 type: adr
-status: draft
+status: stable
+tier: genesis
+source_type: axiomatic
 vault_id: default
 title: Agent write boundaries — agents may write anywhere under `.brain/`; canon (`gks/`) reachable only via PR + CI
 tags:
@@ -12,7 +14,7 @@ tags:
   - authority
   - decision
   - inbound-removal
-crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","FRAME--MSP-ARCHITECTURE-V2","ADR--HUMAN-REVIEW-GATES"]}
+crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","FRAME--MSP-ARCHITECTURE-V2","ADR--HUMAN-REVIEW-GATES"],"supersedes":["ADR--PROMOTION-WORKFLOW","ADR--PROMOTION-LEVELS"]}
 created_at: 2026-05-08T10:01:00.000Z
 ---
 

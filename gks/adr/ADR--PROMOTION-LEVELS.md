@@ -2,7 +2,9 @@
 id: ADR--PROMOTION-LEVELS
 phase: 2
 type: adr
-status: stable
+status: superseded
+tier: genesis
+source_type: axiomatic
 vault_id: default
 title: Promotion levels — L0 raw / L1 validated / L2 reviewed
 tags:
@@ -10,9 +12,12 @@ tags:
   - promotion
   - levels
   - lifecycle
-crosslinks: {"references":["ADR--PROMOTION-WORKFLOW","CONCEPT--INBOUND-QUEUE"]}
+  - superseded
+crosslinks: {"references":["ADR--PROMOTION-WORKFLOW","CONCEPT--INBOUND-QUEUE"],"superseded_by":["ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-03T07:08:43.030Z
 ---
+
+> ⚠️ **Superseded by [`ADR--AGENT-WRITE-BOUNDARIES`](./ADR--AGENT-WRITE-BOUNDARIES.md)** (Phase 4 of `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION`, 2026-05-09). The L0/L1/L2 promotion-level model is replaced by a simple two-state model: `status: candidate` (in `.brain/.../candidates/`) → `status: stable` (in `gks/<type>/` after human PR + CI). Body preserved as historical context.
 
 # ADR — promotion levels
 

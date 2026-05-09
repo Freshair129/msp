@@ -2,7 +2,9 @@
 id: BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
 phase: 3
 type: blueprint
-status: draft
+status: stable
+tier: process
+source_type: axiomatic
 vault_id: default
 title: BLUEPRINT — replace inbound queue with candidates layer (phased removal of msp_propose + propose.mjs + inbound infra)
 tags:

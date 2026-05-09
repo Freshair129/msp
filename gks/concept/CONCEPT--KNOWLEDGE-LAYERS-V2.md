@@ -2,7 +2,9 @@
 id: CONCEPT--KNOWLEDGE-LAYERS-V2
 phase: 1
 type: concept
-status: draft
+status: stable
+tier: genesis
+source_type: axiomatic
 vault_id: default
 title: Knowledge layers v2 — replace inbound queue with 4-layer model (session / episode / candidate / canon)
 tags:
