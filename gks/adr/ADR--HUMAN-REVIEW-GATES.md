@@ -10,7 +10,7 @@ tags:
   - review
   - governance
   - decision
-crosslinks: {"references":["ADR--PROMOTION-WORKFLOW","FRAME--AUTHORITY-MATRIX","FRAME--SCALING-LEVELS"]}
+crosslinks: {"references":["ADR--AGENT-WRITE-BOUNDARIES","FRAME--AUTHORITY-MATRIX","FRAME--SCALING-LEVELS"]}
 created_at: 2026-05-03T10:36:08.623Z
 ---
 

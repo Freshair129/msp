@@ -10,7 +10,7 @@ tags:
   - hotfix
   - escape-hatch
   - escalation
-crosslinks: {"references":["ADR--PROMOTION-WORKFLOW","FRAME--PHASE-GOVERNANCE"]}
+crosslinks: {"references":["ADR--AGENT-WRITE-BOUNDARIES","FRAME--PHASE-GOVERNANCE"]}
 created_at: 2026-05-03T07:08:43.472Z
 ---
 
