@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Pre-commit hook is a portable bash script under examples/hooks/, opt-in install
 tags:
   - msp

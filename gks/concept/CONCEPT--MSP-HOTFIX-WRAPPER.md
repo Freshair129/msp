@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: MSP hotfix wrapper — npm scripts + pre-commit gate for overdue hotfixes
 tags:
   - msp

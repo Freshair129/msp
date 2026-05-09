@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Retrieval orchestration uses Reciprocal Rank Fusion (RRF) with per-source weights
 tags:
   - msp

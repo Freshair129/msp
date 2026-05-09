@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: PROTO--ALGO-PARAM-COUPLING — bi-directional tunes ↔ tunable_by reciprocal validator
 tags:
   - msp

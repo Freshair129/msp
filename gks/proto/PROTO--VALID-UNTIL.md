@@ -5,6 +5,8 @@ type: proto
 status: draft
 severity: warning
 vault_id: default
+tier: safety
+source_type: axiomatic
 title: PROTO--VALID-UNTIL — decision atrophy guard (scan valid_until fields)
 tags:
   - msp

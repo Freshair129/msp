@@ -5,6 +5,8 @@ type: proto
 status: draft
 severity: error
 vault_id: default
+tier: safety
+source_type: axiomatic
 title: PROTO--ALGO-PARAM-COUPLING — bi-directional tunes ↔ tunable_by reciprocal validator
 tags:
   - msp

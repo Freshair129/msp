@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: draft
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Atom contradiction detection — 4-layer stack catching semantic conflict between new and existing knowledge
 tags:
   - msp

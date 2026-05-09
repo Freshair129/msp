@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Project path encoding — bare name (per script) over D-- prefix (per spec)
 tags:
   - msp

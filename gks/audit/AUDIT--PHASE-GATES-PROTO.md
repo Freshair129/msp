@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M8b — PROTO--PHASE-GATES — enforce P0..P6 ordering at PR-time (ships as draft)
 tags:
   - msp

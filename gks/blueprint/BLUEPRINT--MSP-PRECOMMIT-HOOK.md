@@ -4,6 +4,8 @@ phase: 3
 type: blueprint
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: BLUEPRINT — pre-commit hook implementation plan
 tags:
   - msp

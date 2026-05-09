@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Identity layer — namespaced JSON store with profile / voice / preferences
 tags:
   - msp

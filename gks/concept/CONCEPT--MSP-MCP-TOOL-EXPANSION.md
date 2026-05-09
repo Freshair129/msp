@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: MSP MCP tool surface expansion — wrap M7b/c/d/e for agent-facing access
 tags:
   - msp

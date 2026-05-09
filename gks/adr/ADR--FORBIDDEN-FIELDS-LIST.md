@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Forbidden frontmatter fields — agents must never set these
 tags:
   - msp

@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Ollama SLM client — real codegen via Ollama HTTP API
 tags:
   - msp

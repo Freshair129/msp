@@ -4,6 +4,8 @@ phase: 3
 type: blueprint
 status: draft
 vault_id: default
+tier: process
+source_type: axiomatic
 title: BLUEPRINT — contradiction detection implementation (5 phases, one PR per layer)
 tags:
   - msp

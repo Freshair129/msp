@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Epistemic metadata — confidence + source_type + duration on every claim
 tags:
   - msp

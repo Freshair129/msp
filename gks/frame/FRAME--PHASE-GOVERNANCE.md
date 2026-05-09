@@ -4,6 +4,8 @@ phase: 0
 type: frame
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Phase governance — P0..P6 doc-to-code flow
 tags:
   - msp

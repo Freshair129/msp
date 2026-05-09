@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M7-prep — architecture v2 supersede + Obsidian/Smart Connections decision atoms
 tags:
   - msp

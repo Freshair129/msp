@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M8c — PROTO--SCALING-LEVEL-GATE structural FEAT-chain check
 tags:
   - msp

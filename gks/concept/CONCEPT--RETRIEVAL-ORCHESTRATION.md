@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Retrieval orchestration — RRF fusion across GKS vector + Obsidian + episodic + backlinks
 tags:
   - msp

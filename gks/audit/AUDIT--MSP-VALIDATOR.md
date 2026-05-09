@@ -4,6 +4,8 @@ phase: 5
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: MSP validator M2 acceptance audit
 tags:
   - msp

@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M8f — promote 3 existing core rules to PROTO atoms (draft, overlap)
 tags:
   - msp

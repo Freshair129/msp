@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Episodic writer is JSON-array, idempotent on episodicId, with pluggable summariser
 tags:
   - msp

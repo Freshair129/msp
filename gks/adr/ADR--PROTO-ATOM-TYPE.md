@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: PROTO is a new atom type — separate from ADR / FEAT / FRAME
 tags:
   - msp

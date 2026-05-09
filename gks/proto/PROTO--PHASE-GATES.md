@@ -5,6 +5,8 @@ type: proto
 status: draft
 severity: error
 vault_id: default
+tier: safety
+source_type: axiomatic
 title: PROTO--PHASE-GATES — enforce P0..P6 phase ordering at PR-time (M8b)
 tags:
   - msp

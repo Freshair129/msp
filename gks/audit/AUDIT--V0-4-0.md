@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: v0.4.0 close-out — Tier 2 PROTOs (M8a–f) + M9a + Tier 3 explicit defer
 tags:
   - msp

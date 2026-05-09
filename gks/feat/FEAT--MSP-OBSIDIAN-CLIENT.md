@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: MSP Obsidian client wrapper — REST primary, filesystem fallback
 tags:
   - msp

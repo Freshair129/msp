@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Stdio MCP server, MSP-only tools, run side-by-side with gks-mcp-server
 tags:
   - msp

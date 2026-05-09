@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: pre-push-verify.sh — verify-flow per touched FEAT before push
 tags:
   - msp

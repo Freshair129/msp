@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M8a — PROTO loader implementation (foundation for M8b–f)
 tags:
   - msp

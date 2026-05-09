@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Codegen retry policy — max 3 SLM then Gemini then Opus
 tags:
   - msp

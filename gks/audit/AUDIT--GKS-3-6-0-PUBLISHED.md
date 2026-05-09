@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: GKS 3.6.0 published to npm — closes upstream proposal #5
 tags:
   - msp

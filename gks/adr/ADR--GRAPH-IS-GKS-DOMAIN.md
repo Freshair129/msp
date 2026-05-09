@@ -4,6 +4,8 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Atomic graph traversal is GKS domain; MSP only does shift-left + type-specific opinions
 tags:
   - msp

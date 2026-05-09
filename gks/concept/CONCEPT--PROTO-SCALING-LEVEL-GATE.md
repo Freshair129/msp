@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: PROTO--SCALING-LEVEL-GATE — auto-detect L1/L2/L3 from PR diff + check required-atom set
 tags:
   - msp

@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: pre-commit-validator.sh — bash hook that runs MSP validator on staged atoms
 tags:
   - msp

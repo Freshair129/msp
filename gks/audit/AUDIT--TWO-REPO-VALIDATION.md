@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Two-repo validation — MSP atomic claims vs published @freshair129/gks
 tags:
   - msp

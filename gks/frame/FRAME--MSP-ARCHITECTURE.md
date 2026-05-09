@@ -4,6 +4,8 @@ phase: 0
 type: frame
 status: superseded
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: MSP architecture — gatekeeper layers + write flow
 tags:
   - msp

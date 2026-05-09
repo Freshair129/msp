@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: msp:run-task — execute one T*.task.yaml end to end
 tags:
   - msp

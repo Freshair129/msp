@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Consolidator — promotes session turns into durable episodic memory
 tags:
   - msp

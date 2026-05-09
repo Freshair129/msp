@@ -4,6 +4,8 @@ phase: 2
 type: feat
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: msp-mcp-server — 6 tools over stdio MCP
 tags:
   - msp

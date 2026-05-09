@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: Context compression — token-budget aware lossy summarisation of episodes
 tags:
   - msp

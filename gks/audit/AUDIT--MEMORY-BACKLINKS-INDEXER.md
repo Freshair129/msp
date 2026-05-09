@@ -4,6 +4,8 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
+tier: process
+source_type: axiomatic
 title: M3c-1 memory backlinks indexer acceptance audit
 tags:
   - msp

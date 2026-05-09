@@ -4,6 +4,8 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
+tier: genesis
+source_type: axiomatic
 title: MSP roadmap — passport-over-Obsidian execution plan M7 → M10
 tags:
   - msp
