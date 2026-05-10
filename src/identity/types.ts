@@ -89,10 +89,20 @@ export interface Identity {
 /**
  * Options passed to every public function. `root` defaults to `process.cwd()`,
  * `namespace` defaults to `'evaAI'` (matching sessions / consolidator default).
+ *
+ * `view` controls layered reads (per `ADR--GLOBAL-VS-WORKSPACE`):
+ *   - `'merged'`  (default) — global identity shallow-merged with workspace
+ *                  override; mirrors today's behaviour for callers that don't
+ *                  ask for a specific layer.
+ *   - `'global'`  — only `~/.msp/identity.json` (or `MSP_HOME` override).
+ *   - `'project'` — only the workspace `identity.override.json` (sparse).
+ *
+ * `view` is read-only metadata; writes use `IdentityScope` (see store.ts).
  */
 export interface IdentityOptions {
   root?: string
   namespace?: string
+  view?: 'merged' | 'global' | 'project'
 }
 
 /** Default namespace — matches the sessions / consolidator convention. */

@@ -1,21 +1,36 @@
 import { mkdir, mkdtemp, readFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
+import { globalIdentityPath } from '../../../src/lib/msp-home.js'
 import { handler, name } from '../../../src/mcp/tools/identity-set.js'
 
 async function setupRoot(namespace = 'evaAI'): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), 'msp-identity-set-tool-'))
   await mkdir(join(root, '.brain/msp/projects', namespace), { recursive: true })
+  process.env['MSP_HOME'] = resolve(root, '.msp')
   return root
 }
 
-async function readIdentityFile(root: string, namespace = 'evaAI') {
-  const path = join(root, '.brain/msp/projects', namespace, 'identity.json')
-  return JSON.parse(await readFile(path, 'utf8'))
+async function readGlobalIdentityFile(): Promise<{
+  schemaVersion: 1
+  profile: { name: string }
+  voice: unknown
+  preferences: Record<string, unknown>
+}> {
+  return JSON.parse(await readFile(globalIdentityPath(), 'utf8'))
 }
+
+let savedHome: string | undefined
+beforeEach(() => {
+  savedHome = process.env['MSP_HOME']
+})
+afterEach(() => {
+  if (savedHome === undefined) delete process.env['MSP_HOME']
+  else process.env['MSP_HOME'] = savedHome
+})
 
 describe('msp_identity_set tool', () => {
   it('has the right name', () => {
@@ -35,8 +50,8 @@ describe('msp_identity_set tool', () => {
     expect(parsed.identity.profile.role).toBe('research')
     expect(parsed.identity.profile.tier).toBe('T3')
     expect(parsed.identity.profile.createdAt).not.toBe('')
-    // Persisted on disk
-    const onDisk = await readIdentityFile(root)
+    // Persisted to the global path (default scope=global)
+    const onDisk = await readGlobalIdentityFile()
     expect(onDisk.profile.name).toBe('EVA')
   })
 
@@ -178,19 +193,39 @@ describe('msp_identity_set tool', () => {
     expect(result.content[0]!.text).toMatch(/value/)
   })
 
-  it('honours namespace argument', async () => {
-    const root = await setupRoot('alt-ns')
-    await mkdir(join(root, '.brain/msp/projects/alt-ns'), { recursive: true })
+  it('scope=project writes a per-project override (not the global file)', async () => {
+    const root = await setupRoot()
+    // Seed the global first so we have something to override
+    await handler({ root })({
+      kind: 'voice',
+      voice: {
+        tone: [],
+        formality: 'casual',
+        languagePreference: 'en',
+        responseCadence: 'normal',
+      },
+      scope: 'global',
+      root,
+    })
+    // Override formality at project scope
     const result = await handler({ root })({
-      kind: 'profile',
-      partial: { name: 'NS-EVA' },
-      namespace: 'alt-ns',
+      kind: 'voice',
+      voice: {
+        tone: [],
+        formality: 'formal',
+        languagePreference: 'en',
+        responseCadence: 'normal',
+      },
+      scope: 'project',
+      namespace: 'clinic',
       root,
     })
     const parsed = JSON.parse(result.content[0]!.text)
     expect(parsed.ok).toBe(true)
-    expect(parsed.identity.profile.name).toBe('NS-EVA')
-    const onDisk = await readIdentityFile(root, 'alt-ns')
-    expect(onDisk.profile.name).toBe('NS-EVA')
+    // Merged read in clinic returns the override
+    expect(parsed.identity.voice.formality).toBe('formal')
+    // Global remains casual
+    const global = await readGlobalIdentityFile()
+    expect((global.voice as { formality: string }).formality).toBe('casual')
   })
 })

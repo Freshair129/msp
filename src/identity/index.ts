@@ -64,7 +64,18 @@ export {
 export type { PreferenceTtl } from './preferences.js'
 
 // Low-level store (exposed for advanced callers / tests)
-export { identityPath, readIdentity, writeIdentity } from './store.js'
+export {
+  identityPath,
+  projectOverridePath,
+  readIdentity,
+  resolveOptions,
+  writeIdentity,
+} from './store.js'
+export type { IdentityScope, ReadIdentityOptions } from './store.js'
+
+// Migration (exposed primarily for tests + diagnostics)
+export { migrateIfNeeded } from './migrate.js'
+export type { MigrationResult } from './migrate.js'
 
 /**
  * Convenience wrapper around `readIdentity`. Returns the full identity for a

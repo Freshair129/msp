@@ -1,15 +1,26 @@
 import { mkdtemp } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { setProfile } from '../../src/identity/profile.js'
 import { readIdentity } from '../../src/identity/store.js'
 
 async function freshRoot(): Promise<string> {
-  return mkdtemp(join(tmpdir(), 'msp-identity-profile-'))
+  const root = await mkdtemp(join(tmpdir(), 'msp-identity-profile-'))
+  process.env['MSP_HOME'] = resolve(root, '.msp')
+  return root
 }
+
+let savedHome: string | undefined
+beforeEach(() => {
+  savedHome = process.env['MSP_HOME']
+})
+afterEach(() => {
+  if (savedHome === undefined) delete process.env['MSP_HOME']
+  else process.env['MSP_HOME'] = savedHome
+})
 
 describe('setProfile', () => {
   it('writes a profile with set-once createdAt on first write', async () => {

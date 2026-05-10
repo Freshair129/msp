@@ -75,7 +75,7 @@ function callServer(messages: JsonRpc[], opts: CallOpts = {}): Promise<JsonRpc[]
 }
 
 describe('msp-mcp-server bin (spawned)', () => {
-  it('responds to initialize + tools/list with all 16 tools', async () => {
+  it('responds to initialize + tools/list with all 19 tools', async () => {
     const responses = await callServer([
       {
         jsonrpc: '2.0',
@@ -102,6 +102,9 @@ describe('msp-mcp-server bin (spawned)', () => {
       'msp_episode_append',
       'msp_identity_get',
       'msp_identity_set',
+      'msp_project_list',
+      'msp_project_register',
+      'msp_project_resolve',
       'msp_recall',
       'msp_remember',
       'msp_run_task',

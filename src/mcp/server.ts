@@ -6,6 +6,9 @@ import * as compressTool from './tools/compress.js'
 import * as episodeAppend from './tools/episode-append.js'
 import * as identityGet from './tools/identity-get.js'
 import * as identitySet from './tools/identity-set.js'
+import * as projectList from './tools/project-list.js'
+import * as projectRegister from './tools/project-register.js'
+import * as projectResolve from './tools/project-resolve.js'
 import * as recallTool from './tools/recall.js'
 import * as remember from './tools/remember.js'
 import * as runTask from './tools/run-task.js'
@@ -35,6 +38,9 @@ const TOOLS = [
   compressTool,
   identityGet,
   identitySet,
+  projectList,
+  projectRegister,
+  projectResolve,
   symbolLookup,
   symbolNeighbors,
   symbolImpact,

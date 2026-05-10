@@ -1,7 +1,7 @@
 # MSP — Memory & Soul Passport — Technical Full Specification
 
-> **Version:** 2.0.2
-> **Status:** Draft (architecture v2 + GKS audit alignment + agent-agnostic cleanup)
+> **Version:** 2.0.3
+> **Status:** Draft (architecture v2 + GKS audit alignment + agent-agnostic cleanup + global/workspace split)
 > **Audience:** T3 Architects, T2 Implementers, MSP maintainers
 > **Authority:** เมื่อขัดแย้งกับเอกสารนี้ ให้ยึด `gks/frame/FRAME--MSP-ARCHITECTURE-V2.md` เป็นหลัก
 
@@ -10,6 +10,8 @@
 > **เปลี่ยนจาก 2.0.0 → 2.0.1** (M7-prep follow-up): GKS audit อัปเดต — GKS ตอนนี้เป็น canonical embedder (`createNomicEmbedder()` ใน 3.6.0), Smart Connections เป็น in-Obsidian browse path; ทั้งสอง lock ที่ `nomic-embed-text-v1.5`. `OBSIDIAN_HOST` → `OBSIDIAN_URL`. Atomic graph เป็น GKS scope (MSP shift-left validation only). 4 upstream proposals สำหรับ GKS
 >
 > **เปลี่ยนจาก 2.0.1 → 2.0.2** (architecture-doc cleanup, 2026-05-09): MSP ประกาศตัวเป็น **agent-agnostic** (ดู `CONCEPT--AGENT-AGNOSTIC`) — EVA เป็นเพียงหนึ่งใน consumer; Claude Code / Gemini CLI / Antigravity / Hermes / openclaw plug-in ได้เท่ากัน. ลบ `CORE_FRAMEWORK_MASTER_SPEC.md` (ซึ่งเป็น EVA cognitive-layer spec ตามที่ GKS `SCOPE.md` ระบุไว้); ลบ `msp_infra_startup_architecture.md` (อธิบายระบบที่ไม่มีอยู่จริง); ลบ `SPEC--ARCHITECTURE-V2.md` (เอา idea ที่มีค่ามา cherry-pick เป็น 3 CONCEPT atoms). อ้างอิง: `AUDIT--ARCH-DOC-CLEANUP`
+>
+> **เปลี่ยนจาก 2.0.2 → 2.0.3** (Phase B impl, 2026-05-10): Storage แตกเป็น **global vs workspace** ตาม `ADR--GLOBAL-VS-WORKSPACE`. ตัว identity / preferences / projects-registry / cross-project audit ย้ายไป `~/.msp/` (override ได้ด้วย `MSP_HOME`); ส่วน sessions / episodic / candidates / vector ยังอยู่ workspace `./.brain/msp/projects/<ns>/` ตาม `ADR--PATH-ENCODING`. การ migrate จาก workspace identity เก่า → global เป็น one-time auto (idempotent, opt-out ด้วย `MSP_DISABLE_MIGRATION=1`); workspace file ไม่ถูกลบ. MCP tool surface ขยายจาก 16 → 19: `msp_identity_get` มี `view`/`explain`, `msp_identity_set` มี `scope`, ใหม่: `msp_project_list` / `msp_project_register` / `msp_project_resolve`. อ้างอิง: `BLUEPRINT--GLOBAL-VS-WORKSPACE-MIGRATION`, `AUDIT--PHASE-B-IMPL-COMPLETE`
 
 ---
 

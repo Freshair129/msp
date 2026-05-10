@@ -1,19 +1,31 @@
 import { mkdtemp, readFile, stat } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
+import { globalIdentityPath } from '../../src/lib/msp-home.js'
 import {
   getPreference,
   prunePreferences,
   setPreference,
 } from '../../src/identity/preferences.js'
-import { identityPath, readIdentity } from '../../src/identity/store.js'
+import { readIdentity } from '../../src/identity/store.js'
 
 async function freshRoot(): Promise<string> {
-  return mkdtemp(join(tmpdir(), 'msp-identity-prefs-'))
+  const root = await mkdtemp(join(tmpdir(), 'msp-identity-prefs-'))
+  process.env['MSP_HOME'] = resolve(root, '.msp')
+  return root
 }
+
+let savedHome: string | undefined
+beforeEach(() => {
+  savedHome = process.env['MSP_HOME']
+})
+afterEach(() => {
+  if (savedHome === undefined) delete process.env['MSP_HOME']
+  else process.env['MSP_HOME'] = savedHome
+})
 
 describe('setPreference / getPreference (no TTL)', () => {
   it('sets a value and reads it back', async () => {
@@ -79,7 +91,7 @@ describe('lazy expiry', () => {
       { expiresInMs: 1000 },
       () => setAt,
     )
-    const path = identityPath(root, 'evaAI')
+    const path = globalIdentityPath()
     const mtimeBefore = (await stat(path)).mtimeMs
 
     // Read 1h after expiry — must return null.
@@ -198,7 +210,7 @@ describe('prunePreferences', () => {
       undefined,
       () => setAt,
     )
-    const path = identityPath(root, 'evaAI')
+    const path = globalIdentityPath()
     const mtimeBefore = (await stat(path)).mtimeMs
     const count = await prunePreferences({ root, namespace: 'evaAI' })
     expect(count).toBe(0)

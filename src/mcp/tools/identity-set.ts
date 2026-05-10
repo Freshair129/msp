@@ -7,6 +7,7 @@ import {
   setPreference,
   setProfile,
   setVoice,
+  writeIdentity,
 } from '../../identity/index.js'
 import type { Profile, Voice } from '../../identity/types.js'
 import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
@@ -14,7 +15,7 @@ import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } fro
 export const name = 'msp_identity_set'
 
 export const description =
-  'Mutate the passport identity. Discriminated by `kind`: `profile` partial-merges Profile fields (createdAt is set-once), `voice` full-replaces the Voice sub-field, `preference` sets a single preference key with optional TTL. Returns the full identity post-write.'
+  'Mutate the passport identity. Discriminated by `kind`: `profile` partial-merges Profile fields (createdAt is set-once), `voice` full-replaces the Voice sub-field, `preference` sets a single preference key with optional TTL. `scope` controls write target — `global` writes to ~/.msp/identity.json (default for `profile`/`voice`), `project` writes to the workspace `identity.override.json` (sparse). Returns the merged identity post-write.'
 
 const profileShape = z.object({
   name: z.string().optional(),
@@ -36,6 +37,12 @@ export const inputSchema = {
   kind: z
     .enum(['profile', 'voice', 'preference'])
     .describe('Which sub-field to mutate.'),
+  scope: z
+    .enum(['global', 'project'])
+    .optional()
+    .describe(
+      "Write target. Defaults: profile → 'global', voice → 'global', preference → 'global'. Pass 'project' to write a sparse override at .brain/msp/projects/<ns>/identity.override.json instead.",
+    ),
   partial: profileShape
     .optional()
     .describe('Partial profile fields (only for kind=profile).'),
@@ -71,6 +78,7 @@ type ProfilePartial = Partial<
 
 interface IdentitySetArgs {
   kind: 'profile' | 'voice' | 'preference'
+  scope?: 'global' | 'project'
   partial?: ProfilePartial
   voice?: Voice
   key?: string
@@ -85,20 +93,41 @@ export function handler(ctx: ToolHandlerCtx) {
   return async (args: IdentitySetArgs): Promise<ToolTextResult> => {
     const root = resolve(args.root ?? ctx.root)
     const opts = { root, namespace: args.namespace }
+    // Sensible default per ADR: profile + voice → global, preferences → global.
+    // Callers wanting a project-level override (per-project voice/role) pass
+    // `scope: 'project'` explicitly.
+    const scope: 'global' | 'project' = args.scope ?? 'global'
     try {
       switch (args.kind) {
         case 'profile': {
           if (!args.partial) {
             return errorResult('kind=profile requires `partial` field')
           }
-          await setProfile(opts, args.partial)
+          if (scope === 'global') {
+            await setProfile(opts, args.partial)
+          } else {
+            // Project-scope partial profile: write a sparse override containing
+            // only the supplied profile fields. createdAt set-once is bypassed
+            // for overrides (the merged read picks up the global createdAt).
+            await writeIdentity(
+              { ...opts, scope: 'project' },
+              { profile: args.partial as Partial<Profile> as Profile },
+            )
+          }
           break
         }
         case 'voice': {
           if (!args.voice) {
             return errorResult('kind=voice requires `voice` field')
           }
-          await setVoice(opts, args.voice)
+          if (scope === 'global') {
+            await setVoice(opts, args.voice)
+          } else {
+            await writeIdentity(
+              { ...opts, scope: 'project' },
+              { voice: args.voice },
+            )
+          }
           break
         }
         case 'preference': {
@@ -107,6 +136,14 @@ export function handler(ctx: ToolHandlerCtx) {
           }
           if (!('value' in args)) {
             return errorResult('kind=preference requires `value` field')
+          }
+          // setPreference always writes via writeIdentity (default scope=global).
+          // Project-scope prefs are not yet supported (would need a sparse merge
+          // path); reject with a clear error rather than silently routing global.
+          if (scope === 'project') {
+            return errorResult(
+              'kind=preference with scope=project is not yet supported; preferences write globally. Override per-project voice/profile via scope=project on those kinds instead.',
+            )
           }
           const ttl =
             args.expires_at !== undefined || args.expires_in_ms !== undefined
