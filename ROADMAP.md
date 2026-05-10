@@ -1,6 +1,18 @@
 # MSP Roadmap
 
-> **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md). For close-out audits: [`AUDIT--ALL-M-MILESTONES`](./gks/audit/AUDIT--ALL-M-MILESTONES.md) (v0.3.0) + [`AUDIT--V0-4-0`](./gks/audit/AUDIT--V0-4-0.md) (v0.4.0).
+> **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md). For close-out audits: [`AUDIT--ALL-M-MILESTONES`](./gks/audit/AUDIT--ALL-M-MILESTONES.md) (v0.3.0) + [`AUDIT--V0-4-0`](./gks/audit/AUDIT--V0-4-0.md) (v0.4.0) + [`AUDIT--ARCH-DOC-CLEANUP`](./gks/audit/AUDIT--ARCH-DOC-CLEANUP.md) (Phase A, 2026-05-09) + [`AUDIT--PHASE-B-IMPL-COMPLETE`](./gks/audit/AUDIT--PHASE-B-IMPL-COMPLETE.md) (Phase B impl) + [`AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS`](./gks/audit/AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS.md) (Phase C).
+
+## Status — post-Phase-D (architecture re-base, 2026-05-10)
+
+After Phase A+B+C+D (PRs #65/#67/#66/#68) MSP is now explicitly **agent-agnostic** (`CONCEPT--AGENT-AGNOSTIC`) and ships a global-vs-workspace storage split (`ADR--GLOBAL-VS-WORKSPACE`).
+
+| Phase | What | PR | Status |
+|---|---|---|---|
+| A | SSOT cleanup — removed `CORE_FRAMEWORK_MASTER_SPEC.md` (EVA spec) + `msp_infra_startup_architecture.md` + `SPEC--ARCHITECTURE-V2.md`; cherry-picked 3 ideas → CONCEPT atoms | #65 | ✅ merged |
+| B (atoms) | `ADR--GLOBAL-VS-WORKSPACE` + `BLUEPRINT--GLOBAL-VS-WORKSPACE-MIGRATION` | #65 | ✅ merged |
+| B (impl) | `~/.msp/` global root + `src/projects/` registry/resolve + `src/identity/migrate.ts` + 3 new MCP tools (16→19) | #67 | ✅ merged |
+| C | `CONCEPT--AGENT-INTEGRATION-PATTERNS` + `docs/AGENT-INTEGRATION.md` (6-client wiring guide) | #66 | ✅ merged |
+| D | `upstream/gks-proposals/06-msp-relationship-update.md` (drafted; upstream relay pending) | #68 | ✅ merged |
 
 ## Status — v0.4.0 (governance mechanism complete)
 
@@ -49,15 +61,21 @@
 
 ## What v0.4.0 enables (vs v0.3.0)
 
-11 MCP tools (unchanged) — **PLUS** mechanical governance via PROTO loader. v0.3.0 had passport core; v0.4.0 adds:
+Mechanical governance via PROTO loader on top of the v0.3.0 passport core:
 
 - **Generic PROTO loader** — any `gks/proto/PROTO--*.md` atom + linked TS predicate runs as part of `msp:validate --all`
 - **9 PROTOs** shipped at `status: draft` (predicates run, observe, no fail-exit yet): SAMPLE-RULE, PHASE-GATES, SCALING-LEVEL-GATE, ALGO-PARAM-COUPLING, AUTHORITY-ENFORCEMENT, VALID-UNTIL, SUMMARY-MIN, ADR-MONOTONIC, EVIDENCE-FOR-DECISIONS
 - **Cutover machinery** — when a PROTO is promoted to `stable`, `severity: error` violations fail-exit CI
 
-**Gatekeeper (M6)**: `msp_validate`, `msp_propose`, `msp_run_task`, `msp_session_append`, `msp_episode_append`, `msp_backlinks_rebuild`
+## MCP tool surface (19 tools, post-Phase-B)
+
+**Gatekeeper / candidates**: `msp_validate`, `msp_candidate`, `msp_run_task`, `msp_session_append`, `msp_episode_append`, `msp_backlinks_rebuild`
 
 **Passport (M7f)**: `msp_recall`, `msp_remember`, `msp_compress`, `msp_identity_get`, `msp_identity_set`
+
+**Symbol graph**: `msp_symbol_lookup`, `msp_symbol_neighbors`, `msp_symbol_impact`, `msp_symbol_community`, `msp_symbol_search`
+
+**Projects (Phase B)**: `msp_project_list`, `msp_project_register`, `msp_project_resolve`
 
 **Killer demo**: `msp_recall("how did we decide rate limiting?")` returns ranked + provenance hits from GKS vector + Obsidian text + episodic + backlinks merged via RRF.
 
@@ -65,34 +83,40 @@
 
 Layer 0 (human rule) of `BLUEPRINT--CONTRADICTION-DETECTION-IMPL` shipped: `CLAUDE.md` § "Atom contradiction policy" + `.github/pull_request_template.md` checklist. Reviewers verify supersession discipline at PR-author time before any new mechanical layer (`PROTO--RECIPROCAL-SUPERSESSION`, `PROTO--DOMAIN-UNIQUENESS`, embedding hint, opt-in LLM judge) lands. See `ADR--CONTRADICTION-DETECTION-STACK` for the full 5-layer plan.
 
-## Post-v0.4.0 — inbound → candidates migration
+## Post-v0.4.0 — inbound → candidates migration (DONE)
 
-Per `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (4-phase plan):
+Per `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (4-phase plan, all done as of 2026-05-09):
 
-- **Phase 1 (additive — done, PR #46)**: `msp_candidate` MCP tool + `CandidateWriter` + Knowledge Browser tab. Writes to `.brain/.../candidates/`.
-- **Phase 2 (deprecate — in progress)**: `msp_propose` MCP tool marked `[deprecated]`; handler delegates to `CandidateWriter` (now writes candidates/, not inbound/). CLI wrapper `npm run msp:propose` still works for one cycle.
-- **Phase 3 (delete — pending)**: remove `msp_propose` MCP tool, `scripts/msp/propose.mjs`, `.brain/.../inbound/` dir, gks inbound CLI references.
-- **Phase 4 (atom supersession + audit — pending)**: flip `CONCEPT--INBOUND-QUEUE` → superseded by `CONCEPT--KNOWLEDGE-LAYERS-V2`; same for `ADR--PROMOTION-WORKFLOW` + `ADR--PROMOTION-LEVELS`; final AUDIT atom.
+- **Phase 1 (additive)**: `msp_candidate` MCP tool + `CandidateWriter` + Knowledge Browser tab — ✅ merged
+- **Phase 2 (deprecate)**: `msp_propose` marked `[deprecated]`, delegated to `CandidateWriter` — ✅ merged
+- **Phase 3 (delete)**: removed `msp_propose`, `scripts/msp/propose.mjs`, `inbound/` dir — ✅ merged (commit `7eff62b`)
+- **Phase 4 (atom supersession)**: `CONCEPT--INBOUND-QUEUE` superseded — ✅ merged
 
-## Counts at v0.4.0
+## Post-v0.4.0 — architecture re-base (Phases A–D, DONE)
 
-- **159 atoms** in `gks/`
-- **535 passing tests**
-- **71 test files**
-- **27 AUDIT atoms**
-- **9 PROTO atoms** (1 sample + 8 governance, all draft)
-- **5 upstream proposals** drafted for `Freshair129/GksV3`
+See top of file for the table; full context in `AUDIT--ARCH-DOC-CLEANUP`. Net effect: 7 root architecture docs → 2 (`msp_spec.md`, `ROADMAP.md`); MSP declared agent-agnostic; storage split into `~/.msp/` global vs workspace per-project; MCP tool count 16 → 19.
+
+## Counts (current, post-Phase-D)
+
+- **~202 atoms** in `gks/` (+43 from v0.4.0)
+- **663 passing tests** (+128) on Node 20 + 22
+- **19 MCP tools** in `msp-mcp-server`
+- **6 CLI bins**: `msp-validate`, `msp-backlinks`, `msp-run-task`, `msp-master`, `msp-mcp-server`, `msp-graph`
+- **6 upstream proposals** for `Freshair129/GksV3` (5 filed, 1 drafted awaiting relay)
 
 ## Configuration to start using MSP
 
+For full per-client wiring (Claude Code, Gemini CLI, Antigravity, Cursor, Codex, custom TS/Python), see [`docs/AGENT-INTEGRATION.md`](./docs/AGENT-INTEGRATION.md). Quick start:
+
 ```jsonc
-// MCP client config (Claude Code / Cursor / Cline)
+// MCP client config (Claude Code / Cursor / Cline / Gemini CLI / Antigravity)
 {
   "mcpServers": {
     "msp": {
-      "command": "npx",
-      "args": ["msp-mcp-server", "--root=/path/to/your/project"],
+      "command": "msp-mcp-server",
       "env": {
+        "MSP_HOME": "~/.msp",                       // global identity / preferences / projects registry
+        "MSP_PROJECT": "evaAI",                     // workspace project namespace
         "OBSIDIAN_URL": "https://127.0.0.1:27124",
         "OBSIDIAN_API_KEY": "<your-key>",
         "MSP_LLM_PROVIDER": "ollama"
@@ -102,7 +126,7 @@ Per `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (4-phase plan):
 }
 ```
 
-Optional plugins: Obsidian + Local REST API + Smart Connections (configured to use `nomic-embed-text-v1.5` once GKS 3.6.0 ships).
+Optional plugins: Obsidian + Local REST API + Smart Connections (configured to use `nomic-embed-text-v1.5` to match GKS 3.6.0's `createNomicEmbedder`).
 
 ## Out of scope (tracked elsewhere)
 

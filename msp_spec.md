@@ -191,11 +191,13 @@ Agent → msp_remember(turn) → sessions writer (append JSONL)
 | Layer | Path | Owner | บทบาท |
 |---|---|---|---|
 | **Contract** | `.brain/msp/LLM_Contract/` | MSP | YAML schema ที่ validator อ่าน |
-| **Inbound** | `.brain/msp/projects/evaAI/candidates/` | Agent (write), MSP (read) | queue ของ proposal |
-| **Rejected** | `.brain/msp/projects/evaAI/rejected/{date}/` | MSP | proposal ที่ fail พร้อม reason |
-| **Sessions** | `.brain/msp/projects/evaAI/sessions/*.jsonl` | MSP | linear conversation history |
-| **Episodic Memory** | `.brain/msp/projects/evaAI/memory/episodic_memory.json` | MSP | rich event summaries |
-| **Vector / Backlinks** | `.brain/msp/projects/evaAI/vector/` | MSP | hybrid retrieval support |
+| **Candidates** | `.brain/msp/projects/<ns>/candidates/` | Agent (write via `msp_candidate`), MSP (read) | queue ของ proposal (Inbound queue ถูกลบไปใน Phase 3 — ดู `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION`) |
+| **Rejected** | `.brain/msp/projects/<ns>/rejected/{date}/` | MSP | proposal ที่ fail พร้อม reason |
+| **Identity (global)** | `~/.msp/identity.json` | MSP (per `ADR--GLOBAL-VS-WORKSPACE`) | profile / voice / preferences ที่ travel กับ user |
+| **Identity (override)** | `.brain/msp/projects/<ns>/identity.override.json` | MSP | sparse per-project override |
+| **Sessions** | `.brain/msp/projects/<ns>/sessions/*.jsonl` | MSP | linear conversation history |
+| **Episodic Memory** | `.brain/msp/projects/<ns>/memory/episodic_memory.json` | MSP | rich event summaries |
+| **Vector / Backlinks** | `.brain/msp/projects/<ns>/vector/` | MSP | hybrid retrieval support |
 | **Scripts** | `scripts/msp/*.mjs` | Maintainer | CLI runner ของ MSP |
 | **Project rules** | `msp/rules/`, `msp/LLM_Contract/` | T3 Architect | กฎเพิ่มเติมเฉพาะโปรเจกต์ |
 
@@ -220,7 +222,7 @@ rationale: "Document MSP technical surface for new joiners"
 ```
 
 **Filename pattern:** `{yyyymmddHHMMSS}-{agent_id}-{proposal_type}-{slug}.md`
-**Inbound path:** `.brain/msp/projects/evaAI/candidates/`
+**Inbound path:** `.brain/msp/projects/<ns>/candidates/`
 
 ### 3.2 Proposal Types
 
@@ -413,7 +415,7 @@ P2 ต้องแตก draft เป็น 3 atomic:
 
 ### 7.1 Linear Session History (JSONL)
 
-**Path:** `.brain/msp/projects/evaAI/sessions/<episodicId>.jsonl`
+**Path:** `.brain/msp/projects/<ns>/sessions/<episodicId>.jsonl`
 **ใช้:** ไล่เรียงเหตุการณ์ราย turn
 
 ```json
@@ -430,7 +432,7 @@ P2 ต้องแตก draft เป็น 3 atomic:
 
 ### 7.2 Rich Episodic Memory (JSON)
 
-**Path:** `.brain/msp/projects/evaAI/memory/episodic_memory.json`
+**Path:** `.brain/msp/projects/<ns>/memory/episodic_memory.json`
 **ใช้:** สรุป episode สำคัญพร้อม metadata
 
 ```json
@@ -460,7 +462,7 @@ P2 ต้องแตก draft เป็น 3 atomic:
 
 ### 7.3 Vector / Backlinks
 
-**Path:** `.brain/msp/projects/evaAI/vector/backlinks.jsonl`
+**Path:** `.brain/msp/projects/<ns>/vector/backlinks.jsonl`
 แต่ละ edge: `{ from: "ID-A", to: "ID-B", type: "implements|used_by|..." }`
 ใช้สำหรับ hybrid retrieval (RRF) ตาม `gks/concept/CONCEPT--RETRIEVAL-ORCHESTRATION.md`
 
@@ -645,7 +647,7 @@ BLUEPRINT → gks/blueprints   MOD → gks/modules    PARAMS → gks/parameters
 
 | Trigger | Action |
 |---|---|
-| validator fails | move file → `.brain/msp/projects/evaAI/rejected/{YYYY-MM-DD}/` + create `rejection_reason.md` |
+| validator fails | move file → `.brain/msp/projects/<ns>/rejected/{YYYY-MM-DD}/` + create `rejection_reason.md` |
 | reviewer rejects | เหมือนกัน + ระบุ reviewer + reason |
 
 ---
@@ -741,7 +743,7 @@ MSP รองรับหลายโปรเจกต์ใต้ `~/.brain/ms
 | `gks/14_devlog/` | ✅ (free-write) | log per session |
 | `src/` (auto-generated) | ❌ | edit task YAML + rerun codegen |
 | `CLAUDE.md`, `GEMINI.md`, `registry.yaml` | ❌ (Boss-only) | ask first |
-| `.brain/msp/projects/evaAI/candidates/` | ✅ (agents) | drop proposal |
+| `.brain/msp/projects/<ns>/candidates/` | ✅ (agents) | drop proposal |
 | `.brain/msp/LLM_Contract/` | ❌ (MSP maintainer only) | code review |
 
 ---
