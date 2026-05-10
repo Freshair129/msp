@@ -2,7 +2,7 @@
 id: CONCEPT--NAMED-PROJECT-REGISTRY
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
 tier: genesis
 source_type: learned
@@ -11,7 +11,6 @@ tags:
   - msp
   - project
   - registry
-  - aspirational
   - cherry-pick
   - agent-agnostic
 crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","ADR--PATH-ENCODING","ADR--GLOBAL-VS-WORKSPACE"]}
@@ -20,7 +19,7 @@ created_at: 2026-05-09T00:00:00.000Z
 
 # CONCEPT — Named-project registry
 
-> **Status: draft (aspirational).** Not implemented. Cherry-picked from `SPEC--ARCHITECTURE-V2.md` §4.4 during the 2026-05-09 architecture-doc cleanup. Overlaps with the planned global/workspace separation (Phase B).
+> **Status: stable.** Core registry + 4-step resolver shipped in Phase B (`src/projects/{registry,resolve,types}.ts` + `msp_project_{list,register,resolve}` MCP tools — see `AUDIT--PHASE-B-IMPL-COMPLETE`). Cross-project recall (the `cross_project: true` flag described in §"Cross-project search" below) is the one remaining future extension; tracked as a small follow-up. Cherry-picked from `SPEC--ARCHITECTURE-V2.md` §4.4 during the 2026-05-09 architecture-doc cleanup.
 
 ## Problem
 
@@ -58,9 +57,9 @@ projects:
 
 The resolved name is looked up in `~/.msp/projects.yaml` to obtain the path + settings. If the name is unknown, MSP errors loudly rather than silently falling back — projects must be registered.
 
-## Cross-project search
+## Cross-project search (future extension)
 
-`msp_recall { query, cross_project: true }` walks all registered projects' vector stores in parallel and merges results via RRF. Audit log records which project each hit came from.
+`msp_recall { query, cross_project: true }` walks all registered projects' vector stores in parallel and merges results via RRF. Audit log records which project each hit came from. **Not yet implemented** — `msp_recall` currently scopes to the resolved project. Tracked as a follow-up to Phase B.
 
 ## Migration path
 
