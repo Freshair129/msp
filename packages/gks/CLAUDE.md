@@ -126,6 +126,7 @@ Full taxonomy: [`docs/KNOWLEDGE-TYPES.md`](./docs/KNOWLEDGE-TYPES.md)
 | [`docs/MIGRATIONS.md`](./docs/MIGRATIONS.md) | Schema versioning policy |
 | [`docs/BENCHMARKS.md`](./docs/BENCHMARKS.md) | LoCoMo / LongMemEval / BEAM runners |
 | [`docs/ULTRAPLAN.md`](./docs/ULTRAPLAN.md) | Multi-phase roadmap |
+| [`docs/embedder-compatibility.md`](./docs/embedder-compatibility.md) | Smart Connections + nomic-embed-text-v1.5 parity guide |
 
 ### docs/adr/
 
