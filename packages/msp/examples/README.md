@@ -47,6 +47,6 @@ knowledge graph under `gks/`:
 
 - **No source code.** Anything that needs to be imported lives under `src/`.
 - **No atoms.** This tree is supporting documentation; durable knowledge
-  goes in `gks/<type>/` via the inbound queue (`npm run msp:propose`).
+  goes in `gks/<type>/` via the `msp_candidate` MCP tool → `.brain/.../candidates/` → human PR review (per Phase 3 migration, 2026-05-09 — replaces legacy `msp:propose` CLI).
 - **No spec changes.** Adjustments to the Smart Connections / Obsidian
   contract belong in the relevant ADR, not in these guides.

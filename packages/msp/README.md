@@ -1,6 +1,8 @@
 # MSP — Memory & Soul Passport
 
-> **Agent-agnostic Memory OS** that travels with any cognitive-layer client (Claude Code, Gemini CLI, Antigravity, Cursor, EVA, Hermes, openclaw, custom MCP agents). Sits on top of [`@freshair129/gks`](https://github.com/Freshair129/GksV3) for atomic-markdown storage + vector / graph / Obsidian backends.
+> **Agent-agnostic Memory OS** that travels with any cognitive-layer client (Claude Code, Gemini CLI, Antigravity, Cursor, EVA, Hermes, openclaw, custom MCP agents). Sits on top of [`@freshair129/gks`](../gks/) for atomic-markdown storage + vector / graph / Obsidian backends.
+>
+> **Note:** As of 2026-05-11 monorepo migration, the canonical source for `@freshair129/gks` lives at [`packages/gks/`](../gks/) in this monorepo. The previous standalone repo `Freshair129/GksV3` is archived (read-only) on GitHub.
 
 ```
 COGNITIVE LAYER  EVA / Hermes / openclaw / Claude Code / Gemini CLI / Antigravity / Cursor

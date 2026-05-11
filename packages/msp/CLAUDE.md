@@ -8,7 +8,7 @@ This is the project-internal contract for how Claude Code (and human contributor
 
 Authoritative docs:
 - `gks/frame/FRAME--MSP-ARCHITECTURE-V2.md` — top-level architecture
-- `msp_spec.md` — full spec (currently 2.0.1)
+- `msp_spec.md` — full spec (currently 2.0.2)
 - `gks/concept/CONCEPT--MSP-ROADMAP.md` — milestone plan + execution order
 - `ROADMAP.md` — public summary
 

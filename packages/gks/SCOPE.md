@@ -132,8 +132,9 @@ shows a paradigm-agnostic Memory OS that uses GKS as its storage backend.
   `MSP-WKT-`) — process discipline, lives in `registry.yaml` of the
   consuming project.
 
-→ Reference: the `FRAMEWORK_MASTER_SPEC.md` from the EVA project documents
-this layer; GKS does not implement it.
+→ Reference: [`FRAMEWORK_MASTER_SPEC.md`](../../FRAMEWORK_MASTER_SPEC.md) at the
+monorepo root documents this layer; GKS does not implement it. (Originally extracted
+from the EVA project's framework spec.)
 
 ### Code intelligence → use GitNexus or similar
 - **AST parsing** (TS / Python / Go / Rust / …) — language-specific work
@@ -161,7 +162,7 @@ code-structure layer".
 
 ### Direct (no Memory OS) — simple agents
 ```ts
-import { MemoryStore, retain, recall } from '@evaai/gks'
+import { MemoryStore, retain, recall } from '@freshair129/gks'
 
 const store = new MemoryStore({ root: '.' })
 await retain(store, { content: 'User prefers dark mode' })

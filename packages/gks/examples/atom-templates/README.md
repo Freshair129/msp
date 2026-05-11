@@ -1,13 +1,21 @@
 # Atom templates
 
-Starter `.md` templates per prefix from
-[`docs/KNOWLEDGE-TYPES.md`](../../docs/KNOWLEDGE-TYPES.md).
+Starter `.md` templates per prefix — a **representative subset** of the full taxonomy
+in [`docs/KNOWLEDGE-TYPES.md`](../../docs/KNOWLEDGE-TYPES.md) (~30 atom types). The
+templates below are the most commonly authored types; for the complete prefix list
+including IDEA, CONCEPT, FRAME, MASTER, PROTO, MOD, PROTOCOL (interaction-contract),
+API/ENDPOINT/ENTRYPOINT, ENTITY, PARAMS, PERSONA, POLICY, REQ, CONSTRAINT, etc.,
+see KNOWLEDGE-TYPES.md.
 
 Each template is the **minimum viable shape** for that atom type:
 required frontmatter + recommended frontmatter + body skeleton with
-section headings. Copy → fill in → propose via the inbound queue
-(`gks propose-inbound …`) or write directly into `gks/issues/` for
-ISSUE-- (light-governance tier per ADR-012).
+section headings. **Workflow:** copy → fill in → propose via the `msp_candidate`
+MCP tool which writes to `.brain/msp/projects/<ns>/candidates/`, then human PR
+review promotes to `gks/<type>/`. (For ISSUE-- — light-governance tier per
+ADR-012 — you can write directly into `gks/issues/` without the candidates step.)
+
+> **Migration note:** Legacy `gks propose-inbound` / `msp:propose` CLI commands
+> were removed in Phase 3 (2026-05-09); use `msp_candidate` MCP tool instead.
 
 ## Available templates
 
@@ -17,12 +25,12 @@ ISSUE-- (light-governance tier per ADR-012).
 - [`ALGO.md`](./ALGO.md) — algorithm
 - [`FLOW.md`](./FLOW.md) — data / UI flow
 - [`ENTITY.md`](./ENTITY.md) — data schema
-- [`BLUEPRINT.yaml`](./BLUEPRINT.yaml) — implementation plan (YAML, not MD)
+- [`BLUEPRINT.yaml`](./BLUEPRINT.yaml) — implementation plan (YAML variant; MSP also accepts `.md` with YAML frontmatter)
 - [`AUDIT.md`](./AUDIT.md) — verification report
 
 ### Agent governance
 - [`SKILL.md`](./SKILL.md) — agent capability
-- [`PROTOCOL.md`](./PROTOCOL.md) — interaction contract
+- [`PROTOCOL.md`](./PROTOCOL.md) — interaction contract (HTTP/MCP-style, multi-step handshake)
 - [`GUARDRAIL.md`](./GUARDRAIL.md) — runtime-enforced policy
 
 ### Requirements engineering
@@ -34,18 +42,23 @@ ISSUE-- (light-governance tier per ADR-012).
 - [`ISSUE.md`](./ISSUE.md) — live issue (light-governance)
 - [`HOTFIX.md`](./HOTFIX.md) — hotfix escape hatch (48h backfill window, ADR-014)
 - [`RISK.md`](./RISK.md) — risk + mitigation
-- [`RUNBOOK.md`](./RUNBOOK.md) — operational response guide
+- [`RUNBOOK.md`](./RUNBOOK.md) — operational response guide ("if you see X, do Y")
 - [`SLO.md`](./SLO.md) — service-level objective
+
+### Types without bundled templates
+For these, create the file by hand following the schema in KNOWLEDGE-TYPES.md:
+IDEA, CONCEPT, FRAME, MASTER (root policy), PROTO (machine-enforced invariant),
+MOD, API, ENDPOINT, ENTRYPOINT, PARAMS, PERSONA, POLICY, REQ, CONSTRAINT,
+INSIGHT, FACT, RULE (auto-derived).
 
 ## Conventions
 
 - **`id`** must match `^[A-Z][A-Z0-9_]*--[A-Z0-9][A-Z0-9_-]*$`
-- **`phase`** must be an integer 0-5
+- **`phase`** must be an integer 0-6 (validator-enforced range). P7 (Ops) is discussed conceptually but isn't an atom phase
 - **`type`** must match the prefix lowercased (`ADR-- → type: adr`)
-- **`status`** initial value depends on the cluster:
-  - Implementation: `draft` → `stable` (after promote)
-  - Issues: `open` (template default) → `triaged` → `in_progress` → `closed`
-  - Decisions: `proposed` → `accepted` / `rejected`
+- **`status`** must be one of: `stub` / `raw` / `draft` / `active` / `stable` / `deprecated` / `superseded` / `partial` (validator-enforced via `src/validator/rules/phase-status.ts`)
+  - Atom lifecycle: `draft` → `stable` (after PR review merge) → optionally `superseded` or `deprecated` later
+  - Issues (light-governance): use ISSUE-- workflow statuses `open` → `triaged` → `in_progress` → `closed` (stored in atom body, distinct from atom-level `status`)
 - **`linked_symbols`** + **`geography`** — see ADR-010 for cross-reference semantics
 
 ## See also

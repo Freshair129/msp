@@ -98,8 +98,8 @@ See top of file for the table; full context in `AUDIT--ARCH-DOC-CLEANUP`. Net ef
 
 ## Counts (current, post-Phase-D)
 
-- **~202 atoms** in `gks/` (+43 from v0.4.0)
-- **663 passing tests** (+128) on Node 20 + 22
+- **~210 atoms** in `gks/` (+51 from v0.4.0)
+- **776 passing tests** (+241) on Node 20 + 22
 - **19 MCP tools** in `msp-mcp-server`
 - **6 CLI bins**: `msp-validate`, `msp-backlinks`, `msp-run-task`, `msp-master`, `msp-mcp-server`, `msp-graph`
 - **6 upstream proposals** for `Freshair129/GksV3` (5 filed, 1 drafted awaiting relay)

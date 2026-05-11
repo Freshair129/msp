@@ -17,7 +17,8 @@
   Owns: schema validation, ID-uniqueness, wikilink resolution, candidates
   workflow, and agent-specific episodic memory.
 - **Which MSP?**: There are two. **MSP-v9.1** (Python) is EVA's biological memory system. **MSP-this-repo** (TypeScript) is the agent-agnostic orchestrator described here.
-- **Contract**: GKS exposes `proposeInbound()` as the entry point for candidate atoms; MSP validates + human review (PR) promotes to `gks/`; the canonical store is write-protected.
+- **Contract**: GKS exposes `proposeInbound()` (TypeScript API) and `gks_propose_inbound` (MCP tool) as the entry point for candidate atoms. MSP wraps these as the `msp_candidate` MCP tool for agent ergonomics. MSP validates + **human PR review** is the only path that promotes to `gks/`; the canonical store is write-protected.
+  - **Naming note:** GKS keeps the historical `Inbound` name in its API surface for backward compatibility; the conceptual workflow on top is now called **candidates** (post-Phase-3 migration, 2026-05-09). Both refer to the same underlying write path.
 
 ## Why GKS doesn't ship MSP itself
 
@@ -39,7 +40,7 @@ room for an MSP-shaped layer above:
 | `src/memory/inbound.ts` constructor | Refuses inbound dir inside `gksRoot` | `gks/` stays write-protected; inbound is the only entry |
 | `MemoryStore.proposeInbound()` (`src/memory/index.ts`) | Single write API for candidate atoms | MSP can't be bypassed |
 | `src/memory/atomic-id.ts` `ATOMIC_ID_PATTERN` | TYPE--SLUG format check | MSP's ID conventions plug in here |
-| `src/memory/index.ts` `gksLayout()` | Default paths under `.brain/msp/projects/<path>/{inbound,session,memory,audit}/` | Defaults match MSP legacy layout; modern MSP uses `candidates/` instead of `inbound/` |
+| `src/memory/index.ts` `gksLayout()` | GKS default paths: `.brain/msp/projects/<path>/{inbound,session,memory,audit}/` (still emits `inbound/` for back-compat) | Modern MSP overrides `inboundDir` option to write to `candidates/` instead — same underlying write path, different directory name |
 | `src/memory/inbound.ts` `renderArtifactMarkdown` | Stamps namespace + frontmatter | MSP reviewers see provenance |
 | `src/memory/audit.ts` (append-only JSONL) | Every write op is logged | MSP relies on this for traceability |
 
@@ -63,8 +64,13 @@ What MSP owns (and GKS does *not*):
 - **Process artifacts (EVA-specific)**
   - `MSP-IMP-` (P3 plan) → `MSP-TSK-` (P4 task) → `MSP-ACT-` (P5 action)
     → `MSP-WKT-` (P6 walkthrough). Note: the TypeScript MSP is agent-agnostic and does not enforce these specific IDs by default.
-- **CLI commands**
-  - `npm run msp:propose` / `review` / `promote` / `validate` / `index`
+- **CLI commands (current — MSP TypeScript)**
+  - `npm run msp:validate` / `msp:check-links` / `msp:index` / `msp:backlinks` / `msp:verify` — atom integrity
+  - `npm run msp:run-task` — micro-task codegen runner
+  - `npm run msp:master` — MASTER-- atom tooling
+  - `npm run msp:hotfix:open` / `list` / `check` / `close` — 48h backfill window for HOTFIX
+- **CLI commands (removed in Phase 3, 2026-05-09)**
+  - `npm run msp:propose` / `msp:list` / `msp:promote` — **deleted**. Use `msp_candidate` MCP tool instead. There is no CLI promote — promotion is `git merge` of the PR only (per `ADR--AGENT-WRITE-BOUNDARIES`).
 - **Pre-commit hook**
   - Blocks commits if MSP validation fails
 - **Contract files**
@@ -96,8 +102,8 @@ If you're building a Memory OS for GKS, verify:
 - [ ] Frontmatter validated against your schema **before** calling
       `proposeInbound` — GKS only checks ID format + phase range
 - [ ] Promote step moves `candidates/<id>.md` (or legacy `inbound/`) →
-      `gks/<phase>/<type>/<slug>.md`
-- [ ] Promote step appends/updates `gks/00_index/atomic_index.jsonl`
+      `gks/<phase>/<type>/<slug>.md` via **git PR + squash-merge** (not a CLI step in modern MSP)
+- [ ] After merge, regenerate `gks/00_index/atomic_index.jsonl` via `npm run msp:index`
 - [ ] Your process-artifact IDs (`MSP-IMP-` / `-TSK-` / `-WKT-`) carry
       `sessionId` for traceability — but stored wherever you choose,
       *not* in `gks/`
@@ -174,7 +180,7 @@ await retain(store, {
 })
 ```
 
-Renders into the inbound markdown as:
+Renders into the candidate markdown (under `.brain/.../candidates/`) as:
 
 ```yaml
 ---

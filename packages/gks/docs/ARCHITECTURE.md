@@ -158,7 +158,7 @@ the edge that was current then, not now.
     ├── session/
     │   ├── MSP-SESS-...session.json     ← lifecycle + cost summary
     │   └── MSP-SESS-...trace.jsonl      ← append-only trace
-    ├── inbound/                         ← queue of proposed atoms
+    ├── inbound/                         ← queue of proposed atoms (GKS default — MSP overrides to `candidates/` per Phase 3)
     │   └── INSIGHT--FOO.rev-...md
     ├── vector/
     │   ├── atomic.jsonl                 ← (or *.hnsw, or pgvector schema)
@@ -172,9 +172,9 @@ the edge that was current then, not now.
 
 | Path | Write policy |
 |---|---|
-| `gks/` | NEVER write directly — go via `proposeInbound()` |
+| `gks/` | NEVER write directly — go via `proposeInbound()` (GKS API) or `msp_candidate` (MSP MCP tool wrapper) |
 | `.brain/.../memory/*.md` | append-only; refuse-on-overwrite |
-| `.brain/.../inbound/*` | each artifact is a new file with a unique reviewId |
+| `.brain/.../inbound/*` (or `candidates/*` when MSP overrides `inboundDir`) | each artifact is a new file with a unique reviewId — see Phase 3 migration |
 | `.brain/.../vector/*.jsonl` | rebuildable; safe to overwrite via `re-embed` |
 | `.brain/.../session/*.trace.jsonl` | append-only during the session |
 | `.brain/.../audit/*.jsonl` | append-only forever |

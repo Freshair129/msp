@@ -25,7 +25,9 @@ the answer is here. Templates for each prefix live in
 | `ENTRYPOINT--` | Implementation | Auth / middleware / access logic |
 | `PARAMS--` | Implementation | Constants / business config |
 | `FRAME--` | Implementation | Architectural frameworks / methodology / code standards |
-| `BLUEPRINT--` | Implementation | YAML implementation plan |
+| `MASTER--` | Implementation | Root-level policy / genesis rule (e.g. contradiction policy, write boundaries) |
+| `PROTO--` | Implementation | Machine-enforced invariant — short rule the validator checks at write time |
+| `BLUEPRINT--` | Implementation | Implementation plan (YAML or Markdown + frontmatter) |
 | `AUDIT--` | Implementation | Test results / quality report |
 | `HOTFIX--` | Ops | Hotfix escape-hatch atom (48h backfill window — ADR-014) |
 
@@ -123,6 +125,24 @@ where most contributions go.
 - **Don't use for:** runtime behavioural constraints — those are `GUARDRAIL--`.
 - **Phase:** P2.
 
+### `MASTER--` · root-level policy / genesis rule
+- **Use for:** the small set of root-level invariants that the rest of the atom graph defers to — contradiction policy, write boundaries, atom-body schema, supersession rules.
+- **Don't use for:** code-level standards (use `FRAME--`) or write-time validator rules (use `PROTO--`).
+- **Distinguishing question:** *is this the rule that other rules cite?* → if yes, MASTER.
+- **Phase:** P0/P2 (depends on whether it's a genesis axiom or a derived policy).
+- **Examples:** `MASTER--ATOM-CONTRADICTION-POLICY`, `MASTER--ATOM-BODY-SCHEMA`.
+- **Lifecycle:** very stable; supersession requires high-bar ADR.
+
+### `PROTO--` · machine-enforced invariant
+- **Use for:** a single short rule the **validator** checks at write/commit time, with `severity: error` and a `linked_symbols` pointer to the enforcement code.
+- **Don't use for:** runtime agent constraints (use `GUARDRAIL--`), interaction contracts (use `PROTOCOL--`), or operational responses (use `RUNBOOK--`).
+- **Distinguishing question:** *is the rule mechanically checkable by code at write-time?* → if yes, PROTO.
+- **Phase:** P2.
+- **Examples:** `PROTO--ADR-MONOTONIC` (ADR-NNN = max+1), `PROTO--PHASE-GATES`, `PROTO--SCALING-LEVEL-GATE`, `PROTO--VALID-UNTIL`.
+- **Relationship to other types:**
+  - `PROTO--` enforces a rule at **write time** (validator); `GUARDRAIL--` enforces at **runtime** (agent action); `POLICY--` is **operational** (access/retention/rate-limit).
+  - `PROTO--` often *implements* a `MASTER--` policy in machine-checkable form.
+
 ### `BLUEPRINT--` · implementation plan
 - **Use for:** the YAML plan that microtask codegen consumes.
 - **Don't use for:** prose specs — those are `FEAT--`.
@@ -165,6 +185,12 @@ rationale.
 - **Use for:** handshake / message-format contracts between agents or between agent and system (MCP, agent-to-agent).
 - **Don't use for:** HTTP API endpoint contracts — those are `ENDPOINT--`.
 - **Distinguishing question:** *is this a multi-step interaction?* → if yes, PROTOCOL; if request/response single-shot, ENDPOINT.
+
+> ⚠️ **Disambiguation — `PROTOCOL--` ใช้ความหมาย CS standard** (interaction / communication contract — HTTP protocol, MCP protocol)
+> **ไม่ใช่** "SOP / situational procedure" ตามภาษาทั่วไป สำหรับ "เมื่อ X เกิด ให้ทำ Y" ให้เลือก:
+> - **`RUNBOOK--`** = on-call response guide ("ถ้าเห็น alert/incident → ทำ steps เหล่านี้")
+> - **`GUARDRAIL--`** = runtime hard rule ("agent ห้ามทำ X โดยไม่มี Y")
+> - **`POLICY--`** = operational policy ("retain data 90 วัน", "rate limit 100rps")
 
 ### `GUARDRAIL--` · enforced behavioural policy
 - **Use for:** runtime-enforced constraint on agent / tool behaviour ("never call X without Y").
@@ -292,6 +318,8 @@ These have `MSP-` prefix and live in process-tracking storage, not in
         ↓ Is it about EXISTING code / decisions / features?
         │
         ├── Decision        → ADR--
+        ├── Root policy     → MASTER--
+        ├── Validator rule  → PROTO--
         ├── Feature spec    → FEAT--
         ├── Algorithm       → ALGO--
         ├── Code standard   → FRAME--
@@ -329,4 +357,4 @@ These have `MSP-` prefix and live in process-tracking storage, not in
 - [`docs/adr/012-extended-taxonomy.md`](./adr/012-extended-taxonomy.md) — decision record
 - [`examples/atom-templates/`](../examples/atom-templates/) — starter `.md` templates per prefix
 - [`docs/MSP_RELATIONSHIP.md`](./MSP_RELATIONSHIP.md) — how MSP gates these atom writes
-- `FRAMEWORK_MASTER_SPEC §4.1` — original 17-prefix proposal
+- `FRAMEWORK_MASTER_SPEC §4.1` — meta-architecture summary (defers to this file as canonical)

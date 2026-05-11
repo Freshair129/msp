@@ -233,7 +233,7 @@ Try: `npx tsx bin/gks.ts lookup ADR--FLAT-ATOM-LAYOUT --root=.`
 | `gks_recall` | Semantic search across all layers |
 | `gks_lookup` | Exact atomic-id lookup |
 | `gks_lookup_by_symbol` | Find atoms citing a `file:fn` symbol |
-| `gks_propose_inbound` | Write a candidate to the inbound queue |
+| `gks_propose_inbound` | Write a candidate to the inbound queue (GKS-side API; MSP-side users typically call the higher-level `msp_candidate` MCP tool that wraps this) |
 | `gks_reflect` | Trigger consolidation |
 | `gks_verify_flow` | Walk crosslinks from an atom; exit-1 on broken edges |
 | `gks_validate_links` | Check all crosslink integrity in the tree |
