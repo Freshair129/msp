@@ -54,7 +54,7 @@ describe('PROTO--SCALING-LEVEL-GATE predicate', () => {
     expect(result.violations).toEqual([])
   })
 
-  it('warns when an L3 FEAT (BLUEPRINT linked) is missing BLUEPRINT chain coverage', async () => {
+  it('warns (grandfathered) when an L3 FEAT (BLUEPRINT linked) is missing BLUEPRINT chain coverage', async () => {
     // FEAT links to a BLUEPRINT (so implied level = L3) but the BLUEPRINT id
     // doesn't resolve and there's no BLUEPRINT backlink — the auto-classifier
     // therefore lands in L3 but still has only CONCEPT + ADR satisfied.
@@ -62,6 +62,10 @@ describe('PROTO--SCALING-LEVEL-GATE predicate', () => {
     // BLUEPRINT atom in the index already references the FEAT — so expected
     // is L3 yet hasBlueprint is true → passes.
     // Instead test the missing case: declare level: L3 explicitly.
+    //
+    // No `created_at` set on the fixture FEAT, so it's pre-cutoff →
+    // grandfathered to `severity: warning`. ok remains true (warnings don't
+    // block CI per the post-2026-05-12 hardening rule).
     const index = [
       feat(
         'FEAT--BAR',
@@ -78,7 +82,7 @@ describe('PROTO--SCALING-LEVEL-GATE predicate', () => {
       atomicIndex: index,
       repoRoot: '/tmp/anything',
     })
-    expect(result.ok).toBe(false)
+    expect(result.ok).toBe(true) // grandfathered — warning doesn't fail predicate
     expect(result.violations).toHaveLength(1)
     expect(result.violations[0]!.atomId).toBe('FEAT--BAR')
     expect(result.violations[0]!.severity).toBe('warning')
@@ -86,7 +90,7 @@ describe('PROTO--SCALING-LEVEL-GATE predicate', () => {
     expect(result.violations[0]!.message).toMatch(/L3/)
   })
 
-  it('warns when a default-L2 FEAT is missing CONCEPT or ADR', async () => {
+  it('warns (grandfathered) when a default-L2 FEAT is missing CONCEPT or ADR', async () => {
     const index = [
       feat('FEAT--ORPHAN', {
         references: ['CONCEPT--ORPHAN'],
@@ -98,9 +102,57 @@ describe('PROTO--SCALING-LEVEL-GATE predicate', () => {
       atomicIndex: index,
       repoRoot: '/tmp/anything',
     })
-    expect(result.ok).toBe(false)
+    expect(result.ok).toBe(true) // grandfathered — warning doesn't fail predicate
     expect(result.violations).toHaveLength(1)
+    expect(result.violations[0]!.severity).toBe('warning')
     expect(result.violations[0]!.message).toMatch(/ADR/)
+  })
+
+  it('errors (hard-enforced) when a FEAT created_at >= cutoff is missing ADR', async () => {
+    // FEATs with created_at on/after 2026-05-12 must satisfy the chain rule;
+    // grandfather clause does not protect them. Severity becomes 'error',
+    // ok = false (CI fails).
+    const index = [
+      feat(
+        'FEAT--POST-CUTOFF',
+        {
+          references: ['CONCEPT--POST-CUTOFF'],
+          // no ADR linked
+        },
+        { created_at: '2026-05-13T00:00:00.000Z' },
+      ),
+      atom('CONCEPT--POST-CUTOFF', 'concept'),
+    ]
+    const result = await predicate({
+      atomicIndex: index,
+      repoRoot: '/tmp/anything',
+    })
+    expect(result.ok).toBe(false) // hard-enforced — error fails predicate
+    expect(result.violations).toHaveLength(1)
+    expect(result.violations[0]!.severity).toBe('error')
+    expect(result.violations[0]!.atomId).toBe('FEAT--POST-CUTOFF')
+    expect(result.violations[0]!.message).toMatch(/ADR/)
+  })
+
+  it('skips superseded FEATs (no chain check applies to historical atoms)', async () => {
+    const index = [
+      feat(
+        'FEAT--SUPERSEDED',
+        {
+          // intentionally no chain — would normally trigger violation
+        },
+        {
+          status: 'superseded',
+          created_at: '2026-06-01T00:00:00.000Z', // post-cutoff but historical
+        },
+      ),
+    ]
+    const result = await predicate({
+      atomicIndex: index,
+      repoRoot: '/tmp/anything',
+    })
+    expect(result.ok).toBe(true)
+    expect(result.violations).toHaveLength(0)
   })
 
   it('respects level_override: "L1" — no chain expectation', async () => {

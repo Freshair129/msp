@@ -125,11 +125,38 @@ function decideExpectedLevel(
   return hits.hasBlueprint ? 'L3' : 'L2'
 }
 
+/**
+ * Cutoff for hard enforcement of FEAT chain rule.
+ *
+ * Atoms with `created_at` >= this date MUST satisfy the chain (CONCEPT + ADR;
+ * BLUEPRINT for L3) — violations emit `severity: error` and block CI.
+ *
+ * Atoms older than this date are grandfathered (`severity: warning`) until
+ * retrofitted per HANDOFF-SYMBOLS-EXPANSION-PHASE-2.md PR-D.
+ *
+ * Decision recorded in ADR--SYMBOLS-FRAMEWORK-AWARENESS §5.
+ */
+const HARD_ENFORCE_CUTOFF = Date.parse('2026-05-12T00:00:00.000Z')
+
+/**
+ * Read `created_at` from an atomic-index entry as a millisecond timestamp.
+ * Returns NaN if absent or malformed (which falls through to grandfather path).
+ */
+function readCreatedAtMs(entry: AtomicIndexEntry): number {
+  const raw = readField(entry, 'created_at')
+  if (typeof raw !== 'string') return Number.NaN
+  return Date.parse(raw)
+}
+
 const predicate: Predicate = (ctx: PredicateContext): PredicateResult => {
   const violations: PredicateViolation[] = []
   const feats = ctx.atomicIndex.filter((a) => a.type === 'feat')
 
   for (const feat of feats) {
+    // Superseded / deprecated FEATs are historical; skip chain check.
+    const status = readField(feat, 'status')
+    if (status === 'superseded' || status === 'deprecated') continue
+
     const hits = classifyChain(ctx.atomicIndex, feat)
     const expected = decideExpectedLevel(feat, hits)
 
@@ -144,15 +171,21 @@ const predicate: Predicate = (ctx: PredicateContext): PredicateResult => {
     if (expected === 'L3' && !hits.hasBlueprint) missing.push('BLUEPRINT')
 
     if (missing.length > 0) {
+      // Grandfather older FEATs (warning); new FEATs from cutoff onward (error).
+      const createdAtMs = readCreatedAtMs(feat)
+      const isHardEnforced =
+        Number.isFinite(createdAtMs) && createdAtMs >= HARD_ENFORCE_CUTOFF
+      const severity: 'error' | 'warning' = isHardEnforced ? 'error' : 'warning'
+
       violations.push({
         atomId: feat.id,
         message: `${feat.id} (expected ${expected}) is missing linked ${missing.join(' + ')} in crosslinks.references/implements`,
-        severity: 'warning',
+        severity,
       })
     }
   }
 
-  return { ok: violations.length === 0, violations }
+  return { ok: violations.every((v) => v.severity !== 'error'), violations }
 }
 
 export default predicate

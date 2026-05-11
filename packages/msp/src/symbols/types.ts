@@ -15,6 +15,19 @@ export type SymbolKind =
   | 'enum'
   | 'const'
   | 'module'
+  // Framework-aware kinds (Phase 2)
+  | 'page'
+  | 'layout'
+  | 'loading'
+  | 'error_boundary'
+  | 'route'
+  | 'template'
+  | 'middleware'
+  | 'not_found'
+  | 'entity'
+  | 'tool'
+  | 'data_loader'
+  | 'metadata_loader'
 
 export type EdgeType =
   | 'defines'
@@ -23,6 +36,18 @@ export type EdgeType =
   | 'extends'
   | 'implements'
   | 'references'
+  // Framework-aware edges (Phase 2)
+  | 'renders_at'
+  | 'wraps'
+  | 'fallback_for'
+  | 'catches_from'
+  | 'wraps_per_navigation'
+  | 'intercepts'
+  | 'handles'
+  | 'relates_to'
+  | 'loads_for'
+  | 'meta_for'
+  | 'accesses'
 
 export interface Symbol {
   /** Composite id: `<relative-file>:<name>:<kind-shorthand>` (e.g. `src/foo.ts:bar:func`). */
@@ -40,6 +65,8 @@ export interface Symbol {
   signature: string | null
   /** Filled by Leiden after detection; null until then. */
   community_id: number | null
+  /** Optional attributes for framework-specific metadata (runtime, url, etc.). */
+  attrs?: Record<string, any>
   /** ISO 8601 — set at upsert time. */
   created_at: string
 }
@@ -52,6 +79,8 @@ export interface Edge {
   weight: number
   /** false when the parser couldn't statically resolve the target (e.g. dynamic call). */
   resolved: boolean
+  /** Optional attributes for edge-specific metadata. */
+  attrs?: Record<string, any>
 }
 
 export interface Community {

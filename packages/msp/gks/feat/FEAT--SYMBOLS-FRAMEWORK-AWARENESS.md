@@ -2,7 +2,7 @@
 id: FEAT--SYMBOLS-FRAMEWORK-AWARENESS
 phase: 2
 type: feat
-status: active
+status: superseded
 tier: process
 source_type: axiomatic
 vault_id: default
@@ -18,7 +18,7 @@ tags:
   - orm
   - route
   - mcp
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"]}
+crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"],"superseded_by":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","ADR--SYMBOLS-FRAMEWORK-AWARENESS","ALGO--SYMBOLS-FRAMEWORK-RECOGNITION","PROTO--SYMBOLS-FRAMEWORK-INVARIANTS"]}
 linked_symbols:
   - {"file":"packages/msp/src/symbols/parser/framework.ts"}
   - {"file":"packages/msp/src/symbols/parser/orm.ts"}
@@ -26,6 +26,19 @@ created_at: 2026-05-11T21:48:00.000Z
 ---
 
 # FEAT — Framework-aware symbol indexing
+
+> ⚠️ **Superseded on 2026-05-11.** This FEAT bundled four concerns (motivation, decision, algorithms, invariants) which violates atom-type semantics per `KNOWLEDGE-TYPES.md`. It has been decomposed into:
+>
+> - `CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS` (motivation, scope)
+> - `ADR--SYMBOLS-FRAMEWORK-AWARENESS` (decision + decomposition rationale)
+> - `ALGO--SYMBOLS-FRAMEWORK-RECOGNITION` (algorithms per recognizer)
+> - `PROTO--SYMBOLS-FRAMEWORK-INVARIANTS` (validator-enforced graph invariants)
+>
+> See `ADR--SYMBOLS-FRAMEWORK-AWARENESS` for rationale. Implementation work continues per `HANDOFF-SYMBOLS-EXPANSION-PHASE-2.md`.
+>
+> The original content below is preserved verbatim for historical reference.
+
+---
 
 ## User-facing behaviour
 

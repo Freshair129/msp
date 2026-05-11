@@ -17,6 +17,20 @@ const KIND_SHORTHAND: Record<SymbolKind, string> = {
   enum: 'enum',
   const: 'const',
   module: 'mod',
+  // Framework-aware kinds (Phase 2) — COBOL parser doesn't emit these,
+  // but the shorthand map must be exhaustive to satisfy Record<SymbolKind>.
+  page: 'page',
+  layout: 'layt',
+  loading: 'load',
+  error_boundary: 'errb',
+  route: 'route',
+  template: 'tmpl',
+  middleware: 'mwre',
+  not_found: 'nf',
+  entity: 'ent',
+  tool: 'tool',
+  data_loader: 'dload',
+  metadata_loader: 'mload',
 }
 
 function toPosix(p: string): string {
