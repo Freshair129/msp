@@ -186,7 +186,7 @@ m = MemoryOS(
   the kernel uses `MinimalValidatorChain`; wiring up the real ones is a
   matter of writing an `EvaValidatorChain` that wraps them.
 
-## Relationship to GKS v3
+## Relationship to GKS
 
 This example **uses** `gks-mcp-server` as one of two storage backends —
 it doesn't modify GKS itself.

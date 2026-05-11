@@ -1,4 +1,4 @@
--- GKS v3 — pgvector backend schema.
+-- GKS — pgvector backend schema.
 --
 -- Designed to be re-runnable (idempotent) so npm run pg-migrate is safe to
 -- call any number of times. All objects are namespaced under a configurable

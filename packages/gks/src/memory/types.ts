@@ -1,5 +1,5 @@
 /**
- * Shared types for GKS v3 memory fabric.
+ * Shared types for GKS memory fabric.
  *
  * Reference: BLUEPRINT--memory (Layer 1-4).
  */

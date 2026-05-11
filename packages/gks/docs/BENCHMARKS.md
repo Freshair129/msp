@@ -1,4 +1,4 @@
-# GKS v3 — Benchmarks Guide
+# GKS — Benchmarks Guide
 
 Three runners (LoCoMo, LongMemEval, BEAM) and a sweep orchestrator. All
 backend-pluggable via CLI flags so you can mix-and-match embedder × reranker

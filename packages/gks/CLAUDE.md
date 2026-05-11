@@ -1,4 +1,6 @@
-# CLAUDE.md — GKS v3 Agent Guide
+# CLAUDE.md — GKS Agent Guide
+
+> **Package:** `@freshair129/gks` — version in [`package.json`](./package.json), changelog in [`CHANGELOG.md`](./CHANGELOG.md)
 
 Genesis Knowledge System — a **storage engine** for agent memory.
 Four cooperating layers (Atomic, Vector, Episodic, Obsidian) behind
@@ -11,7 +13,7 @@ bi-temporal versioning, and pluggable backends.
 
 ```sh
 npm run typecheck          # tsc --noEmit (run before every commit)
-npm test                   # vitest run — 321 tests
+npm test                   # vitest run — 428 tests
 npm run build              # tsc -p tsconfig.build.json
 npm run quickstart         # end-to-end demo
 

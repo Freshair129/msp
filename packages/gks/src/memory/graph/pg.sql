@@ -1,4 +1,4 @@
--- GKS v3 — Postgres graph backend schema (bi-temporal).
+-- GKS — Postgres graph backend schema (bi-temporal).
 --
 -- Sister schema to pgvector.sql. Run via the same npm run pg-migrate runner
 -- with --schema=graph (or apply both with --schema=all).

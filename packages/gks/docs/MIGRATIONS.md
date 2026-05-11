@@ -1,4 +1,4 @@
-# GKS v3 — Schema Migrations
+# GKS — Schema Migrations
 
 GKS persistent stores carry a `schema_version` field. The runtime checks
 it on `load()` and refuses to read an incompatible store rather than

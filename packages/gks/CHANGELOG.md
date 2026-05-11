@@ -52,9 +52,9 @@
   - Benchmark sweep (`bench:sweep`) correctly extracts headline metrics from multi-line runner output
   - Remove unused `FRAME--TRI-BRAIN-ARCHITECTURE` document (eva-cli spec belongs in a separate repo)
 
-All notable changes to GKS v3 are documented in this file. The format is
+All notable changes to GKS (`@freshair129/gks`) are documented in this file. The format is
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the
-project follows [Semantic Versioning](https://semver.org/).
+project follows [Semantic Versioning](https://semver.org/) — MAJOR.MINOR.PATCH.
 
 ## [3.5.5] — 2026-04-28
 

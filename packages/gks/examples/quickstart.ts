@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 /**
- * GKS v3 quickstart — end-to-end walkthrough.
+ * GKS quickstart — end-to-end walkthrough.
  *
  * Exercises every major API surface in one script so you can eyeball the full
  * loop working:
@@ -77,7 +77,7 @@ async function main(): Promise<void> {
       },
       {
         path: 'Concepts/GKSv3.md',
-        title: 'GKS v3',
+        title: 'GKS',
         body: 'A four-layer memory fabric: Atomic, Vector, Obsidian, Episodic. Built to the EVA Tri-Brain Blueprint.',
         tags: ['architecture', 'memory'],
         backlinks: [],
@@ -165,7 +165,7 @@ async function main(): Promise<void> {
 
   // Append trace steps so consolidation has something to chew on.
   for (const step of [
-    { kind: 'user' as const, content: 'Walk me through GKS v3 layers' },
+    { kind: 'user' as const, content: 'Walk me through GKS layers' },
     { kind: 'agent' as const, content: 'Atomic (exact-id), Vector (semantic), Obsidian (graph), Episodic (session). Retain/Recall/Reflect bridges them.' },
     { kind: 'user' as const, content: 'And when does consolidation run?' },
     { kind: 'agent' as const, content: 'On session end, or when trace > 30 messages and duration > 60 min.' },

@@ -2,7 +2,7 @@
 
 > **Universal Multi-Agent Framework Boilerplate**
 > สถาปัตยกรรมตั้งต้น (Meta-Architecture) สำหรับโปรเจกต์ที่ขับเคลื่อนด้วย Multi-Agent + Doc-Before-Code
-> สกัดจาก GKS v3 — ลบ business logic ออกทั้งหมด คงไว้เฉพาะ "กฎของระบบ" ที่ใช้ซ้ำได้กับทุกโปรเจกต์
+> สกัดจาก GKS — ลบ business logic ออกทั้งหมด คงไว้เฉพาะ "กฎของระบบ" ที่ใช้ซ้ำได้กับทุกโปรเจกต์
 >
 > **Version:** 1.1.0
 > **Last updated:** 2026-05-11 — sync กับ Phase 3 (`BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION`, 2026-05-09) และ monorepo migration (`ADR--MONOREPO-STRUCTURE`, 2026-05-11)
@@ -73,7 +73,7 @@ Human Concept  →  Atomic Knowledge  →  Technical Blueprint  →  Code
 | **MSP** | Memory & Soul Passport — gatekeeper ที่ validate ทุกสิ่งก่อนเข้า GKS | `msp/`, `.brain/msp/` |
 | **SSOT** | Single Source of Truth — ข้อมูลมีจริง 1 ที่เท่านั้น | โฟลเดอร์ Type ย่อยใน `gks/` |
 | **Atomic Note** | ความรู้หน่วยเล็กสุด 1 เรื่อง 1 ไฟล์ — มี frontmatter | `ADR--xxx.md`, `FLOW--yyy.md` |
-| **Blueprint** | แผนงานเทคนิค — รูปแบบขึ้นกับโปรเจกต์: **YAML** (SLM-readable, original GKS v3 / EvaAI) หรือ **Markdown + frontmatter** (human-navigable, MSP) — ใช้อย่างใดอย่างหนึ่งต่อโปรเจกต์ ห้ามผสม | EvaAI: `gks/blueprints/BLUEPRINT--*.yaml` / MSP: `gks/blueprint/BLUEPRINT--*.md` |
+| **Blueprint** | แผนงานเทคนิค — รูปแบบขึ้นกับโปรเจกต์: **YAML** (SLM-readable, original GKS / EvaAI) หรือ **Markdown + frontmatter** (human-navigable, MSP) — ใช้อย่างใดอย่างหนึ่งต่อโปรเจกต์ ห้ามผสม | EvaAI: `gks/blueprints/BLUEPRINT--*.yaml` / MSP: `gks/blueprint/BLUEPRINT--*.md` |
 | **Micro-task** | 1 concern 1 ไฟล์ YAML — หน่วยย่อยสุดของ codegen (orchestrator territory ตาม `ADR--TASK-TRACKING-AT-ORCHESTRATOR`) | `.brain/<ns>/tasks/<slug>/T*.task.yaml` |
 | **Candidate** | atom ที่ agent เสนอ — รอ human PR review ก่อนเข้า `gks/` | `.brain/msp/projects/<ns>/candidates/<id>.md` |
 | **MCP** | Model Context Protocol — ช่องทางที่ agent คุยกับเครื่องมือนอก (เช่น GKS, MSP) | `msp_candidate`, `gks_recall`, `gks_lookup` |
@@ -140,7 +140,7 @@ packages/msp/src/
 
 ---
 
-## 4. GKS v3: Information Assembly Line
+## 4. GKS: Information Assembly Line
 
 ### 4.1 ภาพรวมประเภทองค์ความรู้ (Knowledge Types)
 
@@ -193,7 +193,7 @@ packages/msp/src/
 ### 4.2 โครงโฟลเดอร์มาตรฐาน (Canonical Layout)
 
 > **Folder-naming convention:**
-> ภาพด้านล่างใช้ **plural** (เช่น `adrs/`, `concepts/`, `blueprints/`) — เป็นรูปแบบดั้งเดิมจาก GKS v3 / EvaAI
+> ภาพด้านล่างใช้ **plural** (เช่น `adrs/`, `concepts/`, `blueprints/`) — เป็นรูปแบบดั้งเดิมจาก GKS / EvaAI
 > โปรเจกต์ MSP/monorepo รุ่นใหม่ใช้ **singular** (`adr/`, `concept/`, `blueprint/`) + ชื่อสั้น (`algo/` แทน `algorithms/`, `feat/` แทน `features/`, `frame/` แทน `frameworks/`)
 > **เลือกอย่างใดอย่างหนึ่งต่อโปรเจกต์** — และระบุไว้ใน `CLAUDE.md` ของโปรเจกต์
 >
@@ -241,7 +241,7 @@ packages/msp/src/
 │   │       └── _outputs/            # SLM outputs
 │   ├── audits/                      # 🟠 (AUDIT--)
 │   ├── ops/                         # 🔵 deployment configs, IaC & live ops
-│   └── 14_devlog/
+│   └── devlog/
 │       ├── task/                    # daily task logs (TSK)
 │       ├── implement/               # MSP-IMP-*.md
 │       ├── walkthrough/             # MSP-WKT-*.md (wktId)
@@ -295,7 +295,7 @@ packages/msp/src/
 
 | Type | โฟลเดอร์ | ชนิด | ความหมาย |
 |---|---|---|---|
-| `API--` | `apis/` หรือ `08_apis/` | API Hub | รวม endpoints ของ subsystem หนึ่ง — Technical SSOT |
+| `API--` | `apis/` หรือ `api/` | API Hub | รวม endpoints ของ subsystem หนึ่ง — Technical SSOT |
 | `ENDPOINT--` | `endpoints/` | Endpoint Spec | 1 path × 1 method (request/response schema, auth) |
 | `ENTRYPOINT--` | `entrypoints/` | Access Logic | Auth, Middleware, Rate-limit, Routing |
 
@@ -405,7 +405,7 @@ verification_plan:
 - **Pair กับ `gks/00_index/atomic_index.jsonl`** — JSONL เป็น L0 machine-readable index (~22 KB); MASTER_DASHBOARD เป็น human-readable command center
 
 ### 4.11 Environment Isolation (การแบ่งแยกสภาวะแวดล้อม)
-ระบบ GKS v3 บังคับให้มีการแยกสภาวะแวดล้อมเพื่อความมั่นใจในความปลอดภัยและคุณภาพ:
+ระบบ GKS บังคับให้มีการแยกสภาวะแวดล้อมเพื่อความมั่นใจในความปลอดภัยและคุณภาพ:
 1. **Development (GKS Local):** พื้นที่ทำงานของ Agent ใน **P0–P5** (Frame → Code) — local workspace, candidates queue, ยังไม่ deploy
 2. **Staging (Audit Area):** พื้นที่สำหรับ **P6** (AUDIT) เพื่อทดสอบ + verify ก่อนปล่อยขึ้นระบบจริง — CI runs ที่นี่
 3. **Production (Live System):** **P7** (Ops) ที่ผู้ใช้จริงเข้าถึง — **ห้าม Agent เข้าไปแก้ไขโค้ดตรง ๆ** ต้องผ่าน CI/CD pipeline เสมอ; rollback ใช้ `RUNBOOK--` ที่ถูก approve แล้ว
@@ -462,7 +462,7 @@ Atomic note ทุกใบมี `epistemic.confidence` + `epistemic.source_typ
 | Microtasks `T*.task.yaml` | ✅ ได้ (T2/T3) — **ไม่ใช่ atom** อยู่ที่ orchestrator path ตาม ADR--TASK-TRACKING-AT-ORCHESTRATOR | runner validates at execution |
 | `src/` (AUTO-GENERATED) | ❌ ห้ามแก้มือ | แก้ task YAML → rerun codegen |
 | `src/` (hand-written) | ✅ ได้ | ตาม blueprint |
-| `gks/14_devlog/*` (ถ้าโปรเจกต์ใช้) | ✅ free-write | — |
+| `gks/devlog/*` (ถ้าโปรเจกต์ใช้) | ✅ free-write | — |
 | `.brain/<ns>/candidates/*` | ✅ ได้ (เขียนผ่าน `msp_candidate` MCP) | — |
 
 ### 5.4 Token Efficiency
@@ -488,7 +488,7 @@ Atomic note ทุกใบมี `epistemic.confidence` + `epistemic.source_typ
 
 ### 6.1 Phase flow (The Assembly Line)
 
-การไหลของข้อมูลใน GKS v3 จะเป็นแบบ "Assemble & Log" โดยมี atom store (durable knowledge) และ devlog (live trace) แยกชั้นกัน:
+การไหลของข้อมูลใน GKS จะเป็นแบบ "Assemble & Log" โดยมี atom store (durable knowledge) และ devlog (live trace) แยกชั้นกัน:
 
 ```mermaid
 graph TD
@@ -1031,7 +1031,7 @@ git push origin yrp-NN/<desc> --force-with-lease
 | Repository layer (`src/lib/repositories/*`) | หนึ่งคนต่อ repo file |
 | DB schema | **ห้ามแก้พร้อมกัน — ADR required** |
 | `CLAUDE.md` / `GEMINI.md` / `AGENTS.md` | Boss / Lead Architect |
-| `gks/14_devlog/*` (ถ้ามี) | ทุกคน (แยกไฟล์ตาม task) |
+| `gks/devlog/*` (ถ้ามี) | ทุกคน (แยกไฟล์ตาม task) |
 | `gks/<type>/*.md` (atoms — ADR, CONCEPT, FEAT, BLUEPRINT ฯลฯ) | `msp_candidate` MCP → PR only — ห้ามเขียนตรง |
 | `.brain/<ns>/candidates/*` | per-user staging — เขียนผ่าน MCP tool เท่านั้น |
 
@@ -1322,7 +1322,7 @@ npm test --workspace=packages/gks
 
 ## 16. Migration & Indexing Utilities
 
-เพื่อรองรับการย้ายโปรเจกต์เก่าเข้าสู่มาตรฐาน GKS v3 และการรักษาความถูกต้องของดัชนีความรู้ (Knowledge Index) Framework จึงมีสคริปต์ช่วยเหลือดังนี้:
+เพื่อรองรับการย้ายโปรเจกต์เก่าเข้าสู่มาตรฐาน GKS และการรักษาความถูกต้องของดัชนีความรู้ (Knowledge Index) Framework จึงมีสคริปต์ช่วยเหลือดังนี้:
 
 ### 16.1 Re-indexer (Deterministic)
 สคริปต์สำหรับรวบรวม ID จากทุกไฟล์ใน `gks/` มาสร้าง L0 atomic index เพื่อให้ agent scan ได้เร็ว
@@ -1468,7 +1468,7 @@ id_naming_conventions:
 | **External tracker** (Linear / Jira / GH Issues) | Source of Task — status, assignment, comments (orchestrator territory) |
 | `.brain/msp/projects/<ns>/sessions/` | Session history (JSONL) — turn-by-turn |
 | `.brain/msp/projects/<ns>/memory/episodic_memory.json` | Episodic summaries (rich metadata) |
-| `gks/14_devlog/` (optional, EVA-style) | Local devlog — task log + implementation record (ถ้าโปรเจกต์เลือกใช้) |
+| `gks/devlog/` (optional, EVA-style) | Local devlog — task log + implementation record (ถ้าโปรเจกต์เลือกใช้) |
 
 ---
 

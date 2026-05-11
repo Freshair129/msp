@@ -1,4 +1,4 @@
-# GKS v3 — Architecture
+# GKS — Architecture
 
 Companion to `BLUEPRINT--memory`.
 Where the BLUEPRINT is the canonical spec, this page is the

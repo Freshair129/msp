@@ -331,7 +331,7 @@ async function writeReports(report: SweepReport, dir: string): Promise<void> {
 
 function formatMarkdown(report: SweepReport): string {
   const lines: string[] = []
-  lines.push(`# GKS v3 — Benchmark Sweep`)
+  lines.push(`# GKS — Benchmark Sweep`)
   lines.push('')
   lines.push(`- **Git:** \`${report.meta.git.sha}${report.meta.git.dirty ? ' (dirty)' : ''}\``)
   lines.push(`- **Timestamp:** ${report.meta.timestamp}`)

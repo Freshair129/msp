@@ -136,7 +136,7 @@ export interface LlmExtractorOptions {
   maxTokens?: number
 }
 
-const SYSTEM_PROMPT = `You are the Consolidator for an agentic memory system (GKS v3 / EVA Tri-Brain).
+const SYSTEM_PROMPT = `You are the Consolidator for an agentic memory system (GKS / EVA Tri-Brain).
 You consolidate a multi-turn session into a structured episodic memory record.
 
 You MUST respond with a single JSON object and nothing else (no prose, no code

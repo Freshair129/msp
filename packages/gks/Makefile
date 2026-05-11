@@ -1,5 +1,6 @@
-# GKS v3 — Benchmark Makefile
+# GKS — Benchmark Makefile
 # Targets derived from ULTRAPLAN.md Phase 3
+# Version tracked in ../package.json
 
 .PHONY: all benchmarks locomo longmemeval beam sweep clean
 

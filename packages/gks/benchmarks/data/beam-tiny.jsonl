@@ -1,7 +1,7 @@
 {"id":"doc-001","text":"The Cortex module in the EVA Tri-Brain architecture is responsible for high-level planning and reasoning. It runs on Claude Opus 4.7 for complex tasks and Gemini for alternative perspectives."}
 {"id":"doc-002","text":"The Motor module handles code generation in the EVA agent. It uses Qwen running locally via Ollama, which is fast but has a smaller context window than the Cortex."}
 {"id":"doc-003","text":"The Limbic module manages intent extraction and emotional context. It uses Typhoon, a Thai-tuned language model, because the primary user speaks Thai natively."}
-{"id":"doc-004","text":"Memory in GKS v3 is split into four layers: Atomic (the exact-lookup index), Vector (semantic search), Obsidian (graph and wikilink traversal), and Episodic (session history)."}
+{"id":"doc-004","text":"Memory in GKS is split into four layers: Atomic (the exact-lookup index), Vector (semantic search), Obsidian (graph and wikilink traversal), and Episodic (session history)."}
 {"id":"doc-005","text":"The Atomic layer reads atomic_index.jsonl and returns full notes by exact ID match. It never returns a close match — unknown IDs return null to prevent hallucination."}
 {"id":"doc-006","text":"The Vector layer embeds text using bge-m3 (Ollama, 1024 dimensions) as the primary provider, falling back to text-embedding-3-small (OpenAI, 1536 dimensions) when Ollama is unreachable."}
 {"id":"doc-007","text":"Cosine similarity in the Vector layer uses brute-force O(N*d) search. This is fine up to about 100,000 vectors; beyond that we migrate to HNSW or pgvector."}

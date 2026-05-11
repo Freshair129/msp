@@ -1,10 +1,13 @@
-# GKS v3
+# GKS
 
 > Genesis Knowledge System — a **storage engine** for agent memory:
 > four cooperating layers (Atomic, Vector, Obsidian, Episodic) behind
 > three verbs (Retain, Recall, Reflect), with multi-tenancy, bi-temporal
 > versioning, observability, and pluggable backends.
+>
+> Current version: see [`package.json`](./package.json) (`@freshair129/gks`) and [`CHANGELOG.md`](./CHANGELOG.md).
 
+[![npm](https://img.shields.io/npm/v/@freshair129/gks.svg)](https://www.npmjs.com/package/@freshair129/gks)
 [![tests](https://img.shields.io/badge/tests-428%20passing-brightgreen)](#tests)
 [![node](https://img.shields.io/badge/node-%E2%89%A520-blue)](#requirements)
 [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)

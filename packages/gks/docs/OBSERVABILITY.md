@@ -1,4 +1,4 @@
-# GKS v3 — Observability
+# GKS — Observability
 
 GKS instruments every hot path with OpenTelemetry — spans on `retain` /
 `recall`, plus histograms and counters covering embedder latency, rerank

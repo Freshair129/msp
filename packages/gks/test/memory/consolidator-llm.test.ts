@@ -24,7 +24,7 @@ function failingClient(): LlmClient {
 
 function sampleInput(): ConsolidationInput {
   const t: TraceStep[] = [
-    { t: '2026-04-24T10:00:00.000Z', session_id: 'S1', kind: 'user', content: 'How does GKS v3 handle conflicts?' },
+    { t: '2026-04-24T10:00:00.000Z', session_id: 'S1', kind: 'user', content: 'How does GKS handle conflicts?' },
     { t: '2026-04-24T10:00:05.000Z', session_id: 'S1', kind: 'agent', content: 'The bi-temporal resolver marks superseded docs with valid_to.' },
     { t: '2026-04-24T10:00:12.000Z', session_id: 'S1', kind: 'user', content: 'So the old doc stays in the store but filtered out?' },
     { t: '2026-04-24T10:00:18.000Z', session_id: 'S1', kind: 'agent', content: 'Exactly — preserves audit trail.' },
@@ -54,7 +54,7 @@ const heuristic: SummaryExtractor = {
 describe('createLlmExtractor', () => {
   it('parses a valid JSON response and stamps source_session', async () => {
     const payload = JSON.stringify({
-      summary: 'Discussed bi-temporal conflict resolution in GKS v3.',
+      summary: 'Discussed bi-temporal conflict resolution in GKS.',
       tags: ['memory', 'conflicts'],
       outcomes: ['Confirmed valid_to semantics'],
       emotionSummary: 'curious',

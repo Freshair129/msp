@@ -1,4 +1,4 @@
-# GKS v3 — Ultraplan (Roadmap to SOTA Production)
+# GKS — Ultraplan (Roadmap to SOTA Production)
 
 **Document version:** v3 (Post-ADR-015 Refactor)
 **Repo state at writing:** PR #1 `claude/build-gks-v3-W8a7V` — 82 commits, 309 tests, CI green
