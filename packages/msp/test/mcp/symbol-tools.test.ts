@@ -69,7 +69,7 @@ declare function alpha(): number
   const allSymbols: Symbol[] = []
   const allEdges: Edge[] = []
   for (const f of ['foo.ts', 'bar.ts', 'baz.ts']) {
-    const r = parseFile(join(root, 'src', f), root)
+    const r = await parseFile(join(root, 'src', f), root)
     allSymbols.push(...r.symbols)
     allEdges.push(...r.edges)
   }

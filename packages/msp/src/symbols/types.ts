@@ -67,7 +67,7 @@ export interface Community {
 export interface SymbolGraphMeta {
   schema_version: number
   last_built_at: string
-  parser: 'typescript' | 'tree-sitter'
+  parser: 'typescript' | 'tree-sitter' | 'multi'
   algorithm: 'leiden' | 'louvain'
   leiden_resolution: number
   leiden_seed: number
@@ -98,7 +98,7 @@ export interface SymbolParser {
    * @param repoRoot     absolute path to the repo root; used to compute the
    *                     POSIX-relative file path for symbol ids
    */
-  parseFile(absolutePath: string, repoRoot: string): ParseResult
+  parseFile(absolutePath: string, repoRoot: string): Promise<ParseResult>
 }
 
 export interface CommunityDetectionResult {
