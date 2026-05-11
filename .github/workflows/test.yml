@@ -21,11 +21,14 @@ jobs:
           cache: npm
 
       - name: install
-        # Use `npm install` (not `npm ci`) to work around a long-standing npm bug
-        # where platform-specific optional deps (e.g. @rollup/rollup-linux-x64-gnu)
-        # are NOT installed if the lockfile was generated on a different OS.
+        # npm bug: platform-specific optional deps (e.g. @rollup/rollup-linux-x64-gnu)
+        # are NOT installed if the lockfile was generated on a different OS — even
+        # with `npm install` (it still honors the existing lockfile structure).
+        # Workaround per Rollup's error message: remove package-lock.json and reinstall.
         # https://github.com/npm/cli/issues/4828
-        run: npm install
+        run: |
+          rm -f package-lock.json
+          npm install --no-audit --no-fund
 
       - name: shellcheck packages/msp/examples/hooks/
         run: |
