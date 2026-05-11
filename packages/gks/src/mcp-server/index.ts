@@ -28,6 +28,7 @@ import { ATOMIC_ID_PATTERN } from '../memory/atomic-id.js'
 import type { AtomicEntry, Namespace } from '../memory/types.js'
 import { verifyFlow } from '../memory/verify-flow.js'
 import { validateLinks } from '../memory/validate-links.js'
+import { deriveBacklinksFromEntries } from '../memory/backlinks.js'
 import { scaffoldNewFeature } from '../scaffold/new-feature.js'
 import { HotfixStore } from '../hotfix/store.js'
 import { createLogger } from '../lib/logger.js'
@@ -386,6 +387,32 @@ export function createGksMcpServer(opts: GksMcpServerOptions): McpServer {
       const hotfixStore = new HotfixStore({ root: opts.store.root, audit: opts.store.audit })
       const hotfix = await hotfixStore.close(args.id, args.resolvedBy)
       return jsonReply(hotfix)
+    },
+  )
+
+  // gks_backlinks
+  server.registerTool(
+    'gks_backlinks',
+    {
+      description:
+        'Derive all crosslink edges from the atomic index as a flat list of {from, to, type} objects. Useful for graph expansion (1-hop neighbourhood queries) without a full graph backend. Edges are derived on demand — callers own any caching.',
+      annotations: { readOnlyHint: true, destructiveHint: false },
+      inputSchema: z
+        .object({
+          filter_types: z
+            .array(z.string())
+            .optional()
+            .describe('Only emit edges whose crosslinks predicate matches one of these (e.g. ["references","implements"])'),
+        })
+        .strict(),
+    },
+    async (args) => {
+      await opts.store.atomic.loadIndex()
+      const entries = opts.store.atomic.filter({})
+      const edges = deriveBacklinksFromEntries(entries, {
+        filterTypes: args.filter_types,
+      })
+      return jsonReply({ ok: true, edge_count: edges.length, edges })
     },
   )
 

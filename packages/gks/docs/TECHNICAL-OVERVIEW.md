@@ -62,7 +62,7 @@ declarations, 5 plugin interfaces, 8 MCP tools) is deliberate.
 │ Memory OS / orchestrator (MSP, custom, …)  ── NOT IN THIS REPO  │
 │   • policy: when to consolidate / what to keep                  │
 │   • scheduling: session cascade timing                          │
-│   • workflow: validation / promote / drift detection            │
+│   • workflow: Pull Requests (promotion) / drift detection        │
 └──────────────────────────┬──────────────────────────────────────┘
                            │ store / query / patch
                            ▼
@@ -324,7 +324,7 @@ parallel storage primitive added in 3.5.4 for the self-hosted issue
 tracker (ADR-012):
 
 - Storage: `<root>/gks/issues/<ID>.md`, one file per issue
-- Light governance: direct write OK (no inbound queue), schema-validated
+- Light governance: direct write OK (reviewed via PR), schema-validated
   at every mutation, comments append-only by convention
 - Surface: `IssueStore.create / list / show / comment / setStatus /
   assign / close` — and 8 CLI subcommands (`gks issue *`)
@@ -379,8 +379,8 @@ const result = await retain(store, {
    and namespace fields applied via `applyNamespace()`.
 6. Patch invalidated predecessors (`patchMetadataMany`) — set their
    `valid_to = now` and `superseded_by = doc.id`.
-7. Optionally propose to inbound queue (one `.md` file under
-   `<root>/.brain/.../inbound/`) — never writes to `gks/` directly.
+7. Optionally propose to inbound queue or write directly to a branch.
+   Never writes to `main` directly for strict-tier atoms.
 8. Emit `audit.retain` event with `doc_id`, conflict count,
    invalidation count.
 9. Increment OTel counter `gks.retain.docs` with backend + has_conflict
@@ -474,7 +474,7 @@ pluggable LLM extraction):
 3. **Write episodic** — `EpisodicLayer.writeEpisodic(memory)` produces
    `<sessionId>.md` (overwrite-refusing).
 4. **Propose surviving atoms** — each kept proposal lands in the
-   inbound queue as `<id>.<reviewId>.md` with namespace stamped in
+   inbound queue or directly to a branch.
    frontmatter. A human / orchestrator promotes them into `gks/` later.
 
 **Why deterministic scoring stays deterministic:** the LLM proposes
@@ -1194,7 +1194,7 @@ path. One folder per atom type (singular nouns), no phase prefix.
 **Two rooted spaces**, intentional:
 
 - `gks/` — git-tracked, human-reviewed, the SSOT. Strict-tier atoms
-  flow through the inbound queue → human review → promote.
+  flow through a Pull Request → human review → merge.
 - `.brain/...` — runtime state, mostly machine-generated. Most of
   `.brain/` should be `.gitignore`d (see the project's `.gitignore`).
 
@@ -1218,7 +1218,7 @@ ADR-008 records the contract; quick summary:
 | Schema validation against `atomic_contract.yaml` | Memory OS / MSP gatekeeper |
 | ID uniqueness enforcement | Memory OS / MSP gatekeeper |
 | Wikilink resolution | Memory OS / MSP gatekeeper |
-| Promote workflow (inbound → `gks/`) | Memory OS / MSP gatekeeper |
+| Promote workflow (PR → `gks/`) | Memory OS / MSP gatekeeper |
 
 GKS's `proposeInbound()` is the *only* authorised write path to
 `gks/`-destined atoms; the MSP-style gatekeeper above implements the

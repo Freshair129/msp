@@ -74,23 +74,22 @@ Examples:
 Each becomes one ADR:
 
 ```sh
-cp examples/atom-templates/ADR.md gks/_inbound/ADR--POSTGRES-CHOICE.md
+# Copy the template directly to its canonical folder
+cp examples/atom-templates/ADR.md gks/adr/ADR--POSTGRES-CHOICE.md
 # fill in frontmatter + body
 
-gks inbound list
-gks inbound promote ADR--POSTGRES-CHOICE
+# Commit and create a PR for review
+git add gks/adr/ADR--POSTGRES-CHOICE.md
+git commit -m "docs: define postgres choice"
 ```
 
-Or via CLI directly:
+Or create a branch and author multiple atoms:
 
 ```sh
-gks propose-inbound \
-  --type adr \
-  --id ADR--POSTGRES-CHOICE \
-  --title "Postgres over MongoDB for tenancy isolation" \
-  --file ./draft.md
-
-gks inbound promote ADR--POSTGRES-CHOICE
+git checkout -b docs/initial-adr
+# ... author files ...
+git add gks/
+git commit -m "docs: record initial decisions"
 ```
 
 Stop here for the day. Three ADRs is a working SSOT.
@@ -186,7 +185,7 @@ Restart the agent. It now has 8 stdio tools:
 
 - `gks_recall` — semantic + lexical retrieval
 - `gks_lookup` / `gks_lookup_by_symbol` — exact-id / reverse-citation
-- `gks_propose_inbound` — agents can suggest atoms (review still required)
+- `gks_propose_inbound` — agents can suggest atoms (typically reviewed via PR in monorepos)
 - `gks_retain` / `gks_reflect` / `gks_recall_cross_namespace`
 
 The agent will start calling `gks_recall` before generating code that
@@ -241,7 +240,7 @@ on by default — check `.brain/default/cost.jsonl`.
 |------------------------------------------------|-------------------------------------------------|
 | Migrate every doc on day one                   | Start with 3 ADRs you've already decided        |
 | Write an ADR for every commit                  | ADR = a decision someone will ask "why?" about  |
-| Skip inbound review to move faster             | The review **is** the SSOT guarantee            |
+| Skip PR review to move faster              | The review **is** the SSOT guarantee            |
 | Add `linked_symbols` everywhere                | Only for atoms that actually govern code        |
 | Wait for "enough" atoms before drift detection | Turn it on now — it works with whatever exists  |
 | Treat empty atom shells as progress            | Better to have 5 real atoms than 50 stubs       |
@@ -329,8 +328,8 @@ BLUEPRINT, FRAME) require human review. Light-tier (RUNBOOK, INC,
 CONCEPT-as-FAQ) can be bulk-promoted.
 
 ```sh
-gks inbound bulk-promote --tier light --type runbook
-gks inbound list --type adr | wc -l   # 23 ADRs queued for review
+git add gks/adr/
+git commit -m "docs: bulk import ADRs"
 ```
 
 **Critical guardrail:** cap reviews at ≤ 20 strict-tier atoms per day.

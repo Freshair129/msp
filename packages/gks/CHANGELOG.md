@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.7.0
+
+### Minor Changes
+
+- **Phase 6 accepted** — `gks propose-inbound` and `InboundQueue.propose()` now accept `phase: 6` (post-implementation audit). Previously rejected with "invalid phase … must be integer 0..5". Resolves MSP upstream proposal #01 (GksV3#32).
+
+- **`gks verify-flow --through-superseded`** — new flag that follows `crosslinks.superseded_by` transparently when the walker hits a `status: superseded` atom, instead of halting. Default off — existing CI workflows unaffected. Verbose mode logs each supersede hop. Resolves MSP upstream proposal #02 (GksV3#31).
+
+- **Backlinks derivation API** — new `deriveBacklinksFromEntries()` and `emitBacklinksJsonl()` functions in `src/memory/backlinks.ts`, exported from the public package entry point. CLI: `gks backlinks [--emit=jsonl|json] [--out=PATH] [--filter-type=...]`. MCP tool: `gks_backlinks`. Resolves MSP upstream proposal #03 (GksV3#30).
+
+- **`Status` type now includes `'superseded'`** — `Status = 'raw' | 'draft' | 'stable' | 'deprecated' | 'invalid' | 'superseded'`. MSP and other Memory OS layers already write `status: superseded` into atom frontmatter; the type now matches reality.
+
+- **`verifyFlow` / `VerifyFlowOptions` / `VerifyFlowResult` / `WalkedEdge` / `VerifyError` exported** from the public package entry point.
+
+- **`docs/embedder-compatibility.md`** — new doc covering Smart Connections + `nomic-embed-text-v1.5` parity: why model divergence costs 2× compute, how to configure Smart Connections to match GKS's default embedder, and how to re-embed after a model swap. Resolves MSP upstream proposal #04 (GksV3#29).
+
 ## 3.6.0
 
 ### Minor Changes

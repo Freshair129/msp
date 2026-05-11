@@ -27,9 +27,7 @@ P1 CONCEPT  →  P2 ADR/ENTITY/API  →  P3 BLUEPRINT  →  P4 TASK  →  P5 src
 | P5    | (none — code) | —      | `src/` with `linked_symbols` citing back |
 | P6    | `AUDIT--`     | strict | `gks/audit/` |
 
-Strict-tier atoms route through the inbound queue
-(`.brain/.../inbound/`) and require human review before promotion;
-light-tier atoms can be written directly. See ADR-012.
+Strict-tier atoms are authored directly in dedicated branches and require human review via **Pull Requests** before merging into the canonical tree; light-tier atoms can be written directly to `main`. See ADR-012.
 
 ---
 
@@ -63,7 +61,7 @@ gks new-feature rate-limit \
   --task-tracker=local
 ```
 
-Drops 4 atom candidates into the inbound queue:
+Writes 4 atom candidates directly to their canonical locations (or into a staging branch):
 
 ```
 CONCEPT--RATE-LIMIT
@@ -80,23 +78,21 @@ execution state owned by the orchestrator. With
 scaffolder prints guidance lines for the orchestrator / external
 tracker to consume and writes nothing.
 
-### 2. Review + promote
+### 2. Review via Pull Request
+
+Instead of a local `inbound/` queue, GKS now integrates with standard git workflows.
 
 ```sh
-gks inbound list                       # see what's queued
-gks inbound show ADR--RATE-LIMIT       # read the body
-# (edit the file under .brain/.../inbound/ if revisions needed)
-gks inbound promote ADR--RATE-LIMIT    # → gks/adr/ADR--RATE-LIMIT.md  status: stable
-gks inbound promote CONCEPT--RATE-LIMIT
-gks inbound promote FEAT--RATE-LIMIT
-gks inbound promote BLUEPRINT--RATE-LIMIT
+git checkout -b feat/rate-limit
+# Author atoms (either via 'gks new-feature' or manual write)
+git add packages/msp/gks/
+git commit -m "docs: define rate-limiting knowledge chain"
+git push origin feat/rate-limit
 ```
 
-After every promote, the re-indexer rebuilds `gks/00_index/atomic_index.jsonl`.
+Review happens on the Git hosting platform (GitHub/GitLab). Once the PR is merged, the atoms are considered "promoted" and stable.
 
-Live task state — including microtasks (`T*.task.yaml`) — does not
-flow through inbound; it lives at the orchestrator (ADR-015,
-[`MSP_RELATIONSHIP.md` § task tracking](./MSP_RELATIONSHIP.md#task-tracking--orchestrator-territory-adr-015)).
+After every merge, the re-indexer rebuilds the index (e.g., `npm run msp:index`).
 
 ### 3. Verify the chain before writing code
 
@@ -134,12 +130,10 @@ update the docs.
 After CI is green and the feature is merged:
 
 ```sh
-gks propose-inbound \
-  --type=audit \
-  --id=AUDIT--RATE-LIMIT \
-  --title="Per-tenant rate-limiting verification" \
-  --file=./audit-body.md
-gks inbound promote AUDIT--RATE-LIMIT
+# Author the audit atom directly in gks/audit/
+# or use a template
+git add packages/msp/gks/audit/AUDIT--RATE-LIMIT.md
+git commit -m "audit: verify rate-limiting"
 ```
 
 Audit body records: which acceptance criteria from `FEAT--RATE-LIMIT`
@@ -240,9 +234,8 @@ raw  →  draft  →  stable  →  deprecated
 
 | From | To | When | How |
 |---|---|---|---|
-| (none) | `raw` | inbound `propose` | automatic |
-| `raw` | `draft` | reviewer triages | promote |
-| `draft` | `stable` | reviewer approves | promote |
+| (none) | `draft` | PR created | automatic / manual |
+| `draft` | `stable` | PR merged | automatic (merge) |
 | `stable` | `deprecated` | superseded | new ADR with `crosslinks.supersedes` |
 
 Master-spec wording (`APPROVED`, `Accepted`) is accepted at the input
@@ -295,9 +288,9 @@ gks new-feature <slug> --title="..." [--concept=...] [--adr=...] [--blueprint-fi
 gks propose-inbound <ID> --title="..." --file=./body.md
 
 # Review
-gks inbound list
-gks inbound show <ID>
-gks inbound promote <ID>
+# Use standard Git / Pull Request workflows
+git checkout <branch>
+git merge <branch>
 
 # Enforce
 gks verify-flow <ID>            # chain integrity for one root
@@ -326,7 +319,7 @@ gks/                       canonical atom tree (committed — durable knowledge)
 ├── hotfix/                                     (escape hatch, light)
 └── issues/                                     (live tracker, light)
 
-.brain/<ns>/inbound/       proposed atoms awaiting review (NEVER committed)
+# Note: The local .brain/.../inbound/ queue is deprecated in favor of PRs.
 .brain/<ns>/audit/         append-only operation log (NEVER committed)
 .brain/<ns>/tasks/         microtask YAML when --task-tracker=local (ADR-015)
 ```
@@ -345,7 +338,7 @@ GKS is a storage engine (ADR-008). It does not:
 - **Verify code symbols exist.** GitNexus / your AST tool does that;
   GKS only records the citation.
 - **Schedule reviewer notifications.** Add a CI bot or a Slack
-  webhook on the `propose_inbound` audit op.
+  webhook on the PR merge event.
 - **Decide *when* to run `verify-flow`.** That's policy — your
   pre-commit hook or CI step decides.
 - **Validate atom *content* against domain rules.** Frontmatter shape

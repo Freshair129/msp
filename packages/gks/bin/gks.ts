@@ -1038,6 +1038,43 @@ function emit(flags: GlobalFlags, payload: unknown, pretty: () => void): void {
   }
 }
 
+// ─── backlinks derivation (Proposal 03) ────────────────────────────────────
+
+async function cmdBacklinks(argv: string[]): Promise<void> {
+  const { values } = parseArgs({
+    args: argv,
+    options: {
+      ...GLOBAL_OPTIONS,
+      emit: { type: 'string', default: 'jsonl' },
+      out: { type: 'string' },
+      'filter-type': { type: 'string', multiple: true },
+    },
+  })
+  const flags = readGlobals(values)
+  const filterTypes = values['filter-type'] as string[] | undefined
+  const outPath = values['out'] as string | undefined
+  const store = await openStore(flags)
+  await store.atomic.loadIndex()
+  const entries = store.atomic.filter({})
+
+  if (outPath) {
+    const result = await emitBacklinksJsonl(entries, outPath, { filterTypes })
+    emit(flags, result, () => {
+      console.log(`backlinks: ${result.edgeCount} edge(s) written to ${outPath} (${result.bytes} bytes)`)
+    })
+  } else {
+    const edges = deriveBacklinksFromEntries(entries, { filterTypes })
+    const emitMode = (values['emit'] as string | undefined) ?? 'jsonl'
+    emit(flags, edges, () => {
+      if (emitMode === 'json') {
+        console.log(JSON.stringify(edges, null, 2))
+      } else {
+        for (const e of edges) console.log(JSON.stringify(e))
+      }
+    })
+  }
+}
+
 function readPositionalOrStdin(positionals: string[], op: string): string {
   if (positionals.length > 0) return positionals.join(' ')
   if (process.stdin.isTTY) {
@@ -1077,8 +1114,10 @@ Subcommands
   hotfix list [--overdue] [--pending]
   hotfix close HOTFIX--XXXXXXX --resolved-by=ADR-... [--resolved-by=BLUEPRINT-...]
   hotfix check --file=src/x.ts [--file=src/y.ts]   pre-commit gate; exit-1 if overdue
-  verify-flow ID                              walk crosslinks; exit-1 if any node not stable
+  verify-flow ID [--through-superseded]       walk crosslinks; exit-1 if any node not stable
   validate [--links]                          read-only crosslink integrity check
+  backlinks [--emit=jsonl|json] [--out=PATH] [--filter-type=references ...]
+                                              derive all crosslink edges from the atomic index
   new-feature SLUG --title="..." [--concept=...] [--adr=...] [--blueprint-file=src/x.ts ...]
                   [--task=slug ...] [--task-tracker=local|msp|external (default msp)]
                                               scaffold CONCEPT/ADR/FEAT/BLUEPRINT into inbound queue
@@ -1094,28 +1133,6 @@ Global flags
 
 Pass content/queries as positional arg or via stdin.
 `)
-}
-
-async function cmdBacklinks(argv: string[]): Promise<void> {
-  const { values } = parseArgs({
-    args: argv,
-    options: {
-      ...GLOBAL_OPTIONS,
-      out: { type: 'string' },
-    },
-  })
-  const flags = readGlobals(values)
-  const outPath = values['out'] as string | undefined
-  if (!outPath) {
-    console.error('gks backlinks: missing --out=PATH (e.g. gks/00_index/backlinks.jsonl)')
-    process.exit(1)
-  }
-  const store = await openStore(flags)
-  await store.atomic.loadIndex()
-  const result = await emitBacklinksJsonl(store.atomic.filter({}), outPath)
-  emit(flags, result, () => {
-    console.log(`✓ derived ${result.edgeCount} edge(s) → ${outPath}`)
-  })
 }
 
 main().catch((err) => {
