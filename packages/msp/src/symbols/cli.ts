@@ -29,7 +29,7 @@ import { dirname, join, relative as relativePath, resolve, sep } from 'node:path
 import { parseArgs } from 'node:util'
 
 import { detectCommunities } from './communities/leiden.js'
-import { parseFile } from './parser/typescript.js'
+import { parseFile } from './parser/index.js'
 import { dumpJsonl } from './store/jsonl.js'
 import { SymbolStore } from './store/sqlite.js'
 import type { Community, Edge, EdgeType, Symbol, SymbolGraphMeta, SymbolKind } from './types.js'
@@ -52,6 +52,7 @@ Flags:
   --resolution=<n>      Leiden resolution (default 1.0)
   --seed=<n>            Leiden RNG seed (default 42)
   --include=<patterns>  comma-separated globs (default: src/**/*.ts,web/src/**/*.tsx)
+  --lang=<langs>        comma-separated languages (ts, python, cobol)
   --namespace=<ns>      project namespace (default 'evaAI')
   --json                emit machine-readable JSON
   --kind=<k>            symbol kind filter
@@ -180,16 +181,39 @@ interface BuildOpts extends CommonOpts {
   resolution: number
   seed: number
   include: string[]
+  lang: string[]
 }
 
 async function runBuild(opts: BuildOpts): Promise<number> {
   const start = Date.now()
   process.stderr.write(`[graph] discovering files in ${opts.root}…\n`)
 
-  const files = discoverFiles(opts.root, opts.include)
+  let files = discoverFiles(opts.root, opts.include)
+  if (opts.lang.length > 0) {
+    const langExts = new Set<string>()
+    if (opts.lang.includes('ts')) {
+      langExts.add('.ts')
+      langExts.add('.tsx')
+      langExts.add('.js')
+      langExts.add('.jsx')
+    }
+    if (opts.lang.includes('python')) langExts.add('.py')
+    if (opts.lang.includes('cobol')) {
+      langExts.add('.cbl')
+      langExts.add('.cob')
+      langExts.add('.ccp')
+    }
+    files = files.filter((f) => langExts.has(join(dirname(f), f).slice(f.lastIndexOf('.'))))
+    // Wait, simple extension check
+    files = files.filter((f) => {
+      const ext = f.slice(f.lastIndexOf('.')).toLowerCase()
+      return langExts.has(ext)
+    })
+  }
+
   if (files.length === 0) {
     process.stderr.write(
-      `[graph] no files matched include=${opts.include.join(',')} under ${opts.root}\n`,
+      `[graph] no files matched include=${opts.include.join(',')} lang=${opts.lang.join(',')} under ${opts.root}\n`,
     )
   }
 
@@ -199,7 +223,7 @@ async function runBuild(opts: BuildOpts): Promise<number> {
   const parseErrors: { file: string; message: string }[] = []
   for (const abs of files) {
     try {
-      const result = parseFile(abs, opts.root)
+      const result = await parseFile(abs, opts.root)
       if (result.symbols.length === 0 && result.edges.length === 0) {
         // Treat fully-empty parse as a soft error iff the file is non-empty.
         try {
@@ -310,7 +334,7 @@ async function runBuild(opts: BuildOpts): Promise<number> {
   const meta: SymbolGraphMeta = {
     schema_version: 1,
     last_built_at: nowIso,
-    parser: 'typescript',
+    parser: 'multi',
     algorithm,
     leiden_resolution: opts.resolution,
     leiden_seed: opts.seed,
@@ -321,7 +345,7 @@ async function runBuild(opts: BuildOpts): Promise<number> {
   }
   store.setMeta('schema_version', '1')
   store.setMeta('last_built_at', nowIso)
-  store.setMeta('parser', 'typescript')
+  store.setMeta('parser', 'multi')
   store.setMeta('algorithm', algorithm)
   store.setMeta('leiden_resolution', String(opts.resolution))
   store.setMeta('leiden_seed', String(opts.seed))
@@ -665,6 +689,7 @@ async function main(): Promise<number> {
         resolution: { type: 'string' },
         seed: { type: 'string' },
         include: { type: 'string' },
+        lang: { type: 'string' },
         namespace: { type: 'string' },
         json: { type: 'boolean' },
         kind: { type: 'string' },
@@ -710,6 +735,7 @@ async function main(): Promise<number> {
           resolution: asNumber(values.resolution, DEFAULT_RESOLUTION),
           seed: asNumber(values.seed, DEFAULT_SEED),
           include,
+          lang: (values.lang ?? '').split(',').map(s => s.trim()).filter(Boolean),
         })
       } catch (err) {
         process.stderr.write(`[graph] build error: ${(err as Error).message}\n`)

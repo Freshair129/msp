@@ -22,18 +22,18 @@ afterEach(() => {
 })
 
 describe('typescript parser', () => {
-  it('returns just the module symbol for an empty file', () => {
+  it('returns just the module symbol for an empty file', async () => {
     const path = writeFile('empty.ts', '')
-    const { symbols, edges } = parseFile(path, workDir)
+    const { symbols, edges } = await parseFile(path, workDir)
     // A truly empty TS file still gets a module symbol; no edges.
     expect(symbols).toHaveLength(1)
     expect(symbols[0].kind).toBe('module')
     expect(edges).toHaveLength(0)
   })
 
-  it('emits module + function symbol + defines edge for a top-level function', () => {
+  it('emits module + function symbol + defines edge for a top-level function', async () => {
     const path = writeFile('fn.ts', 'export function greet() { return 1 }\n')
-    const { symbols, edges } = parseFile(path, workDir)
+    const { symbols, edges } = await parseFile(path, workDir)
 
     const moduleSym = symbols.find((s) => s.kind === 'module')
     const fnSym = symbols.find((s) => s.kind === 'function')
@@ -48,7 +48,7 @@ describe('typescript parser', () => {
     expect(defines[0].dst_id).toBe(fnSym?.id)
   })
 
-  it('emits class + heritage edges (extends + implements)', () => {
+  it('emits class + heritage edges (extends + implements)', async () => {
     const path = writeFile(
       'cls.ts',
       `interface Animal { kind: string }
@@ -58,7 +58,7 @@ export class Dog extends Mammal implements Animal {
 }
 `,
     )
-    const { symbols, edges } = parseFile(path, workDir)
+    const { symbols, edges } = await parseFile(path, workDir)
 
     const animal = symbols.find((s) => s.name === 'Animal')
     const mammal = symbols.find((s) => s.name === 'Mammal')
@@ -77,14 +77,14 @@ export class Dog extends Mammal implements Animal {
     expect(implementsEdges[0].dst_id).toBe(animal?.id)
   })
 
-  it('emits an imports edge for `import { x } from "./y"`', () => {
+  it('emits an imports edge for `import { x } from "./y"`', async () => {
     const path = writeFile(
       'imp.ts',
       `import { foo, bar as renamed } from './y'
 export const z = 1
 `,
     )
-    const { edges } = parseFile(path, workDir)
+    const { edges } = await parseFile(path, workDir)
 
     const imports = edges.filter((e) => e.type === 'imports')
     // Two named imports → two edges (resolved=false; we don't bind cross-file in v1)
@@ -94,9 +94,9 @@ export const z = 1
     expect(imports.every((e) => e.resolved === false)).toBe(true)
   })
 
-  it('returns empty arrays on syntactically broken TS without throwing', () => {
+  it('returns empty arrays on syntactically broken TS without throwing', async () => {
     const path = writeFile('bad.ts', 'export function broken( { return\n')
-    const result = parseFile(path, workDir)
+    const result = await parseFile(path, workDir)
     // Either empty (parse-error gate) or at least we didn't throw.
     expect(Array.isArray(result.symbols)).toBe(true)
     expect(Array.isArray(result.edges)).toBe(true)
