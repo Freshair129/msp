@@ -343,6 +343,58 @@ Happy to open the doc PR if you'd prefer code over discussion.
 
 ---
 
+### Issue 7 of 7 — Clarify `FRAME--` scope (canonical narrow vs Memory-OS broad)
+
+> **Drafted 2026-05-11**, not yet filed. Doc-only proposal, independently mergeable from issues 1–6.
+
+**Title**:
+```
+docs: broaden FRAME-- definition (or add METHODOLOGY--) — canonical narrow vs Memory-OS practice
+```
+
+**Body**:
+```markdown
+Hi @<maintainer> — `docs/KNOWLEDGE-TYPES.md` defines `FRAME--` narrowly ("code standards / framework rules, lint policy, components ≤ 500 LOC"), but every Memory OS layer that adopts GKS in practice ends up using `FRAME--` for a *broader* "reusable structural pattern" sense.
+
+## Evidence from `Freshair129/msp` main
+
+| MSP atom | Sense | Fits canonical narrow? |
+|---|---|---|
+| `FRAME--MSP-ARCHITECTURE-V2` | architectural | ❌ |
+| `FRAME--AUTHORITY-MATRIX` | governance | ❌ |
+| `FRAME--KNOWLEDGE-3-TIER` | taxonomic | ❌ |
+| `FRAME--PHASE-GOVERNANCE` | process methodology | ❌ |
+| `FRAME--SCALING-LEVELS` | decision framework | ❌ |
+| `FRAME--CROSSLINKS-VOCABULARY` | taxonomy reference | ❌ |
+| `FRAME--SYMBOL-GRAPH` | architectural | ❌ |
+
+**Every** `FRAME--` atom in [`gks/frame/`](https://github.com/Freshair129/msp/tree/main/gks/frame) is broader than the canonical narrow definition. The narrow definition is technically violated by an entire functioning Memory OS — signal the canonical needs to widen, not that consumers should reshape atoms.
+
+Downstream users also want to express **business methodology frameworks** (5Es instructional design, JTBD, Design Thinking, PDCA) — currently there's no canonical home for these.
+
+## Three options for GKS (full diffs in [the draft](https://github.com/Freshair129/msp/blob/main/upstream/gks-proposals/07-frame-broader-definition.md))
+
+| Option | Change | Cost | Recommendation |
+|---|---|---|---|
+| **A** | Broaden `FRAME--` body to cover architectural / governance / methodology senses | doc-only, smallest | ✅ recommended — least disruptive |
+| **B** | Keep FRAME-- narrow + add new type `METHODOLOGY--` | doc + new type registration | cleaner semantics, more types |
+| **C** | Document FRAME-- as having two valid interpretations | doc-only, most conservative | safe if neither A nor B feels right |
+
+## Compat
+
+Doc-only. No code change in GKS. No breakage in any consumer (`type: frame` continues to validate; semantics just become clearer).
+
+## Test
+
+N/A. Optionally: ensure `examples/atom-templates/FRAME--*` matches whichever option is chosen.
+
+## Drafted by
+
+[MSP architecture-doc cleanup](https://github.com/Freshair129/msp/pull/65) follow-up. Happy to open a PR with the doc change applied for whichever option you prefer.
+```
+
+---
+
 ## Strategy C — Four draft PRs
 
 If the maintainer prefers code over discussion:
