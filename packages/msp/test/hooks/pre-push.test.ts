@@ -1,13 +1,37 @@
 import { spawn, spawnSync } from 'node:child_process'
 import { copyFile, mkdir, mkdtemp, writeFile } from 'node:fs/promises'
+import { readdirSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
 const hookSrc = join(repoRoot, 'examples/hooks/pre-push-verify.sh')
+
+/**
+ * Find the workspace node_modules by walking up from `start`. In npm
+ * workspaces, per-package node_modules is empty; the populated one lives
+ * at the monorepo root.
+ */
+function findWorkspaceNodeModules(start: string): string {
+  let dir = resolve(start)
+  for (let i = 0; i < 5; i++) {
+    const candidate = join(dir, 'node_modules')
+    try {
+      if (readdirSync(candidate).length > 0) return candidate
+    } catch {
+      // missing — keep walking up
+    }
+    const parent = dirname(dir)
+    if (parent === dir) break
+    dir = parent
+  }
+  throw new Error(`no populated node_modules found above '${start}'`)
+}
+
+const workspaceNodeModules = findWorkspaceNodeModules(repoRoot)
 
 interface RunResult {
   code: number
@@ -107,7 +131,7 @@ beforeAll(async () => {
   await mkdir(join(wt, 'gks/00_index'), { recursive: true })
   await mkdir(join(wt, 'gks/feat'), { recursive: true })
   await mkdir(join(wt, 'gks/concept'), { recursive: true })
-  run('ln', ['-s', join(repoRoot, 'node_modules'), join(wt, 'node_modules')], wt)
+  run('ln', ['-s', workspaceNodeModules, join(wt, 'node_modules')], wt)
   // Tiny package.json so npx works
   await writeFile(
     join(wt, 'package.json'),
