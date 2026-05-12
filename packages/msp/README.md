@@ -7,11 +7,13 @@
 ```
 COGNITIVE LAYER  EVA / Hermes / openclaw / Claude Code / Gemini CLI / Antigravity / Cursor
         │ uses (agent-agnostic API — see CONCEPT--AGENT-AGNOSTIC)
+        │ one-line entry: createCognitiveLayer({ root }) — see FEAT--COGNITIVE-LAYER-FACADE
         ▼
 MEMORY OS        MSP (this repo) — passport: sessions / episodic / identity / retrieval / candidates
         │ uses
         ▼
 KNOWLEDGE BASE   GKS (@freshair129/gks) — atomic / vector / episodic / obsidian / graph
+                                          GraphBackend: in-memory / Pg / Genesis Block (TS Phase 0)
 ```
 
 ## What this repo is
@@ -28,6 +30,38 @@ MSP is a **passport-orchestrator** that travels with the agent, carrying:
 - **Symbol graph** — TypeScript impact analysis on `src/`
 
 Agent-agnostic: every cognitive-layer client points to the same `msp-mcp-server` bin and gets a passport. See [`docs/AGENT-INTEGRATION.md`](./docs/AGENT-INTEGRATION.md) for per-client wiring (6 clients covered).
+
+## Quick start (60 seconds)
+
+For programmatic use — one import, one factory call, everything wired:
+
+```ts
+import { createCognitiveLayer } from 'msp'
+
+const layer = await createCognitiveLayer({
+  root: process.cwd(),
+  slm: { tier: 'T1' },              // T1 = local Ollama + qwen2.5-coder (default)
+})
+
+await layer.remember('Cortex handles planning.', { tags: ['cortex'] })
+const hits = await layer.recall('how does cortex plan?')
+await layer.runTask('./.brain/tasks/FEAT--X/T1.task.yaml', { scale: 'L2' })
+
+// Stand up the 20-tool MCP surface for EVA / Claude Code / Hermes / openclaw:
+const server = layer.mcpServer()
+```
+
+The facade reuses GKS (storage) + MSP (passport + codegen) — no new MCP tools are added. It enforces seven `FRAMEWORK_MASTER_SPEC.md` invariants out of the box: §5.1 atomic short-circuit · §7.5 Memory-for-Audit stamping · §7.7.2 scale-level gate · §9.6 AUTO-GENERATED marker · §13 hybrid 4-layer retrieval · §14.1 SSOT hierarchy · §17.3 T1/T2/T3 tier routing.
+
+Pre-reqs (optional but recommended for real codegen, not tests):
+
+```sh
+ollama pull qwen2.5-coder:7b              # T1 default
+# or, on ≥16GB VRAM:
+ollama pull qwen2.5-coder:14b && export OLLAMA_MODEL=qwen2.5-coder:14b
+```
+
+End-to-end demo: `npm run cognitive:quickstart` (runs `examples/cognitive-layer-quickstart.ts`).
 
 ## Authoritative docs
 
@@ -61,7 +95,7 @@ msp/
 │   ├── symbols/                      TS symbol graph + impact analysis
 │   ├── obsidian/                     REST adapter wrapper
 │   ├── codegen/                      microtask runner
-│   ├── mcp/                          msp-mcp-server (19 tools)
+│   ├── mcp/                          msp-mcp-server (20 tools)
 │   └── index.ts                      Knowledge Browser backend (Express)
 ├── ~/.msp/                           global state (per ADR--GLOBAL-VS-WORKSPACE)
 │   ├── identity.json
@@ -76,7 +110,7 @@ msp/
 └── web/                              Knowledge Browser frontend (React + Vite)
 ```
 
-## MCP server (19 tools)
+## MCP server (20 tools)
 
 ```jsonc
 // Claude Code: ~/.claude/mcp.json or .claude/settings.json
@@ -101,7 +135,7 @@ msp/
 |---|---|
 | Gatekeeper / candidates | `msp_validate`, `msp_candidate`, `msp_run_task`, `msp_session_append`, `msp_episode_append`, `msp_backlinks_rebuild` |
 | Passport | `msp_recall`, `msp_remember`, `msp_compress`, `msp_identity_get`, `msp_identity_set` |
-| Symbol graph | `msp_symbol_lookup`, `msp_symbol_neighbors`, `msp_symbol_impact`, `msp_symbol_community`, `msp_symbol_search` |
+| Symbol graph | `msp_symbol_lookup`, `msp_symbol_neighbors`, `msp_symbol_impact`, `msp_symbol_community`, `msp_symbol_search`, `msp_symbol_trace` |
 | Projects | `msp_project_list`, `msp_project_register`, `msp_project_resolve` |
 
 Run alongside `gks-mcp-server` — clients merge tool surfaces.

@@ -6,6 +6,18 @@ import { CandidateWriter } from './memory/candidates/writer.js'
 import { CandidateNotFoundError } from './memory/candidates/types.js'
 import { registerSymbolApi } from './symbols/api.js'
 
+export { createCognitiveLayer } from './cognitive/index.js'
+export type {
+  CognitiveLayer,
+  CognitiveLayerOptions,
+  CognitiveTier,
+  ScaleLevel,
+  CognitiveRecallHit,
+  CognitiveRecallResult,
+  CognitiveRunTaskOptions,
+} from './cognitive/types.js'
+export { ScaleLevelGateError } from './cognitive/types.js'
+
 const app = express()
 app.use(express.json())
 

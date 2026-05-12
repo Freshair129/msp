@@ -10,12 +10,17 @@ Usage:
   msp-run-task <path/to/T*.task.yaml> [flags]
 
 Flags:
-  --model=<name>     SLM identifier (default: mock-slm)
+  --model=<name>     SLM identifier (default: qwen2.5-coder:7b via local Ollama;
+                     set OLLAMA_MODEL=qwen2.5-coder:14b for the 14B variant)
   --max-retries=<n>  default 3
   --no-escalate      fail at exit 1 instead of escalating to Gemini
   --dry-run          print the assembled prompt; don't call SLM
   --json             machine-readable output
   --help             this message
+
+Provider selection:
+  MSP_SLM_PROVIDER   ollama (default) | gemini | qwen | mock
+  OLLAMA_MODEL       defaults to qwen2.5-coder:7b; switch to :14b on ≥16GB VRAM
 
 Exit codes:
   0  acceptance passed

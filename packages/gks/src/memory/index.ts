@@ -34,6 +34,7 @@ import type {
 
 import { AtomicLayer } from './gks.js'
 import { AuditLog, type AuditLogOptions, type AuditEvent } from './audit.js'
+import { GraphStore, type GraphBackend } from './graph.js'
 import { VectorStore } from './vector/index.js'
 import type {
   VectorBackend,
@@ -137,6 +138,17 @@ export interface MemoryStoreOptions {
    * flushes the snapshot into session.json.
    */
   cost?: CostTrackerOptions | false
+  /**
+   * Optional GraphBackend (in-memory `GraphStore`, `PgGraphBackend`, or
+   * `GenesisBlockBackend`). Accepted either as a pre-built instance or as
+   * a factory invoked with the resolved layout. Defaults to a JSONL-backed
+   * `GraphStore` at `<brain>/graph/graph.jsonl` — matching the rest of
+   * GKS's "works zero-config" promise. Exposed on the MemoryStore as
+   * `store.graph` after `init()`.
+   */
+  graphBackend?:
+    | GraphBackend
+    | ((layout: ReturnType<typeof gksLayout>) => Promise<GraphBackend> | GraphBackend)
 }
 
 export class MemoryStore {
@@ -156,6 +168,12 @@ export class MemoryStore {
   readonly audit: AuditLog | null
   /** Cost / token tracker. Null when cost:false was passed. */
   readonly costTracker: CostTracker | null
+  /**
+   * GraphBackend resolved at init() time. Available after `init()` has
+   * been awaited. The default backend is a JSONL-backed `GraphStore`
+   * (`<brain>/graph/graph.jsonl`).
+   */
+  graph!: GraphBackend
 
   private readonly vectorScoreThreshold: number
   private readonly maxTotal: number
@@ -178,10 +196,16 @@ export class MemoryStore {
   private readonly stores = new Map<string, VectorBackend>()
   private readonly storesPending = new Map<string, Promise<VectorBackend>>()
   private readonly vectorBackendFactory: VectorBackendFactory | null
+  private readonly graphBackendOpt:
+    | GraphBackend
+    | ((layout: ReturnType<typeof gksLayout>) => Promise<GraphBackend> | GraphBackend)
+    | null
+  private readonly layout: ReturnType<typeof gksLayout>
 
   constructor(opts: MemoryStoreOptions) {
     this.root = resolve(opts.root)
     const layout = gksLayout(this.root)
+    this.layout = layout
 
     this.atomic = new AtomicLayer({
       indexPath: opts.atomicIndexPath ?? layout.atomicIndex,
@@ -222,6 +246,7 @@ export class MemoryStore {
       : null
 
     this.vectorBackendFactory = opts.vectorBackend ?? null
+    this.graphBackendOpt = opts.graphBackend ?? null
     this.defaultNamespace = opts.defaultNamespace ?? {}
     if (opts.audit === false) {
       this.audit = null
@@ -246,10 +271,29 @@ export class MemoryStore {
   async init(): Promise<void> {
     await this.atomic.loadIndex()
     await this.embedder() // lazy trigger so startup surfaces embedder provider choice
+    await this.resolveGraph()
     log.info('memory store initialized', {
       atomic_count: this.atomic.size(),
       root: this.root,
     })
+  }
+
+  private async resolveGraph(): Promise<void> {
+    if (this.graph) return
+    if (this.graphBackendOpt == null) {
+      const fallback = new GraphStore({ path: join(this.layout.graph, 'graph.jsonl') })
+      await fallback.load()
+      this.graph = fallback
+      return
+    }
+    if (typeof this.graphBackendOpt === 'function') {
+      const built = await this.graphBackendOpt(this.layout)
+      await built.load()
+      this.graph = built
+      return
+    }
+    await this.graphBackendOpt.load()
+    this.graph = this.graphBackendOpt
   }
 
   async embedder(): Promise<Embedder> {
@@ -628,6 +672,7 @@ export function gksLayout(root: string): {
   memory: string
   inbound: string
   audit: string
+  graph: string
   gks: string
   atomicIndex: string
 } {
@@ -641,6 +686,7 @@ export function gksLayout(root: string): {
     memory: join(brain, 'memory'),
     inbound: join(brain, 'inbound'),
     audit: join(brain, 'audit'),
+    graph: join(brain, 'graph'),
     gks: join(r, 'gks'),
     atomicIndex: join(r, 'gks', '00_index', 'atomic_index.jsonl'),
   }
@@ -789,6 +835,12 @@ export { createHnswBackend } from './vector/hnsw.js'
 export type { HnswBackendOptions } from './vector/hnsw.js'
 export { createPgGraphBackend } from './graph/pg.js'
 export type { PgGraphBackendOptions } from './graph/pg.js'
+export { createGenesisBlockBackend, GenesisBlockBackend } from './graph/genesis-block.js'
+export type { GenesisBlockBackendOptions } from './graph/genesis-block.js'
+export {
+  GenesisBlockUnsupportedCypher,
+  GenesisBlockSchemaMismatchError,
+} from './graph/genesis-block-errors.js'
 export { EpisodicLayer } from './episodic.js'
 export { InboundQueue } from './inbound.js'
 export { ATOMIC_ID_PATTERN, isAtomicId, assertAtomicId } from './atomic-id.js'
@@ -855,6 +907,10 @@ export type {
 } from '../lib/cost-tracker.js'
 
 export { GraphStore } from './graph.js'
+export { HotfixStore } from '../hotfix/store.js'
+export type { HotfixStoreOptions, OpenHotfixArgs } from '../hotfix/store.js'
+export type { Hotfix } from '../hotfix/types.js'
+export { HOTFIX_BACKFILL_MS, isOverdue, makeHotfixId, shortSha } from '../hotfix/types.js'
 export type {
   GraphBackend,
   GraphNode,

@@ -1,14 +1,15 @@
-import { execFile } from 'node:child_process'
-import { promisify } from 'node:util'
 import type { Blueprint, Escalator, Task } from '../types.js'
-
-const execFileAsync = promisify(execFile)
+import { runGeminiCli } from '../slm/gemini.js'
+import { SlmError } from '../slm/errors.js'
 
 /**
  * Gemini CLI Escalator — delegates to the `gemini` CLI subagent.
- * 
+ *
  * Per ADR--CODEGEN-MICROTASK-RUNNER:
  * After 3 retries, invoke Gemini CLI via `gemini -p "<escalation_prompt>" -y`.
+ *
+ * Shares the subprocess wrapper with `slm/gemini.ts` so both call paths
+ * stay in sync (env vars, timeouts, error mapping).
  */
 export function createGeminiEscalator(): Escalator {
   return async (task: Task, blueprint: Blueprint, history: any[]): Promise<{ ok: boolean; output?: string }> => {
@@ -49,17 +50,13 @@ If there are multiple files, separate them with a clear marker or follow the sta
 `.trim()
 
     try {
-      // gemini -p "prompt" -y
-      // -y automatically accepts the command
-      const { stdout } = await execFileAsync('gemini', ['-p', escalationPrompt, '-y'], {
-        maxBuffer: 20 * 1024 * 1024, // 20MB
-      })
-      
+      const { stdout } = await runGeminiCli(escalationPrompt)
       // The output from gemini CLI might contain some chatter or headers.
       // We rely on the runner's post-processing to clean it up.
       return { ok: true, output: stdout }
     } catch (err) {
-      console.error('[escalator] Gemini failed:', (err as Error).message)
+      const detail = err instanceof SlmError ? `${err.kind}: ${err.message}` : (err as Error).message
+      console.error('[escalator] Gemini failed:', detail)
       return { ok: false }
     }
   }

@@ -116,4 +116,36 @@ describe('MemoryStore', () => {
     const files = await readdir(dir)
     expect(files.some((f) => f.includes(sessionId))).toBe(true)
   })
+
+  it('graphBackend option exposes a default GraphBackend on store.graph after init()', async () => {
+    const { store, root } = await withStore()
+    cleanup.push(root)
+    expect(store.graph).toBeDefined()
+    expect(typeof store.graph.addNode).toBe('function')
+    await store.graph.addNode({ id: 'X', labels: ['Test'] })
+    await store.graph.addNode({ id: 'Y', labels: ['Test'] })
+    await store.graph.addEdge({ from: 'X', to: 'Y', rel: 'R' })
+    const out = await store.graph.query({ from: 'X' })
+    expect(out).toHaveLength(1)
+  })
+
+  it('graphBackend option accepts an injected GenesisBlockBackend', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'gks-root-gb-'))
+    cleanup.push(root)
+    await mkdir(join(root, 'gks'), { recursive: true })
+    await cp(FIXTURES, join(root, 'gks'), { recursive: true })
+
+    const { createGenesisBlockBackend } = await import('../../src/memory/graph/genesis-block.js')
+    const dir = join(root, '.brain', 'msp', 'projects', 'evaAI', 'graph')
+    const store = new MemoryStore({
+      root,
+      embedder: mockEmbedder(64),
+      graphBackend: () => createGenesisBlockBackend({ path: dir }),
+    })
+    await store.init()
+    await store.graph.addNode({ id: 'a', labels: ['Atom'] })
+    await store.graph.addNode({ id: 'b', labels: ['Atom'] })
+    await store.graph.addEdge({ from: 'a', to: 'b', rel: 'references' })
+    expect((await store.graph.query({ from: 'a' })).length).toBe(1)
+  })
 })

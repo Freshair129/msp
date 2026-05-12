@@ -1,6 +1,7 @@
 import type { SlmCall, SlmClient } from '../types.js'
 import { createOllamaClient } from './ollama.js'
 import { createQwenClient } from './qwen.js'
+import { createGeminiClient } from './gemini.js'
 import { SlmError } from './errors.js'
 import type { SlmFactoryOpts } from './types.js'
 
@@ -21,6 +22,8 @@ export function createSlmClient(opts: SlmFactoryOpts = {}): SlmClient {
       return createOllamaClient(opts.ollama ?? {})
     case 'qwen':
       return createQwenClient(opts.qwen ?? {})
+    case 'gemini':
+      return createGeminiClient(opts.gemini ?? {})
     case 'mock':
       return mockClient
     default:
@@ -29,5 +32,6 @@ export function createSlmClient(opts: SlmFactoryOpts = {}): SlmClient {
 }
 
 export { createOllamaClient } from './ollama.js'
+export { createGeminiClient, runGeminiCli } from './gemini.js'
 export { SlmError, type SlmErrorKind } from './errors.js'
-export type { OllamaOpts, SlmFactoryOpts } from './types.js'
+export type { OllamaOpts, GeminiOpts, SlmFactoryOpts } from './types.js'

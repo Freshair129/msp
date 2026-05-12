@@ -1,3 +1,12 @@
+/**
+ * Ollama-backed SLM client — the canonical T1 microtask executor per
+ * FRAMEWORK_MASTER_SPEC §8 / §17.3.
+ *
+ * Default model: `qwen2.5-coder:7b` (a sensible local default for ≥8GB VRAM).
+ * Recommended upgrade: `OLLAMA_MODEL=qwen2.5-coder:14b` on ≥16GB VRAM.
+ * Both variants follow the same prompt envelope, so swapping is transparent
+ * to the codegen runner.
+ */
 import type { SlmCall, SlmClient } from '../types.js'
 import { SlmError } from './errors.js'
 import type { OllamaOpts } from './types.js'

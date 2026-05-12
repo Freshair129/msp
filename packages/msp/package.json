@@ -44,6 +44,7 @@
     "msp:atom-date": "tsx scripts/msp/atom-date.ts",
     "msp:scaffold-atom": "tsx scripts/msp/scaffold-atom.ts",
     "msp:supersede": "tsx scripts/msp/supersede.ts",
+    "cognitive:quickstart": "tsx examples/cognitive-layer-quickstart.ts",
     "build": "tsc -p tsconfig.build.json && node scripts/msp/chmod-bins.mjs",
     "test": "vitest run",
     "test:watch": "vitest",

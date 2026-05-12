@@ -76,7 +76,10 @@ export async function runTask(
     )
   }
 
-  const slmClient: SlmClient = opts.slmClient ?? createSlmClient({ provider: (process.env.MSP_SLM_PROVIDER as any) ?? 'qwen' })
+  // Microtask SLM contract (FRAMEWORK_MASTER_SPEC §8 + CONCEPT--CODEGEN-MICROTASK-RUNNER):
+  // T1 = local Ollama running qwen2.5-coder. The factory honours MSP_SLM_PROVIDER /
+  // OLLAMA_MODEL env vars; no provider hardcoded here.
+  const slmClient: SlmClient = opts.slmClient ?? createSlmClient({})
   const accept = opts.acceptanceRunner ?? defaultAcceptance
   const escalator = opts.escalator ?? createGeminiEscalator()
   const model = opts.model ?? DEFAULT_MODEL
