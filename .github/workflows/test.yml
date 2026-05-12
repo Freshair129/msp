@@ -26,9 +26,15 @@ jobs:
         # with `npm install` (it still honors the existing lockfile structure).
         # Workaround per Rollup's error message: remove package-lock.json and reinstall.
         # https://github.com/npm/cli/issues/4828
+        #
+        # Same npm bug affects workspace bin-linking: `npm install` doesn't
+        # always create node_modules/.bin/<name> symlinks for workspace
+        # packages. `npm rebuild` does. Without this, `npx gks verify-flow`
+        # in the verify-flow-per-FEAT step below can't resolve the binary.
         run: |
           rm -f package-lock.json
           npm install --no-audit --no-fund
+          npm rebuild --workspace=@freshair129/gks
 
       - name: shellcheck packages/msp/examples/hooks/
         run: |
@@ -55,7 +61,9 @@ jobs:
         run: npm test
 
       - name: msp:validate (whole tree)
-        run: npm run msp:validate --workspace=packages/msp -- --all --root=packages/msp
+        # `--workspace=packages/msp` already cd's into packages/msp; use --root=.
+        # (Earlier `--root=packages/msp` resolved to packages/msp/packages/msp/.)
+        run: npm run msp:validate --workspace=packages/msp -- --all --root=.
 
       - name: msp:backlinks (rebuild + determinism check)
         run: |
