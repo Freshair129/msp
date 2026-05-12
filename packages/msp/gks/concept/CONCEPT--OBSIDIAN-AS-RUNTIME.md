@@ -15,7 +15,7 @@ tags:
   - architecture
   - foundation
 crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
-created_at: 2026-05-04T00:55:05.485+07:00
+created_at: 2026-05-03T23:55:05.485+07:00
 ---
 
 # CONCEPT — Obsidian as runtime

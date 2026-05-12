@@ -20,7 +20,7 @@ linked_symbols:
   - {"file":"src/validator/rules/evidence-for-decisions.ts"}
   - {"file":"src/validator/rules/cite-or-mark-inferred.ts"}
   - {"file":"src/validator/index.ts"}
-created_at: 2026-05-03T19:01:45.959+07:00
+created_at: 2026-05-03T18:01:45.959+07:00
 ---
 
 # AUDIT — anti-hallucination rules complete

@@ -13,7 +13,7 @@ tags:
   - anti-hallucination
   - rules
 crosslinks: {"references":["CONCEPT--ATOMIC-WRITE-CONTRACT","ADR--GRAPH-IS-GKS-DOMAIN"],"implements":["FEAT--MSP-VALIDATOR"]}
-created_at: 2026-05-03T15:08:41.252+07:00
+created_at: 2026-05-03T14:08:41.252+07:00
 ---
 
 # ADR — anti-hallucination rules

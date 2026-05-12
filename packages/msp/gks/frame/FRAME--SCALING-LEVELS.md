@@ -13,7 +13,7 @@ tags:
   - governance
   - foundation
 crosslinks: {"references":["FRAME--PHASE-GOVERNANCE"]}
-created_at: 2026-05-03T15:01:48.787+07:00
+created_at: 2026-05-03T14:01:48.787+07:00
 ---
 
 # FRAME — scaling levels

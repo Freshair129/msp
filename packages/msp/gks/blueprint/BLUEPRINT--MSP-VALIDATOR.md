@@ -25,7 +25,7 @@ linked_symbols:
   - {"file":"src/validator/rules/summary-min.ts"}
   - {"file":"src/validator/atomic-index.ts"}
   - {"file":"src/validator/cli.ts"}
-created_at: 2026-05-03T14:24:25.656+07:00
+created_at: 2026-05-03T13:24:25.656+07:00
 ---
 
 # BLUEPRINT — MSP validator implementation plan

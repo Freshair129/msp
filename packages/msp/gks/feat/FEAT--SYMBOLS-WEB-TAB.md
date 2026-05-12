@@ -22,7 +22,7 @@ linked_symbols:
   - {"file":"web/src/components/SymbolDetail.tsx"}
   - {"file":"web/src/api.ts"}
   - {"file":"src/index.ts"}
-created_at: 2026-05-09T17:54:00.000+07:00
+created_at: 2026-05-09T16:54:00.000+07:00
 ---
 
 # FEAT — Knowledge Browser Symbols tab

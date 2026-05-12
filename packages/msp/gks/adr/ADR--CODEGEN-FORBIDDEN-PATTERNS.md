@@ -13,7 +13,7 @@ tags:
   - forbidden-patterns
   - slm
 crosslinks: {"references":["CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
-created_at: 2026-05-03T15:08:42.151+07:00
+created_at: 2026-05-03T14:08:42.151+07:00
 ---
 
 # ADR — codegen forbidden imports + patterns

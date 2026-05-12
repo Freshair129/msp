@@ -15,7 +15,7 @@ tags:
   - decision
   - decomposition
 crosslinks: {"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","FRAME--SYMBOL-GRAPH"],"supersedes":["FEAT--SYMBOLS-FRAMEWORK-AWARENESS"]}
-created_at: 2026-05-12T06:36:00.000+07:00
+created_at: 2026-05-12T05:36:00.000+07:00
 ---
 
 # ADR — Symbol graph framework awareness

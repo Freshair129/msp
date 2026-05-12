@@ -14,7 +14,7 @@ tags:
   - mcp
   - patterns
 crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--NAMED-PROJECT-REGISTRY","ADR--GLOBAL-VS-WORKSPACE"]}
-created_at: 2026-05-10T08:00:00.000+07:00
+created_at: 2026-05-10T07:00:00.000+07:00
 ---
 
 # CONCEPT — Agent integration patterns

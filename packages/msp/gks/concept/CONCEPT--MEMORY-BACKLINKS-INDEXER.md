@@ -14,7 +14,7 @@ tags:
   - vector
   - indexer
 crosslinks: {"references":["CONCEPT--MEMORY-VECTOR-BACKLINKS","FRAME--CROSSLINKS-VOCABULARY"]}
-created_at: 2026-05-03T15:16:41.740+07:00
+created_at: 2026-05-03T14:16:41.740+07:00
 ---
 
 # CONCEPT — backlinks indexer

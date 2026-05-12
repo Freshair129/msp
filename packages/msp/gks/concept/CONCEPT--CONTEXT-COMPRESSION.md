@@ -14,7 +14,7 @@ tags:
   - episodic
   - m7d
 crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--CONSOLIDATOR","FEAT--CONSOLIDATOR"]}
-created_at: 2026-05-05T17:10:00.000+07:00
+created_at: 2026-05-05T16:10:00.000+07:00
 ---
 
 # CONCEPT — context compression

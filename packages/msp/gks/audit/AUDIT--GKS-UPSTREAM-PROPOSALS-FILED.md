@@ -15,7 +15,7 @@ tags:
   - handoff
 crosslinks: {"references":["AUDIT--TWO-REPO-VALIDATION","ADR--EMBEDDING-MODEL-PARITY"]}
 linked_symbols: []
-created_at: 2026-05-07T04:00:00.000+07:00
+created_at: 2026-05-07T03:00:00.000+07:00
 ---
 
 # AUDIT — GKS upstream proposals filed

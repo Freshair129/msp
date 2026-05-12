@@ -21,7 +21,7 @@ linked_symbols:
   - {"file":"src/memory/backlinks/walk.ts"}
   - {"file":"src/memory/backlinks/atomic-write.ts"}
   - {"file":"src/memory/backlinks/cli.ts"}
-created_at: 2026-05-03T16:43:37.417+07:00
+created_at: 2026-05-03T15:43:37.417+07:00
 ---
 
 # AUDIT — memory backlinks indexer

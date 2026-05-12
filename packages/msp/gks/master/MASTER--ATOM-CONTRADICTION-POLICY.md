@@ -18,7 +18,7 @@ tags:
   - governance
   - instinct
 crosslinks: {"references":["FRAME--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY","BLUEPRINT--CONTRADICTION-DETECTION-IMPL"]}
-created_at: 2026-05-09T16:01:30.000+07:00
+created_at: 2026-05-09T15:01:30.000+07:00
 ---
 
 # MASTER — Atom contradiction policy (Layer 0 supersession discipline)

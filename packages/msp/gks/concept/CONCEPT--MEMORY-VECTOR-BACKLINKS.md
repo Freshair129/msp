@@ -14,7 +14,7 @@ tags:
   - backlinks
   - hybrid-retrieval
 crosslinks: {"references":["CONCEPT--MEMORY-SUBSYSTEM","FRAME--CROSSLINKS-VOCABULARY","ADR--GRAPH-IS-GKS-DOMAIN"]}
-created_at: 2026-05-03T15:01:54.322+07:00
+created_at: 2026-05-03T14:01:54.322+07:00
 ---
 
 # CONCEPT — vector / backlinks

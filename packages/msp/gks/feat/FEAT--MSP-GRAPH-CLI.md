@@ -17,7 +17,7 @@ crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNIT
 linked_symbols:
   - {"file":"src/symbols/cli.ts"}
   - {"file":"package.json"}
-created_at: 2026-05-09T17:53:00.000+07:00
+created_at: 2026-05-09T16:53:00.000+07:00
 ---
 
 # FEAT — msp:graph CLI

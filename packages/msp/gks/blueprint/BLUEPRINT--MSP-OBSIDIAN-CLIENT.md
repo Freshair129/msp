@@ -21,7 +21,7 @@ linked_symbols:
   - {"file":"src/obsidian/filesystem.ts"}
   - {"file":"src/obsidian/env.ts"}
   - {"file":"test/obsidian/client.test.ts"}
-created_at: 2026-05-04T13:25:22.543+07:00
+created_at: 2026-05-04T12:25:22.543+07:00
 ---
 
 # BLUEPRINT — MSP Obsidian client implementation plan

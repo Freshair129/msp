@@ -14,7 +14,7 @@ tags:
   - writer
   - decision
 crosslinks: {"references":["CONCEPT--MEMORY-SESSIONS-WRITER","CONCEPT--MEMORY-SESSIONS"]}
-created_at: 2026-05-03T15:16:38.566+07:00
+created_at: 2026-05-03T14:16:38.566+07:00
 ---
 
 # ADR — sessions writer concurrency model

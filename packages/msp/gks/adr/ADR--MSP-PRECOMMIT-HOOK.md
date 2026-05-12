@@ -14,7 +14,7 @@ tags:
   - decision
   - bash
 crosslinks: {"references":["CONCEPT--MSP-PRECOMMIT-HOOK","FEAT--MSP-VALIDATOR"]}
-created_at: 2026-05-03T15:39:04.838+07:00
+created_at: 2026-05-03T14:39:04.838+07:00
 ---
 
 # ADR — pre-commit hook implementation shape

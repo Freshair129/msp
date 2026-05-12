@@ -13,7 +13,7 @@ tags:
   - algo
   - algorithm
 crosslinks: {"implements":["ADR--SYMBOLS-PROCESS-TRACING"]}
-created_at: 2026-05-12T16:52:00.000+07:00
+created_at: 2026-05-12T15:52:00.000+07:00
 ---
 
 # ALGO — Call graph traversal

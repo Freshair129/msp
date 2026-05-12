@@ -14,7 +14,7 @@ tags:
   - tree-sitter
   - adr
 crosslinks: {"implements":["FEAT--SYMBOLS-MULTI-LANG"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
-created_at: 2026-05-12T06:00:00.000+07:00
+created_at: 2026-05-12T05:00:00.000+07:00
 ---
 
 # ADR — Using Tree-sitter for Python symbol extraction

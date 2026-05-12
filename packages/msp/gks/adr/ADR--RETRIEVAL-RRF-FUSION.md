@@ -15,7 +15,7 @@ tags:
   - decision
   - m7c
 crosslinks: {"references":["CONCEPT--RETRIEVAL-ORCHESTRATION","CONCEPT--EMBEDDING-STRATEGY","ADR--EMBEDDING-MODEL-PARITY"]}
-created_at: 2026-05-05T16:55:30.000+07:00
+created_at: 2026-05-05T15:55:30.000+07:00
 ---
 
 # ADR — retrieval RRF fusion

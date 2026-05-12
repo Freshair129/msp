@@ -15,7 +15,7 @@ tags:
   - governance
   - m8f
 crosslinks: {"references":["CONCEPT--PROTO-PATTERN","ADR--ANTI-HALLUCINATION-RULES","FEAT--MSP-VALIDATOR"]}
-created_at: 2026-05-05T17:28:00.000+07:00
+created_at: 2026-05-05T16:28:00.000+07:00
 ---
 
 # CONCEPT — audit existing validator rules → PROTO promotion

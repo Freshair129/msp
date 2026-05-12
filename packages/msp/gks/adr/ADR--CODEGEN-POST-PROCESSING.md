@@ -13,7 +13,7 @@ tags:
   - post-processing
   - slm
 crosslinks: {"references":["CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
-created_at: 2026-05-03T15:08:41.716+07:00
+created_at: 2026-05-03T14:08:41.716+07:00
 ---
 
 # ADR — codegen post-processing

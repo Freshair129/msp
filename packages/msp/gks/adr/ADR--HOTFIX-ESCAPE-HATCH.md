@@ -13,7 +13,7 @@ tags:
   - escape-hatch
   - escalation
 crosslinks: {"references":["ADR--AGENT-WRITE-BOUNDARIES","FRAME--PHASE-GOVERNANCE"]}
-created_at: 2026-05-03T15:08:43.472+07:00
+created_at: 2026-05-03T14:08:43.472+07:00
 ---
 
 # ADR — hotfix escape hatch

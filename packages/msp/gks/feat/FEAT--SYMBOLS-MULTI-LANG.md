@@ -19,7 +19,7 @@ linked_symbols:
   - {"file":"packages/msp/src/symbols/parser/python.ts"}
   - {"file":"packages/msp/src/symbols/parser/cobol.ts"}
   - {"file":"packages/msp/src/symbols/api.ts"}
-created_at: 2026-05-12T05:48:00.000+07:00
+created_at: 2026-05-12T04:48:00.000+07:00
 ---
 
 # FEAT — Multi-language symbol support

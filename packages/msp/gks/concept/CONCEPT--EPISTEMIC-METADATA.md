@@ -13,7 +13,7 @@ tags:
   - metadata
   - anti-hallucination
 crosslinks: {"references":["CONCEPT--ATOMIC-WRITE-CONTRACT"]}
-created_at: 2026-05-03T15:01:54.801+07:00
+created_at: 2026-05-03T14:01:54.801+07:00
 ---
 
 # CONCEPT — epistemic metadata

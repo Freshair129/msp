@@ -14,7 +14,7 @@ tags:
   - vitest
   - runtime
 crosslinks: {"references":["FEAT--CODEGEN-MICROTASK-RUNNER","ADR--CODEGEN-RETRY-POLICY"]}
-created_at: 2026-05-03T17:27:17.430+07:00
+created_at: 2026-05-03T16:27:17.430+07:00
 ---
 
 # CONCEPT — vitest acceptance runner

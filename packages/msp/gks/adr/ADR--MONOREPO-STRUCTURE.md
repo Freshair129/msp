@@ -16,7 +16,7 @@ tags:
   - msp
   - gks
 crosslinks: {"references":["CONCEPT--MONOREPO-MIGRATION","FRAME--MSP-ARCHITECTURE-V2","ADR--GRAPH-IS-GKS-DOMAIN"]}
-created_at: 2026-05-08T14:21:00.000+07:00
+created_at: 2026-05-08T13:21:00.000+07:00
 ---
 
 # ADR — monorepo structure

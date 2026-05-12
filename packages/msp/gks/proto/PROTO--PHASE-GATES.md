@@ -17,7 +17,7 @@ tags:
 crosslinks: {"enforces":["FRAME--PHASE-GOVERNANCE"],"references":["CONCEPT--PROTO-PHASE-GATES","CONCEPT--PROTO-PATTERN","FEAT--PROTO-LOADER"]}
 linked_symbols:
   - {"file":"src/validator/proto/phase-gates.ts"}
-created_at: 2026-05-05T19:00:00.000+07:00
+created_at: 2026-05-05T18:00:00.000+07:00
 ---
 
 # PROTO — PHASE-GATES

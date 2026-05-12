@@ -16,7 +16,7 @@ tags:
   - preferences
   - m7e
 crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
-created_at: 2026-05-05T01:25:00.000+07:00
+created_at: 2026-05-05T00:25:00.000+07:00
 ---
 
 # CONCEPT — identity layer

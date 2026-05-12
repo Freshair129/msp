@@ -20,7 +20,7 @@ linked_symbols:
   - {"file":"examples/hooks/install.sh"}
   - {"file":"examples/hooks/README.md"}
   - {"file":"test/hooks/pre-push.test.ts"}
-created_at: 2026-05-03T19:01:44.663+07:00
+created_at: 2026-05-03T18:01:44.663+07:00
 ---
 
 # AUDIT — pre-push hook (M5a)

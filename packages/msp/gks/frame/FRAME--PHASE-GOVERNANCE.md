@@ -14,7 +14,7 @@ tags:
   - doc-to-code
   - foundation
 crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
-created_at: 2026-05-03T15:01:48.299+07:00
+created_at: 2026-05-03T14:01:48.299+07:00
 ---
 
 # FRAME — phase governance

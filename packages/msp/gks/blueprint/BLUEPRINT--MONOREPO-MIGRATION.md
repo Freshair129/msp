@@ -26,7 +26,7 @@ linked_symbols:
   - {"file":"upstream/gks-proposals/"}
   - {"file":"scripts/msp/propose.mjs"}
   - {"file":"src/memory/backlinks/"}
-created_at: 2026-05-08T14:22:00.000+07:00
+created_at: 2026-05-08T13:22:00.000+07:00
 ---
 
 # BLUEPRINT — monorepo migration

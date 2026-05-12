@@ -19,7 +19,7 @@ linked_symbols:
   - {"file":"src/validator/rules/dangling-wikilinks.ts"}
   - {"file":"src/validator/rules/id-uniqueness.ts"}
   - {"file":"src/validator/cli.ts"}
-created_at: 2026-05-03T14:24:25.043+07:00
+created_at: 2026-05-03T13:24:25.043+07:00
 ---
 
 # FEAT — msp:validate

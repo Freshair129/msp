@@ -13,7 +13,7 @@ tags:
   - exemption
   - validator
 crosslinks: {"references":["ADR--ANTI-HALLUCINATION-RULES","ADR--FORBIDDEN-FIELDS-LIST"]}
-created_at: 2026-05-03T15:08:43.977+07:00
+created_at: 2026-05-03T14:08:43.977+07:00
 ---
 
 # ADR — legacy files allowance

@@ -21,7 +21,7 @@ linked_symbols:
   - {"file":"src/orchestrator/consolidator/score.ts"}
   - {"file":"src/orchestrator/consolidator/boundary.ts"}
   - {"file":"src/orchestrator/consolidator/summarise.ts"}
-created_at: 2026-05-04T18:06:00.000+07:00
+created_at: 2026-05-04T17:06:00.000+07:00
 ---
 
 # Consolidator — session → episode hybrid-scored gate

@@ -24,7 +24,7 @@ linked_symbols:
   - {"file":"src/identity/voice.ts"}
   - {"file":"src/identity/preferences.ts"}
   - {"file":"src/identity/store.ts"}
-created_at: 2026-05-05T01:26:00.000+07:00
+created_at: 2026-05-05T00:26:00.000+07:00
 ---
 
 # Identity layer — namespaced JSON store with profile / voice / preferences
