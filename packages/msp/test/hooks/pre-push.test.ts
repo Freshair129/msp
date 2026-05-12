@@ -1,6 +1,6 @@
 import { spawn, spawnSync } from 'node:child_process'
-import { copyFile, mkdir, mkdtemp, writeFile } from 'node:fs/promises'
-import { readdirSync } from 'node:fs'
+import { copyFile, mkdir, mkdtemp, symlink, writeFile } from 'node:fs/promises'
+import { existsSync, readdirSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -14,24 +14,47 @@ const hookSrc = join(repoRoot, 'examples/hooks/pre-push-verify.sh')
  * Find the workspace node_modules by walking up from `start`. In npm
  * workspaces, per-package node_modules is empty; the populated one lives
  * at the monorepo root.
+ *
+ * Detection uses the presence of `@freshair129/gks` (a workspace
+ * dependency hoisted to the root) as the marker for "this is the real
+ * one". Earlier versions of this function checked for any non-empty
+ * directory, which got fooled by vitest's `.vite/` cache sometimes
+ * landing in `packages/msp/node_modules/` (Issue #75).
  */
 function findWorkspaceNodeModules(start: string): string {
   let dir = resolve(start)
   for (let i = 0; i < 5; i++) {
     const candidate = join(dir, 'node_modules')
-    try {
-      if (readdirSync(candidate).length > 0) return candidate
-    } catch {
-      // missing — keep walking up
-    }
+    if (existsSync(join(candidate, '@freshair129', 'gks'))) return candidate
     const parent = dirname(dir)
     if (parent === dir) break
     dir = parent
   }
-  throw new Error(`no populated node_modules found above '${start}'`)
+  throw new Error(`no node_modules with @freshair129/gks found above '${start}'`)
 }
 
 const workspaceNodeModules = findWorkspaceNodeModules(repoRoot)
+
+/**
+ * Ensure `node_modules/.bin/gks` exists. npm has a known quirk where
+ * binaries from workspace packages aren't always linked into the root
+ * `.bin/` on a fresh `npm install` — `npm rebuild` would do it, but
+ * the CI workflow doesn't run that. Without this shim, the hook's
+ * `npx gks verify-flow` call resolves to nothing and exits non-zero,
+ * which manifests as Issue #75 — the "exits 0 when chain OK" test
+ * fails because verify-flow never actually runs.
+ *
+ * Idempotent: returns immediately if the symlink already exists.
+ */
+async function ensureGksBin(wsNm: string): Promise<void> {
+  const binDir = join(wsNm, '.bin')
+  const binPath = join(binDir, 'gks')
+  if (existsSync(binPath)) return
+  await mkdir(binDir, { recursive: true })
+  // Target path is relative to .bin/ so the symlink survives node_modules
+  // being re-created by future installs.
+  await symlink('../@freshair129/gks/dist/bin/gks.js', binPath)
+}
 
 interface RunResult {
   code: number
@@ -132,6 +155,7 @@ beforeAll(async () => {
   await mkdir(join(wt, 'gks/feat'), { recursive: true })
   await mkdir(join(wt, 'gks/concept'), { recursive: true })
   run('ln', ['-s', workspaceNodeModules, join(wt, 'node_modules')], wt)
+  await ensureGksBin(workspaceNodeModules)
   // Tiny package.json so npx works
   await writeFile(
     join(wt, 'package.json'),
