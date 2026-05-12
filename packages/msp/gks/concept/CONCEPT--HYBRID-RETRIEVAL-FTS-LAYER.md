@@ -2,7 +2,7 @@
 id: CONCEPT--HYBRID-RETRIEVAL-FTS-LAYER
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic

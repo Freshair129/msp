@@ -2,7 +2,7 @@
 id: ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER
 phase: 2
 type: adr
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic

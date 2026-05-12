@@ -2,7 +2,7 @@
 id: ADR--MEMORY-STORE-GRAPH-WIRING
 phase: 2
 type: adr
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -12,7 +12,7 @@ tags:
   - memory
   - graph
   - decision
-crosslinks: {"references":["CONCEPT--GENESIS-BLOCK-ENGINE","ADR--GENESIS-BLOCK-AS-GKS-BACKEND"]}
+crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T22:48:00.000+07:00
 ---
 

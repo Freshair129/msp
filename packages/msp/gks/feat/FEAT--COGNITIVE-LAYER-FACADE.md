@@ -2,7 +2,7 @@
 id: FEAT--COGNITIVE-LAYER-FACADE
 phase: 2
 type: feat
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -13,7 +13,7 @@ tags:
   - facade
   - memoryos
   - user-facing
-crosslinks: {"implements":["CONCEPT--COGNITIVE-LAYER-FACADE"],"references":["CONCEPT--AGENT-AGNOSTIC","ADR--MEMORY-STORE-GRAPH-WIRING","ADR--GEMINI-AS-SLM-PROVIDER","ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER","BLUEPRINT--GENESIS-BLOCK-TS-FIRST"]}
+crosslinks: {"implements":["CONCEPT--COGNITIVE-LAYER-FACADE"],"references":["CONCEPT--AGENT-AGNOSTIC","ADR--MEMORY-STORE-GRAPH-WIRING","ADR--GEMINI-AS-SLM-PROVIDER","ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER"]}
 linked_symbols:
   - {"file":"packages/msp/src/cognitive/index.ts"}
   - {"file":"packages/msp/src/cognitive/types.ts"}
