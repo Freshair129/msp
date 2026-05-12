@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS symbols (
   parent_id TEXT,
   signature TEXT,
   community_id INTEGER,
+  attrs TEXT,
   created_at TEXT NOT NULL
 );
 
@@ -42,6 +43,7 @@ CREATE TABLE IF NOT EXISTS edges (
   type TEXT NOT NULL,
   weight REAL NOT NULL DEFAULT 1.0,
   resolved INTEGER NOT NULL,
+  attrs TEXT,
   UNIQUE(src_id, dst_id, type)
 );
 
@@ -73,6 +75,7 @@ interface SymbolRow {
   parent_id: string | null
   signature: string | null
   community_id: number | null
+  attrs: string | null
   created_at: string
 }
 
@@ -82,6 +85,7 @@ interface EdgeRow {
   type: string
   weight: number
   resolved: number
+  attrs: string | null
 }
 
 interface CommunityRow {
@@ -93,6 +97,14 @@ interface CommunityRow {
 }
 
 function rowToSymbol(r: SymbolRow): Symbol {
+  let attrs: Record<string, any> | undefined
+  if (r.attrs) {
+    try {
+      attrs = JSON.parse(r.attrs)
+    } catch {
+      // ignore
+    }
+  }
   return {
     id: r.id,
     name: r.name,
@@ -104,17 +116,27 @@ function rowToSymbol(r: SymbolRow): Symbol {
     parent_id: r.parent_id,
     signature: r.signature,
     community_id: r.community_id,
+    attrs,
     created_at: r.created_at,
   }
 }
 
 function rowToEdge(r: EdgeRow): Edge {
+  let attrs: Record<string, any> | undefined
+  if (r.attrs) {
+    try {
+      attrs = JSON.parse(r.attrs)
+    } catch {
+      // ignore
+    }
+  }
   return {
     src_id: r.src_id,
     dst_id: r.dst_id,
     type: r.type as EdgeType,
     weight: r.weight,
     resolved: r.resolved === 1,
+    attrs,
   }
 }
 
@@ -173,13 +195,14 @@ export class SymbolStore {
   upsertSymbol(s: Symbol): void {
     const db = this.requireDb()
     db.prepare(
-      `INSERT INTO symbols (id, name, kind, file, start_line, end_line, exported, parent_id, signature, community_id, created_at)
-       VALUES (@id, @name, @kind, @file, @start_line, @end_line, @exported, @parent_id, @signature, @community_id, @created_at)
+      `INSERT INTO symbols (id, name, kind, file, start_line, end_line, exported, parent_id, signature, community_id, attrs, created_at)
+       VALUES (@id, @name, @kind, @file, @start_line, @end_line, @exported, @parent_id, @signature, @community_id, @attrs, @created_at)
        ON CONFLICT(id) DO UPDATE SET
          name=excluded.name, kind=excluded.kind, file=excluded.file,
          start_line=excluded.start_line, end_line=excluded.end_line,
          exported=excluded.exported, parent_id=excluded.parent_id,
          signature=excluded.signature, community_id=excluded.community_id,
+         attrs=excluded.attrs,
          created_at=excluded.created_at`,
     ).run({
       id: s.id,
@@ -192,6 +215,7 @@ export class SymbolStore {
       parent_id: s.parent_id,
       signature: s.signature,
       community_id: s.community_id,
+      attrs: s.attrs ? JSON.stringify(s.attrs) : null,
       created_at: s.created_at,
     })
   }
@@ -219,20 +243,42 @@ export class SymbolStore {
   upsertEdge(e: Edge): void {
     const db = this.requireDb()
     db.prepare(
-      `INSERT INTO edges (src_id, dst_id, type, weight, resolved)
-       VALUES (?, ?, ?, ?, ?)
+      `INSERT INTO edges (src_id, dst_id, type, weight, resolved, attrs)
+       VALUES (?, ?, ?, ?, ?, ?)
        ON CONFLICT(src_id, dst_id, type) DO UPDATE SET
-         weight=excluded.weight, resolved=excluded.resolved`,
-    ).run(e.src_id, e.dst_id, e.type, e.weight, e.resolved ? 1 : 0)
+         weight=excluded.weight, resolved=excluded.resolved, attrs=excluded.attrs`,
+    ).run(e.src_id, e.dst_id, e.type, e.weight, e.resolved ? 1 : 0, e.attrs ? JSON.stringify(e.attrs) : null)
   }
 
   /** All edges, sorted by (src_id, dst_id, type) for deterministic export. */
   allEdges(): Edge[] {
     const db = this.requireDb()
     const rows = db
-      .prepare(`SELECT src_id, dst_id, type, weight, resolved FROM edges ORDER BY src_id, dst_id, type`)
+      .prepare(`SELECT * FROM edges ORDER BY src_id, dst_id, type`)
       .all() as EdgeRow[]
     return rows.map(rowToEdge)
+  }
+
+  getOutgoingEdges(srcId: string, types?: EdgeType[]): Edge[] {
+    const db = this.requireDb()
+    let query = `SELECT * FROM edges WHERE src_id = ?`
+    if (types && types.length > 0) {
+      query += ` AND type IN (${types.map(() => '?').join(',')})`
+    }
+    const stmt = db.prepare(query)
+    const rows = types ? stmt.all(srcId, ...types) : stmt.all(srcId)
+    return (rows as EdgeRow[]).map(rowToEdge)
+  }
+
+  getIncomingEdges(dstId: string, types?: EdgeType[]): Edge[] {
+    const db = this.requireDb()
+    let query = `SELECT * FROM edges WHERE dst_id = ?`
+    if (types && types.length > 0) {
+      query += ` AND type IN (${types.map(() => '?').join(',')})`
+    }
+    const stmt = db.prepare(query)
+    const rows = types ? stmt.all(dstId, ...types) : stmt.all(dstId)
+    return (rows as EdgeRow[]).map(rowToEdge)
   }
 
   /**

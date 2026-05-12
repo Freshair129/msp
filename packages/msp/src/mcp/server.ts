@@ -18,6 +18,7 @@ import * as symbolImpact from './tools/symbol-impact.js'
 import * as symbolLookup from './tools/symbol-lookup.js'
 import * as symbolNeighbors from './tools/symbol-neighbors.js'
 import * as symbolSearch from './tools/symbol-search.js'
+import * as symbolTrace from './tools/symbol-trace.js'
 import * as validateTool from './tools/validate.js'
 import type { ToolHandlerCtx } from './types.js'
 
@@ -46,6 +47,7 @@ const TOOLS = [
   symbolImpact,
   symbolCommunity,
   symbolSearch,
+  symbolTrace,
 ] as const
 
 export function createMspMcpServer(opts: ServerOpts = {}): McpServer {
