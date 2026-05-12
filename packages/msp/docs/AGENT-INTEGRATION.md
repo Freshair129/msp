@@ -224,7 +224,7 @@ console.log(result)
 To switch projects, change `MSP_PROJECT` in the `env` map. To override the
 global root, add `MSP_HOME` to the same map.
 
-**Verify it's live**: the `listTools()` call returns ~16 tools whose names
+**Verify it's live**: the `listTools()` call returns ~20 tools whose names
 start with `msp_`.
 
 ### Custom agents (Python)
@@ -256,6 +256,107 @@ SDK is just a transport.
 
 **Verify it's live**: `list_tools()` returns the `msp_*` surface.
 
+## Local SLM (default: Ollama + qwen2.5-coder) and Gemini-as-SLM-subagent
+
+MSP's codegen microtask runner (`msp-run-task` / `msp_run_task` MCP tool) calls
+a Small Language Model for the T1 tier per `FRAMEWORK_MASTER_SPEC.md` §17.3.
+The supported providers, selected via `MSP_SLM_PROVIDER`:
+
+| Provider | Use case | Setup |
+|---|---|---|
+| `ollama` *(default)* | T1 tier — local, deterministic, free. Default model `qwen2.5-coder:7b`. | `ollama pull qwen2.5-coder:7b` (or `:14b` on ≥16GB VRAM) |
+| `gemini` | T2/T3 tier — hosted Gemini CLI as a primary subagent for codegen | Install `gemini-cli`; ensure `gemini --version` resolves on `PATH` |
+| `mock` | Tests / dry-run | nothing — built in |
+| `qwen` | Legacy standalone `qwen` CLI binary wrapper (rarely used) | install `qwen` binary on `PATH` |
+
+### Ollama (default — T1)
+
+```bash
+ollama pull qwen2.5-coder:7b
+# Or, for the 14B variant on ≥16GB VRAM:
+ollama pull qwen2.5-coder:14b
+export OLLAMA_MODEL=qwen2.5-coder:14b
+```
+
+No additional MCP config required. The runner will auto-resolve to Ollama:
+
+```bash
+npm run msp:run-task -- .brain/<ns>/tasks/<feature>/T1.task.yaml
+```
+
+Override host: `OLLAMA_HOST=http://10.0.0.5:11434` (default `http://127.0.0.1:11434`).
+
+### Gemini CLI as SLM subagent
+
+To promote Gemini from "final escalator only" to **primary codegen SLM**:
+
+```bash
+# 1. Install gemini-cli and confirm it resolves
+gemini --version
+
+# 2. Point the runner at it (per-shell or in your MCP config block)
+export MSP_SLM_PROVIDER=gemini
+export GEMINI_MODEL=gemini-2.5-pro      # optional; otherwise uses gemini-cli default
+```
+
+In an MCP client config block, the same knob lives under `env`:
+
+```jsonc
+{
+  "mcpServers": {
+    "msp": {
+      "command": "msp-mcp-server",
+      "env": {
+        "MSP_PROJECT": "default",
+        "MSP_SLM_PROVIDER": "gemini",
+        "GEMINI_MODEL": "gemini-2.5-pro"
+      }
+    }
+  }
+}
+```
+
+Under the hood `slm/gemini.ts` invokes `gemini -p <prompt> -y` via `execFile`
+and returns stdout to the runner. The same wrapper backs the **escalator** path
+(`escalator/gemini.ts`), so the fallback chain stays consistent:
+
+```
+attempt 1-3  : MSP_SLM_PROVIDER     (default ollama, optionally gemini)
+escalator    : Gemini CLI           (gemini -p ... -y) — fires after 3 retries
+human gate   : Opus layer           (exit code 4)
+```
+
+Power-user override knobs (all env-var driven):
+
+| Var | Default | Purpose |
+|---|---|---|
+| `MSP_SLM_PROVIDER` | `ollama` | Primary SLM (`ollama` / `gemini` / `mock` / `qwen`) |
+| `OLLAMA_HOST` | `http://127.0.0.1:11434` | Ollama HTTP endpoint |
+| `OLLAMA_MODEL` | `qwen2.5-coder:7b` | Ollama model id |
+| `GEMINI_BIN` | `gemini` | Path / name of the gemini CLI binary |
+| `GEMINI_MODEL` | (CLI default) | Gemini model id passed via `-m` |
+
+### Switching tiers from inside the cognitive facade
+
+If you wire MSP via `createCognitiveLayer` instead of the MCP server, the tier
+knob lives on the factory option:
+
+```ts
+import { createCognitiveLayer } from 'msp'
+
+const layer = await createCognitiveLayer({
+  root: process.cwd(),
+  slm: { tier: 'T1' },          // T1=ollama/qwen2.5-coder (default), T2=gemini, T3=caller-supplied
+})
+
+await layer.runTask('./.brain/tasks/FEAT--X/T1.task.yaml', { scale: 'L2' })
+```
+
+`runTask` enforces the §7.7.2 scale-level gate before any SLM call —
+`scale: 'L2'` requires stable CONCEPT + ADR + FEAT + BLUEPRINT atoms in the
+task's parent_blueprint references closure. A draft / missing atom aborts the
+run with `ScaleLevelGateError` before any tokens are burned.
+
 ## Switching projects
 
 The portable answer is `MSP_PROJECT` env var. It works in every shape:
@@ -286,7 +387,7 @@ or env var overrides it.
 
 For any client, the smoke test is identical:
 
-1. Confirm tool discovery — the agent / client should list ~16 tools whose
+1. Confirm tool discovery — the agent / client should list ~20 tools whose
    names start with `msp_`.
 2. Call `msp_recall` with a trivial query (`{ "query": "test" }`). Empty
    results are fine; an error is not.
