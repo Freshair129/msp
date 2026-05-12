@@ -2,7 +2,7 @@
 id: FEAT--SYMBOLS-MULTI-LANG
 phase: 2
 type: feat
-status: active
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
