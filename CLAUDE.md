@@ -15,11 +15,11 @@ This is the project-internal contract for how Claude Code (and human contributor
 - `packages/msp/gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — Top-level architecture
 - `packages/msp/msp_spec.md` — Full MSP spec
 - `packages/msp/gks/concept/CONCEPT--TAXONOMY-V2-3.md` — atomic-knowledge prefix taxonomy (v2.3)
-- `packages/msp/gks/spec/SPEC--KNOWLEDGE-BLOCK-MANIFEST.md` — FRAME-- frontmatter contract
+- `packages/msp/gks/spec/SPEC--GENESIS-BLOCK-MANIFEST.md` — FRAME-- frontmatter contract
 - `packages/gks/README.md` — GKS engine documentation
 - `packages/msp/ROADMAP.md` — Execution plan
 
-> **Naming disambiguation**: "Genesis Block" appears with two distinct meanings in this repo. (1) **Genesis Block Engine** = the embedded graph DB at `packages/gks/src/memory/graph/genesis-block.ts` (Cypher v0, JSONL log). (2) **Knowledge Block** = the composite knowledge unit declared by a `FRAME--<NAME>` manifest atom per v2.3 taxonomy.
+> **Naming disambiguation**: "Genesis Block" appears with two distinct meanings in this repo. (1) **Genesis Graph Backend** = the embedded graph DB at `packages/gks/src/memory/graph/genesis-graph.ts` (Cypher v0, JSONL log). (2) **Genesis Block** = the composite knowledge unit declared by a `GENESIS--<NAME>` manifest atom per v2.3 taxonomy (contract: `SPEC--GENESIS-BLOCK-MANIFEST`).
 
 ## Monorepo Workflow
 

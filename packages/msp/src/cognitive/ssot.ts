@@ -17,7 +17,8 @@ const AUTHORITY_ORDER: readonly string[] = [
   'master', // 3. root-level policy
   'adr', // 4. architectural decision
   'framework', // 5a. governance / architecture frameworks (v2.3+)
-  'frame', // 5b. block manifest (v2.3+) / legacy framework alias (pre-v2.3)
+  'genesis', // 5b. block manifest (v2.3+)
+  'frame', // 5c. deprecated — legacy framework alias (pre-v2.3) / v2.3 placeholder for genesis
   'knowledge-types', // 6. canonical taxonomy
   'concept', // 7. requirements
   'feat',

@@ -14,11 +14,11 @@ tags:
   - genesis-block
   - gemini
   - audit
-crosslinks: {"references":["CONCEPT--COGNITIVE-LAYER-FACADE","CONCEPT--HYBRID-RETRIEVAL-FTS-LAYER","ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER","ADR--GEMINI-AS-SLM-PROVIDER","ADR--MEMORY-STORE-GRAPH-WIRING","BLUEPRINT--GENESIS-BLOCK-TS-FIRST","FEAT--COGNITIVE-LAYER-FACADE"]}
+crosslinks: {"references":["CONCEPT--COGNITIVE-LAYER-FACADE","CONCEPT--HYBRID-RETRIEVAL-FTS-LAYER","ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER","ADR--GEMINI-AS-SLM-PROVIDER","ADR--MEMORY-STORE-GRAPH-WIRING","BLUEPRINT--GENESIS-GRAPH-TS-FIRST","FEAT--COGNITIVE-LAYER-FACADE"]}
 linked_symbols:
-  - {"file":"packages/gks/src/memory/graph/genesis-block.ts"}
+  - {"file":"packages/gks/src/memory/graph/genesis-graph.ts"}
   - {"file":"packages/gks/src/memory/graph/cypher-v0.ts"}
-  - {"file":"packages/gks/src/memory/graph/genesis-block-errors.ts"}
+  - {"file":"packages/gks/src/memory/graph/genesis-graph-errors.ts"}
   - {"file":"packages/gks/src/memory/index.ts"}
   - {"file":"packages/msp/src/cognitive/index.ts"}
   - {"file":"packages/msp/src/cognitive/types.ts"}
@@ -42,9 +42,9 @@ Stand up the cognitive-layer / memoryOS stack end-to-end so EVA, Claude Code, He
 ## What shipped
 
 ### GKS — storage primitives
-1. `packages/gks/src/memory/graph/genesis-block.ts` — `class GenesisBlockBackend implements GraphBackend`. Event-replay JSONL store (`<dir>/genesis-block.jsonl` + `manifest.json` version byte). Mirrors `GraphStore` semantics + adds `cypher(query)`.
-2. `packages/gks/src/memory/graph/cypher-v0.ts` — hand-written recursive-descent parser covering `BLUEPRINT--GENESIS-BLOCK-INTEGRATION` §"Cypher v0 scope". Throws `GenesisBlockUnsupportedCypher` for anything outside the subset.
-3. `packages/gks/src/memory/graph/genesis-block-errors.ts` — `GenesisBlockUnsupportedCypher` + `GenesisBlockSchemaMismatchError`.
+1. `packages/gks/src/memory/graph/genesis-graph.ts` — `class GenesisGraphBackend implements GraphBackend`. Event-replay JSONL store (`<dir>/genesis-block.jsonl` + `manifest.json` version byte). Mirrors `GraphStore` semantics + adds `cypher(query)`.
+2. `packages/gks/src/memory/graph/cypher-v0.ts` — hand-written recursive-descent parser covering `BLUEPRINT--GENESIS-GRAPH-INTEGRATION` §"Cypher v0 scope". Throws `GenesisGraphUnsupportedCypher` for anything outside the subset.
+3. `packages/gks/src/memory/graph/genesis-graph-errors.ts` — `GenesisGraphUnsupportedCypher` + `GenesisGraphSchemaMismatchError`.
 4. `MemoryStoreOptions.graphBackend` — new opt-in knob; default = JSONL-backed `GraphStore` at `<brain>/graph/graph.jsonl`. `store.graph` is now part of the public surface after `init()`. (ADR--MEMORY-STORE-GRAPH-WIRING)
 5. `HotfixStore` + `HotfixStoreOptions` + `OpenHotfixArgs` now exported from `@freshair129/gks`.
 6. `.gitignore` extended for `*.genesis-block.jsonl` and `.brain/**/graph/*.jsonl`.
@@ -67,7 +67,7 @@ Stand up the cognitive-layer / memoryOS stack end-to-end so EVA, Claude Code, He
 19. `packages/msp/src/index.ts` — re-exports `createCognitiveLayer` + cognitive types.
 
 ### Quickstart + docs
-20. `packages/msp/examples/cognitive-layer-quickstart.ts` — 80-line end-to-end demo with GenesisBlockBackend + cypher round-trip + SSOT resolution + MCP tool surface print.
+20. `packages/msp/examples/cognitive-layer-quickstart.ts` — 80-line end-to-end demo with GenesisGraphBackend + cypher round-trip + SSOT resolution + MCP tool surface print.
 21. `packages/msp/package.json` — `"cognitive:quickstart": "tsx examples/cognitive-layer-quickstart.ts"`.
 
 ### Atoms authored
@@ -76,7 +76,7 @@ Stand up the cognitive-layer / memoryOS stack end-to-end so EVA, Claude Code, He
 - `ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER`
 - `ADR--GEMINI-AS-SLM-PROVIDER`
 - `ADR--MEMORY-STORE-GRAPH-WIRING`
-- `BLUEPRINT--GENESIS-BLOCK-TS-FIRST`
+- `BLUEPRINT--GENESIS-GRAPH-TS-FIRST`
 - `FEAT--COGNITIVE-LAYER-FACADE`
 - `PROTO--AUTO-GENERATED-MARKER`
 - `PROTO--SCALE-LEVEL-GATE`
@@ -110,14 +110,14 @@ Stand up the cognitive-layer / memoryOS stack end-to-end so EVA, Claude Code, He
 | §6.4 | `cognitive.hotfix.{open,list,close,check}` re-exports |
 | §17.1 | Path encoding flows through existing `projects/resolve.ts` |
 
-## Deviations from BLUEPRINT--GENESIS-BLOCK-INTEGRATION
+## Deviations from BLUEPRINT--GENESIS-GRAPH-INTEGRATION
 
-The Rust crate at `packages/gks/native/genesis-block/` is **not** shipped in this PR (Phase 0 = TS-only). The TS-first staging is captured by `BLUEPRINT--GENESIS-BLOCK-TS-FIRST` and uses the same directory layout the Rust binary will eventually own, so the upgrade is invisible to consumers. Phases P3.1–P3.6 in the original BLUEPRINT remain as written.
+The Rust crate at `packages/gks/native/genesis-block/` is **not** shipped in this PR (Phase 0 = TS-only). The TS-first staging is captured by `BLUEPRINT--GENESIS-GRAPH-TS-FIRST` and uses the same directory layout the Rust binary will eventually own, so the upgrade is invisible to consumers. Phases P3.1–P3.6 in the original BLUEPRINT remain as written.
 
 ## Outstanding (post-PR)
 
 - Atom statuses are `draft` — promotion to `stable` happens after CI green on Node 20 + 22 (per `packages/msp/CLAUDE.md` branch convention).
-- Rust crate (BLUEPRINT--GENESIS-BLOCK-INTEGRATION P3.1–P3.6).
+- Rust crate (BLUEPRINT--GENESIS-GRAPH-INTEGRATION P3.1–P3.6).
 - Full §8.4 slot/layout grammar for the deterministic composer.
 - Pre-existing `test/mcp/bin.test.ts > uses --root=<path>` flake (environment-related; reproduces on `main`).
 
@@ -130,6 +130,6 @@ The user's five requested components are all complete and shipped:
 | **Cognitive Layer / memoryOS** | `createCognitiveLayer()` facade in MSP — `packages/msp/src/cognitive/` |
 | **MSP Knowledge Base** | `gks/` atoms via `msp_candidate` + PR; the cognitive facade exposes the surface |
 | **GKS GraphBackend** | `graphBackend` opt added to `MemoryStoreOptions`; `store.graph` on the public class |
-| **Genesis Block** | `createGenesisBlockBackend()` exported from `@freshair129/gks` (Phase 0 TS, Rust later) |
+| **Genesis Block** | `createGenesisGraphBackend()` exported from `@freshair129/gks` (Phase 0 TS, Rust later) |
 | **PgGraph** | already shipped at `packages/gks/src/memory/graph/pg.ts` — now reachable through the facade's `graphBackend` knob |
 | **Gemini CLI as subagent** | `MSP_SLM_PROVIDER=gemini` (first-class SLM) + existing escalator path |

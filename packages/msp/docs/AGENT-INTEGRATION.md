@@ -13,10 +13,11 @@ companion.
 > **Taxonomy reference (v2.3+)**: when authoring atoms via `msp_candidate`,
 > use the prefix taxonomy in `gks/concept/CONCEPT--TAXONOMY-V2-3.md` (canonical
 > docs: `packages/gks/docs/KNOWLEDGE-TYPES.md`). Note the two distinct meanings
-> of "Genesis Block": (1) the **storage-engine** backend (`CONCEPT--GENESIS-BLOCK-ENGINE`,
-> `packages/gks/src/memory/graph/genesis-block.ts`) — DB layer; (2) the
-> **Knowledge Block** composite (`SPEC--KNOWLEDGE-BLOCK-MANIFEST`) — a `FRAME--`
-> manifest aggregating Cognitive + Algo + Guard atoms. These are orthogonal.
+> of "Genesis Block": (1) the **storage-engine** backend (`CONCEPT--GENESIS-GRAPH-BACKEND`,
+> `packages/gks/src/memory/graph/genesis-graph.ts`) — DB layer; (2) the
+> **Genesis Block** composite (`SPEC--GENESIS-BLOCK-MANIFEST`) — a `GENESIS--`
+> manifest aggregating the EVA 4.0 five-dimension core: Cognitive + Algo +
+> Runbook + Concept + Params. These are orthogonal to the storage layer.
 
 ## Prerequisites
 

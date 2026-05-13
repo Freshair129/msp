@@ -20,7 +20,7 @@ created_at: 2026-05-12T22:48:00.000+07:00
 
 ## Context
 
-`MemoryStoreOptions` lets callers swap the vector backend via `vectorBackend: VectorBackendFactory`. There is no equivalent knob for the graph layer, even though three `GraphBackend` implementations now ship (`GraphStore`, `PgGraphBackend`, `GenesisBlockBackend`) and the `BLUEPRINT--GENESIS-BLOCK-INTEGRATION` plan calls for a one-line swap.
+`MemoryStoreOptions` lets callers swap the vector backend via `vectorBackend: VectorBackendFactory`. There is no equivalent knob for the graph layer, even though three `GraphBackend` implementations now ship (`GraphStore`, `PgGraphBackend`, `GenesisGraphBackend`) and the `BLUEPRINT--GENESIS-GRAPH-INTEGRATION` plan calls for a one-line swap.
 
 Today the graph layer is constructed ad-hoc by callers — MSP's `getStore()` doesn't expose a graph at all, and consumers wanting graph traversal must instantiate `GraphStore` independently. This contradicts `FRAMEWORK--FOUR-LAYERS` (the GKS frame atom) which lists graph alongside atomic / vector / episodic / obsidian as a first-class layer.
 
@@ -33,7 +33,7 @@ The change is **additive** — existing callers that don't pass `graphBackend` g
 ## Consequences
 
 ### Positive
-- `PgGraphBackend` and `GenesisBlockBackend` are now wired into `MemoryStore` symmetrically with `pgvector` / `HnswBackend`.
+- `PgGraphBackend` and `GenesisGraphBackend` are now wired into `MemoryStore` symmetrically with `pgvector` / `HnswBackend`.
 - The cognitive facade (`createCognitiveLayer`) can expose `layer.graph` without a separate factory call.
 - `FRAMEWORK--FOUR-LAYERS` is now reflected in the API surface.
 

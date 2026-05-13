@@ -140,7 +140,7 @@ export interface MemoryStoreOptions {
   cost?: CostTrackerOptions | false
   /**
    * Optional GraphBackend (in-memory `GraphStore`, `PgGraphBackend`, or
-   * `GenesisBlockBackend`). Accepted either as a pre-built instance or as
+   * `GenesisGraphBackend`). Accepted either as a pre-built instance or as
    * a factory invoked with the resolved layout. Defaults to a JSONL-backed
    * `GraphStore` at `<brain>/graph/graph.jsonl` — matching the rest of
    * GKS's "works zero-config" promise. Exposed on the MemoryStore as
@@ -835,12 +835,12 @@ export { createHnswBackend } from './vector/hnsw.js'
 export type { HnswBackendOptions } from './vector/hnsw.js'
 export { createPgGraphBackend } from './graph/pg.js'
 export type { PgGraphBackendOptions } from './graph/pg.js'
-export { createGenesisBlockBackend, GenesisBlockBackend } from './graph/genesis-block.js'
-export type { GenesisBlockBackendOptions } from './graph/genesis-block.js'
+export { createGenesisGraphBackend, GenesisGraphBackend } from './graph/genesis-graph.js'
+export type { GenesisGraphBackendOptions } from './graph/genesis-graph.js'
 export {
-  GenesisBlockUnsupportedCypher,
-  GenesisBlockSchemaMismatchError,
-} from './graph/genesis-block-errors.js'
+  GenesisGraphUnsupportedCypher,
+  GenesisGraphSchemaMismatchError,
+} from './graph/genesis-graph-errors.js'
 export { EpisodicLayer } from './episodic.js'
 export { InboundQueue } from './inbound.js'
 export { ATOMIC_ID_PATTERN, isAtomicId, assertAtomicId } from './atomic-id.js'

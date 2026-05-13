@@ -9,7 +9,7 @@ For incremental design decisions, see the ADR series in
 
 > **Atom-prefix taxonomy (v2.3, 2026-05-13)**: directory layout below
 > uses v2.3 vocabulary. `FRAME--` is now **Block Manifest** (runtime
-> entry-point of a Knowledge Block, contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`);
+> entry-point of a Genesis Block, contract: `SPEC--GENESIS-BLOCK-MANIFEST`);
 > the prior governance / architecture meaning moved to `FRAMEWORK--`.
 > `GUARDRAIL--` renamed to `GUARD--`. Engine code in this doc is
 > unchanged by v2.3 — it's an organisational refit on the knowledge
@@ -17,10 +17,10 @@ For incremental design decisions, see the ADR series in
 > [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md).
 >
 > **Naming reminder**: the `genesis-block.ts` backend wired into
-> `GraphBackend` is the **Genesis Block Engine** (storage / DB). It is
-> NOT the same as a **Knowledge Block** (composite knowledge unit
+> `GraphBackend` is the **Genesis Graph Backend** (storage / DB). It is
+> NOT the same as a **Genesis Block** (composite knowledge unit
 > declared via a `FRAME--` manifest). The two layers are orthogonal —
-> a Knowledge Block's edges can be persisted in a Genesis Block Engine
+> a Genesis Block's edges can be persisted in a Genesis Graph Backend
 > instance, but neither owns the other.
 
 ---

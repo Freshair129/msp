@@ -3,20 +3,20 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
-import { createGenesisBlockBackend } from '../../src/memory/graph/genesis-block.js'
-import { GenesisBlockUnsupportedCypher } from '../../src/memory/graph/genesis-block-errors.js'
+import { createGenesisGraphBackend } from '../../src/memory/graph/genesis-graph.js'
+import { GenesisGraphUnsupportedCypher } from '../../src/memory/graph/genesis-graph-errors.js'
 
-describe('GenesisBlockBackend — Cypher v0', () => {
+describe('GenesisGraphBackend — Cypher v0', () => {
   let dir: string
   beforeEach(async () => {
-    dir = await mkdtemp(join(tmpdir(), 'genesis-block-cypher-'))
+    dir = await mkdtemp(join(tmpdir(), 'genesis-graph-cypher-'))
   })
   afterEach(async () => {
     await rm(dir, { recursive: true, force: true })
   })
 
   async function seedAtomVault() {
-    const g = createGenesisBlockBackend({ path: dir })
+    const g = createGenesisGraphBackend({ path: dir })
     await g.load()
     // Three Atom nodes; FEAT--A references ADR--A which implements CONCEPT--A.
     await g.addNode({
@@ -65,11 +65,11 @@ describe('GenesisBlockBackend — Cypher v0', () => {
     expect(rows).toEqual([{ 'b.id': 'ADR--A' }])
   })
 
-  it('unsupported feature (OPTIONAL MATCH) raises GenesisBlockUnsupportedCypher', async () => {
+  it('unsupported feature (OPTIONAL MATCH) raises GenesisGraphUnsupportedCypher', async () => {
     const g = await seedAtomVault()
     await expect(
       g.cypher(`OPTIONAL MATCH (a:Atom {id: 'FEAT--A'})-[r:references]->(b:Atom) RETURN b.id`),
-    ).rejects.toBeInstanceOf(GenesisBlockUnsupportedCypher)
+    ).rejects.toBeInstanceOf(GenesisGraphUnsupportedCypher)
   })
 
   it('unknown seed returns an empty result set (not an error)', async () => {

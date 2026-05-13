@@ -3,19 +3,19 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
-import { createGenesisBlockBackend } from '../../src/memory/graph/genesis-block.js'
+import { createGenesisGraphBackend } from '../../src/memory/graph/genesis-graph.js'
 
-describe('GenesisBlockBackend (Phase 0 — JSONL event-replay)', () => {
+describe('GenesisGraphBackend (Phase 0 — JSONL event-replay)', () => {
   let dir: string
   beforeEach(async () => {
-    dir = await mkdtemp(join(tmpdir(), 'genesis-block-'))
+    dir = await mkdtemp(join(tmpdir(), 'genesis-graph-'))
   })
   afterEach(async () => {
     await rm(dir, { recursive: true, force: true })
   })
 
   it('adds nodes and edges and indexes both directions', async () => {
-    const g = createGenesisBlockBackend({ path: dir })
+    const g = createGenesisGraphBackend({ path: dir })
     await g.load()
     const alice = await g.addNode({ id: 'u:alice', labels: ['User'], props: { name: 'Alice' } })
     const bob = await g.addNode({ id: 'u:bob', labels: ['User'], props: { name: 'Bob' } })
@@ -26,14 +26,14 @@ describe('GenesisBlockBackend (Phase 0 — JSONL event-replay)', () => {
   })
 
   it('rejects edges to unknown nodes', async () => {
-    const g = createGenesisBlockBackend({ path: dir })
+    const g = createGenesisGraphBackend({ path: dir })
     await g.load()
     await g.addNode({ id: 'a', labels: ['X'] })
     await expect(g.addEdge({ from: 'a', to: 'ghost', rel: 'R' })).rejects.toThrow(/unknown to-node/)
   })
 
   it('supersede marks prior valid edges invalid and points them at the new one', async () => {
-    const g = createGenesisBlockBackend({ path: dir })
+    const g = createGenesisGraphBackend({ path: dir })
     await g.load()
     await g.addNode({ id: 'u', labels: ['User'] })
     await g.addNode({ id: 'city:paris', labels: ['City'] })
@@ -64,7 +64,7 @@ describe('GenesisBlockBackend (Phase 0 — JSONL event-replay)', () => {
   })
 
   it('asOf returns edges valid at that point in time', async () => {
-    const g = createGenesisBlockBackend({ path: dir })
+    const g = createGenesisGraphBackend({ path: dir })
     await g.load()
     await g.addNode({ id: 'u', labels: ['User'] })
     await g.addNode({ id: 'p', labels: ['City'] })
@@ -91,7 +91,7 @@ describe('GenesisBlockBackend (Phase 0 — JSONL event-replay)', () => {
   })
 
   it('retractEdge invalidates but preserves history', async () => {
-    const g = createGenesisBlockBackend({ path: dir })
+    const g = createGenesisGraphBackend({ path: dir })
     await g.load()
     await g.addNode({ id: 'a', labels: ['X'] })
     await g.addNode({ id: 'b', labels: ['X'] })
@@ -104,7 +104,7 @@ describe('GenesisBlockBackend (Phase 0 — JSONL event-replay)', () => {
   })
 
   it('neighbors() BFS respects depth and relation filter', async () => {
-    const g = createGenesisBlockBackend({ path: dir })
+    const g = createGenesisGraphBackend({ path: dir })
     await g.load()
     for (const id of ['a', 'b', 'c', 'd']) await g.addNode({ id, labels: ['X'] })
     await g.addEdge({ from: 'a', to: 'b', rel: 'R' })
@@ -118,13 +118,13 @@ describe('GenesisBlockBackend (Phase 0 — JSONL event-replay)', () => {
   })
 
   it('persists across re-open via JSONL event replay', async () => {
-    const g1 = createGenesisBlockBackend({ path: dir })
+    const g1 = createGenesisGraphBackend({ path: dir })
     await g1.load()
     await g1.addNode({ id: 'a', labels: ['X'] })
     await g1.addNode({ id: 'b', labels: ['X'] })
     await g1.addEdge({ from: 'a', to: 'b', rel: 'R' })
 
-    const g2 = createGenesisBlockBackend({ path: dir })
+    const g2 = createGenesisGraphBackend({ path: dir })
     await g2.load()
     expect((await g2.query({ from: 'a' })).length).toBe(1)
   })

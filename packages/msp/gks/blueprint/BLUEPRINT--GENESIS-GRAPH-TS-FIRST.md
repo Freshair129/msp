@@ -1,5 +1,5 @@
 ---
-id: BLUEPRINT--GENESIS-BLOCK-TS-FIRST
+id: BLUEPRINT--GENESIS-GRAPH-TS-FIRST
 phase: 3
 type: blueprint
 status: draft
@@ -15,11 +15,11 @@ tags:
   - genesis-block
   - typescript
   - blueprint
-crosslinks: {"references":["BLUEPRINT--GENESIS-BLOCK-INTEGRATION","ADR--GENESIS-BLOCK-AS-GKS-BACKEND","CONCEPT--GENESIS-BLOCK-ENGINE"]}
+crosslinks: {"references":["BLUEPRINT--GENESIS-GRAPH-INTEGRATION","ADR--GENESIS-GRAPH-AS-GKS-BACKEND","CONCEPT--GENESIS-GRAPH-BACKEND"]}
 linked_symbols:
-  - { file: "packages/gks/src/memory/graph/genesis-block.ts" }
+  - { file: "packages/gks/src/memory/graph/genesis-graph.ts" }
   - { file: "packages/gks/src/memory/graph/cypher-v0.ts" }
-  - { file: "packages/gks/src/memory/graph/genesis-block-errors.ts" }
+  - { file: "packages/gks/src/memory/graph/genesis-graph-errors.ts" }
   - { file: "packages/gks/src/memory/index.ts" }
 created_at: 2026-05-12T22:49:00.000+07:00
 ---
@@ -28,11 +28,11 @@ created_at: 2026-05-12T22:49:00.000+07:00
 
 ## Why a Phase 0 staged ahead of the Rust crate
 
-`BLUEPRINT--GENESIS-BLOCK-INTEGRATION` (P3.1 → P3.6) ships the Rust + napi-rs crate. That's a multi-PR effort. Meanwhile callers asking for "complete and ready to use right now" need a `GenesisBlockBackend` that:
+`BLUEPRINT--GENESIS-GRAPH-INTEGRATION` (P3.1 → P3.6) ships the Rust + napi-rs crate. That's a multi-PR effort. Meanwhile callers asking for "complete and ready to use right now" need a `GenesisGraphBackend` that:
 
 1. Implements the full `GraphBackend` surface so existing `MemoryStore` tests pass with no caller changes.
 2. Persists across restarts (JSONL event log + manifest version byte, same idiom as `GraphStore`).
-3. Exposes the v0 Cypher subset from BLUEPRINT--GENESIS-BLOCK-INTEGRATION §"Cypher v0 scope" so MSP's `verify-flow` / Impact-Analysis paths can adopt it incrementally.
+3. Exposes the v0 Cypher subset from BLUEPRINT--GENESIS-GRAPH-INTEGRATION §"Cypher v0 scope" so MSP's `verify-flow` / Impact-Analysis paths can adopt it incrementally.
 4. Uses the **same on-disk directory** that the Rust crate will eventually own, so the upgrade is invisible to consumers.
 
 This blueprint covers (1)–(4) in pure TypeScript. The Rust phases stay as written.
@@ -41,8 +41,8 @@ This blueprint covers (1)–(4) in pure TypeScript. The Rust phases stay as writ
 
 ```
 packages/gks/src/memory/graph/
-  genesis-block.ts          ← GenesisBlockBackend class (this BLUEPRINT)
-  genesis-block-errors.ts   ← GenesisBlockUnsupportedCypher, GenesisBlockSchemaMismatchError
+  genesis-block.ts          ← GenesisGraphBackend class (this BLUEPRINT)
+  genesis-block-errors.ts   ← GenesisGraphUnsupportedCypher, GenesisGraphSchemaMismatchError
   cypher-v0.ts              ← hand-written recursive-descent parser for the v0 subset
   pg.ts                     ← unchanged
 ```
@@ -55,7 +55,7 @@ On-disk layout (same dir the Rust crate will adopt):
   genesis-block.jsonl    append-only event log (node | edge | edge_retract)
 ```
 
-## Active-engine framing (alignment with CONCEPT--GENESIS-BLOCK-ENGINE §1B)
+## Active-engine framing (alignment with CONCEPT--GENESIS-GRAPH-BACKEND §1B)
 
 The PRD framed Genesis Block as Parser + Syncer + Analytic + Interface. These already exist in the monorepo — they were just scattered. With this blueprint they line up cleanly:
 
@@ -69,7 +69,7 @@ The PRD framed Genesis Block as Parser + Syncer + Analytic + Interface. These al
 
 The split honours `ADR--GRAPH-IS-GKS-DOMAIN` ("storage stays in GKS; orchestration lives above the contract").
 
-## Cypher v0 subset (recap from BLUEPRINT--GENESIS-BLOCK-INTEGRATION)
+## Cypher v0 subset (recap from BLUEPRINT--GENESIS-GRAPH-INTEGRATION)
 
 ```
 MATCH (a:Label {id: 'literal'})-[r:rel1|rel2*N..M]->(b:Label)
@@ -77,21 +77,21 @@ MATCH (a:Label {id: 'literal'})-[r:rel1|rel2*N..M]->(b:Label)
 RETURN b.id [, length(r) AS hops]
 ```
 
-Anything outside the subset raises `GenesisBlockUnsupportedCypher` with the offending fragment. This includes `OPTIONAL MATCH`, `UNION`, `WITH`, `UNWIND`, `CREATE` / `DELETE` / `SET` / `MERGE`, sub-queries, path-property functions, and pattern quantifiers `+` / `?` — exactly the same boundary the Rust crate will respect.
+Anything outside the subset raises `GenesisGraphUnsupportedCypher` with the offending fragment. This includes `OPTIONAL MATCH`, `UNION`, `WITH`, `UNWIND`, `CREATE` / `DELETE` / `SET` / `MERGE`, sub-queries, path-property functions, and pattern quantifiers `+` / `?` — exactly the same boundary the Rust crate will respect.
 
 ## Module breakdown
 
 | File | Responsibility |
 |---|---|
-| `genesis-block.ts` | `class GenesisBlockBackend implements GraphBackend`. Event-replay load(), addNode/addEdge/retractEdge/query/neighbors mirror `GraphStore`. Adds `cypher(query)`. |
-| `cypher-v0.ts` | `parseCypherV0(query): CypherV0Plan`. Hand-written recursive descent; ~150 LoC. Throws `GenesisBlockUnsupportedCypher` on anything outside the subset. |
-| `genesis-block-errors.ts` | `GenesisBlockUnsupportedCypher` (carries the fragment) + `GenesisBlockSchemaMismatchError`. |
+| `genesis-block.ts` | `class GenesisGraphBackend implements GraphBackend`. Event-replay load(), addNode/addEdge/retractEdge/query/neighbors mirror `GraphStore`. Adds `cypher(query)`. |
+| `cypher-v0.ts` | `parseCypherV0(query): CypherV0Plan`. Hand-written recursive descent; ~150 LoC. Throws `GenesisGraphUnsupportedCypher` on anything outside the subset. |
+| `genesis-block-errors.ts` | `GenesisGraphUnsupportedCypher` (carries the fragment) + `GenesisGraphSchemaMismatchError`. |
 
 ## Wire-up
 
 | File | Change |
 |---|---|
-| `packages/gks/src/memory/index.ts` | Add `export { createGenesisBlockBackend, GenesisBlockBackend }`. |
+| `packages/gks/src/memory/index.ts` | Add `export { createGenesisGraphBackend, GenesisGraphBackend }`. |
 | `packages/gks/.gitignore` | Add `*.genesis-block.jsonl` + `genesis-block.jsonl` + `.brain/**/graph/*.jsonl`. |
 
 ## Test strategy
@@ -102,7 +102,7 @@ Anything outside the subset raises `GenesisBlockUnsupportedCypher` with the offe
 
 ## What this BLUEPRINT does **not** cover
 
-- The Rust crate at `packages/gks/native/genesis-block/`. Tracked in BLUEPRINT--GENESIS-BLOCK-INTEGRATION P3.1–P3.6.
+- The Rust crate at `packages/gks/native/genesis-block/`. Tracked in BLUEPRINT--GENESIS-GRAPH-INTEGRATION P3.1–P3.6.
 - Migrating MSP queries to Cypher in production. The cypher() surface is opt-in.
 - Benchmarks against the in-memory `GraphStore` — the TS Phase 0 backend is **not** expected to be faster than `GraphStore`; it exists for persistence + the public contract.
 

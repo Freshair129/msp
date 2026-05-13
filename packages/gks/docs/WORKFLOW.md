@@ -11,8 +11,8 @@ walkthrough relies on.
 
 > **Taxonomy v2.3 note (2026-05-13)**: prefix names below reflect v2.3 —
 > `FRAMEWORK--` (architectural framework / governance, formerly `FRAME--`),
-> `FRAME--` (Block Manifest, runtime entry-point of a Knowledge Block,
-> contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`), `GUARD--` (renamed from
+> `FRAME--` (Block Manifest, runtime entry-point of a Genesis Block,
+> contract: `SPEC--GENESIS-BLOCK-MANIFEST`), `GUARD--` (renamed from
 > `GUARDRAIL--`), plus new prefixes `STACK--`, `SPEC--`, `COGNITIVE--`,
 > `SAFETY--`. See [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md) for the
 > full table. The doc-to-code phases below are unchanged by v2.3; only

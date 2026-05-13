@@ -1,12 +1,12 @@
 ---
-id: CONCEPT--GENESIS-BLOCK-ENGINE
+id: CONCEPT--GENESIS-GRAPH-BACKEND
 phase: 1
 type: concept
 status: draft
 vault_id: default
 tier: genesis
 source_type: axiomatic
-title: Genesis Block Engine — an embedded graph backend specialised for atomic knowledge
+title: Genesis Graph Backend — an embedded graph backend specialised for atomic knowledge
 tags:
   - msp
   - gks
@@ -19,7 +19,7 @@ crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T11:55:00.000+07:00
 ---
 
-# CONCEPT — Genesis Block Engine
+# CONCEPT — Genesis Graph Backend
 
 ## Problem
 
@@ -56,7 +56,7 @@ The PRD `genesis-block-node v1.2.1` proposes solving (1)–(4) with an
 embedded engine, forked from LadybugDB (MIT, Rust), exposing a single
 binary `.db` file with columnar indexing and Cypher query support.
 
-## What "Genesis Block Engine" means here
+## What "Genesis Graph Backend" means here
 
 > **A specialised Knowledge Engine** that, from GKS's point of view,
 > is **a new `GraphBackend` implementation** — nothing more, nothing
@@ -70,7 +70,7 @@ binary `.db` file with columnar indexing and Cypher query support.
 | Part | Lives where | Responsibility |
 |---|---|---|
 | **Storage Core** | Forked Rust crate; loaded via `napi-rs` N-API addon | Binary `.db` file, columnar indices, Cypher executor, page cache |
-| **Logic Layer** | TypeScript adapter in `packages/gks/src/memory/graph/genesis-block.ts` | Implements `GraphBackend` interface; translates `addNode` / `addEdge` / `query` / `neighbors` into Cypher or native FFI calls |
+| **Logic Layer** | TypeScript adapter in `packages/gks/src/memory/graph/genesis-graph.ts` | Implements `GraphBackend` interface; translates `addNode` / `addEdge` / `query` / `neighbors` into Cypher or native FFI calls |
 
 The Parser (Markdown / YAML / Wikilinks) and the MCP surface stay
 **outside** the engine — MSP already owns those. Bundling them inside
@@ -118,7 +118,7 @@ This atom records intent. It does **not** decide:
 
 ## Success criteria (for the eventual FEAT)
 
-- A `GenesisBlockBackend` class exported from `@freshair129/gks` that
+- A `GenesisGraphBackend` class exported from `@freshair129/gks` that
   passes the entire existing `test/memory/graph/*` suite without
   modification, swapped in via the standard `MemoryStore` config knob.
 - `npm install @freshair129/gks` on a fresh machine produces a working
@@ -144,4 +144,4 @@ This atom records intent. It does **not** decide:
 4. **Where does `genesis-block-node` live in the monorepo?** Sub-package
    inside `packages/gks/native/`, or peer at `packages/genesis-block/`?
 
-These are decided in `ADR--GENESIS-BLOCK-AS-GKS-BACKEND`.
+These are decided in `ADR--GENESIS-GRAPH-AS-GKS-BACKEND`.

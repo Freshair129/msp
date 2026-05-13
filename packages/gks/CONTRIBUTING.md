@@ -6,7 +6,7 @@ GKS uses **ADR-014 Doc-to-Code Enforcement** to ensure the integrity of the know
 > vocabulary. New prefixes available: `FRAMEWORK--`, `STACK--`, `SPEC--`,
 > `COGNITIVE--`, `SAFETY--`, `MOD--`. Renames: `GUARDRAIL--` → `GUARD--`;
 > `FRAME--` has been **redefined** as Block Manifest (runtime entry-point
-> of a Knowledge Block, contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`). The
+> of a Genesis Block, contract: `SPEC--GENESIS-BLOCK-MANIFEST`). The
 > prior governance/architecture meaning moved to `FRAMEWORK--`. Full
 > reference: [`docs/KNOWLEDGE-TYPES.md`](./docs/KNOWLEDGE-TYPES.md).
 

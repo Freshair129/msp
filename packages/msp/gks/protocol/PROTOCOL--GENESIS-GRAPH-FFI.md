@@ -1,5 +1,5 @@
 ---
-id: PROTOCOL--GENESIS-BLOCK-FFI
+id: PROTOCOL--GENESIS-GRAPH-FFI
 phase: 2
 type: protocol
 status: draft
@@ -16,7 +16,7 @@ tags:
   - rust
   - protocol
   - contract
-crosslinks: {"references":["ADR--GENESIS-BLOCK-AS-GKS-BACKEND","CONCEPT--GENESIS-BLOCK-ENGINE","BLUEPRINT--GENESIS-BLOCK-INTEGRATION"]}
+crosslinks: {"references":["ADR--GENESIS-GRAPH-AS-GKS-BACKEND","CONCEPT--GENESIS-GRAPH-BACKEND","BLUEPRINT--GENESIS-GRAPH-INTEGRATION"]}
 created_at: 2026-05-12T12:30:00.000+07:00
 ---
 
@@ -26,7 +26,7 @@ created_at: 2026-05-12T12:30:00.000+07:00
 
 Pin the **binary interface** between `packages/gks/native/genesis-block/`
 (Rust crate compiled via `napi-rs`) and
-`packages/gks/src/memory/graph/genesis-block.ts` (TypeScript adapter
+`packages/gks/src/memory/graph/genesis-graph.ts` (TypeScript adapter
 implementing the `GraphBackend` interface).
 
 ABI mismatch across this boundary is a **runtime crash, not a compile
@@ -282,7 +282,7 @@ level, in addition to the parametrised TS suite:
   implementation details that may change without amending this doc.
 - The exact Cypher subset (deferred to BLUEPRINT §"Cypher v0 scope").
 - The on-disk file format byte layout (lives in
-  `BLUEPRINT--GENESIS-BLOCK-INTEGRATION` and any future
+  `BLUEPRINT--GENESIS-GRAPH-INTEGRATION` and any future
   `ENTITY--GENESIS-BLOCK-FILE-FORMAT` atom).
 
 ## 10. Amendment policy
@@ -290,7 +290,7 @@ level, in addition to the parametrised TS suite:
 Any change to §1–§7 that breaks JS ↔ Rust ABI compatibility requires:
 
 1. A new ADR superseding the relevant section of
-   `ADR--GENESIS-BLOCK-AS-GKS-BACKEND`.
+   `ADR--GENESIS-GRAPH-AS-GKS-BACKEND`.
 2. A schema version bump per §6.
 3. A migration routine in `migrations/`.
 4. Reciprocal `supersedes` / `superseded_by` crosslinks per the MSP
@@ -302,5 +302,5 @@ the BLUEPRINT.
 
 ## Source
 
-`ADR--GENESIS-BLOCK-AS-GKS-BACKEND`, `BLUEPRINT--GENESIS-BLOCK-INTEGRATION`,
-`CONCEPT--GENESIS-BLOCK-ENGINE`.
+`ADR--GENESIS-GRAPH-AS-GKS-BACKEND`, `BLUEPRINT--GENESIS-GRAPH-INTEGRATION`,
+`CONCEPT--GENESIS-GRAPH-BACKEND`.

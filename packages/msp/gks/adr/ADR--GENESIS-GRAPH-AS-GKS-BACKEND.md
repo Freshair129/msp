@@ -1,12 +1,12 @@
 ---
-id: ADR--GENESIS-BLOCK-AS-GKS-BACKEND
+id: ADR--GENESIS-GRAPH-AS-GKS-BACKEND
 phase: 2
 type: adr
 status: draft
 vault_id: default
 tier: genesis
 source_type: axiomatic
-title: Genesis Block Engine ships as a GraphBackend implementation, not a parallel engine
+title: Genesis Graph Backend ships as a GraphBackend implementation, not a parallel engine
 tags:
   - msp
   - gks
@@ -17,15 +17,15 @@ tags:
   - rust
   - napi
   - decision
-crosslinks: {"references":["CONCEPT--GENESIS-BLOCK-ENGINE","FRAMEWORK--MSP-ARCHITECTURE-V2","PROTOCOL--GENESIS-BLOCK-FFI"]}
+crosslinks: {"references":["CONCEPT--GENESIS-GRAPH-BACKEND","FRAMEWORK--MSP-ARCHITECTURE-V2","PROTOCOL--GENESIS-GRAPH-FFI"]}
 created_at: 2026-05-12T11:57:00.000+07:00
 ---
 
-# ADR — Genesis Block Engine as a GKS backend
+# ADR — Genesis Graph Backend as a GKS backend
 
 ## Context
 
-`CONCEPT--GENESIS-BLOCK-ENGINE` frames the desire for a sovereign,
+`CONCEPT--GENESIS-GRAPH-BACKEND` frames the desire for a sovereign,
 embedded, Cypher-capable graph engine forked from LadybugDB. The
 remaining question is **how it integrates with the existing stack**.
 
@@ -45,11 +45,11 @@ Option C is the only one that honours
 
 ## Decision
 
-**The Genesis Block Engine is implemented as a new GKS `GraphBackend`.**
+**The Genesis Graph Backend is implemented as a new GKS `GraphBackend`.**
 
 Concretely:
 
-1. **Code lives at** `packages/gks/src/memory/graph/genesis-block.ts`
+1. **Code lives at** `packages/gks/src/memory/graph/genesis-graph.ts`
    (TypeScript adapter) and `packages/gks/native/genesis-block/`
    (Rust crate, forked from LadybugDB).
 2. **The adapter implements the full `GraphBackend` surface** — five
@@ -63,10 +63,10 @@ Concretely:
    into `MemoryStore`, which calls the configured `GraphBackend` —
    Genesis Block sits below that line and inherits the surface for
    free.
-5. **The default `GraphBackend` flips to `GenesisBlockBackend` after
+5. **The default `GraphBackend` flips to `GenesisGraphBackend` after
    P3.5 benchmarks** (see BLUEPRINT). Until then, new `MemoryStore`
    instances use the in-memory `GraphStore` to preserve the zero-dep
-   quickstart promise. After the benchmark gate, `GenesisBlockBackend`
+   quickstart promise. After the benchmark gate, `GenesisGraphBackend`
    becomes the default for persisted memory; `GraphStore` remains
    available as an explicit opt-in for tests and ephemeral sessions.
    The default-flip is documented in BLUEPRINT phase P3.6 and requires
@@ -75,7 +75,7 @@ Concretely:
 6. **`PgGraphBackend` is reframed as the *reference baseline* for
    correctness testing**, not a parallel production target. During
    P3.2–P3.5, every test in `test/memory/graph/` runs against both
-   `PgGraphBackend` (oracle) and `GenesisBlockBackend` (subject under
+   `PgGraphBackend` (oracle) and `GenesisGraphBackend` (subject under
    test) and asserts result equivalence. After the default-flip,
    `PgGraphBackend` remains available for two narrow scenarios:
    (a) multi-process / multi-machine deployments where embedded
@@ -84,13 +84,13 @@ Concretely:
    tooling. Deprecation is **out of scope** for this ADR.
 7. **OpenCypher is exposed as an opt-in extension method**, not part
    of the base `GraphBackend` interface. Callers that want to issue
-   Cypher use a downcast: `(backend as GenesisBlockBackend).cypher(q)`.
+   Cypher use a downcast: `(backend as GenesisGraphBackend).cypher(q)`.
    The MSP `verify-flow` and Impact-Analysis paths gain a Cypher
    path; everything else continues to use `neighbors()` / `query()`.
 8. **The FFI contract between the TS adapter and the Rust crate is
-   pinned by `PROTOCOL--GENESIS-BLOCK-FFI`** (companion atom). Every
+   pinned by `PROTOCOL--GENESIS-GRAPH-FFI`** (companion atom). Every
    `#[napi]` export in `packages/gks/native/genesis-block/` and every
-   TS method on `GenesisBlockBackend` must match that PROTOCOL; ABI
+   TS method on `GenesisGraphBackend` must match that PROTOCOL; ABI
    drift across the boundary is a runtime crash, not a type error.
 
 ### Reconciling with ADR-005
@@ -129,7 +129,7 @@ backend's `.db` file is opaque binary; that is acceptable because:
   file is gitignored; only the Markdown atoms it indexes are
   committed.
 
-A `BLUEPRINT--GENESIS-BLOCK-INTEGRATION` task tracks adding a
+A `BLUEPRINT--GENESIS-GRAPH-INTEGRATION` task tracks adding a
 `.gitignore` entry for `*.gks-graph.db` in the published templates.
 
 ### PgGraphBackend → reference baseline (transition plan)
@@ -141,7 +141,7 @@ stages, tied to BLUEPRINT phases:
 | Phase | `PgGraphBackend` role |
 |---|---|
 | Today → P3.4 | Production peer (unchanged behaviour) |
-| P3.2 → P3.5 | **Oracle** in the parametrised graph test suite — every assertion runs against PG first, then `GenesisBlockBackend`, and the two outputs must agree |
+| P3.2 → P3.5 | **Oracle** in the parametrised graph test suite — every assertion runs against PG first, then `GenesisGraphBackend`, and the two outputs must agree |
 | P3.6+ | Optional backend retained for two narrow scenarios: (a) multi-process / multi-machine deployments, (b) orgs with existing Postgres + SQL-admin requirements |
 
 Full deprecation is **out of scope**. If single-process scenarios
@@ -190,10 +190,10 @@ belongs to its own ADR, not this one.
 ## Status
 
 **Draft.** This ADR is the artifact for the P2 decision step of
-`CONCEPT--GENESIS-BLOCK-ENGINE`. Promotion to `stable` requires:
+`CONCEPT--GENESIS-GRAPH-BACKEND`. Promotion to `stable` requires:
 
 1. A green CI run against the existing graph test suite with the
-   `GenesisBlockBackend` swapped in via `parametrize`.
+   `GenesisGraphBackend` swapped in via `parametrize`.
 2. A benchmark run on the 50k/500k fixture from CONCEPT's success
    criteria.
 3. A reviewer sign-off on the ADR-005 / ADR-001 reconciliation

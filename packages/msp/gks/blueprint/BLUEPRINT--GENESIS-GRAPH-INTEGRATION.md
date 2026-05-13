@@ -1,5 +1,5 @@
 ---
-id: BLUEPRINT--GENESIS-BLOCK-INTEGRATION
+id: BLUEPRINT--GENESIS-GRAPH-INTEGRATION
 phase: 3
 type: blueprint
 status: draft
@@ -18,12 +18,12 @@ tags:
   - cypher
   - blueprint
   - implementation
-crosslinks: {"references":["ADR--GENESIS-BLOCK-AS-GKS-BACKEND","CONCEPT--GENESIS-BLOCK-ENGINE","FRAMEWORK--MSP-ARCHITECTURE-V2","PROTOCOL--GENESIS-BLOCK-FFI"]}
+crosslinks: {"references":["ADR--GENESIS-GRAPH-AS-GKS-BACKEND","CONCEPT--GENESIS-GRAPH-BACKEND","FRAMEWORK--MSP-ARCHITECTURE-V2","PROTOCOL--GENESIS-GRAPH-FFI"]}
 linked_symbols:
   - { file: "packages/gks/src/memory/index.ts" }
-  - { file: "packages/gks/src/memory/graph/genesis-block.ts" }
+  - { file: "packages/gks/src/memory/graph/genesis-graph.ts" }
   - { file: "packages/gks/src/memory/graph/cypher-v0.ts" }
-  - { file: "packages/gks/src/memory/graph/genesis-block-errors.ts" }
+  - { file: "packages/gks/src/memory/graph/genesis-graph-errors.ts" }
 created_at: 2026-05-12T11:59:00.000+07:00
 ---
 
@@ -32,8 +32,8 @@ created_at: 2026-05-12T11:59:00.000+07:00
 ```yaml
 metadata:
   title: "Genesis Block — Rust fork of LadybugDB, wired in as a GKS GraphBackend"
-  parent_adr: ADR--GENESIS-BLOCK-AS-GKS-BACKEND
-  parent_concept: CONCEPT--GENESIS-BLOCK-ENGINE
+  parent_adr: ADR--GENESIS-GRAPH-AS-GKS-BACKEND
+  parent_concept: CONCEPT--GENESIS-GRAPH-BACKEND
 ```
 
 ## Architectural pattern
@@ -51,8 +51,8 @@ Cypher is exposed as a sixth, opt-in method via a downcast.
                              │ calls
                              ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│  packages/gks/src/memory/graph/genesis-block.ts                  │
-│    class GenesisBlockBackend implements GraphBackend             │
+│  packages/gks/src/memory/graph/genesis-graph.ts                  │
+│    class GenesisGraphBackend implements GraphBackend             │
 │      load() / addNode() / addEdge() / retractEdge()              │
 │      query() / neighbors()                                       │
 │      cypher(q: string)   ← opt-in extension                      │
@@ -69,13 +69,13 @@ Cypher is exposed as a sixth, opt-in method via a downcast.
 
 ## Module breakdown
 
-### TypeScript side — `packages/gks/src/memory/graph/genesis-block.ts`
+### TypeScript side — `packages/gks/src/memory/graph/genesis-graph.ts`
 
 | Export | Shape | Responsibility |
 |---|---|---|
-| `createGenesisBlockBackend(opts)` | factory returning `GraphBackend` | Loads the prebuilt `.node` for the host triple, opens / creates the `.db` file at `opts.path`, returns the adapter |
-| `GenesisBlockBackend` (class) | `implements GraphBackend` | All five base methods + `cypher(q: string): Promise<unknown[]>` |
-| `GenesisBlockBackendOptions` | type | `{ path: string; readOnly?: boolean; pageCacheMB?: number }` |
+| `createGenesisGraphBackend(opts)` | factory returning `GraphBackend` | Loads the prebuilt `.node` for the host triple, opens / creates the `.db` file at `opts.path`, returns the adapter |
+| `GenesisGraphBackend` (class) | `implements GraphBackend` | All five base methods + `cypher(q: string): Promise<unknown[]>` |
+| `GenesisGraphBackendOptions` | type | `{ path: string; readOnly?: boolean; pageCacheMB?: number }` |
 
 ### Rust side — `packages/gks/native/genesis-block/src/`
 
@@ -135,7 +135,7 @@ Out of scope for v0 (tracked as separate atoms when needed):
 
 1. **Reuse existing graph tests** by parametrising the suite over
    the three backends (`GraphStore`, `PgGraphBackend`,
-   `GenesisBlockBackend`). The factory function makes this a
+   `GenesisGraphBackend`). The factory function makes this a
    one-line change in `test/memory/graph/setup.ts`.
 2. **New Cypher suite** at `test/memory/graph/genesis-block-cypher.test.ts`
    — driven from a fixture vault of ~30 atoms covering every
@@ -153,9 +153,9 @@ Out of scope for v0 (tracked as separate atoms when needed):
 | File / area | Change |
 |---|---|
 | `packages/gks/package.json` | Add `optionalDependencies` entries for the per-triple prebuild packages (`@freshair129/gks-genesis-block-linux-x64-gnu`, etc.). Add `napi.binaryName` config. |
-| `packages/gks/src/memory/index.ts` | Add `export { createGenesisBlockBackend, GenesisBlockBackend, GenesisBlockBackendOptions } from './graph/genesis-block.js'`. No change to anything else. |
+| `packages/gks/src/memory/index.ts` | Add `export { createGenesisGraphBackend, GenesisGraphBackend, GenesisGraphBackendOptions } from './graph/genesis-block.js'`. No change to anything else. |
 | `packages/gks/.gitignore` | Add `*.gks-graph.db`. |
-| `packages/gks/README.md` | One row in the "Backends" table: `GenesisBlockBackend` under the Graph column. |
+| `packages/gks/README.md` | One row in the "Backends" table: `GenesisGraphBackend` under the Graph column. |
 | `packages/msp/src/orchestrator/impact-analysis/` | (Follow-up, not this BLUEPRINT.) Migrate one query to the new `cypher()` method as proof-of-life. |
 | Existing MCP server | **No change.** It calls `MemoryStore`, which routes through the configured backend. |
 

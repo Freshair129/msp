@@ -91,7 +91,7 @@ affected files until CONCEPT/ADR/BLUEPRINT are written and stable.
 | `INC--` | Incident post-mortem | light |
 | `GUARD--` | Hard constraint (renamed from `GUARDRAIL--` per `ADR--TAXONOMY-V2-3-MIGRATION`) | strict |
 | `FRAMEWORK--` | Governance / architectural framework (split from `FRAME--` in v2.3) | strict |
-| `FRAME--` | Block Manifest — runtime entry-point of a Knowledge Block (v2.3+). Contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST` | strict |
+| `GENESIS--` | Block Manifest — runtime entry-point of a Genesis Block (v2.3+). Contract: `SPEC--GENESIS-BLOCK-MANIFEST`. (Replaces retired placeholder `FRAME--`.) | strict |
 | `STACK--` | Technology stack inventory (new in v2.3) | strict |
 | `SPEC--` | Data shape / API spec (new in v2.3) | strict |
 | `MOD--` | Module manifest (new in v2.3 taxonomy) | strict |

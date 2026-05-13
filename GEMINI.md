@@ -44,7 +44,7 @@ Canonical reference: `packages/gks/docs/KNOWLEDGE-TYPES.md`.
 | `FRAMEWORK--`| **New Prefix** | Governance / architectural framework (prior `FRAME--` meaning). |
 | `GUARD--` | **Renamed** | Enforced behavioural policy (was `GUARDRAIL--`). |
 | `STACK--` | **New Prefix** | Technology stack inventory. |
-| `SPEC--` | **New Prefix** | Data shape specification (e.g. `SPEC--KNOWLEDGE-BLOCK-MANIFEST`). |
+| `SPEC--` | **New Prefix** | Data shape specification (e.g. `SPEC--GENESIS-BLOCK-MANIFEST`). |
 | `MOD--` | **New Prefix** | Module manifest (boundary + dependencies). |
 
 **Authoring Rules:**

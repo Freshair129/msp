@@ -7,13 +7,13 @@
  * Layout (per `ADR--GENESIS-BLOCK-AS-GKS-BACKEND` §"Reconciling with ADR-001"):
  *   <path>/
  *     manifest.json        — { schema_version: '1.0.0' }
- *     genesis-block.jsonl  — append-only event log
+ *     genesis-graph.jsonl  — append-only event log
  *
  * Eventual upgrade path (`BLUEPRINT--GENESIS-BLOCK-INTEGRATION` P3.1-P3.6):
- *   the Rust crate at `packages/gks/native/genesis-block/` takes over the
+ *   the Rust crate at `packages/gks/native/genesis-graph/` takes over the
  *   same directory. The on-disk format is forward-compatible because the
  *   Rust binary will accept either a `.db` binary file or the existing
- *   `.jsonl` event log; the TS adapter shape (`createGenesisBlockBackend`
+ *   `.jsonl` event log; the TS adapter shape (`createGenesisGraphBackend`
  *   returning a `GraphBackend`) stays unchanged.
  *
  * Active-engine framing (`CONCEPT--GENESIS-BLOCK-ENGINE` §1B):
@@ -44,14 +44,14 @@ import type {
 } from '../graph.js'
 
 import { parseCypherV0, type CypherV0Plan, type ReturnItem } from './cypher-v0.js'
-import { GenesisBlockUnsupportedCypher } from './genesis-block-errors.js'
+import { GenesisGraphUnsupportedCypher } from './genesis-graph-errors.js'
 
-const log = createLogger('graph:genesis-block')
+const log = createLogger('graph:genesis-graph')
 
-export interface GenesisBlockBackendOptions {
+export interface GenesisGraphBackendOptions {
   /**
-   * Directory that owns the genesis-block store. `manifest.json` +
-   * `genesis-block.jsonl` are created here. If the directory does not
+   * Directory that owns the genesis-graph store. `manifest.json` +
+   * `genesis-graph.jsonl` are created here. If the directory does not
    * exist, it is created on first write.
    */
   path: string
@@ -66,11 +66,11 @@ interface Manifest {
   schema_version: string
 }
 
-export function createGenesisBlockBackend(opts: GenesisBlockBackendOptions): GenesisBlockBackend {
-  return new GenesisBlockBackend(opts)
+export function createGenesisGraphBackend(opts: GenesisGraphBackendOptions): GenesisGraphBackend {
+  return new GenesisGraphBackend(opts)
 }
 
-export class GenesisBlockBackend implements GraphBackend {
+export class GenesisGraphBackend implements GraphBackend {
   private readonly dir: string
   private readonly jsonlPath: string
   private readonly manifestPath: string
@@ -80,9 +80,9 @@ export class GenesisBlockBackend implements GraphBackend {
   private readonly inIdx = new Map<string, Set<string>>()
   private loaded = false
 
-  constructor(opts: GenesisBlockBackendOptions) {
+  constructor(opts: GenesisGraphBackendOptions) {
     this.dir = opts.path
-    this.jsonlPath = join(this.dir, 'genesis-block.jsonl')
+    this.jsonlPath = join(this.dir, 'genesis-graph.jsonl')
     this.manifestPath = join(this.dir, 'manifest.json')
   }
 
@@ -105,7 +105,7 @@ export class GenesisBlockBackend implements GraphBackend {
     }
 
     this.loaded = true
-    log.info('genesis-block loaded', {
+    log.info('genesis-graph loaded', {
       dir: this.dir,
       nodes: this.nodes.size,
       edges: this.edges.size,
@@ -260,7 +260,7 @@ export class GenesisBlockBackend implements GraphBackend {
 
   /**
    * Opt-in Cypher v0 surface. Parses the query, runs it through neighbors(),
-   * and projects RETURN items. Throws `GenesisBlockUnsupportedCypher` for
+   * and projects RETURN items. Throws `GenesisGraphUnsupportedCypher` for
    * anything outside the BLUEPRINT v0 subset.
    *
    * Supported shape:
@@ -331,7 +331,7 @@ export class GenesisBlockBackend implements GraphBackend {
         else if (src === 'b.id') row[item.as] = hit.node.id
         else if (src.startsWith('a.')) row[item.as] = seed.props[src.slice(2)] ?? null
         else if (src.startsWith('b.')) row[item.as] = hit.node.props[src.slice(2)] ?? null
-        else throw new GenesisBlockUnsupportedCypher(src, 'RETURN source unrecognised')
+        else throw new GenesisGraphUnsupportedCypher(src, 'RETURN source unrecognised')
         continue
       }
     }

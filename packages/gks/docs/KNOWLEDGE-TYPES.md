@@ -10,12 +10,12 @@
 > `ADR--TAXONOMY-V2-3-MIGRATION` in the MSP atom tree.
 
 > **Genesis Block disambiguation**: "Genesis Block" appears with two
-> meanings in this repo. (1) **Genesis Block Engine** — the embedded
-> graph DB at `packages/gks/src/memory/graph/genesis-block.ts` (Cypher
-> v0, JSONL log); see `CONCEPT--GENESIS-BLOCK-ENGINE`. (2) **Knowledge
+> meanings in this repo. (1) **Genesis Graph Backend** — the embedded
+> graph DB at `packages/gks/src/memory/graph/genesis-graph.ts` (Cypher
+> v0, JSONL log); see `CONCEPT--GENESIS-GRAPH-BACKEND`. (2) **Knowledge
 > Block** — a composite knowledge unit (FRAME-- manifest + Cognitive +
-> Algo + Guard atoms); see `SPEC--KNOWLEDGE-BLOCK-MANIFEST`. These are
-> orthogonal: a Knowledge Block can be stored in a Genesis Block Engine
+> Algo + Guard atoms); see `SPEC--GENESIS-BLOCK-MANIFEST`. These are
+> orthogonal: a Genesis Block can be stored in a Genesis Graph Backend
 > but is not the same thing.
 
 This is the **reference** — when you ask "where does this concept go?"
@@ -41,7 +41,7 @@ the answer is here. Templates for each prefix live in
 | `FRAME--` | Implementation | **(v2.3+)** Block Manifest — runtime entry-point of a Genesis Block |
 | `FRAMEWORK--` | Implementation | **(v2.3+)** Governance / architectural framework (was `FRAME--` pre-v2.3) |
 | `STACK--` | Implementation | Technology stack — language/runtime/library inventory |
-| `SPEC--` | Implementation | Specification — JSON Schema, API data shape, wire format. First example: `SPEC--KNOWLEDGE-BLOCK-MANIFEST` (frontmatter contract for `FRAME--` Block Manifests). |
+| `SPEC--` | Implementation | Specification — JSON Schema, API data shape, wire format. First example: `SPEC--GENESIS-BLOCK-MANIFEST` (frontmatter contract for `FRAME--` Block Manifests). |
 | `COGNITIVE--` | Implementation | Mental model / interpretive lens (e.g. Erikson stages) |
 | `SAFETY--` | Governance | Ethical safety — AI alignment + behavioural guardrails |
 | `MASTER--` | Implementation | Root-level policy / genesis rule (e.g. contradiction policy, write boundaries) |
@@ -140,12 +140,12 @@ where most contributions go.
 - **Phase:** P2.
 
 ### `FRAME--` · Block Manifest (v2.3+)
-- **Use for:** the runtime entry-point of a **Knowledge Block** — a manifest atom that aggregates `COGNITIVE--`, `ALGO--`, `GUARD--` (and optionally `RUNBOOK--`, `PROTOCOL--`, `STACK--`, `SAFETY--`) atoms into a composite knowledge engine.
+- **Use for:** the runtime entry-point of a **Genesis Block** — a manifest atom that aggregates `COGNITIVE--`, `ALGO--`, `GUARD--` (and optionally `RUNBOOK--`, `PROTOCOL--`, `STACK--`, `SAFETY--`) atoms into a composite knowledge engine.
 - **Don't use for:** governance/architecture frameworks — those moved to `FRAMEWORK--` in v2.3.
-- **Frontmatter contract:** `SPEC--KNOWLEDGE-BLOCK-MANIFEST` — declares the `members.core` / `members.optional` / `daci:` / `manifest_version:` shape.
+- **Frontmatter contract:** `SPEC--GENESIS-BLOCK-MANIFEST` — declares the `members.core` / `members.optional` / `daci:` / `manifest_version:` shape.
 - **Phase:** P0 (Block Manifests are foundational).
 - **Status cascade:** `status(block) = min(status(member))` — see SPEC §4.2.
-- **Examples (proposed):** `FRAME--IDENTITY-ENGINE` aggregates the identity-resolution Knowledge Block.
+- **Examples (proposed):** `FRAME--IDENTITY-ENGINE` aggregates the identity-resolution Genesis Block.
 
 ### `FRAMEWORK--` · governance / architectural framework (v2.3+)
 - **Use for:** architectural patterns, governance frameworks, higher-level invariant methodologies (Knowledge 3-Tier model, JTBD, Design Thinking, phase governance), and code standards ("all DB calls go through repositories", "components ≤ 500 LOC", lint policy).
@@ -155,7 +155,7 @@ where most contributions go.
 - **Renamed from:** `FRAME--` (pre-v2.3). The taxonomy migration script handles existing references.
 
 ### `STACK--` · technology stack inventory (v2.3+)
-- **Use for:** the language/runtime/library/tool inventory used by a subsystem or Knowledge Block — e.g. "React 18 + Rust + napi-rs + pgvector".
+- **Use for:** the language/runtime/library/tool inventory used by a subsystem or Genesis Block — e.g. "React 18 + Rust + napi-rs + pgvector".
 - **Don't use for:** module boundaries (use `MOD--`) or build config (use `PARAMS--`).
 - **Phase:** P2.
 - **Distinguishing question:** *is this a list of tools/runtimes a thing uses?* → if yes, STACK.
@@ -164,7 +164,7 @@ where most contributions go.
 - **Use for:** JSON Schema, API data shape, wire format, frontmatter contract.
 - **Don't use for:** decisions (use `ADR--`) or behavioural rules (use `PROTO--`).
 - **Phase:** P2.
-- **Examples:** `SPEC--KNOWLEDGE-BLOCK-MANIFEST` (frontmatter contract for FRAME-- atoms).
+- **Examples:** `SPEC--GENESIS-BLOCK-MANIFEST` (frontmatter contract for FRAME-- atoms).
 
 ### `COGNITIVE--` · mental model / interpretive lens (v2.3+)
 - **Use for:** psychological / cognitive-science models the system reasons with — Erikson stages, Ego Death, Qualia, retrieval-augmented attention, etc.
@@ -380,7 +380,7 @@ These have `MSP-` prefix and live in process-tracking storage, not in
         ├── Feature spec    → FEAT--
         ├── Algorithm       → ALGO--
         ├── Architectural framework → FRAMEWORK--
-        ├── Block manifest  → FRAME-- (v2.3+: aggregates atoms into a Knowledge Block)
+        ├── Block manifest  → FRAME-- (v2.3+: aggregates atoms into a Genesis Block)
         ├── Tech stack      → STACK--
         ├── Module           → MOD--
         ├── Data schema     → ENTITY--

@@ -1,5 +1,5 @@
 /**
- * Cypher v0 parser + planner for GenesisBlockBackend.
+ * Cypher v0 parser + planner for GenesisGraphBackend.
  *
  * Grammar (BLUEPRINT--GENESIS-BLOCK-INTEGRATION §"Cypher v0 scope"):
  *
@@ -7,13 +7,13 @@
  *   [WHERE b.prop = 'literal' [AND b.other = 'lit']]
  *   RETURN b.id [, length(r) AS hops]
  *
- * Anything else throws GenesisBlockUnsupportedCypher with the offending
+ * Anything else throws GenesisGraphUnsupportedCypher with the offending
  * fragment. The plan is small enough that we execute it against the
  * backend's `neighbors()` call and filter the rest in TS — no real
  * physical planner.
  */
 
-import { GenesisBlockUnsupportedCypher } from './genesis-block-errors.js'
+import { GenesisGraphUnsupportedCypher } from './genesis-graph-errors.js'
 
 export interface CypherV0Plan {
   /** Anchor node id (extracted from `(a:Label {id: '...'})` literal). */
@@ -45,7 +45,7 @@ export interface ReturnItem {
 export function parseCypherV0(input: string): CypherV0Plan {
   const src = input.trim()
   if (!src) {
-    throw new GenesisBlockUnsupportedCypher('empty query')
+    throw new GenesisGraphUnsupportedCypher('empty query')
   }
 
   const matchPart = consume(src, /^MATCH\s+/i, 'expected MATCH keyword at start')
@@ -65,7 +65,7 @@ export function parseCypherV0(input: string): CypherV0Plan {
 
   const returnMatch = /^RETURN\s+/i.exec(rest)
   if (!returnMatch) {
-    throw new GenesisBlockUnsupportedCypher('missing RETURN clause')
+    throw new GenesisGraphUnsupportedCypher('missing RETURN clause')
   }
   rest = rest.slice(returnMatch[0].length)
   const returns = readReturn(rest.trim())
@@ -84,7 +84,7 @@ export function parseCypherV0(input: string): CypherV0Plan {
 
 function consume(input: string, re: RegExp, message: string): { rest: string } {
   const m = re.exec(input)
-  if (!m) throw new GenesisBlockUnsupportedCypher(input.slice(0, 40), message)
+  if (!m) throw new GenesisGraphUnsupportedCypher(input.slice(0, 40), message)
   return { rest: input.slice(m[0].length) }
 }
 
@@ -105,7 +105,7 @@ function readPattern(input: string): PatternResult {
     /^\(\s*a\s*:\s*([A-Za-z_][A-Za-z0-9_]*)\s*\{\s*id\s*:\s*(['"])([^'"]+)\2\s*\}\s*\)\s*-\s*\[\s*r\s*:\s*([A-Za-z_|][A-Za-z0-9_|]*)\s*(?:\*\s*(\d+)?\s*(?:\.\.\s*(\d+)?)?\s*)?\]\s*->\s*\(\s*b\s*:\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\s*/
   const m = re.exec(input)
   if (!m) {
-    throw new GenesisBlockUnsupportedCypher(
+    throw new GenesisGraphUnsupportedCypher(
       input.slice(0, 80),
       'pattern must be (a:Label {id: "..."})-[r:rel*N..M]->(b:Label)',
     )
@@ -115,7 +115,7 @@ function readPattern(input: string): PatternResult {
   const minHops = minStr ? Number.parseInt(minStr, 10) : 1
   const maxHops = maxStr ? Number.parseInt(maxStr, 10) : minHops
   if (Number.isNaN(minHops) || Number.isNaN(maxHops) || minHops < 1 || maxHops < minHops) {
-    throw new GenesisBlockUnsupportedCypher(`${minStr}..${maxStr}`, 'invalid hop range')
+    throw new GenesisGraphUnsupportedCypher(`${minStr}..${maxStr}`, 'invalid hop range')
   }
   return {
     seedId: seedId!,
@@ -140,7 +140,7 @@ function readWhere(input: string): WhereResult {
   while (true) {
     const m = /^\s*([ab])\.([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(['"])([^'"]*)\3\s*/.exec(remaining)
     if (!m) {
-      throw new GenesisBlockUnsupportedCypher(remaining.slice(0, 40), 'WHERE allows only `<a|b>.prop = "literal"`')
+      throw new GenesisGraphUnsupportedCypher(remaining.slice(0, 40), 'WHERE allows only `<a|b>.prop = "literal"`')
     }
     predicates.push({ alias: m[1] as 'a' | 'b', prop: m[2]!, equals: m[4]! })
     remaining = remaining.slice(m[0].length)
@@ -153,7 +153,7 @@ function readWhere(input: string): WhereResult {
 
 function readReturn(input: string): ReturnItem[] {
   if (!input) {
-    throw new GenesisBlockUnsupportedCypher('empty RETURN list')
+    throw new GenesisGraphUnsupportedCypher('empty RETURN list')
   }
   const items: ReturnItem[] = []
   const parts = splitTopLevelCommas(input)
@@ -170,7 +170,7 @@ function readReturn(input: string): ReturnItem[] {
       items.push({ kind: 'property', source, as: propMatch[3] ?? source })
       continue
     }
-    throw new GenesisBlockUnsupportedCypher(trimmed, 'RETURN allows `a.prop | b.prop | length(r) [AS alias]` only')
+    throw new GenesisGraphUnsupportedCypher(trimmed, 'RETURN allows `a.prop | b.prop | length(r) [AS alias]` only')
   }
   return items
 }
