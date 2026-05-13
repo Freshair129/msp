@@ -51,7 +51,7 @@ function extractImplPath(linkedSymbols: unknown): string | null {
 }
 
 function normaliseStatus(s: unknown): ProtoStatus | null {
-  if (s === 'draft' || s === 'stable' || s === 'superseded') return s
+  if (s === 'draft' || s === 'stable' || s === 'active' || s === 'superseded') return s as ProtoStatus
   return null
 }
 
