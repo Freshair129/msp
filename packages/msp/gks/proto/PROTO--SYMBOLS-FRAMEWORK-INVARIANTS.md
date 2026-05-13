@@ -14,8 +14,9 @@ tags:
   - invariants
   - nextjs
   - prisma
-crosslinks: {"implements":["ADR--SYMBOLS-FRAMEWORK-AWARENESS"],"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","ALGO--SYMBOLS-FRAMEWORK-RECOGNITION"]}
-created_at: 2026-05-12T05:38:00.000+07:00
+crosslinks: {"implements":["ADR--SYMBOLS-FRAMEWORK-AWARENESS"],"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","ALGO--SYMBOLS-FRAMEWORK-RECOGNITION"],"enforces":["Rule 1","Rule 2","Rule 3","Rule 4","Rule 5"]}
+linked_symbols: [{"file":"src/validator/proto/framework-invariants.ts"}]
+created_at: 2026-05-12T12:38:00.000+08:00
 ---
 
 # PROTO — Framework-aware symbol invariants
