@@ -166,14 +166,12 @@ export class MemoryStore {
   readonly defaultNamespace: Namespace
   /** Append-only audit log. Null when audit:false was passed. */
   readonly audit: AuditLog | null
-  /** Cost / token tracker. Null when cost:false was passed. */
-  readonly costTracker: CostTracker | null
   /**
    * GraphBackend resolved at init() time. Available after `init()` has
    * been awaited. The default backend is a JSONL-backed `GraphStore`
    * (`<brain>/graph/graph.jsonl`).
    */
-  graph!: GraphBackend
+  public graph!: GraphBackend
 
   private readonly vectorScoreThreshold: number
   private readonly maxTotal: number
@@ -201,6 +199,8 @@ export class MemoryStore {
     | ((layout: ReturnType<typeof gksLayout>) => Promise<GraphBackend> | GraphBackend)
     | null
   private readonly layout: ReturnType<typeof gksLayout>
+  /** Cost / token tracker. Available after `init()`. */
+  public costTracker: CostTracker | null = null
 
   constructor(opts: MemoryStoreOptions) {
     this.root = resolve(opts.root)
