@@ -16,7 +16,8 @@ companion.
 > of "Genesis Block": (1) the **storage-engine** backend (`CONCEPT--GENESIS-GRAPH-BACKEND`,
 > `packages/gks/src/memory/graph/genesis-graph.ts`) — DB layer; (2) the
 > **Genesis Block** composite (`SPEC--GENESIS-BLOCK-MANIFEST`) — a `FRAME--`
-> manifest aggregating Cognitive + Algo + Guard atoms. These are orthogonal.
+> manifest aggregating the EVA 4.0 five-dimension core: Cognitive + Algo +
+> Runbook + Concept + Params. These are orthogonal to the storage layer.
 
 ## Prerequisites
 

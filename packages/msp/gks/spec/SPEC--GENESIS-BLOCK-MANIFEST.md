@@ -63,15 +63,19 @@ tags: [..., manifest, knowledge-block]
 manifest_version: <semver>   # e.g. "1.0.0" — block version, independent of SPEC version
 
 members:
-  core:
-    cognitive: [COGNITIVE--<...>, ...]   # ≥1 entry — the mental model / interpretive lens
-    algo:      [ALGO--<...>, ...]        # ≥1 entry — the executable logic
-    guard:     [GUARD--<...>, ...]       # ≥1 entry — the structural invariants
+  core:                                  # EVA 4.0 5-dimension model
+    cognitive: [COGNITIVE--<...>, ...]   # ≥1 entry — mental framework / lens (= EVA "Frame::X")
+    algo:      [ALGO--<...>, ...]        # ≥1 entry — executable logic       (= EVA "Algo::X")
+    runbook:   [RUNBOOK--<...>, ...]     # ≥1 entry — procedural SOPs        (= EVA "Proto::X")
+    concept:   [CONCEPT--<...>, ...]     # ≥1 entry — origin / purpose       (= EVA "Concept::X")
+    params:    [PARAMS--<...>, ...]      # ≥1 entry — tunable values         (= EVA "Param::X")
   optional:
-    runbook:   [RUNBOOK--<...>, ...]     # required for "operational" blocks (see §3.2)
-    protocol:  [PROTOCOL--<...>, ...]    # required if the block exposes A2A/MCP
-    stack:     [STACK--<...>, ...]       # technology inventory for execution
+    guard:     [GUARD--<...>, ...]       # structural invariants (data-integrity)
     safety:    [SAFETY--<...>, ...]      # ethical / alignment rules
+    stack:     [STACK--<...>, ...]       # technology inventory for execution
+    protocol:  [PROTOCOL--<...>, ...]    # A2A / MCP / HTTP interface (if exposed)
+    mod:       [MOD--<...>, ...]         # module manifest (boundary + public API)
+    spec:      [SPEC--<...>, ...]        # data shape / wire format
 
 daci:
   driver:       MOD--<...> | PERSONA--<...> | ENTITY--<...>   # single owner of decisions
@@ -84,22 +88,32 @@ The `crosslinks.references` field already exists in every atom; the SPEC does **
 
 ## 3. Membership rules
 
-### 3.1 Core trio (mandatory)
+### 3.1 Five-dimension core (per EVA 4.0 — mandatory)
 
-Per `CONCEPT--TAXONOMY-V2-3` §1–§3 and the user's v2.3 specification, every Genesis Block must aggregate at least one atom from each of three core roles:
+Per `gks_genesis_knowledge_system_summary.md` §2.1 (the EVA 4.0 canonical structure), every Genesis Block must be definable in **five** orthogonal dimensions. These are the **promotion criterion**: a block needs ≥4 of the 5 dimensions filled before it becomes a candidate for Master Block promotion.
 
-- **COGNITIVE** — the lens / mental model the block reasons with (e.g. an Erikson-stage model, an ego-death frame, a Qualia model)
-- **ALGO** — the step-by-step procedure the block executes (e.g. simulated-annealing schedule, retrieval planner)
-- **GUARD** — the structural invariants that hold during execution (e.g. id-match, no-nulls, schema constraints)
+| Role | v2.3 prefix | EVA 4.0 source | Purpose |
+|---|---|---|---|
+| **Cognitive** | `COGNITIVE--` | `Frame::X` | The mental framework / lens the block reasons with (e.g. Erikson 8 stages, Ego Death, Ship of Theseus, Artificial Qualia) |
+| **Algo** | `ALGO--` | `Algo::X` | The step-by-step executable logic (e.g. Simulated Annealing, MRF, Meta Learning Loop, Emotional Learning Loop) |
+| **Runbook** | `RUNBOOK--` | `Proto::X` | The procedural how-to / SOP — when and how to apply the algo in real conversation |
+| **Concept** | `CONCEPT--` | `Concept::X` | The "why" — origin reflection, self-consistency, ethical memory root |
+| **Params** | `PARAMS--` | `Param::X` | Tunable values (e.g. paradox_acceptance_threshold, principled_honesty, self_correction_urgency) |
 
-`FRAME--` is the *manifest itself*; it is not "a fourth member" of the trio. The trio is closed at three roles.
+`FRAME--` is the *manifest itself*; it is not "a sixth member". The five core roles are closed.
 
-### 3.2 Operational SOPs (conditional)
+> **Naming note**: in EVA 4.0 vocabulary, "Frame" means *mental framework* (a lens / model for interpreting events) — that maps to `COGNITIVE--` in v2.3. The v2.3 prefix `FRAMEWORK--` is a different concept (governance / architectural framework, used at the engineering layer). Do not confuse them.
 
-- `RUNBOOK--<...>` is **required** when the block is operational — i.e. anything that runs on a recurring schedule, owns incidents, or is on an on-call rotation. The author declares operational scope in the manifest body.
-- `PROTOCOL--<...>` is **required** when the block exposes an external surface (A2A/MCP, HTTP/JSON-RPC, FFI). Internal-only blocks may omit it.
-- `STACK--<...>` is recommended for any block that executes code; omit only for purely-declarative blocks.
-- `SAFETY--<...>` is recommended for any block that takes outbound action (file writes, API calls, messages); omit for read-only blocks.
+### 3.2 Optional extensions (conditional)
+
+The following supplement the five-dimension core when the block has the relevant concern:
+
+- `GUARD--<...>` — when the block has structural data invariants (id-match, schema constraints, non-null)
+- `SAFETY--<...>` — when the block takes outbound action (file writes, API calls, messages)
+- `STACK--<...>` — when the block executes code that requires a specific runtime / library
+- `PROTOCOL--<...>` — when the block exposes an external surface (A2A/MCP, HTTP/JSON-RPC, FFI)
+- `MOD--<...>` — when the block declares a module boundary with a public API
+- `SPEC--<...>` — when the block consumes or produces structured data with a documented shape
 
 ### 3.3 Aggregation grammar
 
@@ -129,13 +143,14 @@ When a Genesis Block evolves materially (a member is swapped for a different ato
 
 The validator currently checks frontmatter shape via `required-fields` + the atomic contract. **Nothing in this SPEC's §2.2 / §3 is machine-checked yet.** The `members:` / `manifest_version:` / `daci:` fields are descriptive contract that authors and reviewers obey by convention.
 
-A follow-up `PROTO--KNOWLEDGE-BLOCK-MEMBERSHIP` will:
+A follow-up `PROTO--GENESIS-BLOCK-MEMBERSHIP` will:
 
-- Add `framework_manifest` (or extend `frame`) to the validator's per-type required-fields list
+- Add `frame` Block Manifest to the validator's per-type required-fields list (require `members.core` with all 5 dimensions present)
 - Walk `members.*` and verify each id resolves and has the expected `type:`
 - Apply the §4.2 status cascade and fail if `status:` disagrees with `min(member status)`
+- Apply the **4-of-5 promotion criterion**: if ≥4 of the 5 core dimensions are filled with `status: stable` atoms, the block is a candidate for Master Block promotion (per `gks_genesis_knowledge_system_summary.md` §2.1)
 
-That PROTO is **not** part of this PR (scope: SPEC only, per `claude/msp-spec-genesis-block-manifest` plan).
+That PROTO is **not** part of this PR (scope: SPEC only).
 
 ## 6. Worked example (mock — not authored)
 
@@ -158,12 +173,15 @@ members:
   core:
     cognitive: [COGNITIVE--EGO-DEATH-PASSPORT]
     algo:      [ALGO--IDENTITY-RESOLUTION]
-    guard:     [GUARD--IDENTITY-SCHEMA, GUARD--PASSPORT-NONNULL]
-  optional:
     runbook:   [RUNBOOK--IDENTITY-MIGRATION]
+    concept:   [CONCEPT--IDENTITY-LAYER]
+    params:    [PARAMS--IDENTITY-PROFILE-DEFAULTS]
+  optional:
+    guard:     [GUARD--IDENTITY-SCHEMA, GUARD--PASSPORT-NONNULL]
     protocol:  [PROTOCOL--IDENTITY-API]
     stack:     [STACK--MSP-NODE-RUNTIME]
     safety:    [SAFETY--PII-REDACTION]
+    mod:       [MOD--IDENTITY]
 daci:
   driver:      MOD--IDENTITY
   approver:    [PERSONA--T3-ARCHITECT]
@@ -175,9 +193,11 @@ crosslinks:
     - MOD--IDENTITY
     - ALGO--IDENTITY-RESOLUTION
     - COGNITIVE--EGO-DEATH-PASSPORT
+    - CONCEPT--IDENTITY-LAYER
+    - RUNBOOK--IDENTITY-MIGRATION
+    - PARAMS--IDENTITY-PROFILE-DEFAULTS
     - GUARD--IDENTITY-SCHEMA
     - GUARD--PASSPORT-NONNULL
-    - RUNBOOK--IDENTITY-MIGRATION
     - PROTOCOL--IDENTITY-API
     - STACK--MSP-NODE-RUNTIME
     - SAFETY--PII-REDACTION
