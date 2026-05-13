@@ -8,9 +8,13 @@ This is the project-internal contract for how Claude Code (and human contributor
 
 Authoritative docs:
 - `gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — top-level architecture
-- `msp_spec.md` — full spec (currently 2.0.2)
+- `msp_spec.md` — full spec (currently 2.0.3)
+- `gks/concept/CONCEPT--TAXONOMY-V2-3.md` — atomic-knowledge prefix taxonomy (v2.3)
+- `gks/spec/SPEC--KNOWLEDGE-BLOCK-MANIFEST.md` — FRAME-- frontmatter contract
 - `gks/concept/CONCEPT--MSP-ROADMAP.md` — milestone plan + execution order
 - `ROADMAP.md` — public summary
+
+> **Naming disambiguation**: "Genesis Block" appears with two distinct meanings — (1) the **Genesis Block Engine** (embedded graph DB at `packages/gks/src/memory/graph/genesis-block.ts`, Cypher v0, JSONL log), and (2) a **Knowledge Block** (composite knowledge unit declared by a `FRAME--` manifest). Always pick the right one; see `SPEC--KNOWLEDGE-BLOCK-MANIFEST` for the composite, `CONCEPT--GENESIS-BLOCK-ENGINE` for the DB.
 
 ## Doc-to-code workflow (mandatory)
 
