@@ -1,0 +1,2 @@
+[console_scripts]
+qwen = qwen:main

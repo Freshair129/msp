@@ -4,6 +4,7 @@ dist/
 *.log
 .DS_Store
 .brain/
+.claude/
 packages/*/dist/
 packages/*/node_modules/
 packages/msp/gks/00_index/atomic_index.jsonl
