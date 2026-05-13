@@ -14,7 +14,7 @@ tags:
   - doc-to-code
   - 3-tier
   - decision
-crosslinks: {"references":["FRAME--KNOWLEDGE-3-TIER","CONCEPT--CODEGEN-MICROTASK-CONTRACT","MASTER--MSP-DOC-TO-CODE"]}
+crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","CONCEPT--CODEGEN-MICROTASK-CONTRACT","MASTER--MSP-DOC-TO-CODE"]}
 created_at: 2026-05-09T15:02:00.000+07:00
 ---
 
@@ -22,7 +22,7 @@ created_at: 2026-05-09T15:02:00.000+07:00
 
 ## Context
 
-`FRAME--KNOWLEDGE-3-TIER` introduced a Master tier for stable cross-cutting
+`FRAMEWORK--KNOWLEDGE-3-TIER` introduced a Master tier for stable cross-cutting
 knowledge that an agent should carry as instinct (loaded as a system-prompt
 preamble) rather than re-discover per session. The frame requires a `tier:
 master` atom to declare `promoted_from`, `promoted_at`, `promotion_adr`, and
@@ -83,13 +83,13 @@ agent-facing rule.
 
 - **Leave the rule in `CLAUDE.md` only.** Rejected: agents that don't load
   `CLAUDE.md` (per-tool variation in MCP / non-Claude agents) miss it.
-- **Promote `FRAME--MSP-ARCHITECTURE-V2` instead.** Rejected: that frame
+- **Promote `FRAMEWORK--MSP-ARCHITECTURE-V2` instead.** Rejected: that frame
   is too broad to fit the 400-token budget; doc-to-code is a single
   enforceable directive that distills cleanly.
 
 ## Source
 
-- `FRAME--KNOWLEDGE-3-TIER` (Master Block § "How they get created")
+- `FRAMEWORK--KNOWLEDGE-3-TIER` (Master Block § "How they get created")
 - `CLAUDE.md` § "Doc-to-code workflow"
 - `CONCEPT--CODEGEN-MICROTASK-CONTRACT`
 - 3-tier rollout plan (PR-5)

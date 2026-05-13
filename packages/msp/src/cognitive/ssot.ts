@@ -16,7 +16,8 @@ const AUTHORITY_ORDER: readonly string[] = [
   'proto', // 2. machine-enforced invariants
   'master', // 3. root-level policy
   'adr', // 4. architectural decision
-  'frame', // 5. framework / architecture standards
+  'framework', // 5a. governance / architecture frameworks (v2.3+)
+  'frame', // 5b. block manifest (v2.3+) / legacy framework alias (pre-v2.3)
   'knowledge-types', // 6. canonical taxonomy
   'concept', // 7. requirements
   'feat',

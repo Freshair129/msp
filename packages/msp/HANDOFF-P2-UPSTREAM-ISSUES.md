@@ -73,7 +73,7 @@ verify-flow: add --through-superseded flag to follow superseded_by chain
 
 `gks verify-flow <ID>` walks `crosslinks.references` to verify the chain. When a referenced atom has `status: superseded`, the walker halts — even if the supersede chain is intact via `crosslinks.superseded_by`.
 
-Hit during MSP PR #8: `FRAME--MSP-ARCHITECTURE` v1 was marked superseded by V2; CI failed because `verify-flow` refused to walk through v1 to reach the shared ADRs. Worked around by repointing 9 atoms; correct fix is upstream.
+Hit during MSP PR #8: `FRAMEWORK--MSP-ARCHITECTURE` v1 was marked superseded by V2; CI failed because `verify-flow` refused to walk through v1 to reach the shared ADRs. Worked around by repointing 9 atoms; correct fix is upstream.
 
 ## Proposed change
 

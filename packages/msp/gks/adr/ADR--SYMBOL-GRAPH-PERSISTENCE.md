@@ -14,7 +14,7 @@ tags:
   - sqlite
   - jsonl
   - decision
-crosslinks: {"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH"]}
+crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH"]}
 created_at: 2026-05-09T16:50:00.000+07:00
 ---
 
@@ -120,6 +120,6 @@ JSONL exports are flattened views of the same data, sorted by primary key:
 
 ## Source
 
-- `CONCEPT--SYMBOL-GRAPH`, `FRAME--SYMBOL-GRAPH`
+- `CONCEPT--SYMBOL-GRAPH`, `FRAMEWORK--SYMBOL-GRAPH`
 - npm registry inspection 2026-05-09: `better-sqlite3` ships prebuilds for Node 20/22
 - Existing GKS patterns: `gks/00_index/atomic_index.jsonl` + `.brain/.../vector/backlinks.jsonl` (sorted JSONL)

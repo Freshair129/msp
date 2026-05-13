@@ -14,7 +14,7 @@ tags:
   - master
   - schema
   - 3-tier
-crosslinks: {"enforces":["FRAME--KNOWLEDGE-3-TIER"],"references":["FRAME--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY"]}
+crosslinks: {"enforces":["FRAMEWORK--KNOWLEDGE-3-TIER"],"references":["FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY"]}
 linked_symbols:
   - {"file":"src/validator/proto/master-body-schema.ts"}
 created_at: 2026-05-09T15:05:00.000+07:00
@@ -36,7 +36,7 @@ descriptive prose on the heading line):
 ## Conflicts with
 ```
 
-The order is canonical (per `FRAME--KNOWLEDGE-3-TIER`), but the predicate
+The order is canonical (per `FRAMEWORK--KNOWLEDGE-3-TIER`), but the predicate
 checks presence only, not order. The `## Conflicts with` section MAY be
 empty (e.g. "(none currently)"), but its heading MUST be present so that
 future atoms have a stable hook to register conflicts against.
@@ -83,5 +83,5 @@ PROTO loader's draft policy.
 
 ## Source
 
-`FRAME--KNOWLEDGE-3-TIER` (Master Block § "Body contract"); PR-5 of the
+`FRAMEWORK--KNOWLEDGE-3-TIER` (Master Block § "Body contract"); PR-5 of the
 3-tier rollout plan.

@@ -15,7 +15,7 @@ tags:
   - valid-until
   - atrophy
   - m9a
-crosslinks: {"enforces":["FRAME--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--DECISION-ATROPHY-GUARDS","FEAT--PROTO-LOADER"]}
+crosslinks: {"enforces":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--DECISION-ATROPHY-GUARDS","FEAT--PROTO-LOADER"]}
 linked_symbols:
   - {"file":"src/validator/proto/valid-until.ts"}
 created_at: 2026-05-05T18:10:00.000+07:00

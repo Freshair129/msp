@@ -14,7 +14,7 @@ tags:
   - trace
   - impact-analysis
   - feat
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--SYMBOLS-FRAMEWORK-AWARENESS"],"superseded_by":["CONCEPT--SYMBOLS-PROCESS-TRACING","ADR--SYMBOLS-PROCESS-TRACING","ALGO--SYMBOLS-CALL-GRAPH-TRAVERSAL","PROTO--SYMBOLS-TRACE-INVARIANTS"]}
+crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--SYMBOLS-FRAMEWORK-AWARENESS"],"superseded_by":["CONCEPT--SYMBOLS-PROCESS-TRACING","ADR--SYMBOLS-PROCESS-TRACING","ALGO--SYMBOLS-CALL-GRAPH-TRAVERSAL","PROTO--SYMBOLS-TRACE-INVARIANTS"]}
 linked_symbols:
   - {"file":"packages/msp/src/symbols/tracer.ts"}
   - {"file":"packages/msp/src/mcp/tools/symbol-trace.ts"}

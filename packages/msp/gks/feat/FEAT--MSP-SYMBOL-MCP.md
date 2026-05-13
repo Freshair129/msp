@@ -13,7 +13,7 @@ tags:
   - mcp
   - feat
   - tool
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-MCP-SERVER"]}
+crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-MCP-SERVER"]}
 linked_symbols:
   - {"file":"src/mcp/tools/symbol-lookup.ts"}
   - {"file":"src/mcp/tools/symbol-neighbors.ts"}
@@ -67,6 +67,6 @@ A 6th tool `msp_symbol_subgraph(community_id)` was considered but deferred — `
 
 ## Source
 
-- `FRAME--SYMBOL-GRAPH`, `CONCEPT--SYMBOL-GRAPH`
+- `FRAMEWORK--SYMBOL-GRAPH`, `CONCEPT--SYMBOL-GRAPH`
 - Existing tool shape: `src/mcp/tools/recall.ts` (zod inputSchema, `handler(ctx)` returning `ToolTextResult`)
 - Tool registration pattern: `src/mcp/server.ts:TOOLS` array (currently 11 entries)

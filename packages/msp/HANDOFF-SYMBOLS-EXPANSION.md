@@ -56,7 +56,7 @@ packages/msp/gks/feat/
 └── FEAT--SYMBOLS-PROCESS-TRACING.md      ← entry-point → leaf tracing
 
 packages/msp/gks/blueprint/BLUEPRINT--SYMBOL-GRAPH-CORE.md   ← prior blueprint (reference)
-packages/msp/gks/frame/FRAME--SYMBOL-GRAPH.md
+packages/msp/gks/frame/FRAMEWORK--SYMBOL-GRAPH.md
 packages/msp/gks/concept/CONCEPT--SYMBOL-GRAPH.md
 packages/msp/gks/concept/CONCEPT--PARSER-CHOICE.md
 packages/msp/gks/adr/ADR--SYMBOL-GRAPH-PERSISTENCE.md

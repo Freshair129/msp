@@ -14,7 +14,7 @@ tags:
   - msp-recall
   - m7c
   - audit
-crosslinks: {"references":["FEAT--RETRIEVAL-ORCHESTRATION","BLUEPRINT--RETRIEVAL-ORCHESTRATION","ADR--RETRIEVAL-RRF-FUSION","CONCEPT--RETRIEVAL-ORCHESTRATION","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FEAT--RETRIEVAL-ORCHESTRATION","BLUEPRINT--RETRIEVAL-ORCHESTRATION","ADR--RETRIEVAL-RRF-FUSION","CONCEPT--RETRIEVAL-ORCHESTRATION","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"src/orchestrator/retrieval/index.ts"}
   - {"file":"src/orchestrator/retrieval/types.ts"}

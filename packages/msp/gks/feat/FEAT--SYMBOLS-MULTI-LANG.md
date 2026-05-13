@@ -14,7 +14,7 @@ tags:
   - python
   - cobol
   - feat
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"]}
+crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"]}
 linked_symbols:
   - {"file":"packages/msp/src/symbols/parser/python.ts"}
   - {"file":"packages/msp/src/symbols/parser/cobol.ts"}

@@ -13,7 +13,7 @@ tags:
   - vector
   - backlinks
   - hybrid-retrieval
-crosslinks: {"references":["CONCEPT--MEMORY-SUBSYSTEM","FRAME--CROSSLINKS-VOCABULARY","ADR--GRAPH-IS-GKS-DOMAIN"]}
+crosslinks: {"references":["CONCEPT--MEMORY-SUBSYSTEM","FRAMEWORK--CROSSLINKS-VOCABULARY","ADR--GRAPH-IS-GKS-DOMAIN"]}
 created_at: 2026-05-03T14:01:54.322+07:00
 ---
 
@@ -37,7 +37,7 @@ The third memory layer is a flat edge list under `vector/backlinks.jsonl`. Each 
 { "from": "BLUEPRINT--MSP-VALIDATOR", "to": "FEAT--MSP-VALIDATOR", "type": "implements" }
 ```
 
-`type` is one of the predicates from `FRAME--CROSSLINKS-VOCABULARY`.
+`type` is one of the predicates from `FRAMEWORK--CROSSLINKS-VOCABULARY`.
 
 ## How it's built
 

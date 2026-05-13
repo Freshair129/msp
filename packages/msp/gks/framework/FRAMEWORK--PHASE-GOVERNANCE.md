@@ -1,7 +1,7 @@
 ---
-id: FRAME--PHASE-GOVERNANCE
+id: FRAMEWORK--PHASE-GOVERNANCE
 phase: 0
-type: frame
+type: framework
 status: stable
 vault_id: default
 tier: genesis
@@ -13,7 +13,7 @@ tags:
   - governance
   - doc-to-code
   - foundation
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-03T14:01:48.299+07:00
 ---
 

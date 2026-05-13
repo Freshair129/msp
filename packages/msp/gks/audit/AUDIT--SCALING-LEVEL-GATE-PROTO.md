@@ -14,7 +14,7 @@ tags:
   - governance
   - audit
   - m8c
-crosslinks: {"references":["PROTO--SCALING-LEVEL-GATE","CONCEPT--PROTO-SCALING-LEVEL-GATE","FRAME--SCALING-LEVELS","FEAT--PROTO-LOADER"]}
+crosslinks: {"references":["PROTO--SCALING-LEVEL-GATE","CONCEPT--PROTO-SCALING-LEVEL-GATE","FRAMEWORK--SCALING-LEVELS","FEAT--PROTO-LOADER"]}
 linked_symbols:
   - {"file":"src/validator/proto/scaling-level-gate.ts"}
   - {"file":"gks/proto/PROTO--SCALING-LEVEL-GATE.md"}
@@ -35,7 +35,7 @@ following M8a's loader foundation; it does NOT modify any shared infrastructure.
 | File | Purpose |
 |---|---|
 | `src/validator/proto/scaling-level-gate.ts` | Predicate impl — `default export` follows the M8a loader contract |
-| `gks/proto/PROTO--SCALING-LEVEL-GATE.md` | Atom (`status: draft`, `severity: warning`, `enforces: FRAME--SCALING-LEVELS`) |
+| `gks/proto/PROTO--SCALING-LEVEL-GATE.md` | Atom (`status: draft`, `severity: warning`, `enforces: FRAMEWORK--SCALING-LEVELS`) |
 | `test/validator/proto/scaling-level-gate.test.ts` | 7 vitest cases covering full chain, missing CONCEPT/ADR, missing BLUEPRINT, `level_override` escape hatch, BLUEPRINT backlink, no-FEAT, empty index |
 
 ## Predicate domain
@@ -109,4 +109,4 @@ PROTO promotes from `draft` to `stable`.
 ## Source
 
 `CONCEPT--PROTO-SCALING-LEVEL-GATE`, `CONCEPT--PROTO-PATTERN`,
-`FRAME--SCALING-LEVELS`, `FEAT--PROTO-LOADER`.
+`FRAMEWORK--SCALING-LEVELS`, `FEAT--PROTO-LOADER`.

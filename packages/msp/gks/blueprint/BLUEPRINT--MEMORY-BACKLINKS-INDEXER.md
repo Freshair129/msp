@@ -87,7 +87,7 @@ api_contracts:
       }
 
 verification_plan:
-  - vitest: edgesFromAtom yields one edge per crosslinks.* value across all predicates in FRAME--CROSSLINKS-VOCABULARY
+  - vitest: edgesFromAtom yields one edge per crosslinks.* value across all predicates in FRAMEWORK--CROSSLINKS-VOCABULARY
   - vitest: edgesFromAtom returns [] when frontmatter has no crosslinks
   - vitest: indexer sort is stable (same input → same byte output across runs)
   - vitest: --check mode returns changed=true when input differs, changed=false otherwise

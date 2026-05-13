@@ -13,7 +13,7 @@ tags:
   - extraction
   - aspirational
   - cherry-pick
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--CONSOLIDATOR"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--CONSOLIDATOR"]}
 created_at: 2026-05-09T07:00:00.000+07:00
 ---
 

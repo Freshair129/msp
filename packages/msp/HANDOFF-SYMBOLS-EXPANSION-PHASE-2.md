@@ -331,7 +331,7 @@ Currently the rule lives in `scaling-level-gate.ts`. Consider authoring:
 PROTO--FEAT-REQUIRES-ADR  (new)
 ```
 
-That references `FRAME--SCALING-LEVELS` and points `linked_symbols` at `scaling-level-gate.ts`. Makes the rule discoverable via atom search.
+That references `FRAMEWORK--SCALING-LEVELS` and points `linked_symbols` at `scaling-level-gate.ts`. Makes the rule discoverable via atom search.
 
 ### 8.3 Pre-commit hook upgrade
 

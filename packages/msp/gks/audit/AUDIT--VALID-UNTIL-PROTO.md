@@ -15,7 +15,7 @@ tags:
   - atrophy
   - audit
   - m9a
-crosslinks: {"references":["PROTO--VALID-UNTIL","CONCEPT--DECISION-ATROPHY-GUARDS","FEAT--PROTO-LOADER","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["PROTO--VALID-UNTIL","CONCEPT--DECISION-ATROPHY-GUARDS","FEAT--PROTO-LOADER","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"src/validator/proto/valid-until.ts"}
   - {"file":"gks/proto/PROTO--VALID-UNTIL.md"}
@@ -34,7 +34,7 @@ Implements Guard 1 from `CONCEPT--DECISION-ATROPHY-GUARDS`: a scanning predicate
 | File | Purpose |
 |---|---|
 | `src/validator/proto/valid-until.ts` | Predicate impl. Reads each atom file, parses frontmatter, compares `valid_until` to `now`. Warning if expired, info if within 30 days. |
-| `gks/proto/PROTO--VALID-UNTIL.md` | PROTO atom (status: draft, severity: warning). Enforces `FRAME--MSP-ARCHITECTURE-V2`. |
+| `gks/proto/PROTO--VALID-UNTIL.md` | PROTO atom (status: draft, severity: warning). Enforces `FRAMEWORK--MSP-ARCHITECTURE-V2`. |
 | `test/validator/proto/valid-until.test.ts` | 6 tests covering vacuous pass, expired, near-expiry, far-future, superseded skip, and `MSP_NOW` env override. |
 
 ## Behaviour
@@ -86,4 +86,4 @@ Implements Guard 1 from `CONCEPT--DECISION-ATROPHY-GUARDS`: a scanning predicate
 
 ## Source
 
-`CONCEPT--DECISION-ATROPHY-GUARDS` (Guard 1), `FEAT--PROTO-LOADER`, `FRAME--MSP-ARCHITECTURE-V2`.
+`CONCEPT--DECISION-ATROPHY-GUARDS` (Guard 1), `FEAT--PROTO-LOADER`, `FRAMEWORK--MSP-ARCHITECTURE-V2`.

@@ -14,7 +14,7 @@ tags:
   - master
   - token-budget
   - 3-tier
-crosslinks: {"enforces":["FRAME--KNOWLEDGE-3-TIER"],"references":["FRAME--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY"]}
+crosslinks: {"enforces":["FRAMEWORK--KNOWLEDGE-3-TIER"],"references":["FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY"]}
 linked_symbols:
   - {"file":"src/validator/proto/master-token-cap.ts"}
 created_at: 2026-05-09T15:06:00.000+07:00
@@ -83,5 +83,5 @@ practice, this PROTO promotes to `stable`.
 
 ## Source
 
-`FRAME--KNOWLEDGE-3-TIER` (Master Block § "Token cap"); PR-5 of the
+`FRAMEWORK--KNOWLEDGE-3-TIER` (Master Block § "Token cap"); PR-5 of the
 3-tier rollout plan.

@@ -14,7 +14,7 @@ tags:
   - hybrid
   - msp-recall
   - m7c
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","FEAT--MSP-OBSIDIAN-CLIENT","FEAT--CONSOLIDATOR","CONCEPT--EMBEDDING-STRATEGY","CONCEPT--MEMORY-VECTOR-BACKLINKS"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FEAT--MSP-OBSIDIAN-CLIENT","FEAT--CONSOLIDATOR","CONCEPT--EMBEDDING-STRATEGY","CONCEPT--MEMORY-VECTOR-BACKLINKS"]}
 created_at: 2026-05-05T15:55:00.000+07:00
 ---
 
@@ -134,4 +134,4 @@ Nothing new persists. M7c is pure read-side orchestration.
 
 ## Source
 
-`msp_spec.md` §7c, `FRAME--MSP-ARCHITECTURE-V2`, M7a/M7b/M7e completion (PRs #12, #16, #19, #20).
+`msp_spec.md` §7c, `FRAMEWORK--MSP-ARCHITECTURE-V2`, M7a/M7b/M7e completion (PRs #12, #16, #19, #20).

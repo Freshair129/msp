@@ -16,7 +16,7 @@ tags:
   - coupling
   - governance
   - m8d
-crosslinks: {"enforces":["FRAME--CROSSLINKS-VOCABULARY"],"references":["CONCEPT--PROTO-ALGO-PARAM-COUPLING","CONCEPT--PROTO-PATTERN","ADR--GRAPH-IS-GKS-DOMAIN"]}
+crosslinks: {"enforces":["FRAMEWORK--CROSSLINKS-VOCABULARY"],"references":["CONCEPT--PROTO-ALGO-PARAM-COUPLING","CONCEPT--PROTO-PATTERN","ADR--GRAPH-IS-GKS-DOMAIN"]}
 linked_symbols:
   - {"file":"src/validator/proto/algo-param-coupling.ts"}
 created_at: 2026-05-05T18:11:00.000+07:00
@@ -87,4 +87,4 @@ atom pair lands and the predicate is observed catching real drift.
 ## Source
 
 `CONCEPT--PROTO-ALGO-PARAM-COUPLING`, `ADR--GRAPH-IS-GKS-DOMAIN`,
-`FRAME--CROSSLINKS-VOCABULARY`.
+`FRAMEWORK--CROSSLINKS-VOCABULARY`.

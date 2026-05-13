@@ -1,7 +1,7 @@
 ---
-id: FRAME--MSP-ARCHITECTURE-V2
+id: FRAMEWORK--MSP-ARCHITECTURE-V2
 phase: 0
-type: frame
+type: framework
 status: stable
 vault_id: default
 tier: genesis
@@ -13,13 +13,13 @@ tags:
   - foundation
   - v2
   - supersede
-crosslinks: {"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","CONCEPT--EMBEDDING-STRATEGY","CONCEPT--AGENT-AGNOSTIC","CONCEPT--AGENT-INTEGRATION-PATTERNS","ADR--MSP-OBSIDIAN-INTEGRATION","ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS","ADR--GLOBAL-VS-WORKSPACE"],"supersedes":["FRAME--MSP-ARCHITECTURE"]}
+crosslinks: {"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","CONCEPT--EMBEDDING-STRATEGY","CONCEPT--AGENT-AGNOSTIC","CONCEPT--AGENT-INTEGRATION-PATTERNS","ADR--MSP-OBSIDIAN-INTEGRATION","ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS","ADR--GLOBAL-VS-WORKSPACE"],"supersedes":["FRAMEWORK--MSP-ARCHITECTURE"]}
 created_at: 2026-05-03T23:55:07.217+07:00
 ---
 
 # FRAME — MSP architecture v2
 
-> Supersedes `FRAME--MSP-ARCHITECTURE` (v1). v1 framed MSP as a "gatekeeper" — a write-path enforcer for atoms going into `gks/`. That framing was correct for what M0–M6 implemented but **incomplete**: MSP's name (Memory & Soul Passport) implies a passport that travels with the agent, carrying memory + identity + retrieval logic. v1 captured the gatekeeping; v2 captures the passport.
+> Supersedes `FRAMEWORK--MSP-ARCHITECTURE` (v1). v1 framed MSP as a "gatekeeper" — a write-path enforcer for atoms going into `gks/`. That framing was correct for what M0–M6 implemented but **incomplete**: MSP's name (Memory & Soul Passport) implies a passport that travels with the agent, carrying memory + identity + retrieval logic. v1 captured the gatekeeping; v2 captures the passport.
 >
 > **Updated 2026-05-10 (post-Phase-A–D)**: MSP is now explicitly **agent-agnostic** (`CONCEPT--AGENT-AGNOSTIC`); the 2-layer mental model below is the MSP-internal split, sandwiched under any cognitive-layer agent (EVA / Hermes / openclaw / Claude Code / Gemini CLI / Antigravity / Cursor / custom). Storage now splits global (`~/.msp/`) vs workspace (`./.brain/msp/projects/<ns>/`) per `ADR--GLOBAL-VS-WORKSPACE`. MCP surface is **19 tools** (passport + projects + symbols + candidates).
 
@@ -182,10 +182,10 @@ These all stay in v2; they just live inside the passport, not as the passport it
 
 ## Migration
 
-- v1 atom (`FRAME--MSP-ARCHITECTURE`) marked `status: superseded` + `superseded_by: [FRAME--MSP-ARCHITECTURE-V2]`. Body unchanged for historical reference.
+- v1 atom (`FRAMEWORK--MSP-ARCHITECTURE`) marked `status: superseded` + `superseded_by: [FRAMEWORK--MSP-ARCHITECTURE-V2]`. Body unchanged for historical reference.
 - All atoms previously crosslinked to v1 stay valid; they reference v1 frame for context, and v2 supersedes it.
 - M7 implementation work (consolidator, retrieval, compressor, identity, Obsidian client) lands per the table above.
 
 ## Source
 
-User's M7-prep architectural clarification. Previous: `FRAME--MSP-ARCHITECTURE` (v1).
+User's M7-prep architectural clarification. Previous: `FRAMEWORK--MSP-ARCHITECTURE` (v1).

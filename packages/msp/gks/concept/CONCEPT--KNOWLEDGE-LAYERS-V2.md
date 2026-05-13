@@ -14,7 +14,7 @@ tags:
   - candidate
   - inbound-removal
   - architecture
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--MEMORY-EPISODIC-WRITER","CONCEPT--MEMORY-SESSIONS"],"supersedes":["CONCEPT--INBOUND-QUEUE","CONCEPT--PROPOSAL-TYPES","CONCEPT--SUBMISSION-ENVELOPE"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--MEMORY-EPISODIC-WRITER","CONCEPT--MEMORY-SESSIONS"],"supersedes":["CONCEPT--INBOUND-QUEUE","CONCEPT--PROPOSAL-TYPES","CONCEPT--SUBMISSION-ENVELOPE"]}
 created_at: 2026-05-08T17:00:00.000+07:00
 ---
 
@@ -120,6 +120,6 @@ The 4-layer model puts a clean wall between `.brain/` (any agent can write anyth
 
 - `CONCEPT--INBOUND-QUEUE` (superseded)
 - `CONCEPT--MEMORY-SESSIONS`, `CONCEPT--MEMORY-EPISODIC-WRITER` (existing layers we keep)
-- `FRAME--MSP-ARCHITECTURE-V2` § "Roles" (boundary table — extended here)
+- `FRAMEWORK--MSP-ARCHITECTURE-V2` § "Roles" (boundary table — extended here)
 - PR #41 — propose.mjs cwd bug fix (becomes moot if we delete propose entirely)
 - Race condition diagnosis in PR #41/#42 CI failures — direct evidence of inbound's hidden cost

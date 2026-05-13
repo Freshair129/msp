@@ -1,7 +1,7 @@
 ---
-id: FRAME--SCALING-LEVELS
+id: FRAMEWORK--SCALING-LEVELS
 phase: 0
-type: frame
+type: framework
 status: stable
 vault_id: default
 tier: genesis
@@ -12,7 +12,7 @@ tags:
   - scaling
   - governance
   - foundation
-crosslinks: {"references":["FRAME--PHASE-GOVERNANCE"]}
+crosslinks: {"references":["FRAMEWORK--PHASE-GOVERNANCE"]}
 created_at: 2026-05-03T14:01:48.787+07:00
 ---
 

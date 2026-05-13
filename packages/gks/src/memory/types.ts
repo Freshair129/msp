@@ -38,6 +38,7 @@ export function isApprovedStatus(s: string | undefined | null): boolean {
 export type AtomicType =
   | 'concept'
   | 'frame'
+  | 'framework'
   | 'blueprint'
   | 'adr'
   | 'flow'

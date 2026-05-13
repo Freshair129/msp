@@ -7,7 +7,7 @@ vault_id: GKS-CORE
 title: MemoryStore — the unified four-layer façade
 tags: [architecture, core, api]
 crosslinks:
-  references: [FRAME--FOUR-LAYERS, FEAT--LOOKUP-BY-SYMBOL]
+  references: [FRAMEWORK--FOUR-LAYERS, FEAT--LOOKUP-BY-SYMBOL]
 linked_symbols:
   - { file: "src/memory/index.ts" }
   - { file: "src/memory/api.ts", fn: retain }

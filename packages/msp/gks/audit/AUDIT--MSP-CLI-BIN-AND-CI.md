@@ -28,7 +28,7 @@ created_at: 2026-05-03T16:20:06.903+07:00
 
 ## Scope
 
-L1 infrastructure work — no FEAT chain ceremony per `FRAME--SCALING-LEVELS`. Closes P0 items #3 and #4 from the production-readiness TODO.
+L1 infrastructure work — no FEAT chain ceremony per `FRAMEWORK--SCALING-LEVELS`. Closes P0 items #3 and #4 from the production-readiness TODO.
 
 ## Changes
 

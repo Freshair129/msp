@@ -15,7 +15,7 @@ tags:
   - prisma
   - mcp
   - recognition
-crosslinks: {"implements":["ADR--SYMBOLS-FRAMEWORK-AWARENESS"],"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","FRAME--SYMBOL-GRAPH"]}
+crosslinks: {"implements":["ADR--SYMBOLS-FRAMEWORK-AWARENESS"],"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","FRAMEWORK--SYMBOL-GRAPH"]}
 linked_symbols:
   - {"file":"packages/msp/src/symbols/framework/routes.ts"}
   - {"file":"packages/msp/src/symbols/framework/nextjs.ts"}

@@ -15,7 +15,7 @@ tags:
   - supersession
   - 3-tier
   - decision
-crosslinks: {"references":["FRAME--KNOWLEDGE-3-TIER","BLUEPRINT--CONTRADICTION-DETECTION-IMPL","MASTER--ATOM-CONTRADICTION-POLICY","ADR--CONTRADICTION-DETECTION-STACK"]}
+crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","BLUEPRINT--CONTRADICTION-DETECTION-IMPL","MASTER--ATOM-CONTRADICTION-POLICY","ADR--CONTRADICTION-DETECTION-STACK"]}
 created_at: 2026-05-09T15:03:00.000+07:00
 ---
 
@@ -23,7 +23,7 @@ created_at: 2026-05-09T15:03:00.000+07:00
 
 ## Context
 
-`FRAME--KNOWLEDGE-3-TIER` requires Master atoms be created via an
+`FRAMEWORK--KNOWLEDGE-3-TIER` requires Master atoms be created via an
 evidence ADR (Master is not authored directly). PR-5 promotes the second
 of two foundational rules into the Master tier; this ADR is the evidence
 record for `MASTER--ATOM-CONTRADICTION-POLICY`.
@@ -97,7 +97,7 @@ contract; `MASTER--ATOM-CONTRADICTION-POLICY` is the agent-facing SSOT.
 
 ## Source
 
-- `FRAME--KNOWLEDGE-3-TIER`
+- `FRAMEWORK--KNOWLEDGE-3-TIER`
 - `BLUEPRINT--CONTRADICTION-DETECTION-IMPL` § Layer 0
 - `CLAUDE.md` § "Atom contradiction policy"
 - `.github/pull_request_template.md` (atom contradiction checklist)

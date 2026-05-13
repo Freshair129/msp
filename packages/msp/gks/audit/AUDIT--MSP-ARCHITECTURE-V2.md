@@ -14,7 +14,7 @@ tags:
   - audit
   - architecture
   - supersede
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--OBSIDIAN-AS-RUNTIME","CONCEPT--EMBEDDING-STRATEGY","ADR--MSP-OBSIDIAN-INTEGRATION","ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--OBSIDIAN-AS-RUNTIME","CONCEPT--EMBEDDING-STRATEGY","ADR--MSP-OBSIDIAN-INTEGRATION","ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS"]}
 linked_symbols: []
 created_at: 2026-05-03T23:55:51.476+07:00
 ---
@@ -38,14 +38,14 @@ Doc-only PR. No source code changes. Records the architectural shift discovered 
 | `CONCEPT--EMBEDDING-STRATEGY` | 1 | concept | Smart Connections is the embedder; MSP delegates |
 | `ADR--MSP-OBSIDIAN-INTEGRATION` | 2 | adr | REST primary, file fallback, TLS scope, auth |
 | `ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS` | 2 | adr | No MSP embedder ever; runtime dep on Obsidian for semantic |
-| `FRAME--MSP-ARCHITECTURE-V2` | 0 | frame | Supersedes v1; new two-layer mental model |
+| `FRAMEWORK--MSP-ARCHITECTURE-V2` | 0 | frame | Supersedes v1; new two-layer mental model |
 | `AUDIT--MSP-ARCHITECTURE-V2` | 6 | audit | This file |
 
 ## V1 supersede
 
-`FRAME--MSP-ARCHITECTURE` (v1):
+`FRAMEWORK--MSP-ARCHITECTURE` (v1):
 - `status: stable` → `status: superseded`
-- `crosslinks.superseded_by: [FRAME--MSP-ARCHITECTURE-V2]`
+- `crosslinks.superseded_by: [FRAMEWORK--MSP-ARCHITECTURE-V2]`
 - Body preserved verbatim with a header note pointing at v2
 
 V1 stays in `gks/frame/` for historical reference; readers see the supersede note immediately.

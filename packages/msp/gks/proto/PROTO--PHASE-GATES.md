@@ -14,7 +14,7 @@ tags:
   - phase-gates
   - governance
   - m8b
-crosslinks: {"enforces":["FRAME--PHASE-GOVERNANCE"],"references":["CONCEPT--PROTO-PHASE-GATES","CONCEPT--PROTO-PATTERN","FEAT--PROTO-LOADER"]}
+crosslinks: {"enforces":["FRAMEWORK--PHASE-GOVERNANCE"],"references":["CONCEPT--PROTO-PHASE-GATES","CONCEPT--PROTO-PATTERN","FEAT--PROTO-LOADER"]}
 linked_symbols:
   - {"file":"src/validator/proto/phase-gates.ts"}
 created_at: 2026-05-05T18:00:00.000+07:00
@@ -24,7 +24,7 @@ created_at: 2026-05-05T18:00:00.000+07:00
 
 ## Rule
 
-Per `FRAME--PHASE-GOVERNANCE`, the doc-to-code chain is
+Per `FRAMEWORK--PHASE-GOVERNANCE`, the doc-to-code chain is
 
 ```
 P0 FRAME → P1 CONCEPT → P2 ADR/FEAT → P3 BLUEPRINT → P5 CODE → P6 AUDIT
@@ -97,4 +97,4 @@ BLUEPRINTs or opt them out via `phase_override`.
 
 ## Source
 
-`CONCEPT--PROTO-PHASE-GATES`, `FRAME--PHASE-GOVERNANCE`, `CONCEPT--PROTO-PATTERN`.
+`CONCEPT--PROTO-PHASE-GATES`, `FRAMEWORK--PHASE-GOVERNANCE`, `CONCEPT--PROTO-PATTERN`.

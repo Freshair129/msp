@@ -73,7 +73,7 @@ Six rules, each as a small pure function returning `ValidationError[]`. Hard rul
 
 - Forbidden frontmatter fields → see `ADR--FORBIDDEN-FIELDS-LIST`.
 - Field shape constraints (length, regex) → see future `ADR--FIELD-CONSTRAINTS` (M3).
-- Phase-status compatibility table → see `FRAME--PHASE-GOVERNANCE`.
+- Phase-status compatibility table → see `FRAMEWORK--PHASE-GOVERNANCE`.
 - Atomic graph traversal / canonical-store integrity → **GKS** (`gks validate --links`, `gks verify-flow`); see `ADR--GRAPH-IS-GKS-DOMAIN` for the layered ownership.
 
 ## Source

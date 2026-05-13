@@ -14,7 +14,7 @@ tags:
   - adr
   - decision
   - decomposition
-crosslinks: {"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","FRAME--SYMBOL-GRAPH"],"supersedes":["FEAT--SYMBOLS-FRAMEWORK-AWARENESS"]}
+crosslinks: {"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","FRAMEWORK--SYMBOL-GRAPH"],"supersedes":["FEAT--SYMBOLS-FRAMEWORK-AWARENESS"]}
 created_at: 2026-05-12T05:36:00.000+07:00
 ---
 
@@ -118,7 +118,7 @@ Instead of one `ALGO--SYMBOLS-FRAMEWORK-RECOGNITION` covering all recognizers, s
 
 ## What this ADR does NOT change
 
-- `FRAME--SYMBOL-GRAPH` — overall architecture untouched
+- `FRAMEWORK--SYMBOL-GRAPH` — overall architecture untouched
 - `FEAT--SYMBOLS-MULTI-LANG` — parser foundation unchanged (this work builds on top)
 - `BLUEPRINT--SYMBOL-GRAPH-CORE` — existing core blueprint untouched
 - Existing 5 MCP tools — `symbol_search`, `symbol_lookup`, `symbol_neighbors`, `symbol_impact`, `symbol_community` continue working with the new framework-typed nodes (they just see more node kinds)
@@ -127,7 +127,7 @@ Instead of one `ALGO--SYMBOLS-FRAMEWORK-RECOGNITION` covering all recognizers, s
 
 - `CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS` (motivation)
 - `FEAT--SYMBOLS-FRAMEWORK-AWARENESS` (superseded; what this ADR replaces)
-- `FRAME--SYMBOL-GRAPH` (architectural backdrop)
+- `FRAMEWORK--SYMBOL-GRAPH` (architectural backdrop)
 - `PROTO--SCALING-LEVEL-GATE` (the rule this ADR hardens)
 - `MASTER--ATOM-CONTRADICTION-POLICY` (decomposition justification)
 - `HANDOFF-SYMBOLS-EXPANSION-PHASE-2.md` (implementation handoff to follow this PR)

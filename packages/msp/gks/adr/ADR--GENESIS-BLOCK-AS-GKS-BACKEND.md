@@ -17,7 +17,7 @@ tags:
   - rust
   - napi
   - decision
-crosslinks: {"references":["CONCEPT--GENESIS-BLOCK-ENGINE","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["CONCEPT--GENESIS-BLOCK-ENGINE","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T11:57:00.000+07:00
 ---
 

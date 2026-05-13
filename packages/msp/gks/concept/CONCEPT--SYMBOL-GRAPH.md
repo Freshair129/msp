@@ -12,7 +12,7 @@ tags:
   - symbol-graph
   - structural
   - prior-art
-crosslinks: {"references":["FRAME--SYMBOL-GRAPH","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-09T16:31:00.000+07:00
 ---
 
@@ -81,5 +81,5 @@ The Symbol Graph isn't novel; the value is in **integrating it as a first-class 
 ## Source
 
 - User design dialogue 2026-05-09 — Tree-sitter + Leiden proposal
-- `FRAME--SYMBOL-GRAPH` — parent frame
+- `FRAMEWORK--SYMBOL-GRAPH` — parent frame
 - Prior art: ctags, sourcegraph SCIP, stack-graphs, comby (researched 2026-05-09)

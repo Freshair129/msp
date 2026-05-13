@@ -14,7 +14,7 @@ tags:
   - scaling-levels
   - governance
   - m8c
-crosslinks: {"enforces":["FRAME--SCALING-LEVELS"],"references":["CONCEPT--PROTO-SCALING-LEVEL-GATE","FEAT--PROTO-LOADER"]}
+crosslinks: {"enforces":["FRAMEWORK--SCALING-LEVELS"],"references":["CONCEPT--PROTO-SCALING-LEVEL-GATE","FEAT--PROTO-LOADER"]}
 linked_symbols:
   - {"file":"src/validator/proto/scaling-level-gate.ts"}
 created_at: 2026-05-05T18:00:00.000+07:00
@@ -25,7 +25,7 @@ created_at: 2026-05-05T18:00:00.000+07:00
 ## Rule
 
 Each `FEAT--*` atom must declare an atomic chain that matches its implied
-Scaling Level (per `FRAME--SCALING-LEVELS`):
+Scaling Level (per `FRAMEWORK--SCALING-LEVELS`):
 
 - **L2** (default for FEATs): at least one `CONCEPT--*` AND one `ADR--*`
   appears in the FEAT's `crosslinks.references` or `crosslinks.implements`.
@@ -89,5 +89,5 @@ not fail-exit per the PROTO loader's draft policy.
 
 ## Source
 
-`FRAME--SCALING-LEVELS`, `CONCEPT--PROTO-SCALING-LEVEL-GATE`,
+`FRAMEWORK--SCALING-LEVELS`, `CONCEPT--PROTO-SCALING-LEVEL-GATE`,
 `CONCEPT--MSP-ROADMAP` §2 M8c.

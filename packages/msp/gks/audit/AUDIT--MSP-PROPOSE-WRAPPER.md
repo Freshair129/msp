@@ -14,7 +14,7 @@ tags:
   - audit
   - propose
   - phase-6
-crosslinks: {"references":["FRAME--PHASE-GOVERNANCE"]}
+crosslinks: {"references":["FRAMEWORK--PHASE-GOVERNANCE"]}
 linked_symbols:
   - {"file":"scripts/msp/propose.mjs"}
   - {"file":"test/scripts/propose.test.ts"}

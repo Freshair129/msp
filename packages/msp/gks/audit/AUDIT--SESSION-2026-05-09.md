@@ -15,7 +15,7 @@ tags:
   - symbol-graph
   - reconciliation
   - milestone
-crosslinks: {"references":["FRAME--KNOWLEDGE-3-TIER","FRAME--SYMBOL-GRAPH","FRAME--AUTHORITY-MATRIX","AUDIT--INBOUND-TO-CANDIDATES-MIGRATION-COMPLETE","AUDIT--CORE-FRAMEWORK-RECONCILE-V1","AUDIT--SYMBOL-GRAPH-V1","AUDIT--PR-2-PACKAGE-JSON-RESIDUE","CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES"]}
+crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","FRAMEWORK--SYMBOL-GRAPH","FRAMEWORK--AUTHORITY-MATRIX","AUDIT--INBOUND-TO-CANDIDATES-MIGRATION-COMPLETE","AUDIT--CORE-FRAMEWORK-RECONCILE-V1","AUDIT--SYMBOL-GRAPH-V1","AUDIT--PR-2-PACKAGE-JSON-RESIDUE","CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-09T21:00:00.000+07:00
 ---
 
@@ -45,7 +45,7 @@ Single-day session that shipped two major architectural axes (3-tier knowledge m
 | # | PR | Title |
 |---|---|---|
 | W2.1 | #56 | docs(spec): reconcile `CORE_FRAMEWORK` with actual MSP codebase (W1+W2) |
-| W2.2 | #61 | docs(atom): update `FRAME--AUTHORITY-MATRIX` to current MSP reality (W4) |
+| W2.2 | #61 | docs(atom): update `FRAMEWORK--AUTHORITY-MATRIX` to current MSP reality (W4) |
 
 ### Wave 3 — Symbol Graph layer (6 PRs)
 
@@ -85,8 +85,8 @@ Single-day session that shipped two major architectural axes (3-tier knowledge m
 - **TypeScript Compiler API parser** (per `CONCEPT--PARSER-CHOICE`); tree-sitter NOT a dep; matches v1 decision
 - **Symbol Graph build smoke** (PR-4): 897 symbols / 1843 edges / 143 communities, modularity 0.958 — recorded in `AUDIT--SYMBOL-GRAPH-V1`
 - **Master Block compose** smoke: 2 atoms = 720 tokens; both ≤ 400-token warn threshold
-- **`FRAME--AUTHORITY-MATRIX`** body lists current paths (singular, with `master/` `proto/` rows; no `inbound/` references)
-- **`FRAME--KNOWLEDGE-3-TIER`** ↔ `FRAME--SYMBOL-GRAPH` correctly orthogonal (knowledge-class axis vs structural axis)
+- **`FRAMEWORK--AUTHORITY-MATRIX`** body lists current paths (singular, with `master/` `proto/` rows; no `inbound/` references)
+- **`FRAMEWORK--KNOWLEDGE-3-TIER`** ↔ `FRAMEWORK--SYMBOL-GRAPH` correctly orthogonal (knowledge-class axis vs structural axis)
 - **All 21 FEATs** pass `gks verify-flow` (no draft atoms in any FEAT's reachable graph)
 - **Validator gates** (`npx tsx src/validator/cli.ts --all`) exit 0 across the 16 PRs
 - **CI** green on Node 20 + 22 across all 16 PRs (7 transient retries — npm registry / determinism)
@@ -104,7 +104,7 @@ Single-day session that shipped two major architectural axes (3-tier knowledge m
 ```
                      ┌────────────────────────────────────────┐
         Knowledge-class axis ─▶ Safety / Master / Genesis / Process
-        (FRAME--KNOWLEDGE-3-TIER)
+        (FRAMEWORK--KNOWLEDGE-3-TIER)
                                               │
                                               ▼
         Conceptual graph (atoms)              Storage layer
@@ -116,14 +116,14 @@ Single-day session that shipped two major architectural axes (3-tier knowledge m
                                               ▼
                      ┌────────────────────────────────────────┐
         Structural axis ─▶ symbols / edges / communities (Leiden)
-        (FRAME--SYMBOL-GRAPH)                 │
+        (FRAMEWORK--SYMBOL-GRAPH)                 │
                                               ▼
                                               .brain/.../symbols/{graph.db, *.jsonl}
                                               MSP repo: 897 symbols / 1843 edges
                                               / 143 communities
 
         Authority axis ─▶ T1 / T2 / T3 / Boss (orthogonal to Knowledge-class)
-        (FRAME--AUTHORITY-MATRIX)
+        (FRAMEWORK--AUTHORITY-MATRIX)
 ```
 
 The 4 axes (Knowledge-class, Conceptual graph, Structural graph, Authority) are independently queryable and orthogonal. Each has its own validator rules, MCP tools, CLI, and storage path.

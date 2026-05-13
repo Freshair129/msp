@@ -7,7 +7,7 @@ This is the project-internal contract for how Claude Code (and human contributor
 **MSP** (Memory & Soul Passport) — a passport-orchestrator that travels with an AI agent, carrying memory + soul + retrieval + identity. Built on top of `@freshair129/gks` (Genesis Knowledge System) which provides atomic markdown storage + vector / graph backends.
 
 Authoritative docs:
-- `gks/frame/FRAME--MSP-ARCHITECTURE-V2.md` — top-level architecture
+- `gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — top-level architecture
 - `msp_spec.md` — full spec (currently 2.0.2)
 - `gks/concept/CONCEPT--MSP-ROADMAP.md` — milestone plan + execution order
 - `ROADMAP.md` — public summary
@@ -17,7 +17,7 @@ Authoritative docs:
 Every milestone follows this phase order. Don't skip.
 
 ```
-P0 FRAME       (architecture)        gks/frame/FRAME--*.md
+P0 FRAMEWORK   (architecture)        gks/framework/FRAMEWORK--*.md
   ↓
 P1 CONCEPT     (problem + intent)    gks/concept/CONCEPT--*.md
   ↓
@@ -161,7 +161,7 @@ MSP atoms sometimes reference `@freshair129/gks` features. Before claiming a GKS
 
 1. This file (CLAUDE.md)
 2. `ROADMAP.md` (where we are)
-3. `gks/frame/FRAME--MSP-ARCHITECTURE-V2.md` (architecture)
+3. `gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md` (architecture)
 4. `gks/concept/CONCEPT--MSP-ROADMAP.md` (full milestone plan)
 5. `msp_spec.md` (full spec — long; reference, not cover-to-cover)
 6. The CONCEPT/ADR/FEAT/BLUEPRINT atoms for the milestone you're working on

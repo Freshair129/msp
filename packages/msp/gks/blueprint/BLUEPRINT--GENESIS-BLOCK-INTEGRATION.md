@@ -18,7 +18,7 @@ tags:
   - cypher
   - blueprint
   - implementation
-crosslinks: {"references":["ADR--GENESIS-BLOCK-AS-GKS-BACKEND","CONCEPT--GENESIS-BLOCK-ENGINE","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["ADR--GENESIS-BLOCK-AS-GKS-BACKEND","CONCEPT--GENESIS-BLOCK-ENGINE","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T11:59:00.000+07:00
 ---
 

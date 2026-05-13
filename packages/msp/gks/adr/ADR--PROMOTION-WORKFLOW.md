@@ -13,7 +13,7 @@ tags:
   - workflow
   - governance
   - superseded
-crosslinks: {"references":["CONCEPT--INBOUND-QUEUE","CONCEPT--PROPOSAL-TYPES","FRAME--AUTHORITY-MATRIX"],"superseded_by":["ADR--AGENT-WRITE-BOUNDARIES"]}
+crosslinks: {"references":["CONCEPT--INBOUND-QUEUE","CONCEPT--PROPOSAL-TYPES","FRAMEWORK--AUTHORITY-MATRIX"],"superseded_by":["ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-03T14:08:40.359+07:00
 ---
 

@@ -13,7 +13,7 @@ tags:
   - architecture
   - foundation
   - integration
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--OBSIDIAN-AS-RUNTIME"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--OBSIDIAN-AS-RUNTIME"]}
 created_at: 2026-05-09T07:00:00.000+07:00
 ---
 

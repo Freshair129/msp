@@ -14,7 +14,7 @@ tags:
   - human-review
   - decision
   - m9b
-crosslinks: {"references":["FRAME--AUTHORITY-MATRIX","ADR--HUMAN-REVIEW-GATES","CONCEPT--PROTO-AUTHORITY-ENFORCEMENT"]}
+crosslinks: {"references":["FRAMEWORK--AUTHORITY-MATRIX","ADR--HUMAN-REVIEW-GATES","CONCEPT--PROTO-AUTHORITY-ENFORCEMENT"]}
 created_at: 2026-05-05T16:28:00.000+07:00
 ---
 
@@ -40,7 +40,7 @@ A delegation policy is needed.
 | **L3** (multi-module / breaking / new framework) | **Boss only** (T3) |
 | **HOTFIX** | 1 senior; backfill within 48h |
 
-"Senior" = T2 or T3, per `FRAME--AUTHORITY-MATRIX`.
+"Senior" = T2 or T3, per `FRAMEWORK--AUTHORITY-MATRIX`.
 
 ### Auto-promote heuristic
 
@@ -57,7 +57,7 @@ Even at L2, certain content escalates to Boss-required:
 - Any change to `examples/hooks/` (pre-commit / pre-push)
 - Any change touching `package.json` or `package-lock.json` (dep changes)
 
-These match `FRAME--AUTHORITY-MATRIX` "Boss-only paths".
+These match `FRAMEWORK--AUTHORITY-MATRIX` "Boss-only paths".
 
 ### Quorum override
 
@@ -92,4 +92,4 @@ If only 1 senior is available (e.g. small team starting out, vacation), Boss can
 
 ## Source
 
-`FRAME--AUTHORITY-MATRIX`, `ADR--HUMAN-REVIEW-GATES`, `CONCEPT--MSP-ROADMAP` §3 M9b, user direction (all-M planning) — needed before team scales past 5 contributors.
+`FRAMEWORK--AUTHORITY-MATRIX`, `ADR--HUMAN-REVIEW-GATES`, `CONCEPT--MSP-ROADMAP` §3 M9b, user direction (all-M planning) — needed before team scales past 5 contributors.

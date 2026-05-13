@@ -7,7 +7,7 @@ vault_id: GKS-CORE
 title: Extended atomic taxonomy + ISSUE-- as self-hosted tracker
 tags: [taxonomy, governance, issue-tracking, scope]
 crosslinks:
-  references: [FRAME--FOUR-LAYERS, ADR--FLAT-ATOM-LAYOUT]
+  references: [FRAMEWORK--FOUR-LAYERS, ADR--FLAT-ATOM-LAYOUT]
   resolves: []
 ---
 

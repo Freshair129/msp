@@ -13,7 +13,7 @@ tags:
   - backlinks
   - vector
   - indexer
-crosslinks: {"references":["CONCEPT--MEMORY-VECTOR-BACKLINKS","FRAME--CROSSLINKS-VOCABULARY"]}
+crosslinks: {"references":["CONCEPT--MEMORY-VECTOR-BACKLINKS","FRAMEWORK--CROSSLINKS-VOCABULARY"]}
 created_at: 2026-05-03T14:16:41.740+07:00
 ---
 

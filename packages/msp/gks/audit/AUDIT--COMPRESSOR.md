@@ -14,7 +14,7 @@ tags:
   - token-budget
   - m7d
   - audit
-crosslinks: {"references":["FEAT--COMPRESSOR","BLUEPRINT--COMPRESSOR","ADR--COMPRESSOR-THREE-TIER","CONCEPT--CONTEXT-COMPRESSION","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FEAT--COMPRESSOR","BLUEPRINT--COMPRESSOR","ADR--COMPRESSOR-THREE-TIER","CONCEPT--CONTEXT-COMPRESSION","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"src/orchestrator/compressor/index.ts"}
   - {"file":"src/orchestrator/compressor/types.ts"}

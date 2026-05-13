@@ -3,7 +3,7 @@ import { extname, join, relative, resolve } from 'node:path'
 
 import type { ObsidianClient, SearchHit } from './types.js'
 
-const SEARCH_DIRS = ['concept', 'adr', 'feat', 'blueprint', 'frame', 'audit', 'task', 'issues']
+const SEARCH_DIRS = ['concept', 'adr', 'feat', 'blueprint', 'frame', 'framework', 'audit', 'task', 'issues']
 
 async function listMarkdown(root: string): Promise<string[]> {
   const out: string[] = []

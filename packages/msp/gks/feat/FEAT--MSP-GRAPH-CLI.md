@@ -13,7 +13,7 @@ tags:
   - cli
   - feat
   - bin
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
+crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
 linked_symbols:
   - {"file":"src/symbols/cli.ts"}
   - {"file":"package.json"}

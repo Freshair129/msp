@@ -14,7 +14,7 @@ tags:
   - knowledge-browser
   - cytoscape
   - feat
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAME--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"]}
+crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAMEWORK--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"]}
 linked_symbols:
   - {"file":"web/src/components/SymbolsTab.tsx"}
   - {"file":"web/src/components/SymbolList.tsx"}
@@ -84,6 +84,6 @@ To avoid shipping an empty tab to users who haven't built the graph yet, the tab
 
 ## Source
 
-- `FRAME--SYMBOL-GRAPH`, `ADR--SYMBOL-GRAPH-PERSISTENCE`, `FEAT--MSP-SYMBOL-MCP`
+- `FRAMEWORK--SYMBOL-GRAPH`, `ADR--SYMBOL-GRAPH-PERSISTENCE`, `FEAT--MSP-SYMBOL-MCP`
 - Existing Cytoscape pattern: `web/src/components/GraphView.tsx`
 - Existing tab pattern: `web/src/App.tsx` `Atoms | Candidates` toggle

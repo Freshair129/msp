@@ -13,7 +13,7 @@ tags:
   - core-framework
   - documentation
   - reconciliation
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","FRAME--KNOWLEDGE-3-TIER","ADR--AGENT-WRITE-BOUNDARIES"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--KNOWLEDGE-3-TIER","ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-09T16:30:00.000+07:00
 ---
 
@@ -46,9 +46,9 @@ The spec was originally written as a **generic boilerplate** for forking into ot
 
 ## Deferred (separate PRs)
 
-- **W3 — phase/status vocab** (§4.1, §7.3): spec uses P0–P7 + `stub/raw/verified`; reality uses `draft/stable/superseded/deprecated`. Not done in this PR — needs a thoughtful rewrite of §4.1 to align with `FRAME--PHASE-GOVERNANCE` semantics.
+- **W3 — phase/status vocab** (§4.1, §7.3): spec uses P0–P7 + `stub/raw/verified`; reality uses `draft/stable/superseded/deprecated`. Not done in this PR — needs a thoughtful rewrite of §4.1 to align with `FRAMEWORK--PHASE-GOVERNANCE` semantics.
 - **W3 — forbidden/required fields** (§7.3): point to `.brain/msp/LLM_Contract/atomic_contract.yaml` as SSOT and update example to show actual 17 forbidden fields. Not urgent — the example values shown happen to be a valid (if incomplete) subset.
-- **W4 — `FRAME--AUTHORITY-MATRIX.md` atom edit**: still references inbound legacy `/submit-memory → inbound queue`. Atom edit is out-of-scope for spec audit but is the next reconciliation target.
+- **W4 — `FRAMEWORK--AUTHORITY-MATRIX.md` atom edit**: still references inbound legacy `/submit-memory → inbound queue`. Atom edit is out-of-scope for spec audit but is the next reconciliation target.
 
 ## Verification
 
@@ -61,7 +61,7 @@ The spec was originally written as a **generic boilerplate** for forking into ot
 ## Atom contradiction checklist
 
 - ✅ This AUDIT atom is additive; no supersession
-- ✅ References `FRAME--MSP-ARCHITECTURE-V2`, `FRAME--KNOWLEDGE-3-TIER`, `ADR--AGENT-WRITE-BOUNDARIES` — all stable
+- ✅ References `FRAMEWORK--MSP-ARCHITECTURE-V2`, `FRAMEWORK--KNOWLEDGE-3-TIER`, `ADR--AGENT-WRITE-BOUNDARIES` — all stable
 - ✅ No claims about anything that contradicts another stable atom
 
 ## Lesson

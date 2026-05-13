@@ -13,7 +13,7 @@ tags:
   - audit
   - phase-6
   - upstream-gks
-crosslinks: {"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE","ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION","FEAT--MSP-SYMBOL-MCP","FEAT--MSP-GRAPH-CLI","FEAT--SYMBOLS-WEB-TAB","BLUEPRINT--SYMBOL-GRAPH-CORE"]}
+crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE","ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION","FEAT--MSP-SYMBOL-MCP","FEAT--MSP-GRAPH-CLI","FEAT--SYMBOLS-WEB-TAB","BLUEPRINT--SYMBOL-GRAPH-CORE"]}
 created_at: 2026-05-09T19:30:00.000+07:00
 ---
 
@@ -21,15 +21,15 @@ created_at: 2026-05-09T19:30:00.000+07:00
 
 ## Summary
 
-The 6-PR Symbol Graph rollout completed 2026-05-09. MSP now has a queryable structural graph over its source code, orthogonal to the conceptual atom graph defined in `FRAME--KNOWLEDGE-3-TIER`.
+The 6-PR Symbol Graph rollout completed 2026-05-09. MSP now has a queryable structural graph over its source code, orthogonal to the conceptual atom graph defined in `FRAMEWORK--KNOWLEDGE-3-TIER`.
 
-Per `FRAME--SYMBOL-GRAPH`'s "path to GKS upstream": this PR also files `upstream/gks-proposals/05-symbol-graph.md` so GKS can absorb the layer and MSP can become a thin wrapper in a future major release.
+Per `FRAMEWORK--SYMBOL-GRAPH`'s "path to GKS upstream": this PR also files `upstream/gks-proposals/05-symbol-graph.md` so GKS can absorb the layer and MSP can become a thin wrapper in a future major release.
 
 ## What shipped (6 PRs)
 
 | PR | Title | What |
 |---|---|---|
-| #57 | PR-1: FRAME + 2 CONCEPTs | atoms only — `FRAME--SYMBOL-GRAPH` + `CONCEPT--SYMBOL-GRAPH` + `CONCEPT--PARSER-CHOICE` |
+| #57 | PR-1: FRAME + 2 CONCEPTs | atoms only — `FRAMEWORK--SYMBOL-GRAPH` + `CONCEPT--SYMBOL-GRAPH` + `CONCEPT--PARSER-CHOICE` |
 | #58 | PR-2: 2 ADRs + 3 FEATs | atoms only — persistence (SQLite + JSONL) + Leiden + MCP/CLI/Web contracts |
 | #59 | PR-3: BLUEPRINT + parser + SQLite + JSONL + Leiden | foundation code: TS Compiler API parser, `better-sqlite3` store, JSONL exporter, Leiden adapter (with Louvain fallback) |
 | #60 | PR-4: CLI + 5 MCP tools | `msp-graph` bin (6 subcommands) + `msp_symbol_lookup/neighbors/impact/community/search`. Tool count 11 → 16 |

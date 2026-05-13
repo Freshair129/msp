@@ -12,7 +12,7 @@ tags:
   - obsidian
   - m7a
   - audit
-crosslinks: {"references":["FEAT--MSP-OBSIDIAN-CLIENT","BLUEPRINT--MSP-OBSIDIAN-CLIENT","ADR--MSP-OBSIDIAN-INTEGRATION","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FEAT--MSP-OBSIDIAN-CLIENT","BLUEPRINT--MSP-OBSIDIAN-CLIENT","ADR--MSP-OBSIDIAN-INTEGRATION","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"src/obsidian/client.ts"}
   - {"file":"src/obsidian/rest.ts"}

@@ -13,7 +13,7 @@ tags:
   - authority
   - audit
   - m8e
-crosslinks: {"references":["PROTO--AUTHORITY-ENFORCEMENT","CONCEPT--PROTO-AUTHORITY-ENFORCEMENT","ADR--DELEGATION-POLICY","FRAME--AUTHORITY-MATRIX","FEAT--PROTO-LOADER","AUDIT--PROTO-LOADER"]}
+crosslinks: {"references":["PROTO--AUTHORITY-ENFORCEMENT","CONCEPT--PROTO-AUTHORITY-ENFORCEMENT","ADR--DELEGATION-POLICY","FRAMEWORK--AUTHORITY-MATRIX","FEAT--PROTO-LOADER","AUDIT--PROTO-LOADER"]}
 linked_symbols:
   - {"file":"src/validator/proto/authority-enforcement.ts"}
   - {"file":"gks/proto/PROTO--AUTHORITY-ENFORCEMENT.md"}
@@ -35,7 +35,7 @@ PR-time CI workflow that will match git author tier to touched paths.
 | File | Purpose |
 |---|---|
 | `src/validator/proto/authority-enforcement.ts` | Predicate: read `.brain/msp/authority.yaml`, parse YAML, validate shape, return violations |
-| `gks/proto/PROTO--AUTHORITY-ENFORCEMENT.md` | `status: draft`, `severity: error` PROTO atom; enforces `FRAME--AUTHORITY-MATRIX` |
+| `gks/proto/PROTO--AUTHORITY-ENFORCEMENT.md` | `status: draft`, `severity: error` PROTO atom; enforces `FRAMEWORK--AUTHORITY-MATRIX` |
 | `test/validator/proto/authority-enforcement.test.ts` | 8 tests covering vacuous pass, valid file, invalid YAML, multi-tier user, empty paths, missing inbound, missing top-level keys, non-string entries |
 | `gks/audit/AUDIT--AUTHORITY-ENFORCEMENT-PROTO.md` | this file |
 
@@ -138,4 +138,4 @@ Tracked here so the next milestone slice doesn't lose context:
 ## Source
 
 `CONCEPT--PROTO-AUTHORITY-ENFORCEMENT`, `ADR--DELEGATION-POLICY`,
-`FRAME--AUTHORITY-MATRIX`, `FEAT--PROTO-LOADER`, `AUDIT--PROTO-LOADER`.
+`FRAMEWORK--AUTHORITY-MATRIX`, `FEAT--PROTO-LOADER`, `AUDIT--PROTO-LOADER`.

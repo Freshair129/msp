@@ -12,7 +12,7 @@ tags:
   - review
   - governance
   - decision
-crosslinks: {"references":["ADR--AGENT-WRITE-BOUNDARIES","FRAME--AUTHORITY-MATRIX","FRAME--SCALING-LEVELS"]}
+crosslinks: {"references":["ADR--AGENT-WRITE-BOUNDARIES","FRAMEWORK--AUTHORITY-MATRIX","FRAMEWORK--SCALING-LEVELS"]}
 created_at: 2026-05-03T17:36:08.623+07:00
 ---
 
@@ -20,7 +20,7 @@ created_at: 2026-05-03T17:36:08.623+07:00
 
 ## Context
 
-`ADR--PROMOTION-WORKFLOW` defines the third gate as "human review" without saying *who* is the human for which atom type. `FRAME--AUTHORITY-MATRIX` covers who can write where but not who approves the promotion. We need an explicit per-type → reviewer mapping so promotions don't stall waiting for an unspecified human.
+`ADR--PROMOTION-WORKFLOW` defines the third gate as "human review" without saying *who* is the human for which atom type. `FRAMEWORK--AUTHORITY-MATRIX` covers who can write where but not who approves the promotion. We need an explicit per-type → reviewer mapping so promotions don't stall waiting for an unspecified human.
 
 ## Decision
 
@@ -68,7 +68,7 @@ created_at: 2026-05-03T17:36:08.623+07:00
 
 - The validator's hard rules — see `ADR--ANTI-HALLUCINATION-RULES`.
 - The promotion levels themselves — see `ADR--PROMOTION-LEVELS`.
-- Authority over file paths — see `FRAME--AUTHORITY-MATRIX`.
+- Authority over file paths — see `FRAMEWORK--AUTHORITY-MATRIX`.
 
 ## Source
 

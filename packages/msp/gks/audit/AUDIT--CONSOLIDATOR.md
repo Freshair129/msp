@@ -12,7 +12,7 @@ tags:
   - consolidator
   - m7b
   - audit
-crosslinks: {"references":["FEAT--CONSOLIDATOR","BLUEPRINT--CONSOLIDATOR","ADR--CONSOLIDATOR-HYBRID-SCORING","CONCEPT--CONSOLIDATOR","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FEAT--CONSOLIDATOR","BLUEPRINT--CONSOLIDATOR","ADR--CONSOLIDATOR-HYBRID-SCORING","CONCEPT--CONSOLIDATOR","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"src/orchestrator/consolidator/index.ts"}
   - {"file":"src/orchestrator/consolidator/types.ts"}

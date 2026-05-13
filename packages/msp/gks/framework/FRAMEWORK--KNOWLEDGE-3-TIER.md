@@ -1,7 +1,7 @@
 ---
-id: FRAME--KNOWLEDGE-3-TIER
+id: FRAMEWORK--KNOWLEDGE-3-TIER
 phase: 0
-type: frame
+type: framework
 status: stable
 tier: genesis
 source_type: axiomatic
@@ -16,7 +16,7 @@ tags:
   - safety
   - epistemic
   - provenance
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES","FRAME--AUTHORITY-MATRIX"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES","FRAMEWORK--AUTHORITY-MATRIX"]}
 created_at: 2026-05-09T14:30:00.000+07:00
 ---
 
@@ -127,6 +127,6 @@ These fields are added to the runtime contract (`atomic_contract.yaml`) as permi
 
 - `CONCEPT--KNOWLEDGE-LAYERS-V2` — storage layer model (sibling)
 - `ADR--AGENT-WRITE-BOUNDARIES` — write boundary that 3-tier sits on top of
-- `FRAME--AUTHORITY-MATRIX` — tier mapping (T1/T2/T3 agent authority — different "tier" axis; not to be confused with this frame's Safety / Master / Genesis)
+- `FRAMEWORK--AUTHORITY-MATRIX` — tier mapping (T1/T2/T3 agent authority — different "tier" axis; not to be confused with this frame's Safety / Master / Genesis)
 - `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` — migration that closed the gap that 3-tier exists to fill
 - User design dialogue (2026-05-09 session) — the polymorphism + axiomatic + manual+ADR-evidence promotion + instinct framing decisions

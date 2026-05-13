@@ -38,7 +38,7 @@ describe('PROTO--SAMPLE-RULE predicate', () => {
     })
     expect(result.ok).toBe(false)
     expect(result.violations[0]!.severity).toBe('warning')
-    expect(result.violations[0]!.message).toMatch(/no FRAME atom found/)
+    expect(result.violations[0]!.message).toMatch(/no FRAME or FRAMEWORK atom found/)
   })
 
   it('passes against the real repo atomic index (smoke)', async () => {

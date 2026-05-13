@@ -12,7 +12,7 @@ tags:
   - symbol-graph
   - concept
   - tracing
-crosslinks: {"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH"]}
+crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH"]}
 created_at: 2026-05-12T15:50:00.000+07:00
 ---
 

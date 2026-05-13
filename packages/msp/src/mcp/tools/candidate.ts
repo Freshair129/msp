@@ -13,8 +13,8 @@ export const description =
 export const inputSchema = {
   proposed_id: z
     .string()
-    .describe('Atomic id (TYPE--SLUG, e.g. CONCEPT--FOO; type must be one of CONCEPT|ADR|FEAT|BLUEPRINT|FRAME|AUDIT|PROTO).'),
-  type: z.string().describe('Atom type (concept, adr, feat, blueprint, frame, audit, proto).'),
+    .describe('Atomic id (TYPE--SLUG, e.g. CONCEPT--FOO; type must be one of CONCEPT|ADR|FEAT|BLUEPRINT|FRAME|FRAMEWORK|AUDIT|PROTO).'),
+  type: z.string().describe('Atom type (concept, adr, feat, blueprint, frame, framework, audit, proto).'),
   title: z.string().describe('Human-readable title (≤ 100 chars).'),
   body: z.string().describe('Body markdown. Composed under a "# {title}" heading if no leading heading present.'),
   rationale: z.string().optional().describe('Optional one-line note on why this candidate exists.'),

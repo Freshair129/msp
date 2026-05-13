@@ -15,7 +15,7 @@ tags:
   - interface
   - adapter
   - decision
-crosslinks: {"implements":["FRAME--MSP-ARCHITECTURE-V2"],"references":["ADR--MONOREPO-STRUCTURE","ADR--MSP-MCP-SERVER","CONCEPT--AGENT-AGNOSTIC"]}
+crosslinks: {"implements":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["ADR--MONOREPO-STRUCTURE","ADR--MSP-MCP-SERVER","CONCEPT--AGENT-AGNOSTIC"]}
 created_at: 2026-05-12T03:30:00.000+07:00
 ---
 
@@ -137,7 +137,7 @@ These responsibilities live in `interfaces/`, not orchestrator:
 
 ## What this ADR does NOT change
 
-- **MSP↔GKS boundary** (`ADR--MONOREPO-STRUCTURE`, `FRAME--MSP-ARCHITECTURE-V2`) — GKS stays as outbound dependency; this ADR just formalizes where the wrapper lives (`clients/gks-client.ts`).
+- **MSP↔GKS boundary** (`ADR--MONOREPO-STRUCTURE`, `FRAMEWORK--MSP-ARCHITECTURE-V2`) — GKS stays as outbound dependency; this ADR just formalizes where the wrapper lives (`clients/gks-client.ts`).
 - **Public API surface** — MCP tool names, CLI commands, atom schemas — all unchanged. This is an internal refactor.
 - **Candidates workflow** — `msp_candidate` MCP tool → `.brain/.../candidates/` → human PR review unchanged (per `ADR--AGENT-WRITE-BOUNDARIES`). The tool simply moves from `src/mcp/tools/candidate.ts` to `src/interfaces/mcp/tools/candidate.ts`.
 
@@ -156,7 +156,7 @@ This ADR is filed as `proposed` to capture the decision; flip to `accepted` once
 - Original analysis: discussion comparing OpenClaw / Hermes / GKS+MSP roles (2026-05-12)
 - Hexagonal Architecture — Alistair Cockburn (2005), Domain-Driven Design — Eric Evans (2003)
 - Prior art: NestJS module pattern, Spring's `@Controller` / `@Service` separation, Go's `cmd/` + `internal/` layout
-- `FRAME--MSP-ARCHITECTURE-V2` — establishes that MSP is the orchestrator above GKS
+- `FRAMEWORK--MSP-ARCHITECTURE-V2` — establishes that MSP is the orchestrator above GKS
 - `CONCEPT--AGENT-AGNOSTIC` — establishes that MSP must not assume any specific cognitive-layer client
 - `ADR--MSP-MCP-SERVER` — establishes the first concrete interface (MCP server)
 - `ADR--MONOREPO-STRUCTURE` — establishes the package boundary between MSP and GKS

@@ -13,7 +13,7 @@ tags:
   - token-budget
   - episodic
   - m7d
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--CONSOLIDATOR","FEAT--CONSOLIDATOR"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--CONSOLIDATOR","FEAT--CONSOLIDATOR"]}
 created_at: 2026-05-05T16:10:00.000+07:00
 ---
 
@@ -120,4 +120,4 @@ Pure read + transform; no persistence. Episodic store unchanged.
 
 ## Source
 
-`msp_spec.md` §7d, `CONCEPT--CONSOLIDATOR` (compressor's input shape comes from M7b episodes), `FRAME--MSP-ARCHITECTURE-V2`.
+`msp_spec.md` §7d, `CONCEPT--CONSOLIDATOR` (compressor's input shape comes from M7b episodes), `FRAMEWORK--MSP-ARCHITECTURE-V2`.

@@ -15,7 +15,7 @@ tags:
   - governance
   - msp
   - gks
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","ADR--GRAPH-IS-GKS-DOMAIN","AUDIT--TWO-REPO-VALIDATION","AUDIT--GKS-UPSTREAM-PROPOSALS-FILED","AUDIT--GKS-3-6-0-PUBLISHED"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","ADR--GRAPH-IS-GKS-DOMAIN","AUDIT--TWO-REPO-VALIDATION","AUDIT--GKS-UPSTREAM-PROPOSALS-FILED","AUDIT--GKS-3-6-0-PUBLISHED"]}
 created_at: 2026-05-08T13:20:00.000+07:00
 ---
 
@@ -84,7 +84,7 @@ These constraints are stronger inside a monorepo because they're machine-checked
 ## Source
 
 - `CLAUDE.md` "Two-repo sync rule"
-- `FRAME--MSP-ARCHITECTURE-V2` — MSP↔GKS boundary table
+- `FRAMEWORK--MSP-ARCHITECTURE-V2` — MSP↔GKS boundary table
 - `ADR--GRAPH-IS-GKS-DOMAIN` — example of MSP carrying GKS-domain code as workaround
 - `AUDIT--TWO-REPO-VALIDATION` — drift audit motivated by the split
 - `AUDIT--GKS-UPSTREAM-PROPOSALS-FILED` — the proposal queue

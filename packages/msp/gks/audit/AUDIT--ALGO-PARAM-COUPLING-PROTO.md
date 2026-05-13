@@ -16,7 +16,7 @@ tags:
   - algo
   - param
   - governance
-crosslinks: {"references":["PROTO--ALGO-PARAM-COUPLING","CONCEPT--PROTO-ALGO-PARAM-COUPLING","ADR--GRAPH-IS-GKS-DOMAIN","FRAME--CROSSLINKS-VOCABULARY","CONCEPT--PROTO-PATTERN"]}
+crosslinks: {"references":["PROTO--ALGO-PARAM-COUPLING","CONCEPT--PROTO-ALGO-PARAM-COUPLING","ADR--GRAPH-IS-GKS-DOMAIN","FRAMEWORK--CROSSLINKS-VOCABULARY","CONCEPT--PROTO-PATTERN"]}
 linked_symbols:
   - {"file":"src/validator/proto/algo-param-coupling.ts"}
   - {"file":"test/validator/proto/algo-param-coupling.test.ts"}
@@ -49,7 +49,7 @@ foundation; no shared infrastructure modified.
 | File | Purpose |
 |---|---|
 | `src/validator/proto/algo-param-coupling.ts` | Predicate impl; default-exports `Predicate` |
-| `gks/proto/PROTO--ALGO-PARAM-COUPLING.md` | PROTO atom; `status: draft`, `severity: error`, enforces `FRAME--CROSSLINKS-VOCABULARY` |
+| `gks/proto/PROTO--ALGO-PARAM-COUPLING.md` | PROTO atom; `status: draft`, `severity: error`, enforces `FRAMEWORK--CROSSLINKS-VOCABULARY` |
 | `test/validator/proto/algo-param-coupling.test.ts` | 7 tests (vacuous, ok, wrong-reciprocal, type-mismatch ×2, missing-partner, multi-PARAM) |
 
 ## Test summary
@@ -103,5 +103,5 @@ accidentally double-enforce.
 
 - `CONCEPT--PROTO-ALGO-PARAM-COUPLING` (rule + scope)
 - `ADR--GRAPH-IS-GKS-DOMAIN` (boundary)
-- `FRAME--CROSSLINKS-VOCABULARY` (the FRAME this PROTO mechanises)
+- `FRAMEWORK--CROSSLINKS-VOCABULARY` (the FRAME this PROTO mechanises)
 - M8a PROTO loader (`src/validator/proto/loader.ts`) — unchanged

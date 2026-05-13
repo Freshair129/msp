@@ -120,7 +120,7 @@ packages/msp/gks/audit/AUDIT--SYMBOLS-FRAMEWORK-AWARENESS.md  (you author)
 packages/msp/msp_spec.md           ← Boss editing separately
 packages/msp/gks/audit/AUDIT--CORE-FRAMEWORK-RECONCILE-V1.md
 packages/msp/gks/concept/CONCEPT--CODEGEN-MICROTASK-RUNNER.md
-packages/msp/gks/frame/FRAME--PHASE-GOVERNANCE.md
+packages/msp/gks/frame/FRAMEWORK--PHASE-GOVERNANCE.md
 AGENT.md, GEMINI.md  ← user/agent personal config
 ```
 

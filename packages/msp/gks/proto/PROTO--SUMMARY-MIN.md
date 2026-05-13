@@ -14,7 +14,7 @@ tags:
   - summary
   - validator
   - m8f
-crosslinks: {"enforces":["FRAME--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--PROTO-PATTERN","CONCEPT--PROTO-AUDIT-EXISTING-RULES","FEAT--PROTO-LOADER","ADR--ANTI-HALLUCINATION-RULES"]}
+crosslinks: {"enforces":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--PROTO-PATTERN","CONCEPT--PROTO-AUDIT-EXISTING-RULES","FEAT--PROTO-LOADER","ADR--ANTI-HALLUCINATION-RULES"]}
 linked_symbols:
   - {"file":"src/validator/proto/summary-min.ts"}
 created_at: 2026-05-05T20:00:00.000+07:00

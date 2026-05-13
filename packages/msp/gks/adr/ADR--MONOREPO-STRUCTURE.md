@@ -15,7 +15,7 @@ tags:
   - decision
   - msp
   - gks
-crosslinks: {"references":["CONCEPT--MONOREPO-MIGRATION","FRAME--MSP-ARCHITECTURE-V2","ADR--GRAPH-IS-GKS-DOMAIN"]}
+crosslinks: {"references":["CONCEPT--MONOREPO-MIGRATION","FRAMEWORK--MSP-ARCHITECTURE-V2","ADR--GRAPH-IS-GKS-DOMAIN"]}
 created_at: 2026-05-08T13:21:00.000+07:00
 ---
 
@@ -70,7 +70,7 @@ freshair129/msp/                    (this repo, renamed-or-kept; archive GksV3 s
 
 **Decision**: npm workspaces. Disk efficiency loss is negligible for a 2-package monorepo and the migration cost stays minimal.
 
-### Boundary (refined from `FRAME--MSP-ARCHITECTURE-V2` + `ADR--GRAPH-IS-GKS-DOMAIN`)
+### Boundary (refined from `FRAMEWORK--MSP-ARCHITECTURE-V2` + `ADR--GRAPH-IS-GKS-DOMAIN`)
 
 | Rule | Enforcement |
 |---|---|
@@ -142,7 +142,7 @@ Slightly better disk usage and stricter dependency hoisting than npm workspaces.
 
 ## What this ADR does NOT change
 
-- **MSP↔GKS boundary semantics**: `FRAME--MSP-ARCHITECTURE-V2` and `ADR--GRAPH-IS-GKS-DOMAIN` still define what each package owns. The migration moves files; it doesn't redraw the line.
+- **MSP↔GKS boundary semantics**: `FRAMEWORK--MSP-ARCHITECTURE-V2` and `ADR--GRAPH-IS-GKS-DOMAIN` still define what each package owns. The migration moves files; it doesn't redraw the line.
 - **Public API of `@freshair129/gks`**: same exports, same CLI, same MCP server entrypoints
 - **MSP atom store layout**: `gks/concept/`, `gks/adr/`, etc. inside `packages/msp/` keep their current paths
 

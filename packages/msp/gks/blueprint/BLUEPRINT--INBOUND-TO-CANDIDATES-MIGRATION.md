@@ -14,7 +14,7 @@ tags:
   - migration
   - blueprint
   - implementation
-crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"src/mcp/tools/propose.ts"}
   - {"file":"src/mcp/tools/candidate.ts"}
@@ -217,7 +217,7 @@ phase_4_audit_supersede:
         - crosslinks.superseded_by: ["CONCEPT--KNOWLEDGE-LAYERS-V2"]
         - body: prepend a "Superseded by …" notice block
 
-    4.2 Audit FRAME--MSP-ARCHITECTURE-V2:
+    4.2 Audit FRAMEWORK--MSP-ARCHITECTURE-V2:
         - if it mentions inbound, update text to reference 4-layer model
         - if it's purely structural and doesn't mention inbound, no change
 
@@ -254,7 +254,7 @@ geography:
   - "CLAUDE.md"                                                  # MODIFIED phase 3
   - "ROADMAP.md"                                                 # MODIFIED phase 2 (deprecation), phase 3 (final)
   - "gks/concept/CONCEPT--INBOUND-QUEUE.md"                      # MODIFIED phase 4 — status: superseded
-  - "gks/frame/FRAME--MSP-ARCHITECTURE-V2.md"                    # MODIFIED phase 4 if needed
+  - "gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md"                    # MODIFIED phase 4 if needed
   - "gks/audit/AUDIT--INBOUND-REMOVED.md"                        # NEW phase 4
 
 verification_plan:
@@ -303,7 +303,7 @@ implementation_order:
   P3.7 PHASE_3_AUDIT          AUDIT--INBOUND-INFRA-DELETED
 
   P4.1 SUPERSEDE_ATOM         CONCEPT--INBOUND-QUEUE → status: superseded
-  P4.2 FRAME_AUDIT            FRAME--MSP-ARCHITECTURE-V2 if needed
+  P4.2 FRAME_AUDIT            FRAMEWORK--MSP-ARCHITECTURE-V2 if needed
   P4.3 FINAL_AUDIT            AUDIT--INBOUND-REMOVED
 ```
 
@@ -331,7 +331,7 @@ implementation_order:
 
 - `CONCEPT--KNOWLEDGE-LAYERS-V2` — model
 - `ADR--AGENT-WRITE-BOUNDARIES` — boundary
-- `FRAME--MSP-ARCHITECTURE-V2` — base architecture
+- `FRAMEWORK--MSP-ARCHITECTURE-V2` — base architecture
 - PR #41 + PR #42 CI failures — race condition that this BLUEPRINT eliminates structurally
 - Existing `src/memory/episodic/writer.ts` — pattern for CandidateWriter API shape
 - Existing `src/mcp/tools/episode-append.ts` — pattern for `msp_candidate` handler shape

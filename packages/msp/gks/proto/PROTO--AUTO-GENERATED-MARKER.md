@@ -14,7 +14,7 @@ tags:
   - codegen
   - marker
   - framework-spec-9.6
-crosslinks: {"enforces":["FRAME--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--COGNITIVE-LAYER-FACADE","CONCEPT--CODEGEN-MICROTASK-RUNNER"]}
+crosslinks: {"enforces":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--COGNITIVE-LAYER-FACADE","CONCEPT--CODEGEN-MICROTASK-RUNNER"]}
 linked_symbols:
   - {"file":"packages/msp/src/cognitive/compose.ts"}
   - {"file":"packages/msp/src/cognitive/marker-constants.ts","symbol":"PROTO_AUTO_GENERATED_MARKER"}

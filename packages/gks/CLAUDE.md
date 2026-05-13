@@ -89,7 +89,9 @@ affected files until CONCEPT/ADR/BLUEPRINT are written and stable.
 | `ISSUE--` | Bug / problem report | light (direct write) |
 | `HOTFIX--` | Emergency bypass atom | light |
 | `INC--` | Incident post-mortem | light |
-| `GUARDRAIL--` | Hard constraint | strict |
+| `GUARD--` | Hard constraint (renamed from `GUARDRAIL--` per `ADR--TAXONOMY-V2-3-MIGRATION`) | strict |
+| `FRAMEWORK--` | Governance / architectural framework (split from `FRAME--` in v2.3) | strict |
+| `FRAME--` | Block Manifest — runtime entry-point of a Genesis Block (v2.3+) | strict |
 | `RISK--` | Risk register entry | strict |
 | `RUNBOOK--` | Operational playbook | strict |
 | `SLO--` | Service-level objective | strict |
@@ -223,7 +225,7 @@ gks/
   blueprint/ BLUEPRINT--ISSUE-CLI
   concept/  CONCEPT--MEMORY-STORE
   feat/     FEAT--ISSUE-TRACKER, FEAT--LOOKUP-BY-SYMBOL
-  frame/    FRAME--FOUR-LAYERS
+  frame/    FRAMEWORK--FOUR-LAYERS
   00_index/ atomic_index.jsonl  ← rebuilt by `npm run msp:index`
 ```
 

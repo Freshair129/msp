@@ -1178,7 +1178,7 @@ Resolved questions have moved to §0. The following remain open. Each is annotat
 
 ### Existing MSP / GKS atoms (load-bearing for this spec)
 
-- `packages/msp/gks/frame/FRAME--MSP-ARCHITECTURE-V2.md` — top-level MSP architecture.
+- `packages/msp/gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — top-level MSP architecture.
 - `packages/msp/gks/concept/CONCEPT--AGENT-AGNOSTIC.md` — agent-agnostic boundary contract.
 - `packages/msp/gks/concept/CONCEPT--MSP-ROADMAP.md` — milestone plan.
 - `packages/gks/docs/adr/004-namespace-as-first-class.md` — Namespace primitive.

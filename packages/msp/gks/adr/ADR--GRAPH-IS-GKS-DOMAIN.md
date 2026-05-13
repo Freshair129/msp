@@ -13,7 +13,7 @@ tags:
   - scope
   - decision
   - governance
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","FRAME--CROSSLINKS-VOCABULARY","ADR--ANTI-HALLUCINATION-RULES"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--CROSSLINKS-VOCABULARY","ADR--ANTI-HALLUCINATION-RULES"]}
 created_at: 2026-05-04T09:02:48.270+07:00
 ---
 
@@ -34,7 +34,7 @@ This ADR records the boundary so we don't drift further and so future reviewers 
 
 ## Decision
 
-### Boundary (refined from `FRAME--MSP-ARCHITECTURE-V2`)
+### Boundary (refined from `FRAMEWORK--MSP-ARCHITECTURE-V2`)
 
 | Concern | Owner |
 |---|---|

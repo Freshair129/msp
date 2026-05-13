@@ -1,7 +1,7 @@
 ---
-id: FRAME--CROSSLINKS-VOCABULARY
+id: FRAMEWORK--CROSSLINKS-VOCABULARY
 phase: 0
-type: frame
+type: framework
 status: stable
 vault_id: default
 tier: genesis

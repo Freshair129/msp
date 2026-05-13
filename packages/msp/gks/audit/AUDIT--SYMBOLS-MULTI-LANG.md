@@ -15,7 +15,7 @@ tags:
   - cobol
   - audit
   - tree-sitter
-crosslinks: {"references":["FEAT--SYMBOLS-MULTI-LANG","BLUEPRINT--SYMBOLS-MULTI-LANG","ADR--SYMBOLS-PYTHON-PARSER","ADR--SYMBOLS-COBOL-STRATEGY","FRAME--SYMBOL-GRAPH"]}
+crosslinks: {"references":["FEAT--SYMBOLS-MULTI-LANG","BLUEPRINT--SYMBOLS-MULTI-LANG","ADR--SYMBOLS-PYTHON-PARSER","ADR--SYMBOLS-COBOL-STRATEGY","FRAMEWORK--SYMBOL-GRAPH"]}
 linked_symbols:
   - {"file":"packages/msp/src/symbols/parser/python.ts"}
   - {"file":"packages/msp/src/symbols/parser/cobol.ts"}

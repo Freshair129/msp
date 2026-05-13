@@ -15,7 +15,7 @@ tags:
   - voice
   - preferences
   - m7e
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-05T00:25:00.000+07:00
 ---
 
@@ -120,4 +120,4 @@ Read at session start; written via `setProfile` / `setVoice` / `setPreference`. 
 
 ## Source
 
-`msp_spec.md` §7e (Identity / Soul), `FRAME--MSP-ARCHITECTURE-V2` (passport metaphor — identity is the fourth pillar).
+`msp_spec.md` §7e (Identity / Soul), `FRAMEWORK--MSP-ARCHITECTURE-V2` (passport metaphor — identity is the fourth pillar).

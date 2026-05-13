@@ -18,7 +18,7 @@ tags:
   - orm
   - route
   - mcp
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"],"superseded_by":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","ADR--SYMBOLS-FRAMEWORK-AWARENESS","ALGO--SYMBOLS-FRAMEWORK-RECOGNITION","PROTO--SYMBOLS-FRAMEWORK-INVARIANTS"]}
+crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-SYMBOL-MCP"],"superseded_by":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","ADR--SYMBOLS-FRAMEWORK-AWARENESS","ALGO--SYMBOLS-FRAMEWORK-RECOGNITION","PROTO--SYMBOLS-FRAMEWORK-INVARIANTS"]}
 linked_symbols:
   - {"file":"packages/msp/src/symbols/parser/framework.ts"}
   - {"file":"packages/msp/src/symbols/parser/orm.ts"}

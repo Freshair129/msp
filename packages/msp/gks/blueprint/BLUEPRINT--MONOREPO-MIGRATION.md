@@ -15,7 +15,7 @@ tags:
   - implementation
   - msp
   - gks
-crosslinks: {"references":["CONCEPT--MONOREPO-MIGRATION","ADR--MONOREPO-STRUCTURE","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["CONCEPT--MONOREPO-MIGRATION","ADR--MONOREPO-STRUCTURE","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"package.json"}
   - {"file":"packages/gks/package.json"}

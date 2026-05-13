@@ -16,7 +16,7 @@ tags:
   - sqlite
   - jsonl
   - leiden
-crosslinks: {"implements":["FEAT--MSP-GRAPH-CLI","FEAT--MSP-SYMBOL-MCP"],"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE","ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"]}
+crosslinks: {"implements":["FEAT--MSP-GRAPH-CLI","FEAT--MSP-SYMBOL-MCP"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE","ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"]}
 linked_symbols:
   - {"file":"src/symbols/types.ts"}
   - {"file":"src/symbols/parser/typescript.ts"}
@@ -411,7 +411,7 @@ T7 (DEFER)      : CLI lives in PR-4; MCP tools live in PR-4; web UI in PR-5
 
 ## Source
 
-- `FRAME--SYMBOL-GRAPH`, `CONCEPT--SYMBOL-GRAPH`
+- `FRAMEWORK--SYMBOL-GRAPH`, `CONCEPT--SYMBOL-GRAPH`
 - `CONCEPT--PARSER-CHOICE` — TS Compiler API in v1
 - `ADR--SYMBOL-GRAPH-PERSISTENCE` — SQLite + JSONL hybrid; schema verbatim
 - `ADR--LEIDEN-COMMUNITY-DETECTION` — Leiden primary, Louvain fallback

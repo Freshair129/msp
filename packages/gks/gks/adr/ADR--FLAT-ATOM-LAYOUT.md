@@ -7,7 +7,7 @@ vault_id: GKS-CORE
 title: Atom folders by type, not by phase
 tags: [filesystem-layout, taxonomy, governance]
 crosslinks:
-  references: [ADR--EXTENDED-TAXONOMY, FRAME--FOUR-LAYERS]
+  references: [ADR--EXTENDED-TAXONOMY, FRAMEWORK--FOUR-LAYERS]
 linked_symbols:
   - { file: "scripts/msp/re-indexer.ts" }
   - { file: "src/memory/gks.ts", fn: readBody }

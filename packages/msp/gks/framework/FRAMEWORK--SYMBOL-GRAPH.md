@@ -1,7 +1,7 @@
 ---
-id: FRAME--SYMBOL-GRAPH
+id: FRAMEWORK--SYMBOL-GRAPH
 phase: 0
-type: frame
+type: framework
 status: stable
 tier: genesis
 source_type: axiomatic
@@ -15,7 +15,7 @@ tags:
   - tree-sitter
   - leiden
   - upstream-gks
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","FRAME--KNOWLEDGE-3-TIER","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--KNOWLEDGE-3-TIER","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-09T16:30:00.000+07:00
 ---
 
@@ -23,7 +23,7 @@ created_at: 2026-05-09T16:30:00.000+07:00
 
 ## Two graphs, one repo
 
-`FRAME--KNOWLEDGE-3-TIER` defined the **conceptual** axis of MSP: atoms in `gks/<type>/` connected by `crosslinks` (references / supersedes / implements / parent_blueprint / resolves) and tagged with Safety / Master / Genesis tier. That graph captures **why** code exists.
+`FRAMEWORK--KNOWLEDGE-3-TIER` defined the **conceptual** axis of MSP: atoms in `gks/<type>/` connected by `crosslinks` (references / supersedes / implements / parent_blueprint / resolves) and tagged with Safety / Master / Genesis tier. That graph captures **why** code exists.
 
 This frame adds an orthogonal **structural** axis: a graph over **source-code symbols** (functions, classes, types, imports) connected by `calls` / `extends` / `implements` / `imports` / `references` / `defines` edges, clustered into communities by Leiden algorithm. That graph captures **how** the code is wired.
 
@@ -85,6 +85,6 @@ The 6-PR sequence (PR-1 atoms → PR-6 audit + upstream proposal) is the impleme
 ## Source
 
 - User design dialogue 2026-05-09 — proposed Tree-sitter + Leiden combination
-- `FRAME--MSP-ARCHITECTURE-V2` — base architecture; this frame extends it orthogonally
-- `FRAME--KNOWLEDGE-3-TIER` — conceptual axis sibling
+- `FRAMEWORK--MSP-ARCHITECTURE-V2` — base architecture; this frame extends it orthogonally
+- `FRAMEWORK--KNOWLEDGE-3-TIER` — conceptual axis sibling
 - Prior art: ctags, sourcegraph SCIP, scope-graphs (stack-graphs), comby AST-based search

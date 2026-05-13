@@ -16,7 +16,7 @@ tags:
   - doc-to-code
   - governance
   - instinct
-crosslinks: {"references":["FRAME--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
+crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
 created_at: 2026-05-09T15:00:30.000+07:00
 ---
 

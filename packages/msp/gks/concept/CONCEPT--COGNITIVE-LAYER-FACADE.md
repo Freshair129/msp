@@ -13,7 +13,7 @@ tags:
   - facade
   - memoryos
   - agent-agnostic
-crosslinks: {"references":["CONCEPT--AGENT-AGNOSTIC","CONCEPT--AGENT-INTEGRATION-PATTERNS","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["CONCEPT--AGENT-AGNOSTIC","CONCEPT--AGENT-INTEGRATION-PATTERNS","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T22:45:00.000+07:00
 ---
 
@@ -54,7 +54,7 @@ import { createCognitiveLayer } from 'msp'
 const layer = await createCognitiveLayer({ root: process.cwd() })
 ```
 
-This is the answer to "what makes MSP plug into a cognitive layer" — the seam that `FRAME--MSP-ARCHITECTURE-V2` v2 promised but `docs/AGENT-INTEGRATION.md` had to teach by example. The facade reduces consumer-side wiring from ~50 lines to one.
+This is the answer to "what makes MSP plug into a cognitive layer" — the seam that `FRAMEWORK--MSP-ARCHITECTURE-V2` v2 promised but `docs/AGENT-INTEGRATION.md` had to teach by example. The facade reduces consumer-side wiring from ~50 lines to one.
 
 ## Success criteria (for the eventual FEAT)
 

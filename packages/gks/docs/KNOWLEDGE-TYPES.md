@@ -3,6 +3,12 @@
 > The atomic-knowledge prefix taxonomy GKS recognises. Every `.md` file
 > under `gks/` should have a frontmatter `id: TYPE--SLUG` whose `TYPE`
 > appears in this document. ADR-012 records why this list exists.
+> **Taxonomy v2.3** redefines `FRAME--` as Block Manifest, introduces
+> `FRAMEWORK--` for the prior `FRAME--` meaning, renames `GUARDRAIL--`
+> to `GUARD--`, and adds engine-layer prefixes (`STACK--`, `SPEC--`,
+> `SAFETY--`, `COGNITIVE--`). See `ADR--TAXONOMY-V2-3-MIGRATION` in the
+> MSP atom tree for the migration record. Long-form descriptions in this
+> document still reference legacy prefix names pending a doc-update pass.
 
 This is the **reference** — when you ask "where does this concept go?"
 the answer is here. Templates for each prefix live in
@@ -24,7 +30,12 @@ the answer is here. Templates for each prefix live in
 | `ENDPOINT--` | Implementation | One API path / method |
 | `ENTRYPOINT--` | Implementation | Auth / middleware / access logic |
 | `PARAMS--` | Implementation | Constants / business config |
-| `FRAME--` | Implementation | Architectural frameworks / methodology / code standards |
+| `FRAME--` | Implementation | **(v2.3+)** Block Manifest — runtime entry-point of a Genesis Block |
+| `FRAMEWORK--` | Implementation | **(v2.3+)** Governance / architectural framework (was `FRAME--` pre-v2.3) |
+| `STACK--` | Implementation | Technology stack — language/runtime/library inventory |
+| `SPEC--` | Implementation | Specification — JSON Schema, API data shape, wire format |
+| `COGNITIVE--` | Implementation | Mental model / interpretive lens (e.g. Erikson stages) |
+| `SAFETY--` | Governance | Ethical safety — AI alignment + behavioural guardrails |
 | `MASTER--` | Implementation | Root-level policy / genesis rule (e.g. contradiction policy, write boundaries) |
 | `PROTO--` | Implementation | Machine-enforced invariant — short rule the validator checks at write time |
 | `BLUEPRINT--` | Implementation | Implementation plan (YAML or Markdown + frontmatter) |
@@ -36,7 +47,7 @@ the answer is here. Templates for each prefix live in
 > and `gks new-feature --task-tracker=…` for the integration points.
 | `SKILL--` | Governance | Agent capability |
 | `PROTOCOL--` | Governance | Interaction contract |
-| `GUARDRAIL--` | Governance | Enforced behavioural policy |
+| `GUARD--` | Governance | Enforced behavioural policy (renamed from `GUARDRAIL--` in v2.3) |
 | `POLICY--` | Governance | Operational policy |
 | `PERSONA--` | Governance | Agent identity / role |
 | `REQ--` | Requirements | Umbrella requirement |

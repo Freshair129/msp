@@ -44,7 +44,7 @@ Every inbound proposal declares one of four `proposal_type` values. The promote 
 ## What this concept does NOT cover
 
 - Specific anti-hallucination rules for each type (e.g. ADR-monotonic only applies to `new_atomic` for ADRs) → see `ADR--ANTI-HALLUCINATION-RULES`
-- Crosslink semantics for `supersede` → see `FRAME--CROSSLINKS-VOCABULARY`
+- Crosslink semantics for `supersede` → see `FRAMEWORK--CROSSLINKS-VOCABULARY`
 - The promotion levels (L0/L1/L2) the inbound transitions through → see `ADR--PROMOTION-LEVELS`
 
 ## Source

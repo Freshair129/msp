@@ -12,7 +12,7 @@ tags:
   - memory
   - graph
   - decision
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T22:48:00.000+07:00
 ---
 
@@ -22,7 +22,7 @@ created_at: 2026-05-12T22:48:00.000+07:00
 
 `MemoryStoreOptions` lets callers swap the vector backend via `vectorBackend: VectorBackendFactory`. There is no equivalent knob for the graph layer, even though three `GraphBackend` implementations now ship (`GraphStore`, `PgGraphBackend`, `GenesisBlockBackend`) and the `BLUEPRINT--GENESIS-BLOCK-INTEGRATION` plan calls for a one-line swap.
 
-Today the graph layer is constructed ad-hoc by callers — MSP's `getStore()` doesn't expose a graph at all, and consumers wanting graph traversal must instantiate `GraphStore` independently. This contradicts `FRAME--FOUR-LAYERS` (the GKS frame atom) which lists graph alongside atomic / vector / episodic / obsidian as a first-class layer.
+Today the graph layer is constructed ad-hoc by callers — MSP's `getStore()` doesn't expose a graph at all, and consumers wanting graph traversal must instantiate `GraphStore` independently. This contradicts `FRAMEWORK--FOUR-LAYERS` (the GKS frame atom) which lists graph alongside atomic / vector / episodic / obsidian as a first-class layer.
 
 ## Decision
 
@@ -35,7 +35,7 @@ The change is **additive** — existing callers that don't pass `graphBackend` g
 ### Positive
 - `PgGraphBackend` and `GenesisBlockBackend` are now wired into `MemoryStore` symmetrically with `pgvector` / `HnswBackend`.
 - The cognitive facade (`createCognitiveLayer`) can expose `layer.graph` without a separate factory call.
-- `FRAME--FOUR-LAYERS` is now reflected in the API surface.
+- `FRAMEWORK--FOUR-LAYERS` is now reflected in the API surface.
 
 ### Negative
 - One extra dir (`<brain>/graph/`) on disk by default. Gitignored.

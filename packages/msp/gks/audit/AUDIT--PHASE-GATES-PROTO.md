@@ -13,7 +13,7 @@ tags:
   - phase-gates
   - audit
   - m8b
-crosslinks: {"references":["PROTO--PHASE-GATES","CONCEPT--PROTO-PHASE-GATES","FRAME--PHASE-GOVERNANCE","FEAT--PROTO-LOADER","BLUEPRINT--PROTO-LOADER","CONCEPT--PROTO-PATTERN"]}
+crosslinks: {"references":["PROTO--PHASE-GATES","CONCEPT--PROTO-PHASE-GATES","FRAMEWORK--PHASE-GOVERNANCE","FEAT--PROTO-LOADER","BLUEPRINT--PROTO-LOADER","CONCEPT--PROTO-PATTERN"]}
 linked_symbols:
   - {"file":"src/validator/proto/phase-gates.ts"}
   - {"file":"gks/proto/PROTO--PHASE-GATES.md"}
@@ -30,14 +30,14 @@ created_at: 2026-05-05T18:00:00.000+07:00
 
 Implements `CONCEPT--PROTO-PHASE-GATES` as a PROTO predicate plugged into
 the M8a loader. Mechanises the doc-to-code phase order from
-`FRAME--PHASE-GOVERNANCE`.
+`FRAMEWORK--PHASE-GOVERNANCE`.
 
 ## What shipped
 
 | File | Purpose |
 |---|---|
 | `src/validator/proto/phase-gates.ts` | Predicate impl (default export) |
-| `gks/proto/PROTO--PHASE-GATES.md` | PROTO atom — `status: draft`, `severity: error`, enforces FRAME--PHASE-GOVERNANCE |
+| `gks/proto/PROTO--PHASE-GATES.md` | PROTO atom — `status: draft`, `severity: error`, enforces FRAMEWORK--PHASE-GOVERNANCE |
 | `test/validator/proto/phase-gates.test.ts` | 9 tests covering the predicate |
 | `gks/audit/AUDIT--PHASE-GATES-PROTO.md` | This file |
 
@@ -138,4 +138,4 @@ opting out via `phase_override.skip_blueprint`.
 
 ## Source
 
-`CONCEPT--PROTO-PHASE-GATES`, `FRAME--PHASE-GOVERNANCE`, `FEAT--PROTO-LOADER`, `BLUEPRINT--PROTO-LOADER`, `CONCEPT--PROTO-PATTERN`.
+`CONCEPT--PROTO-PHASE-GATES`, `FRAMEWORK--PHASE-GOVERNANCE`, `FEAT--PROTO-LOADER`, `BLUEPRINT--PROTO-LOADER`, `CONCEPT--PROTO-PATTERN`.

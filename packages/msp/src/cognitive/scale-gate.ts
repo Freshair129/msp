@@ -37,7 +37,7 @@ interface IndexEntry {
 const REQUIRED_BY_SCALE: Record<ScaleLevel, string[]> = {
   L1: [],
   L2: ['concept', 'adr', 'feat', 'blueprint'],
-  L3: ['concept', 'adr', 'feat', 'blueprint', 'frame', 'flow'],
+  L3: ['concept', 'adr', 'feat', 'blueprint', 'framework', 'flow'],
 }
 
 const STABLE_STATUSES = new Set(['stable', 'active'])

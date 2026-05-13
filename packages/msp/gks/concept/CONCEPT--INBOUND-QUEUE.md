@@ -13,7 +13,7 @@ tags:
   - write-path
   - gatekeeper
   - superseded
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"],"superseded_by":["CONCEPT--KNOWLEDGE-LAYERS-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"superseded_by":["CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-03T14:01:50.297+07:00
 ---
 

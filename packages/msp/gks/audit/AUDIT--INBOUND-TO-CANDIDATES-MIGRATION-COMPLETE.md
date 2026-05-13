@@ -14,7 +14,7 @@ tags:
   - migration
   - audit
   - supersession
-crosslinks: {"references":["BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--INBOUND-QUEUE","ADR--AGENT-WRITE-BOUNDARIES","ADR--PROMOTION-WORKFLOW","ADR--PROMOTION-LEVELS","FRAME--KNOWLEDGE-3-TIER"]}
+crosslinks: {"references":["BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--INBOUND-QUEUE","ADR--AGENT-WRITE-BOUNDARIES","ADR--PROMOTION-WORKFLOW","ADR--PROMOTION-LEVELS","FRAMEWORK--KNOWLEDGE-3-TIER"]}
 created_at: 2026-05-09T14:45:00.000+07:00
 ---
 
@@ -46,13 +46,13 @@ created_at: 2026-05-09T14:45:00.000+07:00
 
 ## 3-tier model introduced (this PR — Stream B)
 
-- New atom: `FRAME--KNOWLEDGE-3-TIER` (`status: draft`, `tier: genesis`, `source_type: axiomatic`) — defines Safety / Master / Genesis classification + provenance schema.
+- New atom: `FRAMEWORK--KNOWLEDGE-3-TIER` (`status: draft`, `tier: genesis`, `source_type: axiomatic`) — defines Safety / Master / Genesis classification + provenance schema.
 - Six new permitted optional frontmatter fields recognised across the codebase: `tier`, `source_type`, `learned_from`, `promoted_from`, `promoted_at`, `promotion_adr`. None are forbidden; none are required for existing types.
 - The 6 atoms touched in Stream A are tagged with `tier:` + `source_type:` while we're editing them anyway. Bulk-tagging the remaining ~175 atoms is deferred to PR-4 of the rollout plan.
 
 ## What did NOT change
 
-- `FRAME--MSP-ARCHITECTURE-V2.md` — no inbound references found; left untouched.
+- `FRAMEWORK--MSP-ARCHITECTURE-V2.md` — no inbound references found; left untouched.
 - All `AUDIT--*` atoms — historical record, immutable; their body mentions of inbound remain accurate as historical context.
 - `SPEC--ARCHITECTURE-V2.md` — left as draft per the parent rollout plan.
 - `CLAUDE.md` — already updated in PR-2 (Phase 3); no further edits in this PR.
@@ -77,5 +77,5 @@ created_at: 2026-05-09T14:45:00.000+07:00
 
 - `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` — implementation plan executed
 - PRs #46, #49, #50, and this PR — phase-by-phase shipping
-- `FRAME--KNOWLEDGE-3-TIER` — knowledge-class model introduced concurrently
+- `FRAMEWORK--KNOWLEDGE-3-TIER` — knowledge-class model introduced concurrently
 - 2026-05-09 session — user-driven 3-tier model design

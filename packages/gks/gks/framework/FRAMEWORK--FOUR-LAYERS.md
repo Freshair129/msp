@@ -1,7 +1,7 @@
 ---
-id: FRAME--FOUR-LAYERS
+id: FRAMEWORK--FOUR-LAYERS
 phase: 2
-type: frame
+type: framework
 status: stable
 vault_id: GKS-CORE
 title: Four-layer storage model

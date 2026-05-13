@@ -13,7 +13,7 @@ tags:
   - client
   - m7a
   - user-facing
-crosslinks: {"implements":["ADR--MSP-OBSIDIAN-INTEGRATION"],"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"implements":["ADR--MSP-OBSIDIAN-INTEGRATION"],"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
   - {"file":"src/obsidian/client.ts"}
   - {"file":"src/obsidian/types.ts"}
@@ -32,8 +32,8 @@ const client = await createObsidianClient({ root: process.cwd() })
 if (client.mode === 'rest') {
   const hits = await client.search('passport', { limit: 5 })
 }
-const note = await client.readFile('gks/frame/FRAME--MSP-ARCHITECTURE-V2.md')
-const link = client.smartViewDeepLink?.('FRAME--MSP-ARCHITECTURE-V2')
+const note = await client.readFile('gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md')
+const link = client.smartViewDeepLink?.('FRAMEWORK--MSP-ARCHITECTURE-V2')
 ```
 
 ## Acceptance criteria

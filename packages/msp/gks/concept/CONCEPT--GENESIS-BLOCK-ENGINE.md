@@ -15,7 +15,7 @@ tags:
   - genesis-block
   - sovereign-stack
   - cypher
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T11:55:00.000+07:00
 ---
 

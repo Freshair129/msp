@@ -15,7 +15,7 @@ tags:
   - nextjs
   - prisma
   - mcp
-crosslinks: {"references":["FRAME--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
+crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
 created_at: 2026-05-12T05:35:00.000+07:00
 ---
 
@@ -67,7 +67,7 @@ In scope:
 ## Source
 
 - `FEAT--SYMBOLS-MULTI-LANG` — parser foundation
-- `FRAME--SYMBOL-GRAPH` — overall architecture this concept extends
+- `FRAMEWORK--SYMBOL-GRAPH` — overall architecture this concept extends
 - Original FEAT--SYMBOLS-FRAMEWORK-AWARENESS (superseded by the decomposition this concept opens; see `ADR--SYMBOLS-FRAMEWORK-AWARENESS`)
 - Next.js App Router documentation (Vercel)
 - Prisma schema reference

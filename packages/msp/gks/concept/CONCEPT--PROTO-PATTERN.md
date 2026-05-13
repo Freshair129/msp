@@ -14,7 +14,7 @@ tags:
   - protocol
   - contract
   - m8a
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","FRAME--PHASE-GOVERNANCE","ADR--HUMAN-REVIEW-GATES","FEAT--MSP-VALIDATOR"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--PHASE-GOVERNANCE","ADR--HUMAN-REVIEW-GATES","FEAT--MSP-VALIDATOR"]}
 created_at: 2026-05-05T16:18:00.000+07:00
 ---
 
@@ -24,7 +24,7 @@ created_at: 2026-05-05T16:18:00.000+07:00
 
 `FRAME--*` atoms describe governance ("authority levels", "phase order", "scaling levels", "crosslink vocabulary"). They're **descriptive** — humans read them, agents reference them, but no code automatically checks compliance.
 
-Example: `FRAME--PHASE-GOVERNANCE` says "P3 BLUEPRINT must precede P5 CODE". A new PR landing code-without-blueprint is technically a violation, but nothing fails at CI today — only a human reviewer might catch it.
+Example: `FRAMEWORK--PHASE-GOVERNANCE` says "P3 BLUEPRINT must precede P5 CODE". A new PR landing code-without-blueprint is technically a violation, but nothing fails at CI today — only a human reviewer might catch it.
 
 The result: governance docs decay into folklore. A new contributor can land a PR that violates the FRAME and nobody notices for months.
 
@@ -133,4 +133,4 @@ M8b–f then implement specific PROTOs (PHASE-GATES, SCALING-LEVEL-GATE, ALGO-PA
 
 ## Source
 
-`msp_spec.md` §10 (governance), `FRAME--PHASE-GOVERNANCE`, `FRAME--AUTHORITY-MATRIX`, `ADR--HUMAN-REVIEW-GATES`, user direction "วางแผนและทำให้จบ ทุก M" — M8a is the foundation enabling M8b–f.
+`msp_spec.md` §10 (governance), `FRAMEWORK--PHASE-GOVERNANCE`, `FRAMEWORK--AUTHORITY-MATRIX`, `ADR--HUMAN-REVIEW-GATES`, user direction "วางแผนและทำให้จบ ทุก M" — M8a is the foundation enabling M8b–f.

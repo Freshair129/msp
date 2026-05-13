@@ -132,7 +132,7 @@ data_logic: |
       type: proto
       status: draft                  ← important: draft so it doesn't fail CI
       severity: warning
-      crosslinks: { enforces: [FRAME--MSP-ARCHITECTURE-V2] }
+      crosslinks: { enforces: [FRAMEWORK--MSP-ARCHITECTURE-V2] }
       linked_symbols: [{ file: 'src/validator/proto/sample.ts' }]
     body: brief explanation of what the rule does
 

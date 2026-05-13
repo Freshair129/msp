@@ -242,7 +242,7 @@ Single PR, no feature flag. Migration is opt-out via `MSP_DISABLE_MIGRATION=1` (
 1. CI passes on Node 20 + 22.
 2. AUDIT atom records what shipped.
 3. Update `msp_spec.md` §12 (project paths) + §16 (references) to reflect new layout.
-4. Update `gks/frame/FRAME--MSP-ARCHITECTURE-V2.md` storage section.
+4. Update `gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md` storage section.
 5. Update GKS `docs/MSP_RELATIONSHIP.md` upstream (Phase D).
 
 ## Risks

@@ -13,7 +13,7 @@ tags:
   - scaling-levels
   - governance
   - m8c
-crosslinks: {"references":["CONCEPT--PROTO-PATTERN","FRAME--SCALING-LEVELS"]}
+crosslinks: {"references":["CONCEPT--PROTO-PATTERN","FRAMEWORK--SCALING-LEVELS"]}
 created_at: 2026-05-05T16:28:00.000+07:00
 ---
 
@@ -21,7 +21,7 @@ created_at: 2026-05-05T16:28:00.000+07:00
 
 ## Problem
 
-`FRAME--SCALING-LEVELS` defines L1/L2/L3 — escalating impact tiers requiring more documentation:
+`FRAMEWORK--SCALING-LEVELS` defines L1/L2/L3 — escalating impact tiers requiring more documentation:
 
 - **L1** (typo, comment, single-file refactor): no atom required
 - **L2** (single-feature change ≤ N files): CONCEPT + ADR + FEAT
@@ -57,4 +57,4 @@ PR diff inspection. Runs in CI workflow (not local validate, since needs git dif
 
 ## Source
 
-`FRAME--SCALING-LEVELS`, `CONCEPT--MSP-ROADMAP` §2 M8c.
+`FRAMEWORK--SCALING-LEVELS`, `CONCEPT--MSP-ROADMAP` §2 M8c.

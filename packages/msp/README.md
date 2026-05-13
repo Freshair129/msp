@@ -67,7 +67,7 @@ End-to-end demo: `npm run cognitive:quickstart` (runs `examples/cognitive-layer-
 
 | Doc | Role |
 |---|---|
-| [`gks/frame/FRAME--MSP-ARCHITECTURE-V2.md`](./gks/frame/FRAME--MSP-ARCHITECTURE-V2.md) | Architecture SSOT (3-layer ecosystem, storage layout) |
+| [`gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md`](./gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md) | Architecture SSOT (3-layer ecosystem, storage layout) |
 | [`msp_spec.md`](./msp_spec.md) v2.0.3 | Full technical spec |
 | [`gks/concept/CONCEPT--AGENT-AGNOSTIC.md`](./gks/concept/CONCEPT--AGENT-AGNOSTIC.md) | MSP/agent boundary contract |
 | [`docs/AGENT-INTEGRATION.md`](./docs/AGENT-INTEGRATION.md) | Per-client wiring snippets |

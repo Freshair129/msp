@@ -14,7 +14,7 @@ tags:
   - authority
   - decision
   - inbound-removal
-crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","FRAME--MSP-ARCHITECTURE-V2","ADR--HUMAN-REVIEW-GATES"],"supersedes":["ADR--PROMOTION-WORKFLOW","ADR--PROMOTION-LEVELS"]}
+crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","FRAMEWORK--MSP-ARCHITECTURE-V2","ADR--HUMAN-REVIEW-GATES"],"supersedes":["ADR--PROMOTION-WORKFLOW","ADR--PROMOTION-LEVELS"]}
 created_at: 2026-05-08T17:01:00.000+07:00
 ---
 
@@ -134,7 +134,7 @@ Agents that want to record durable knowledge ask the human in chat ("should I dr
 
 ## What this ADR does NOT change
 
-- `FRAME--MSP-ARCHITECTURE-V2` boundary between MSP and GKS — orthogonal axis
+- `FRAMEWORK--MSP-ARCHITECTURE-V2` boundary between MSP and GKS — orthogonal axis
 - Inbound queue removal mechanics (`BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` owns those)
 - `ADR--HUMAN-REVIEW-GATES` — review is still required for canon entry; this ADR just narrows *where* the review happens to PR review
 

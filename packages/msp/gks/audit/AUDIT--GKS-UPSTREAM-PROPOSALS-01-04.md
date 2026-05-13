@@ -51,7 +51,7 @@ commit `dd076db`.
 - Walker follows `crosslinks.superseded_by` transparently on superseded atoms
 - Cycle guard prevents infinite loop
 - Default off — existing CI pipelines unaffected
-- MSP pre-push hook can now pass `--through-superseded` when projects use supersede chains (e.g. FRAME--MSP-ARCHITECTURE → V2)
+- MSP pre-push hook can now pass `--through-superseded` when projects use supersede chains (e.g. FRAMEWORK--MSP-ARCHITECTURE → V2)
 
 ### Proposal 03 — Backlinks derivation API
 - New `deriveBacklinksFromEntries()` — pure derivation from an `AtomicEntry[]`
