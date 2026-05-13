@@ -2,11 +2,19 @@
 
 ## TL;DR
 
-GKS 3.6.0+ ships `createNomicEmbedder()` using `nomic-ai/nomic-embed-text-v1.5`
-(768-dim, Thai+English, fully local). If your project also runs a Memory OS
-that exposes the same vault to an in-Obsidian browse plugin (e.g. Smart
-Connections), configure that plugin to use the **same model**. Otherwise
-the vault is embedded twice into incompatible vector spaces.
+GKS 3.6.0+ (current: 3.7.0) ships `createNomicEmbedder()` using
+`nomic-ai/nomic-embed-text-v1.5` (768-dim, Thai+English, fully local).
+If your project also runs a Memory OS that exposes the same vault to an
+in-Obsidian browse plugin (e.g. Smart Connections), configure that plugin
+to use the **same model**. Otherwise the vault is embedded twice into
+incompatible vector spaces.
+
+> **Monorepo note (2026-05-11+)**: GKS now ships from
+> `packages/gks/` of the `cognitive_system` monorepo. Run package-scoped
+> commands via `npm run <script> --workspace=packages/gks` from the repo
+> root (e.g. `npm run re-embed --workspace=packages/gks`). The CLI is
+> still callable as `gks <cmd>` once `packages/gks` is built and linked,
+> matching the pre-monorepo invocation shown below.
 
 ## Why this matters
 
@@ -57,7 +65,12 @@ plugin to use the chosen model. The ADR records why.
 If you change the canonical model:
 
 ```bash
-npm run gks re-embed                   # GKS rebuilds .brain/.../vector/
+# Monorepo (current):
+npm run re-embed --workspace=packages/gks   # GKS rebuilds .brain/.../vector/
+
+# Or, if `gks` CLI is on PATH (after `npm link`):
+gks re-embed
+
 # Then in Obsidian:
 # Settings → Smart Connections → Re-index vault
 ```

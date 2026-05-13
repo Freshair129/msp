@@ -17,11 +17,13 @@ crosslinks: {"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","CONCEPT--EMBEDDING-ST
 created_at: 2026-05-03T23:55:07.217+07:00
 ---
 
-# FRAME — MSP architecture v2
+# FRAMEWORK — MSP architecture v2
 
 > Supersedes `FRAMEWORK--MSP-ARCHITECTURE` (v1). v1 framed MSP as a "gatekeeper" — a write-path enforcer for atoms going into `gks/`. That framing was correct for what M0–M6 implemented but **incomplete**: MSP's name (Memory & Soul Passport) implies a passport that travels with the agent, carrying memory + identity + retrieval logic. v1 captured the gatekeeping; v2 captures the passport.
 >
 > **Updated 2026-05-10 (post-Phase-A–D)**: MSP is now explicitly **agent-agnostic** (`CONCEPT--AGENT-AGNOSTIC`); the 2-layer mental model below is the MSP-internal split, sandwiched under any cognitive-layer agent (EVA / Hermes / openclaw / Claude Code / Gemini CLI / Antigravity / Cursor / custom). Storage now splits global (`~/.msp/`) vs workspace (`./.brain/msp/projects/<ns>/`) per `ADR--GLOBAL-VS-WORKSPACE`. MCP surface is **19 tools** (passport + projects + symbols + candidates).
+>
+> **Updated 2026-05-13 (post-v2.3 taxonomy)**: This atom was renamed from `FRAME--MSP-ARCHITECTURE-V2` per `ADR--TAXONOMY-V2-3-MIGRATION`. The prefix `FRAME--` now means **Block Manifest** (runtime entry-point of a Knowledge Block, contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`); `FRAMEWORK--` carries the prior governance/architecture meaning. The body still uses "FRAME" historically — read as "FRAMEWORK" post-v2.3. Note: "Genesis Block" in this document, when referring to a composite knowledge unit (`CONCEPT--GENESIS-BLOCK-ENGINE` aside), means **Knowledge Block** in v2.3 vocabulary. See `CONCEPT--TAXONOMY-V2-3` for the full prefix map.
 
 ## The three-layer ecosystem
 

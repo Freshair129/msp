@@ -7,6 +7,22 @@ Where the BLUEPRINT is the canonical spec, this page is the
 For incremental design decisions, see the ADR series in
 [`docs/adr/`](./adr/).
 
+> **Atom-prefix taxonomy (v2.3, 2026-05-13)**: directory layout below
+> uses v2.3 vocabulary. `FRAME--` is now **Block Manifest** (runtime
+> entry-point of a Knowledge Block, contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`);
+> the prior governance / architecture meaning moved to `FRAMEWORK--`.
+> `GUARDRAIL--` renamed to `GUARD--`. Engine code in this doc is
+> unchanged by v2.3 — it's an organisational refit on the knowledge
+> layer above the storage engine. Full prefix table:
+> [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md).
+>
+> **Naming reminder**: the `genesis-block.ts` backend wired into
+> `GraphBackend` is the **Genesis Block Engine** (storage / DB). It is
+> NOT the same as a **Knowledge Block** (composite knowledge unit
+> declared via a `FRAME--` manifest). The two layers are orthogonal —
+> a Knowledge Block's edges can be persisted in a Genesis Block Engine
+> instance, but neither owns the other.
+
 ---
 
 ## Layer dependency
@@ -144,11 +160,16 @@ the edge that was current then, not now.
 ├── gks/                                  ← CANONICAL, READ-MOSTLY
 │   ├── 00_index/
 │   │   └── atomic_index.jsonl           ← AtomicLayer reads this
-│   ├── concept/                         ← CONCEPT-- atoms
-│   ├── frame/                           ← FRAME--
+│   ├── concept/                         ← CONCEPT-- atoms (+ COGNITIVE-- per v2.3)
+│   ├── frame/                           ← FRAME--      (v2.3: Block Manifest)
+│   ├── framework/                       ← FRAMEWORK--  (v2.3: governance / architecture, was FRAME--)
 │   ├── adr/                             ← ADR--
 │   ├── feat/                            ← FEAT--
 │   ├── algo/                            ← ALGO-- · …
+│   ├── spec/                            ← SPEC--       (v2.3)
+│   ├── stack/                           ← STACK--      (v2.3)
+│   ├── safety/                          ← SAFETY--     (v2.3)
+│   ├── guard/                           ← GUARD--      (v2.3: was GUARDRAIL--)
 │   ├── blueprint/                       ← BLUEPRINT-- (yaml)
 │   ├── issues/                          ← ISSUE-- (light-tier per ADR-012)
 │   └── ...                              ← one folder per type (ADR-013)

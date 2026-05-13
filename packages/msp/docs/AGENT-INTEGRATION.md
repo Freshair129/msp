@@ -10,6 +10,14 @@ companion.
 > clients) or `.mspconfig` in the project root. Identity is read from
 > `~/.msp/identity.json` (or `$MSP_HOME/identity.json`).
 
+> **Taxonomy reference (v2.3+)**: when authoring atoms via `msp_candidate`,
+> use the prefix taxonomy in `gks/concept/CONCEPT--TAXONOMY-V2-3.md` (canonical
+> docs: `packages/gks/docs/KNOWLEDGE-TYPES.md`). Note the two distinct meanings
+> of "Genesis Block": (1) the **storage-engine** backend (`CONCEPT--GENESIS-BLOCK-ENGINE`,
+> `packages/gks/src/memory/graph/genesis-block.ts`) — DB layer; (2) the
+> **Knowledge Block** composite (`SPEC--KNOWLEDGE-BLOCK-MANIFEST`) — a `FRAME--`
+> manifest aggregating Cognitive + Algo + Guard atoms. These are orthogonal.
+
 ## Prerequisites
 
 1. Install MSP so `msp-mcp-server` is on `PATH`:
@@ -269,6 +277,13 @@ The supported providers, selected via `MSP_SLM_PROVIDER`:
 | `mock` | Tests / dry-run | nothing — built in |
 | `qwen` | Legacy standalone `qwen` CLI binary wrapper (rarely used) | install `qwen` binary on `PATH` |
 
+> **Also available**: the repo's `qwen-cli/` directory ships a Python-based
+> Qwen subagent harness for parallel coding tasks. It is invoked outside MSP's
+> SLM provider chain (not bound to `MSP_SLM_PROVIDER`) and is useful when
+> multiple coding subagents need to run concurrently — e.g. fan-out edits
+> across several files. Treat it as a peer to Gemini CLI rather than an MSP
+> provider.
+
 ### Ollama (default — T1)
 
 ```bash
@@ -325,6 +340,13 @@ attempt 1-3  : MSP_SLM_PROVIDER     (default ollama, optionally gemini)
 escalator    : Gemini CLI           (gemini -p ... -y) — fires after 3 retries
 human gate   : Opus layer           (exit code 4)
 ```
+
+> **Windows note**: the binary is `gemini.cmd`, not `gemini`. `slm/gemini.ts`
+> passes `shell: process.platform === 'win32'` to `execFile` so the `.cmd`
+> shim resolves correctly. If you fork the SLM client, keep that flag — Node
+> refuses to spawn `.cmd`/`.bat` without a shell. PowerShell here-strings
+> (`@'...'@`) also misparse Gemini's `-p` flag — prefer Bash heredocs or
+> stdin pipes when invoking from scripts.
 
 Power-user override knobs (all env-var driven):
 

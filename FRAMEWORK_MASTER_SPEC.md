@@ -4,10 +4,12 @@
 > สถาปัตยกรรมตั้งต้น (Meta-Architecture) สำหรับโปรเจกต์ที่ขับเคลื่อนด้วย Multi-Agent + Doc-Before-Code
 > สกัดจาก GKS — ลบ business logic ออกทั้งหมด คงไว้เฉพาะ "กฎของระบบ" ที่ใช้ซ้ำได้กับทุกโปรเจกต์
 >
-> **Version:** 1.1.0
-> **Last updated:** 2026-05-11 — sync กับ Phase 3 (`BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION`, 2026-05-09) และ monorepo migration (`ADR--MONOREPO-STRUCTURE`, 2026-05-11)
+> **Version:** 1.2.0
+> **Last updated:** 2026-05-13 — sync กับ **Taxonomy v2.3** (`ADR--TAXONOMY-V2-3-MIGRATION`, 2026-05-13)
 > **License intent:** Boilerplate — fork แล้วแทนที่ `YourProject` / `ExampleFeature` ได้ทันที
 > **สถานะ:** ACTIVE — Master Reference สำหรับแตกออกเป็น Atomic (ADR / Protocol) ต่อไป
+>
+> **Changelog 1.2.0 (2026-05-13):** Taxonomy v2.3 prefix updates. `FRAME--` ตอนนี้แทน **Block Manifest** (runtime entry-point ของ Knowledge Block; frontmatter contract อยู่ที่ `SPEC--KNOWLEDGE-BLOCK-MANIFEST`). ความหมายเดิม "architectural framework / methodology / code standards" ย้ายไป `FRAMEWORK--`. `GUARDRAIL--` rename เป็น `GUARD--`. Prefixes ใหม่: `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`. Reference เก่า `FRAME--` ในเอกสารนี้ (~9 จุดที่เหลือใน §6/§7/§11/§14/§17/§18) ที่หมายถึง "architectural framework" ต้องอ่านเป็น `FRAMEWORK--`. Canonical reference: `packages/gks/docs/KNOWLEDGE-TYPES.md`. Disambiguation: "Genesis Block" มี 2 ความหมาย — **Genesis Block Engine** (DB ที่ `packages/gks/src/memory/graph/genesis-block.ts`) vs **Knowledge Block** (composite ที่ FRAME-- manifest aggregate).
 >
 > **Changelog 1.1.0:** Inbound queue (`/submit-memory`, `gks/inbound/`, `npm run msp:propose|list|promote`) ถูกแทนที่ด้วย **Candidates flow** (`msp_candidate` MCP tool → `.brain/msp/projects/<ns>/candidates/` → human PR). ดู §7.2 และ §16.5
 
@@ -20,7 +22,7 @@
 
 1. อ่านทั้งไฟล์ตั้งแต่ §0 – §20 (อ่านครั้งเดียว — ที่เหลือเปิดอ้างอิงเป็นเรื่อง ๆ)
 2. แตกแต่ละ section ออกเป็น Atomic Notes เพื่อจัดเก็บตาม Type (โฟลเดอร์ใช้ชื่อเอกพจน์ตามแบบของ GKS ปัจจุบัน):
-   - §3 – §4 → `gks/frame/FRAME--gks-v3-architecture.md`
+   - §3 – §4 → `gks/framework/FRAMEWORK--gks-architecture.md` (v2.3: was `gks/frame/FRAME--gks-v3-architecture.md`)
    - §5 → `gks/proto/PROTO--agent-protocol.md`
    - §6 → `gks/adr/ADR--doc-to-code-workflow.md`
    - §7 → `gks/adr/ADR--msp-gatekeeper.md` (+ `ADR--AGENT-WRITE-BOUNDARIES`)
@@ -287,7 +289,13 @@ packages/msp/src/
 |---|---|---|---|
 | `ADR--` | `adrs/` หรือ `adr/` | Architecture Decision Record | การตัดสินใจทางสถาปัตยกรรม |
 | `MASTER--`| `master/` | Root-level Policy | กฎระดับ root (เช่น contradiction policy, write boundaries) |
-| `FRAME--` | `frameworks/` หรือ `frame/` | Framework Rules | มาตรฐานโค้ด + สถาปัตยกรรม |
+| `FRAMEWORK--` | `framework/` | Framework Rules (v2.3+) | มาตรฐานโค้ด + สถาปัตยกรรม / governance (เดิม `FRAME--`) |
+| `FRAME--` | `frame/` | Block Manifest (v2.3+) | runtime entry-point ของ Knowledge Block (contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`) |
+| `STACK--` | `stack/` | Technology stack (v2.3+) | inventory ของ language / runtime / library |
+| `SPEC--` | `spec/` | Specification (v2.3+) | data contract / wire format / API shape |
+| `COGNITIVE--` | `cognitive/` | Mental model (v2.3+) | interpretive lens (Erikson, Qualia, ฯลฯ) |
+| `SAFETY--` | `safety/` | Ethical safety (v2.3+) | AI alignment / behaviour shaping |
+| `MOD--` | `mod/` | Module manifest (v2.3+) | scope + public API ของ module |
 | `FEAT--` | `features/` หรือ `feat/` | Feature Spec | รายละเอียดฟีเจอร์และพฤติกรรมระบบ |
 | `PROTO--` | `proto/` | Machine-enforced Invariant | กฎสั้นที่ validator เช็คตอน write-time (severity: error); `linked_symbols` ชี้ไป validator code |
 
@@ -315,7 +323,7 @@ packages/msp/src/
 |---|---|---|---|
 | `PROTOCOL--`| `protocol/` | Agent Governance | **Interaction contract** — handshake / multi-step messaging (MCP, agent-to-agent). ตัวอย่าง: `PROTOCOL--IDENTITY-API` |
 | `RUNBOOK--` | `runbooks/` หรือ `runbook/` | Ops Governance | **"ถ้าเห็น X ให้ทำ Y"** — operational response guide สำหรับ on-call (incident, deploy, rollback) |
-| `GUARDRAIL--`| `guardrails/` | Agent Governance | Runtime-enforced constraint บน agent behavior ("never call X without Y") |
+| `GUARD--` | `guard/` | Agent Governance (v2.3: was `GUARDRAIL--`) | Runtime-enforced constraint บน agent behavior หรือ data invariant ("never call X without Y") |
 | `POLICY--` | `policies/` | Agent Governance | Operational policy — access (RBAC), data retention, rate limit |
 | `SKILL--` | `skills/` | Agent Governance | Agent capability — action/tool ที่ agent สามารถ trigger ได้เอง |
 | `PERSONA--` | `personas/` | Agent Governance | Agent identity — role, voice, base system prompt |
@@ -324,7 +332,7 @@ packages/msp/src/
 >
 > สำหรับ "เมื่อ X เกิด ให้ทำ Y" map ตามนี้:
 > - **RUNBOOK--** = "ถ้าเห็น alert/incident → รัน steps เหล่านี้" (Ops, executable)
-> - **GUARDRAIL--** = "agent ห้ามทำ X โดยไม่มี Y" (runtime hard rule)
+> - **GUARD--** = "agent ห้ามทำ X โดยไม่มี Y" (runtime hard rule) — v2.3 rename จาก `GUARDRAIL--`
 > - **POLICY--** = "data retention 90 วัน / rate limit 100rps" (system-level access/config)
 > - **PROTOCOL--** = "agent กับ MCP server คุยกันยังไง" (interaction contract)
 
@@ -507,7 +515,7 @@ graph TD
 
 | Phase | กิจกรรมหลัก | Atom Artifact (durable) | Devlog (optional, EVA-style) |
 |---|---|---|---|
-| **P0** | Frame architecture | `FRAME--`, `MASTER--` | — |
+| **P0** | Framework architecture (v2.3 rename of "Frame") | `FRAMEWORK--`, `MASTER--`; optionally `FRAME--` Block Manifest at the engine-aggregation layer | — |
 | **P1** | กำหนดความต้องการธุรกิจ & motivation | `CONCEPT--` | — |
 | **P2** | ออกแบบโครงสร้าง / API / decision | `ADR--`, `FEAT--`, `ENTITY--`, `API--`, `PROTO--`, `PROTOCOL--` | — |
 | **P3** | วางแผนการแก้โค้ดเชิงลึก | `BLUEPRINT--` | `MSP-IMP-` (EVA only) |

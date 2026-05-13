@@ -3,12 +3,20 @@
 > The atomic-knowledge prefix taxonomy GKS recognises. Every `.md` file
 > under `gks/` should have a frontmatter `id: TYPE--SLUG` whose `TYPE`
 > appears in this document. ADR-012 records why this list exists.
-> **Taxonomy v2.3** redefines `FRAME--` as Block Manifest, introduces
-> `FRAMEWORK--` for the prior `FRAME--` meaning, renames `GUARDRAIL--`
-> to `GUARD--`, and adds engine-layer prefixes (`STACK--`, `SPEC--`,
-> `SAFETY--`, `COGNITIVE--`). See `ADR--TAXONOMY-V2-3-MIGRATION` in the
-> MSP atom tree for the migration record. Long-form descriptions in this
-> document still reference legacy prefix names pending a doc-update pass.
+> **Taxonomy v2.3** (2026-05-13) redefines `FRAME--` as Block Manifest,
+> introduces `FRAMEWORK--` for the prior `FRAME--` meaning, renames
+> `GUARDRAIL--` to `GUARD--`, and adds engine-layer prefixes (`STACK--`,
+> `SPEC--`, `SAFETY--`, `COGNITIVE--`). Canonical migration record:
+> `ADR--TAXONOMY-V2-3-MIGRATION` in the MSP atom tree.
+
+> **Genesis Block disambiguation**: "Genesis Block" appears with two
+> meanings in this repo. (1) **Genesis Block Engine** — the embedded
+> graph DB at `packages/gks/src/memory/graph/genesis-block.ts` (Cypher
+> v0, JSONL log); see `CONCEPT--GENESIS-BLOCK-ENGINE`. (2) **Knowledge
+> Block** — a composite knowledge unit (FRAME-- manifest + Cognitive +
+> Algo + Guard atoms); see `SPEC--KNOWLEDGE-BLOCK-MANIFEST`. These are
+> orthogonal: a Knowledge Block can be stored in a Genesis Block Engine
+> but is not the same thing.
 
 This is the **reference** — when you ask "where does this concept go?"
 the answer is here. Templates for each prefix live in
@@ -131,10 +139,46 @@ where most contributions go.
 - **Don't use for:** infra constants (Postgres pool size etc.) — those live in `ops/` configs.
 - **Phase:** P2.
 
-### `FRAME--` · architectural frameworks / methodology / code standards
-- **Use for:** architectural patterns, governance frameworks, higher-level invariant methodologies (Master/Genesis blocks, JTBD, Design Thinking), and code standards ("all DB calls go through repositories", "components ≤ 500 LOC", lint policy).
-- **Don't use for:** runtime behavioural constraints — those are `GUARDRAIL--`.
+### `FRAME--` · Block Manifest (v2.3+)
+- **Use for:** the runtime entry-point of a **Knowledge Block** — a manifest atom that aggregates `COGNITIVE--`, `ALGO--`, `GUARD--` (and optionally `RUNBOOK--`, `PROTOCOL--`, `STACK--`, `SAFETY--`) atoms into a composite knowledge engine.
+- **Don't use for:** governance/architecture frameworks — those moved to `FRAMEWORK--` in v2.3.
+- **Frontmatter contract:** `SPEC--KNOWLEDGE-BLOCK-MANIFEST` — declares the `members.core` / `members.optional` / `daci:` / `manifest_version:` shape.
+- **Phase:** P0 (Block Manifests are foundational).
+- **Status cascade:** `status(block) = min(status(member))` — see SPEC §4.2.
+- **Examples (proposed):** `FRAME--IDENTITY-ENGINE` aggregates the identity-resolution Knowledge Block.
+
+### `FRAMEWORK--` · governance / architectural framework (v2.3+)
+- **Use for:** architectural patterns, governance frameworks, higher-level invariant methodologies (Knowledge 3-Tier model, JTBD, Design Thinking, phase governance), and code standards ("all DB calls go through repositories", "components ≤ 500 LOC", lint policy).
+- **Don't use for:** runtime behavioural constraints — those are `GUARD--`. For Block Manifest entries, use `FRAME--`.
+- **Phase:** P0/P2.
+- **Examples:** `FRAMEWORK--MSP-ARCHITECTURE-V2`, `FRAMEWORK--PHASE-GOVERNANCE`, `FRAMEWORK--SCALING-LEVELS`, `FRAMEWORK--AUTHORITY-MATRIX`.
+- **Renamed from:** `FRAME--` (pre-v2.3). The taxonomy migration script handles existing references.
+
+### `STACK--` · technology stack inventory (v2.3+)
+- **Use for:** the language/runtime/library/tool inventory used by a subsystem or Knowledge Block — e.g. "React 18 + Rust + napi-rs + pgvector".
+- **Don't use for:** module boundaries (use `MOD--`) or build config (use `PARAMS--`).
 - **Phase:** P2.
+- **Distinguishing question:** *is this a list of tools/runtimes a thing uses?* → if yes, STACK.
+
+### `SPEC--` · technical specification (v2.3+)
+- **Use for:** JSON Schema, API data shape, wire format, frontmatter contract.
+- **Don't use for:** decisions (use `ADR--`) or behavioural rules (use `PROTO--`).
+- **Phase:** P2.
+- **Examples:** `SPEC--KNOWLEDGE-BLOCK-MANIFEST` (frontmatter contract for FRAME-- atoms).
+
+### `COGNITIVE--` · mental model / interpretive lens (v2.3+)
+- **Use for:** psychological / cognitive-science models the system reasons with — Erikson stages, Ego Death, Qualia, retrieval-augmented attention, etc.
+- **Don't use for:** algorithmic procedures (use `ALGO--`) or product framings (use `CONCEPT--`).
+- **Phase:** P1/P2.
+- **Distinguishing question:** *is this a lens through which the agent interprets state?* → if yes, COGNITIVE.
+
+### `SAFETY--` · ethical safety / AI alignment (v2.3+)
+- **Use for:** alignment rules, ethical guardrails, PII handling, behaviour-shaping rules ("do not assist with X without consent").
+- **Don't use for:** structural data invariants (use `GUARD--`) or operational policy (use `POLICY--`).
+- **Phase:** P0/P2 (safety rules are typically foundational).
+- **Distinguishing question:** *would violating this be unethical or unsafe, not just incorrect?* → if yes, SAFETY.
+
+> `MOD--` was added to the v2.3 prefix set but its long-form definition lives in Cluster 1 above (next to `FEAT--` / `ALGO--`) since it's been in the taxonomy since pre-v2.3.
 
 ### `MASTER--` · root-level policy / genesis rule
 - **Use for:** the small set of root-level invariants that the rest of the atom graph defers to — contradiction policy, write boundaries, atom-body schema, supersession rules.
@@ -146,12 +190,12 @@ where most contributions go.
 
 ### `PROTO--` · machine-enforced invariant
 - **Use for:** a single short rule the **validator** checks at write/commit time, with `severity: error` and a `linked_symbols` pointer to the enforcement code.
-- **Don't use for:** runtime agent constraints (use `GUARDRAIL--`), interaction contracts (use `PROTOCOL--`), or operational responses (use `RUNBOOK--`).
+- **Don't use for:** runtime agent constraints (use `GUARD--`), interaction contracts (use `PROTOCOL--`), or operational responses (use `RUNBOOK--`).
 - **Distinguishing question:** *is the rule mechanically checkable by code at write-time?* → if yes, PROTO.
 - **Phase:** P2.
 - **Examples:** `PROTO--ADR-MONOTONIC` (ADR-NNN = max+1), `PROTO--PHASE-GATES`, `PROTO--SCALING-LEVEL-GATE`, `PROTO--VALID-UNTIL`.
 - **Relationship to other types:**
-  - `PROTO--` enforces a rule at **write time** (validator); `GUARDRAIL--` enforces at **runtime** (agent action); `POLICY--` is **operational** (access/retention/rate-limit).
+  - `PROTO--` enforces a rule at **write time** (validator); `GUARD--` enforces at **runtime** (agent action / data invariant); `POLICY--` is **operational** (access/retention/rate-limit).
   - `PROTO--` often *implements* a `MASTER--` policy in machine-checkable form.
 
 ### `BLUEPRINT--` · implementation plan
@@ -200,17 +244,19 @@ rationale.
 > ⚠️ **Disambiguation — `PROTOCOL--` ใช้ความหมาย CS standard** (interaction / communication contract — HTTP protocol, MCP protocol)
 > **ไม่ใช่** "SOP / situational procedure" ตามภาษาทั่วไป สำหรับ "เมื่อ X เกิด ให้ทำ Y" ให้เลือก:
 > - **`RUNBOOK--`** = on-call response guide ("ถ้าเห็น alert/incident → ทำ steps เหล่านี้")
-> - **`GUARDRAIL--`** = runtime hard rule ("agent ห้ามทำ X โดยไม่มี Y")
+> - **`GUARD--`** = runtime hard rule ("agent ห้ามทำ X โดยไม่มี Y") — renamed from `GUARDRAIL--` in v2.3
 > - **`POLICY--`** = operational policy ("retain data 90 วัน", "rate limit 100rps")
+> - **`SAFETY--`** = ethical / alignment rule (v2.3+) — distinct from `GUARD--` (structural)
 
-### `GUARDRAIL--` · enforced behavioural policy
-- **Use for:** runtime-enforced constraint on agent / tool behaviour ("never call X without Y").
-- **Don't use for:** policy-by-decision (that's `ADR--`) or operational policy (that's `POLICY--`).
-- **Distinguishing question:** *is it enforced at every call?* → if yes, GUARDRAIL.
+### `GUARD--` · structural / behavioural guardrail (v2.3+)
+- **Use for:** runtime-enforced constraint on agent / tool behaviour ("never call X without Y") OR a data-integrity invariant ("id must match filename", "no null primary keys").
+- **Don't use for:** policy-by-decision (that's `ADR--`), operational policy (that's `POLICY--`), or ethical alignment (use `SAFETY--`).
+- **Distinguishing question:** *is it enforced at every call / write?* → if yes, GUARD.
+- **Renamed from:** `GUARDRAIL--` (pre-v2.3) — shortened for consistency with peer four-letter prefixes (`STACK`, `FRAME`, `SPEC`). Zero `GUARDRAIL--` atoms existed at migration time; the rename is doc-only.
 
 ### `POLICY--` · operational policy
 - **Use for:** access policies (RBAC), data retention, rate limits.
-- **Don't use for:** behavioural constraints during a single agent action — those are `GUARDRAIL--`.
+- **Don't use for:** behavioural constraints during a single agent action — those are `GUARD--`.
 - **Distinguishing question:** *does it govern config / access at the system level?* → POLICY.
 
 ### `PERSONA--` · agent identity
@@ -303,7 +349,7 @@ rather than human-authored:
 
 ### `RULE--` · derived behavioural rule
 - A heuristic / pattern derived from multiple observations. Often
-  promoted later into a formal `GUARDRAIL--` or `POLICY--` after review.
+  promoted later into a formal `GUARD--` or `POLICY--` after review.
 
 ## Process tracking IDs (not atomic knowledge)
 
@@ -333,9 +379,12 @@ These have `MSP-` prefix and live in process-tracking storage, not in
         ├── Validator rule  → PROTO--
         ├── Feature spec    → FEAT--
         ├── Algorithm       → ALGO--
-        ├── Code standard   → FRAME--
+        ├── Architectural framework → FRAMEWORK--
+        ├── Block manifest  → FRAME-- (v2.3+: aggregates atoms into a Knowledge Block)
+        ├── Tech stack      → STACK--
         ├── Module           → MOD--
         ├── Data schema     → ENTITY--
+        ├── Spec / contract → SPEC--
         ├── API contract    → API-- / ENDPOINT-- / ENTRYPOINT--
         ↓ Is it about WHAT TO BUILD?
         ├── Idea            → IDEA--
@@ -350,7 +399,9 @@ These have `MSP-` prefix and live in process-tracking storage, not in
         ↓ Is it about AGENT BEHAVIOUR?
         ├── Capability      → SKILL--
         ├── Interaction     → PROTOCOL--
-        ├── Hard rule       → GUARDRAIL--
+        ├── Hard rule       → GUARD-- (renamed from GUARDRAIL-- in v2.3)
+        ├── Ethical / safety → SAFETY--
+        ├── Mental model    → COGNITIVE--
         ├── Operational     → POLICY--
         ├── Identity        → PERSONA--
         ↓ Is it about OPS?

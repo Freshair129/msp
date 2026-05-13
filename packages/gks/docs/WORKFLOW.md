@@ -9,23 +9,37 @@ walkthrough relies on.
 > install and adopt GKS in a project. This doc assumes that's done and
 > covers what to do every day after.
 
+> **Taxonomy v2.3 note (2026-05-13)**: prefix names below reflect v2.3 —
+> `FRAMEWORK--` (architectural framework / governance, formerly `FRAME--`),
+> `FRAME--` (Block Manifest, runtime entry-point of a Knowledge Block,
+> contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`), `GUARD--` (renamed from
+> `GUARDRAIL--`), plus new prefixes `STACK--`, `SPEC--`, `COGNITIVE--`,
+> `SAFETY--`. See [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md) for the
+> full table. The doc-to-code phases below are unchanged by v2.3; only
+> the prefix vocabulary tightened up.
+
 ---
 
-## The six phases at a glance
+## The phases at a glance
 
 ```
-P1 CONCEPT  →  P2 ADR/ENTITY/API  →  P3 BLUEPRINT  →  P4 TASK  →  P5 src/  →  P6 AUDIT
-   why?           what?                  how-plan?       chunks      code         results
+P0 FRAMEWORK  →  P1 CONCEPT  →  P2 ADR/FEAT/ENTITY/SPEC  →  P3 BLUEPRINT  →  P4 TASK  →  P5 src/  →  P6 AUDIT
+   foundation     why?          what?                       how-plan?       chunks      code         results
 ```
+
+P0 is optional for incremental work — only required when introducing a new architectural framework or governance rule.
 
 | Phase | Atom | Tier   | Storage             |
 |-------|------|--------|---------------------|
-| P1    | `CONCEPT--`   | strict | `gks/concept/` after promote |
-| P2    | `ADR--` · `ENTITY--` · `API--` · `FEAT--` | strict | `gks/{adr,entity,api,feat}/` |
+| P0    | `FRAMEWORK--` · `FRAME--` (Block Manifest) | strict | `gks/framework/` · `gks/frame/` |
+| P1    | `CONCEPT--` · `COGNITIVE--` | strict | `gks/concept/` · `gks/cognitive/` |
+| P2    | `ADR--` · `ENTITY--` · `API--` · `FEAT--` · `SPEC--` · `STACK--` · `MOD--` | strict | `gks/{adr,entity,api,feat,spec,stack,mod}/` |
 | P3    | `BLUEPRINT--` | strict | `gks/blueprint/` (YAML) |
 | P4    | *(not an atom — see ADR-015)* | tracker | live task state lives at the orchestrator, not in `gks/` |
 | P5    | (none — code) | —      | `src/` with `linked_symbols` citing back |
 | P6    | `AUDIT--`     | strict | `gks/audit/` |
+
+Cross-phase atoms: `GUARD--` (runtime invariants) and `SAFETY--` (ethical / alignment rules) typically sit at P0 or P2 depending on whether they're foundational or feature-scoped.
 
 Strict-tier atoms are authored directly in dedicated branches and require human review via **Pull Requests** before merging into the canonical tree; light-tier atoms can be written directly to `main`. See ADR-012.
 
@@ -349,7 +363,7 @@ GKS is a storage engine (ADR-008). It does not:
 ## Further reading
 
 - [`ONBOARDING.md`](./ONBOARDING.md) — adopt GKS in an existing or new project
-- [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md) — full atom taxonomy (30+ prefixes)
+- [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md) — full atom taxonomy (35+ prefixes after v2.3)
 - [`adr/014-doc-to-code-enforcement.md`](./adr/014-doc-to-code-enforcement.md) — the model behind this workflow
 - [`adr/010-reverse-citation-lookup.md`](./adr/010-reverse-citation-lookup.md) — `lookup-by-symbol` semantics
 - [`adr/012-extended-taxonomy.md`](./adr/012-extended-taxonomy.md) — strict vs light tier

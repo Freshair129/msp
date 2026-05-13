@@ -2,16 +2,29 @@
 
 GKS uses **ADR-014 Doc-to-Code Enforcement** to ensure the integrity of the knowledge graph. All contributions that add new features or modify core logic must pass the integrity gates.
 
+> **Atom prefix taxonomy (v2.3, 2026-05-13)**: this guide uses the v2.3
+> vocabulary. New prefixes available: `FRAMEWORK--`, `STACK--`, `SPEC--`,
+> `COGNITIVE--`, `SAFETY--`, `MOD--`. Renames: `GUARDRAIL--` → `GUARD--`;
+> `FRAME--` has been **redefined** as Block Manifest (runtime entry-point
+> of a Knowledge Block, contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`). The
+> prior governance/architecture meaning moved to `FRAMEWORK--`. Full
+> reference: [`docs/KNOWLEDGE-TYPES.md`](./docs/KNOWLEDGE-TYPES.md).
+
 ## The Doc-to-Code Loop
 
+0.  **Phase 0: Framework** (`FRAMEWORK--slug.md`) — *optional, foundational*
+    Architectural framework / governance pattern, written only when introducing a
+    new top-level rule (e.g. `FRAMEWORK--MSP-ARCHITECTURE-V2`). Most features skip P0.
 1.  **Phase 1: Concept** (`CONCEPT--slug.md`)
     Define the "What" and "Why". Status must be `stable` before moving to Phase 2.
-2.  **Phase 2: ADR** (`ADR--slug.md`)
-    Define the architectural decision. Status must be `stable` before moving to Phase 3.
+    A companion `COGNITIVE--` atom (mental model / lens) may live alongside the CONCEPT for psychology-shaped work.
+2.  **Phase 2: ADR / FEAT / SPEC / STACK / MOD** (`ADR--slug.md`, etc.)
+    Define the architectural decision, feature spec, data contract, tech stack, or module boundary. Status must be `stable` before moving to Phase 3.
 3.  **Phase 3: Blueprint** (`BLUEPRINT--slug.md`)
     Define the technical implementation plan. Status must be `stable` before Phase 4.
 4.  **Phase 4-6: Implementation** (`FEAT--slug.md`)
     Code changes. The `FEAT--` atom must cite the `BLUEPRINT` it implements.
+    Block Manifest atoms (`FRAME--slug.md`) are authored at P0 / alongside their member atoms.
 
 ## CI Gates
 
@@ -40,6 +53,13 @@ git diff --exit-code -- gks/00_index/atomic_index.jsonl
 npx tsx bin/gks.ts validate --links
 npx tsx bin/gks.ts verify-flow FEAT--YOUR-FEATURE
 ```
+
+> **Monorepo note (2026-05-11+)**: GKS now ships from `packages/gks/` of
+> the `cognitive_system` monorepo. From the repo root, prefix per-package
+> commands with the workspace selector — e.g.
+> `npm run msp:index --workspace=packages/gks`. The CLI invocations
+> (`bin/gks.ts ...`) work the same once you've `cd packages/gks` or used
+> `npx tsx packages/gks/bin/gks.ts ...` from the root.
 
 ## Hotfixes (Escape Hatch)
 

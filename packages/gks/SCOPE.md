@@ -8,6 +8,21 @@ This file is the contract for contributors and downstream users. If a
 proposed feature doesn't fit here, it doesn't go in `src/` — it goes in
 its own package, repo, or layer above GKS.
 
+> **Where GKS lives (post-2026-05-11 monorepo migration)**: GKS is
+> `packages/gks/` of the `cognitive_system` monorepo. The legacy
+> `Freshair129/GksV3` repo is archived (read-only) — do not push there.
+> Per-package npm commands use `--workspace=packages/gks` from the
+> monorepo root.
+>
+> **Atom-prefix taxonomy (v2.3, 2026-05-13)**: SCOPE itself is unchanged
+> by v2.3, but contributors authoring atoms here should use the v2.3
+> prefix set — see [`docs/KNOWLEDGE-TYPES.md`](./docs/KNOWLEDGE-TYPES.md).
+> The new prefixes (`STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`,
+> `FRAMEWORK--`) and renames (`GUARDRAIL--` → `GUARD--`; `FRAME--`
+> redefined to Block Manifest) are orthogonal to GKS scope — they're a
+> knowledge-organisation refit in the layer GKS *stores*, not in the
+> engine itself.
+
 ---
 
 ## Layer position

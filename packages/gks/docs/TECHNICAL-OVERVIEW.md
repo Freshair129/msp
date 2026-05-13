@@ -15,8 +15,23 @@
 > **Audience:** engineers integrating GKS into an agent system, building
 > on top of it, or extending it via its plugin points.
 >
-> **Version:** 3.5.4 (2026-04). See `CHANGELOG.md` for the per-release
+> **Version:** 3.7.0 (2026-05). See `CHANGELOG.md` for the per-release
 > history.
+>
+> **Atom prefix taxonomy (v2.3, 2026-05-13)**: this doc uses the v2.3
+> vocabulary — `FRAME--` (Block Manifest), `FRAMEWORK--` (governance /
+> architecture, formerly `FRAME--`), `GUARD--` (formerly `GUARDRAIL--`),
+> plus new prefixes `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`.
+> Canonical reference: [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md).
+>
+> **Genesis Block disambiguation**: "Genesis Block" appears here in two
+> distinct senses. (1) **Genesis Block Engine** — the embedded graph
+> backend implemented at `src/memory/graph/genesis-block.ts` (Cypher v0,
+> JSONL log) — pure storage layer, slot under `GraphBackend`. (2)
+> **Knowledge Block** — a composite knowledge unit declared by a
+> `FRAME--<NAME>` manifest atom (frontmatter contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`).
+> A Knowledge Block can be stored in a Genesis Block Engine, but they're
+> orthogonal concepts.
 
 ---
 
@@ -1160,14 +1175,19 @@ path. One folder per atom type (singular nouns), no phase prefix.
 │   ├── algo/                             # ALGO--
 │   ├── flow/                             # FLOW--
 │   ├── entity/                           # ENTITY--
-│   ├── frame/                            # FRAME--
+│   ├── frame/                            # FRAME--       (v2.3: Block Manifest — see SPEC--KNOWLEDGE-BLOCK-MANIFEST)
+│   ├── framework/                        # FRAMEWORK--   (v2.3: governance / architecture, formerly FRAME--)
 │   ├── parameters/                       # PARAMS--
 │   ├── module/                           # MOD--
 │   ├── blueprint/                        # BLUEPRINT-- (.yaml)
 │   ├── audit/                            # AUDIT--
 │   ├── skill/                            # SKILL--      (ADR-012 cluster)
 │   ├── protocol/                         # PROTOCOL--
-│   ├── guardrail/                        # GUARDRAIL--
+│   ├── stack/                            # STACK--       (v2.3: tech stack inventory)
+│   ├── spec/                             # SPEC--        (v2.3: data shape / API contract)
+│   ├── cognitive/                        # COGNITIVE--   (v2.3: mental model / lens)
+│   ├── safety/                           # SAFETY--      (v2.3: ethical / alignment rule)
+│   ├── guard/                            # GUARD--       (v2.3: behavioural + structural guardrail, was GUARDRAIL--)
 │   ├── policy/                           # POLICY--
 │   ├── persona/                          # PERSONA--
 │   ├── fr/                               # FR--          (ADR-012 RE cluster)
@@ -1356,7 +1376,7 @@ so every published tarball has both passing tests and a clean dist.
 | `examples/memory-os-architecture/` | Python POC: Memory OS kernel + EVA plugin + storage adapter (`JsonFile` and `Gks`-via-MCP) |
 | `examples/gitnexus-graph-cache/` | TS adapter syncing GitNexus AST exports into GKS `GraphStore` (the ADR-009 denormalisation pattern) |
 | `examples/drift-detection/` | TS pre-push gate combining `lookupBySymbol` + cached call graph; risk-classified report (HIGH / MEDIUM / LOW / NONE) |
-| `examples/atom-templates/` | 17 starter `.md` templates per atomic prefix (ADR / FEAT / ALGO / SKILL / GUARDRAIL / FR / NFR / INC / ISSUE / RISK / RUNBOOK / SLO / …) |
+| `examples/atom-templates/` | 17 starter `.md` templates per atomic prefix (ADR / FEAT / ALGO / SKILL / GUARD / FR / NFR / INC / ISSUE / RISK / RUNBOOK / SLO / …) — note: the `GUARDRAIL.md` template file remains under its legacy name pending a follow-up rename to `GUARD.md`. |
 
 ---
 
