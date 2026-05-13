@@ -96,13 +96,37 @@ Per `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (4-phase plan, all done as of 2
 
 See top of file for the table; full context in `AUDIT--ARCH-DOC-CLEANUP`. Net effect: 7 root architecture docs → 2 (`msp_spec.md`, `ROADMAP.md`); MSP declared agent-agnostic; storage split into `~/.msp/` global vs workspace per-project; MCP tool count 16 → 19.
 
-## Counts (current, post-Phase-D)
+## Post-v0.4.0 — Taxonomy v2.3 + Knowledge Block (in-flight, 2026-05-13)
 
-- **~210 atoms** in `gks/` (+51 from v0.4.0)
-- **776 passing tests** (+241) on Node 20 + 22
+Three PRs landed end-of-day 2026-05-13, each with CI green on Node 20 + 22. Stacked in dependency order:
+
+| PR | Branch | Scope | CI |
+|---|---|---|---|
+| **#91** | `claude/msp-windows-test-infra-fixes` | Windows test infra (8 files) — cross-platform `path.sep` normalisation, `shell: true` for spawning `.cmd` shims (gemini/npx), production fix for `src/codegen/slm/gemini.ts` + `src/codegen/acceptance/vitest.ts`. Reduces local Windows failures 35 → 17 (remaining 15 = `better-sqlite3` native binding, 2 = atom-validity tracked in #90) | ✅ green |
+| **#92** | `claude/msp-taxonomy-v2.3-migration` | **Taxonomy v2.3.** `FRAME--` redefined as Block Manifest; `FRAMEWORK--` carries the prior governance/architecture meaning; `GUARDRAIL--` renamed `GUARD--`. New prefixes: `STACK--`, `SPEC--`, `MOD--`, `COGNITIVE--`, `SAFETY--`. 9 atom renames, 293 ref rewrites across 128 markdown files, 6 source-file enum updates, 2 governing atoms (`CONCEPT--TAXONOMY-V2-3`, `ADR--TAXONOMY-V2-3-MIGRATION`), migration script with `--dry-run` + `--inverse`. Base: `main` | ✅ green |
+| **#93** | `claude/msp-spec-knowledge-block-manifest` | `SPEC--KNOWLEDGE-BLOCK-MANIFEST` — frontmatter contract for `FRAME--` Block Manifest atoms. Disambiguates "Knowledge Block" (composite knowledge unit, defined here) from "Genesis Block Engine" (DB backend, `CONCEPT--GENESIS-BLOCK-ENGINE`). Members trio (Cognitive + Algo + Guard) mandatory, optional (Runbook/Protocol/Stack/Safety) conditional. Base: `claude/msp-taxonomy-v2.3-migration` (PR #92) | ✅ green |
+
+**Open issue [#90](https://github.com/Freshair129/cognitive_system/issues/90)** tracks 5 pre-existing atom-validity errors surfaced during v2.3 verification: `ALGO--IDENTITY-RESOLUTION` / `MOD--IDENTITY` / `PROTOCOL--IDENTITY-API` missing `created_at`, `BLUEPRINT--GENESIS-BLOCK-{INTEGRATION,TS-FIRST}` missing `linked_symbols`, plus 9 Phase-6 audits without backing blueprints. Not caused by the three PRs above; pre-existing on `main`.
+
+### Deferred follow-ups (separate atoms / PRs)
+
+| Item | What |
+|---|---|
+| `PROTO--KNOWLEDGE-BLOCK-MEMBERSHIP` | Machine-enforces `members.*` resolution + status cascade declared in `SPEC--KNOWLEDGE-BLOCK-MANIFEST` |
+| `BLUEPRINT--KNOWLEDGE-BLOCK-RUNTIME` | The loader/executor that reads a Block Manifest and invokes members |
+| `FRAME--IDENTITY-ENGINE` | First real Block Manifest — blocked on `COGNITIVE--EGO-DEATH-PASSPORT`, `STACK--MSP-NODE-RUNTIME`, `GUARD--IDENTITY-SCHEMA`, `SAFETY--PII-REDACTION` (none authored yet) |
+| `SPEC--RESONANCE-INDEX` | From v1.2 draft; calculation of RI for block outputs |
+| `KNOWLEDGE-TYPES.md` long-form pass | Quick-lookup table is current; legacy `GUARDRAIL--` / pre-v2.3 `FRAME--` mentions in body sections still need a rewrite |
+| Root `gks/00_index/atomic_index.jsonl` cleanup | Pre-monorepo legacy snapshot (May 11, before the 2026-05-11 monorepo migration); 89 stale `FRAME--` refs — needs separate regen / removal decision |
+
+## Counts (current, post-v2.3)
+
+- **~213 atoms** in `gks/` (+51 from v0.4.0; +3 from v2.3: 1 SPEC, 1 ADR, 1 CONCEPT — net of 9 atom renames in-place)
+- **711 passing tests** on Node 20 + 22 (CI run on PR #93, post-rename)
 - **19 MCP tools** in `msp-mcp-server`
 - **6 CLI bins**: `msp-validate`, `msp-backlinks`, `msp-run-task`, `msp-master`, `msp-mcp-server`, `msp-graph`
 - **6 upstream proposals** for `Freshair129/GksV3` (5 filed, 1 drafted awaiting relay)
+- **~21 prefix types** recognised post-v2.3 (added: `FRAMEWORK`, `STACK`, `SPEC`, `MOD`, `COGNITIVE`, `SAFETY`, `GUARD`; `FRAME` redefined; `GUARDRAIL` → `GUARD`)
 
 ## Configuration to start using MSP
 

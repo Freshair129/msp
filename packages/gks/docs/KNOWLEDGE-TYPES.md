@@ -33,7 +33,7 @@ the answer is here. Templates for each prefix live in
 | `FRAME--` | Implementation | **(v2.3+)** Block Manifest — runtime entry-point of a Genesis Block |
 | `FRAMEWORK--` | Implementation | **(v2.3+)** Governance / architectural framework (was `FRAME--` pre-v2.3) |
 | `STACK--` | Implementation | Technology stack — language/runtime/library inventory |
-| `SPEC--` | Implementation | Specification — JSON Schema, API data shape, wire format |
+| `SPEC--` | Implementation | Specification — JSON Schema, API data shape, wire format. First example: `SPEC--KNOWLEDGE-BLOCK-MANIFEST` (frontmatter contract for `FRAME--` Block Manifests). |
 | `COGNITIVE--` | Implementation | Mental model / interpretive lens (e.g. Erikson stages) |
 | `SAFETY--` | Governance | Ethical safety — AI alignment + behavioural guardrails |
 | `MASTER--` | Implementation | Root-level policy / genesis rule (e.g. contradiction policy, write boundaries) |

@@ -13,7 +13,7 @@ tags:
   - knowledge
   - genesis-block
   - foundation
-crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--ATOMIC-WRITE-CONTRACT","FRAMEWORK--CROSSLINKS-VOCABULARY","ADR--TAXONOMY-V2-3-MIGRATION"]}
+crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--ATOMIC-WRITE-CONTRACT","FRAMEWORK--CROSSLINKS-VOCABULARY","ADR--TAXONOMY-V2-3-MIGRATION","SPEC--KNOWLEDGE-BLOCK-MANIFEST"]}
 created_at: 2026-05-13T12:21:49+07:00
 ---
 
@@ -23,7 +23,7 @@ created_at: 2026-05-13T12:21:49+07:00
 
 The atomic-knowledge prefix taxonomy expanded organically through ADR-012 (`extended-taxonomy`) and several follow-ups. Two pressures forced a refit:
 
-1. **Genesis Block Engine** introduces a *composite* unit — an executable knowledge engine assembled from atoms. The composite needs a manifest atom (one entry-point file listing its members). Before v2.3 the `FRAME--` prefix was overloaded with "architectural framework" content (now-renamed `FRAMEWORK--MSP-ARCHITECTURE-V2`, `FRAMEWORK--PHASE-GOVERNANCE`, …) which would conflict with the Block Manifest meaning.
+1. **Genesis Block / Knowledge Block** introduces a *composite* unit — an executable knowledge engine assembled from atoms. (Called "Genesis Block" in early drafts and "Knowledge Block" in `SPEC--KNOWLEDGE-BLOCK-MANIFEST`, where the term is pinned down to disambiguate from the storage-engine `CONCEPT--GENESIS-BLOCK-ENGINE`.) The composite needs a manifest atom (one entry-point file listing its members). Before v2.3 the `FRAME--` prefix was overloaded with "architectural framework" content (now-renamed `FRAMEWORK--MSP-ARCHITECTURE-V2`, `FRAMEWORK--PHASE-GOVERNANCE`, …) which would conflict with the Block Manifest meaning.
 2. **Vocabulary drift**: `GUARDRAIL--` is verbose relative to the four-letter peers (`GUARD`, `STACK`, `SAFETY`). New prefixes proposed for the engine layer (`STACK`, `SPEC`, `MOD`, `COGNITIVE`, `SAFETY`) had no home.
 
 v2.3 reorganises into six layers, **resolves the `FRAME--` overload by carving out `FRAMEWORK--`**, and adds the engine-layer prefixes.
@@ -34,7 +34,7 @@ v2.3 reorganises into six layers, **resolves the `FRAME--` overload by carving o
 
 | Prefix | Role |
 |---|---|
-| `FRAME--` | **(redefined)** Block Manifest — the index file that aggregates atoms into a Genesis Block (executable engine). One `FRAME--<NAME>.md` per engine. |
+| `FRAME--` | **(redefined)** Block Manifest — the index file that aggregates atoms into a Knowledge Block (composite knowledge engine; was "Genesis Block" in earlier drafts). One `FRAME--<NAME>.md` per block. Frontmatter contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`. |
 | `STACK--` | Technology stack — language/runtime/library inventory for a subsystem |
 | `SPEC--` | Specification — JSON Schema, API data shape, wire format |
 | `MOD--` | Module definition — scope + public API of a module (e.g. `MOD--IDENTITY`) |
