@@ -61,24 +61,25 @@ jobs:
         run: npm test
 
       - name: msp:validate (whole tree)
-        # `--workspace=packages/msp` already cd's into packages/msp; use --root=.
-        # (Earlier `--root=packages/msp` resolved to packages/msp/packages/msp/.)
-        run: npm run msp:validate --workspace=packages/msp -- --all --root=.
+        # Use root-level script which invokes the validator at
+        # packages/msp/src/validator/cli.ts with --root=. (= repo root).
+        run: npm run msp:validate
 
       - name: msp:backlinks (rebuild + determinism check)
         run: |
           # The .jsonl is gitignored — fresh checkout has no file to compare against.
           # Build it once, then run --check to assert a second pass is no-op (deterministic).
-          npm run msp:backlinks --workspace=packages/msp
-          npm run msp:backlinks --workspace=packages/msp -- --check
+          # --root=../.. so the workspace-scoped script scans the repo-root gks/ vault.
+          npm run msp:backlinks --workspace=packages/msp -- --root=../..
+          npm run msp:backlinks --workspace=packages/msp -- --root=../.. --check
 
       - name: msp:check-links (gks crosslink integrity)
-        run: npm run msp:check-links --workspace=packages/msp
+        run: npm run msp:check-links
 
       - name: verify-flow per FEAT
         run: |
           set -e
-          for feat_path in packages/msp/gks/feat/FEAT--*.md; do
+          for feat_path in gks/feat/FEAT--*.md; do
             feat=$(basename "$feat_path" .md)
             # Skip FEATs whose status marks them as terminal — `superseded`
             # and `deprecated` are valid lifecycle states (per the supersession
@@ -90,5 +91,5 @@ jobs:
               continue
             fi
             echo "→ $feat"
-            npx gks verify-flow "$feat" --root=packages/msp
+            npx gks verify-flow "$feat" --root=.
           done
