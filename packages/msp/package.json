@@ -14,7 +14,8 @@
     "msp-run-task": "./dist/codegen/cli.js",
     "msp-master": "./dist/codegen/master/cli.js",
     "msp-mcp-server": "./dist/mcp/bin.js",
-    "msp-graph": "./dist/symbols/cli.js"
+    "msp-graph": "./dist/symbols/cli.js",
+    "msp-dispatch": "./dist/agents/cli.js"
   },
   "files": [
     "dist/",
@@ -37,6 +38,7 @@
     "msp:run-task": "tsx src/codegen/cli.ts",
     "msp:master": "tsx src/codegen/master/cli.ts",
     "msp:graph": "tsx src/symbols/cli.ts",
+    "msp:dispatch": "tsx src/agents/cli.ts",
     "msp:hotfix:open": "gks hotfix open",
     "msp:hotfix:list": "gks hotfix list",
     "msp:hotfix:close": "gks hotfix close",
