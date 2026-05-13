@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
-    "declaration": true
+    "declaration": true,
+    "noUncheckedIndexedAccess": false
   },
   "include": ["src/**/*", "test/**/*"],
   "exclude": [

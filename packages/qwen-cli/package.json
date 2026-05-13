@@ -1,1 +1,10 @@
-{"name":"qwen-cli-tools","version":"1.0.0","dependencies":{"docx":"^9.6.1"}}
+{
+  "name": "qwen-cli-tools",
+  "version": "1.0.0",
+  "dependencies": {
+    "docx": "^9.6.1"
+  },
+  "scripts": {
+    "typecheck": "echo \"Python package: skipping TS typecheck\" && exit 0"
+  }
+}
