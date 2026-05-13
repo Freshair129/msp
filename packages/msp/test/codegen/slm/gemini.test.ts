@@ -6,12 +6,23 @@ import { join } from 'node:path'
 import { createGeminiClient } from '../../../src/codegen/slm/gemini.js'
 import { SlmError } from '../../../src/codegen/slm/errors.js'
 
+const IS_WINDOWS = process.platform === 'win32'
+
 async function makeStubGemini(stdout: string, exitCode = 0): Promise<string> {
   const dir = await mkdtemp(join(tmpdir(), 'gemini-stub-'))
+  if (IS_WINDOWS) {
+    const jsPath = join(dir, 'stub.cjs')
+    await writeFile(
+      jsPath,
+      `process.stdout.write(${JSON.stringify(stdout)}); process.exit(${exitCode});`,
+      'utf8',
+    )
+    const path = join(dir, 'gemini.cmd')
+    const cmd = ['@echo off', `node "${jsPath}"`, `exit /b %errorlevel%`].join('\r\n') + '\r\n'
+    await writeFile(path, cmd, 'utf8')
+    return path
+  }
   const path = join(dir, 'gemini')
-  // Stub binary: prints `stdout` and exits with `exitCode`. The stub also
-  // dumps its argv to /dev/stderr so tests can verify the -p / -y / -m
-  // envelope.
   const script = [
     '#!/usr/bin/env bash',
     'printf "%s" "$@" >&2',

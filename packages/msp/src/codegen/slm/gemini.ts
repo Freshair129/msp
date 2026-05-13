@@ -54,6 +54,7 @@ export async function runGeminiCli(prompt: string, opts: GeminiOpts = {}): Promi
     const { stdout, stderr } = await execFileAsync(bin, args, {
       maxBuffer,
       timeout: timeoutMs,
+      shell: process.platform === 'win32',
     })
     return { stdout: stdout ?? '', stderr: stderr ?? '' }
   } catch (err) {

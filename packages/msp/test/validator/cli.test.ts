@@ -20,6 +20,7 @@ function run(args: string[]): Promise<RunResult> {
     const child = spawn('npx', ['tsx', cliPath, ...args], {
       env: { ...process.env, NO_COLOR: '1' },
       cwd: repoRoot,
+      shell: process.platform === 'win32',
     })
     let stdout = ''
     let stderr = ''

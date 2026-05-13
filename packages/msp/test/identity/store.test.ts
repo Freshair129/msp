@@ -33,15 +33,15 @@ afterEach(() => {
 describe('identityPath', () => {
   it('joins root + .brain/msp/projects/<ns>/identity.json (legacy/migration path)', () => {
     const p = identityPath('/home/user/work', 'evaAI')
-    expect(p).toBe('/home/user/work/.brain/msp/projects/evaAI/identity.json')
+    expect(p.replace(/\\/g, '/')).toMatch(/\/home\/user\/work\/\.brain\/msp\/projects\/evaAI\/identity\.json$/)
   })
 })
 
 describe('projectOverridePath', () => {
   it('joins root + .brain/msp/projects/<ns>/identity.override.json', () => {
     const p = projectOverridePath('/home/user/work', 'evaAI')
-    expect(p).toBe(
-      '/home/user/work/.brain/msp/projects/evaAI/identity.override.json',
+    expect(p.replace(/\\/g, '/')).toMatch(
+      /\/home\/user\/work\/\.brain\/msp\/projects\/evaAI\/identity\.override\.json$/,
     )
   })
 })

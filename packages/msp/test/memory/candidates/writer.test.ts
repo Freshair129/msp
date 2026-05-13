@@ -52,7 +52,7 @@ describe('CandidateWriter.write', () => {
     const root = await freshRoot()
     const w = new CandidateWriter({ root, namespace: 'team-x' })
     const result = await w.write(VALID_INPUT)
-    expect(result.path).toContain('/projects/team-x/candidates/')
+    expect(result.path.replace(/\\/g, '/')).toContain('/projects/team-x/candidates/')
   })
 
   it('honours proposedBy = human', async () => {

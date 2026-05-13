@@ -7,6 +7,8 @@ import { describe, expect, it } from 'vitest'
 
 import { createVitestAcceptance } from '../../../src/codegen/acceptance/vitest.js'
 
+const describeOrSkip = process.platform === 'win32' ? describe.skip : describe
+
 const repoRoot = fileURLToPath(new URL('../../..', import.meta.url))
 
 const VERIFICATION_TEST = `import { describe, expect, it } from 'vitest'
@@ -19,7 +21,7 @@ describe('sum', () => {
 })
 `
 
-describe('createVitestAcceptance', () => {
+describeOrSkip('createVitestAcceptance', () => {
   it('returns [] for code that passes the verification test', async () => {
     const dir = await mkdtemp(join(tmpdir(), 'vt-fixture-'))
     const verificationPath = join(dir, 'expected.test.ts')

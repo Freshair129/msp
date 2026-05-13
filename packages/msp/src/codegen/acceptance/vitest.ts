@@ -28,6 +28,7 @@ function spawnVitest(cwd: string, vitestBin: string, timeoutMs: number): Promise
     const child = spawn(cmd!, args, {
       cwd,
       env: { ...process.env, NO_COLOR: '1' },
+      shell: process.platform === 'win32',
     })
 
     let stdout = ''

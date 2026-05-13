@@ -101,6 +101,6 @@ describe('msp_candidate tool', () => {
       namespace: 'team-alpha',
     })
     const payload = JSON.parse(result.content[0]!.text)
-    expect(payload.candidate_path).toContain('/projects/team-alpha/candidates/')
+    expect(payload.candidate_path.replace(/\\/g, '/')).toContain('/projects/team-alpha/candidates/')
   })
 })
