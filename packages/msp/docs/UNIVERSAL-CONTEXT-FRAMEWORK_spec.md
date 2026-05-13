@@ -1,6 +1,6 @@
 # UNIVERSAL CONTEXT FRAMEWORK — Specification
 
-> **Status:** `draft` · **Version:** `0.1.0` · **Created:** 2026-05-13 · **Owner:** MSP team
+> **Status:** `draft` · **Version:** `0.1.1` · **Created:** 2026-05-13 · **Owner:** MSP team
 >
 > A universal, transport-agnostic framework for **identity-aware**, **policy-controlled**, **graded-resolution** retrieval and context delivery in agentic AI systems. Designed to work for any data domain (medical, finance, legal, code, HR, multi-tenant SaaS) without hardcoding domain knowledge into the core.
 >
@@ -11,6 +11,7 @@
 ## Table of Contents
 
 - [Abstract](#abstract)
+- [§0 Resolved Decisions](#0-resolved-decisions)
 - [§1 Motivation & Background](#1-motivation--background)
 - [§2 Conceptual Model — Three Axes](#2-conceptual-model--three-axes)
 - [§3 Subject-Resource-Action-Context Model](#3-subject-resource-action-context-model)
@@ -48,6 +49,21 @@ This spec defines a **single composable framework** that solves all four:
 - **Step-up authentication** for sensitive operations even when the outer session is already authenticated.
 
 The core is **domain-agnostic**. Domain knowledge enters through plugin classifiers (e.g. PII regex, HIPAA tags) and policy files (YAML / Cedar / OPA). Shipping a vertical (e.g. medical agent) is a matter of dropping in a policy pack — no core changes.
+
+---
+
+## §0 Resolved Decisions
+
+The following design choices have been agreed and remove their counterparts from §14 Open Questions. Subsequent sections that depend on them have been updated inline.
+
+| # | Topic | Decision | Date | Notes |
+|---|---|---|---|---|
+| **D-1** | Policy language v1 | **YAML + minimal built-in operators** (~200 LOC parser/evaluator). | 2026-05-13 | Migration path to Cedar is mechanical translation once policy count exceeds ~30 rules or recursion is needed. |
+| **D-2** | Resolution tier count (MVP) | **2-tier: `FULL` + `MENTION`**, plus `expand()` on demand. | 2026-05-13 | 4-tier (adding `SUMMARY`, `SKELETON`) deferred to Phase 4 — only if `expand()` usage telemetry proves graded retrieval is high-value. |
+| **D-7** | Default policy posture | **`default-permit` + shadow log in Phase 1**, tighten to `default-deny` per-endpoint from Phase 3 onward. | 2026-05-13 | Prevents breakage of existing flows; gives operators a "what would have been denied" report before enforcement. |
+| **D-8** | AttributeBag storage | **Atom metadata (JSON column / frontmatter `attributes:`)**. `Namespace` stays the 4-field composite key in GKS, untouched. | 2026-05-13 | Preserves GKS invariants (Namespace = immutable partition key); pgvector filters use `attributes->>'<key>'`. |
+
+Open questions remaining: see §14.
 
 ---
 
@@ -461,13 +477,15 @@ Human researchers do not work this way. We scan abstracts, expand the relevant o
 The Resolution Gradient encodes this:
 
 ```
-Tier      Content shape                          Typical tokens
-────────────────────────────────────────────────────────────────
-FULL      complete body + frontmatter            500 – 5000
-SUMMARY   frontmatter + first paragraph + h2s    50 – 300
-SKELETON  id + title + 1-line description        20 – 60
-MENTION   id only (pointer, no preview)          5 – 10
+Tier      Content shape                          Typical tokens   MVP?
+─────────────────────────────────────────────────────────────────────────
+FULL      complete body + frontmatter            500 – 5000       ✅ yes
+SUMMARY   frontmatter + first paragraph + h2s    50 – 300         ⏳ Phase 4
+SKELETON  id + title + 1-line description        20 – 60          ⏳ Phase 4
+MENTION   id only (pointer, no preview)          5 – 10           ✅ yes
 ```
+
+**MVP scope (per D-2):** ship `FULL` + `MENTION` only, plus `expand()` to promote a `MENTION` to `FULL` on demand. The intermediate tiers are added in Phase 4 once telemetry confirms `expand()` is exercised frequently enough to justify the renderer / budget-allocator complexity. The composer must, however, **structure data as if all four tiers exist** so adding `SUMMARY` / `SKELETON` later is a renderer addition, not a rearchitecture.
 
 ### 6.2 Tiering signals
 
@@ -602,7 +620,9 @@ The framework uses the classic XACML / OPA architecture:
 
 ### 7.3 Policy file format (initial)
 
-```yaml
+**Format (per D-1):** YAML with a small built-in operator set. Estimated 200 LOC for parser + evaluator. Hot-reload is supported via file watcher + monotonic policy-version counter. Migration to Cedar / OPA is a mechanical translation once policy count or expressiveness needs exceed the YAML form (target threshold: ~30 rules or any need for recursive evaluation).
+
+
 # policies/subagent-context-scoping.yaml
 - id: deny-out-of-scope-atoms
   description: Subagent tasks see only atoms whose domain is in scope.needs.
@@ -897,17 +917,19 @@ Each phase ships behind a feature flag, is independently testable, and produces 
 **Deliverables:**
 
 - Implement `evaluatePolicy(subject, resource, action, context): Decision` (~300 LOC).
-- YAML policy loader with hot reload.
-- One default policy: `log-everything-permit-everything`.
-- PEP at `layer.runTask()` only; in shadow mode (log, do not enforce).
+- YAML policy loader with hot reload (per D-1).
+- Default posture: **`default-permit`** (per D-7) — every action is permitted unless an explicit rule denies it.
+- One starter policy: `log-everything-permit-everything` (literally permits and logs every call).
+- PEP at `layer.runTask()` only; in **shadow mode** — PDP runs, decisions are logged with full reasoning, but enforcement is off (every action runs regardless of decision).
 
 **Acceptance:**
 
 - Decision logs include reasoning trace.
 - Operator can author a new YAML policy and see it pick up without restart.
-- runTask still produces identical outputs (shadow mode).
+- `runTask` still produces identical outputs (shadow mode confirmed).
+- The shadow log surfaces "what would have been denied if we flipped to enforce" — this is the key artifact for Phase 2 confidence.
 
-**Risk:** low.
+**Risk:** low. Worst case the PDP misbehaves — fall back to log-only is automatic.
 
 ### Phase 2 — Subagent scope filtering, enforced (Week 3)
 
@@ -927,19 +949,36 @@ Each phase ships behind a feature flag, is independently testable, and produces 
 
 ### Phase 3 — Vault and resolution gradient (Week 4-5)
 
-**Deliverables:**
+**Deliverables (per D-2 — 2-tier MVP):**
 
 - Vault config files (`~/.msp/vaults/*.yaml`).
 - Layer 4 (resolution tier assignment) + Layer 5 (budget enforcement) in composer.
-- `expand()` MCP tool + facade method.
-- 2-tier (FULL / MENTION) before 4-tier — prove the concept first.
+- `expand()` MCP tool + facade method (promote a `MENTION` to `FULL`).
+- **Tier set:** `FULL` and `MENTION` only. `SUMMARY` and `SKELETON` deferred to Phase 4 — but the tier-assignment data model must already encode all four so adding renderers later is additive.
+- First per-endpoint flip from `default-permit` → `default-deny` for the `expose-to-llm` action on Resources marked `restricted` or higher (per D-7).
 
 **Acceptance:**
 
 - Token usage on standard query set drops 60%+ vs. flat top-K.
 - Agents call `expand()` and the call chains work end-to-end.
+- `default-deny` for `restricted` resources confirmed in audit log.
 
 **Risk:** medium — risk of breaking existing recall consumers.
+
+### Phase 3.5 — SUMMARY / SKELETON renderers (optional, gated on telemetry)
+
+**Trigger to ship:** Phase 3 telemetry shows `expand()` is called on ≥ 20% of MENTION-tier resources. Below that threshold, the cost of building renderers exceeds the value — agents are happy with FULL + MENTION.
+
+**Deliverables:**
+
+- `SummaryRenderer` — extracts frontmatter + first paragraph + heading list.
+- `SkeletonRenderer` — extracts id + title + 1-line description from frontmatter.
+- Per-tier budget allocator.
+- Vault config: per-tier caps and `on_overflow` strategy.
+
+**Acceptance:** token savings on same standard query set increase by another 20-30% beyond Phase 3 baseline.
+
+**Risk:** low — additive, behind a flag.
 
 ### Phase 4 — User-level ABAC, enforced (Week 6)
 
@@ -1119,27 +1158,19 @@ Each phase ships behind a feature flag, is independently testable, and produces 
 
 ## §14 Open Questions
 
-The following are deliberately unresolved at v0.1 and need decisions before phases that depend on them ship.
+Resolved questions have moved to §0. The following remain open. Each is annotated with the phase by which a decision is required.
 
-1. **Policy language v1.** YAML with built-in operators (proposed) vs. embed Cedar/Rego from day one vs. WASM-evaluator plugin model. Trade-off: simplicity now vs. ceiling later.
+1. **Hop metric.** Pure graph hops, pure cosine, or weighted sum? Each has correctness edge cases. **Required by Phase 3.** Working assumption: weighted hybrid `0.7·sim + 0.3·(1/(1+hops))` — revise after Phase 2 telemetry.
 
-2. **Resolution tier count.** 2 (FULL/MENTION), 3 (add SUMMARY), or 4 (add SKELETON)? Each tier costs implementation + UX complexity. Smallest viable is 2; richest is 4.
+2. **MCP step-up channel.** Out-of-band web/mobile confirmation, pre-signed token bundles, or per-tool risk class? Each has UX trade-offs. **Required by Phase 5.** Working assumption: per-tool risk class with out-of-band only for `risk: high` tools.
 
-3. **Hop metric.** Pure graph hops, pure cosine, or weighted sum? Each has correctness edge cases.
+3. **Auth provider.** Build minimal (PIN + passkey ourselves) vs. integrate an IdP (Auth0, Keycloak, Authentik) vs. delegate to reverse proxy (oauth2-proxy, Caddy)? **Required by Phase 4.** Working assumption: minimal in-house (PIN + Passkey) + accept reverse-proxy headers as an alternative auth source.
 
-4. **MCP step-up channel.** Out-of-band web/mobile confirmation, pre-signed token bundles, or per-tool risk class? Each has UX trade-offs.
+4. **Vault membership versioning.** When Alice leaves the team, atoms she wrote remain in the team vault. Do we recompute her vault view at every query (slow but correct) or snapshot membership at session start (fast but stale)? **Required by Phase 3.** Working assumption: session-snapshot with explicit `refresh` action.
 
-5. **Auth provider.** Build minimal (PIN + passkey ourselves) vs. integrate an IdP (Auth0, Keycloak, Authentik) vs. delegate to reverse proxy (oauth2-proxy, Caddy)?
+5. **Audit log destination.** Inline in MSP audit (current pattern) vs. dedicated security log with stricter retention? Compliance teams will want the latter; operations teams may want correlation with existing logs. **Required by Phase 4.** Working assumption: inline MSP audit with `audit_class: security` field, split file later if a regulator requires.
 
-6. **Vault membership versioning.** When Alice leaves the team, atoms she wrote remain in the team vault. Do we recompute her vault view at every query (slow but correct) or snapshot membership at session start (fast but stale)?
-
-7. **Default policy posture.** Default-deny (safe, requires explicit allow) vs. default-permit (compatible with existing flows). Likely default-permit with shadow logging in Phase 1, default-deny by Phase 4.
-
-8. **GKS scope expansion.** Should `Namespace` extend with `attributes?: AttributeBag`, or should attributes stay in metadata? Affects pgvector schema and migration cost.
-
-9. **Audit log destination.** Inline in MSP audit (current pattern) vs. dedicated security log with stricter retention? Compliance teams will want the latter; operations teams may want correlation with existing logs.
-
-10. **Embedding-leak threshold.** What is acceptable timing leakage? Constant-time everywhere is expensive; "good enough" tolerances need defining per deployment class.
+6. **Embedding-leak threshold.** What is acceptable timing leakage? Constant-time everywhere is expensive; "good enough" tolerances need defining per deployment class. **Required by Phase 4 for sensitive-vault deployments.** Working assumption: constant-time deny only when vault config sets `sensitive_mode: true`.
 
 ---
 
@@ -1200,6 +1231,7 @@ The following are deliberately unresolved at v0.1 and need decisions before phas
 | Version | Date | Change |
 |---|---|---|
 | `0.1.0` | 2026-05-13 | Initial draft consolidating chat-derived design. |
+| `0.1.1` | 2026-05-13 | Resolved D-1 (YAML policy lang), D-2 (2-tier MVP), D-7 (default-permit + shadow log), D-8 (attributes in metadata, Namespace untouched). Added §0 Resolved Decisions and Phase 3.5 for SUMMARY/SKELETON renderers. Updated §6, §7, §11 Phase 1 / Phase 3 inline. Trimmed §14 open questions accordingly. |
 
 ---
 
