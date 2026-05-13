@@ -1,6 +1,20 @@
 # MSP Roadmap
 
-> **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md). For close-out audits: [`AUDIT--ALL-M-MILESTONES`](./gks/audit/AUDIT--ALL-M-MILESTONES.md) (v0.3.0) + [`AUDIT--V0-4-0`](./gks/audit/AUDIT--V0-4-0.md) (v0.4.0) + [`AUDIT--ARCH-DOC-CLEANUP`](./gks/audit/AUDIT--ARCH-DOC-CLEANUP.md) (Phase A, 2026-05-09) + [`AUDIT--PHASE-B-IMPL-COMPLETE`](./gks/audit/AUDIT--PHASE-B-IMPL-COMPLETE.md) (Phase B impl) + [`AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS`](./gks/audit/AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS.md) (Phase C).
+> **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md). For close-out audits: [`AUDIT--ALL-M-MILESTONES`](./gks/audit/AUDIT--ALL-M-MILESTONES.md) (v0.3.0) + [`AUDIT--V0-4-0`](./gks/audit/AUDIT--V0-4-0.md) (v0.4.0) + [`AUDIT--ARCH-DOC-CLEANUP`](./gks/audit/AUDIT--ARCH-DOC-CLEANUP.md) (Phase A, 2026-05-09) + [`AUDIT--PHASE-B-IMPL-COMPLETE`](./gks/audit/AUDIT--PHASE-B-IMPL-COMPLETE.md) (Phase B impl) + [`AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS`](./gks/audit/AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS.md) (Phase C) + [`AUDIT--PHASE-D-AGENTIC-RUNTIME-COMPLETE`](./gks/audit/AUDIT--PHASE-D-AGENTIC-RUNTIME-COMPLETE.md) (Phase D) + [`AUDIT--PHASE-F-COMPLETE`](./gks/audit/AUDIT--PHASE-F-COMPLETE.md) (Phase F).
+
+## Status — Agentic Monorepo Pivot D + E + F COMPLETE (2026-05-14)
+
+The agentic monorepo pivot from `ULTRAPLAN--AGENTIC-MONOREPO-PIVOT` is **fully implemented**. Three phases shipped end-to-end:
+
+| Phase | Scope | Closeout |
+|---|---|---|
+| **D — Agentic Runtime** | 4 streams (routing, adapters, dispatch, two-brain) over PRs #103–#118 | [`AUDIT--PHASE-D-AGENTIC-RUNTIME-COMPLETE`](./gks/audit/AUDIT--PHASE-D-AGENTIC-RUNTIME-COMPLETE.md) |
+| **E — Production features** | E1 real CLI wiring (#123), E2 `msp_dispatch` MCP (#119), E3 cost tracking (#120), E4 Master promotion (#122), E5 Genesis Block runtime (#121) | per-stream audits |
+| **F — Refinements** | F1 Master↔Genesis wiring (#124), F2 cost dashboard (#125), F4 episode GC (#126) | [`AUDIT--PHASE-F-COMPLETE`](./gks/audit/AUDIT--PHASE-F-COMPLETE.md) |
+
+The repo now exposes a complete agent loop: **dispatch** (`msp-dispatch`) → **record** (`result-recorder`) → **aggregate cost** (`msp-usage`) → **promote** (`msp-master-propose`) → **execute** (`msp-genesis-exec`) → **garbage-collect** (`msp-episode-gc`).
+
+---
 
 ## Status — Phase D (Agentic Runtime) COMPLETE (2026-05-14)
 
@@ -16,17 +30,29 @@ The **Agentic Monorepo Pivot Phase D** (per `ULTRAPLAN--AGENTIC-MONOREPO-PIVOT`)
 
 Net effect: MSP can now route any task through T1 (Qwen) / T2 (Gemini) / T3 (Claude) via a single `dispatch()` entry point, record episodes as immutable atoms, and resolve queries against the dispatched-agent's memory via MCP — fulfilling `CONCEPT--AGENT-TIER-ROUTING` + `ADR--AGENT-TIER-COST-POLICY` + `BLUEPRINT--AGENT-DISPATCHER`.
 
-## Phase E — candidate milestones (next)
+## Phase E — Production features COMPLETE (2026-05-13/14)
 
-Phase D landed the *plumbing*; Phase E wires it to real backends and extends the surface. Candidates (in rough priority order — final selection at Phase-E kickoff):
+All five E-streams shipped:
 
-| Candidate | What | Source atom(s) |
+| Stream | What | PR | Status |
+|---|---|---|---|
+| **E1 — Real tier CLIs** | Wired actual `qwen` / `gemini` / `claude` CLI invocation per adapter; opt-in integration tests behind `MSP_RUN_TIER_INTEGRATION=1`. | #123 | ✅ merged |
+| **E2 — MCP `msp_dispatch`** | Exposed the dispatcher to remote agents as MCP tool (count 21 → 22). | #119 | ✅ merged |
+| **E3 — Cost tracking** | `cost-tracker.ts` per tier; emits `USAGE--DAILY-*` atoms; budget enforcement at dispatch boundary. | #120 | ✅ merged |
+| **E4 — Master Block promotion** | Consolidator pipeline + `msp-master-propose` CLI gated by PROTO body-schema + token-cap. | #122 | ✅ merged |
+| **E5 — Genesis Block runtime** | Loader/executor for `FRAME--*` Block Manifest atoms (`msp-genesis-exec`). | #121 | ✅ merged |
+
+## Phase F — Refinements COMPLETE (2026-05-14)
+
+Phase F closed loose ends from E without adding new surface area. Three streams shipped in parallel:
+
+| Stream | What | PR |
 |---|---|---|
-| **E1 — Real tier CLIs** | Wire actual `qwen` / `gemini` / `claude` CLI invocation in each adapter (current implementations are scaffolds returning `not implemented` for offline CI). | `BLUEPRINT--AGENT-DISPATCHER` §P3 |
-| **E2 — MCP `msp_dispatch`** | Expose the dispatcher to remote agents as an MCP tool (parallel to `msp_brain_resolve`). | `FRAMEWORK--AGENT-DISPATCH` §Surface |
-| **E3 — Cost tracking** | Add `cost-tracker.ts` hook per tier; emit `USAGE--*` atoms; budget enforcement at the dispatch boundary. | `BLUEPRINT--AGENT-DISPATCHER` §Open-questions |
-| **E4 — Master Block promotion** | Consolidator pipeline: episodes → consolidated lessons → `MASTER--*` promotions (gated by `PROTO--MASTER-BODY-SCHEMA` + `PROTO--MASTER-TOKEN-CAP`). | `ADR--MASTER-PROMOTION-DOC-TO-CODE`, `MASTER--MSP-DOC-TO-CODE` |
-| **E5 — Genesis Block runtime** | Loader/executor for `FRAME--*` Block Manifest atoms (first real Block: `GENESIS--IDENTITY-ENGINE`). | `SPEC--GENESIS-BLOCK-MANIFEST` §Deferred follow-ups |
+| **F1 — Master ↔ Genesis wiring** | `registry.ts` + `promote-apply.ts`; `ExecuteResult.from_master?`. | #124 |
+| **F2 — Cost dashboard / USAGE roll-ups** | `aggregator.ts` + `rollup-writer.ts` + `msp-usage` CLI (5 subcommands). | #125 |
+| **F4 — Episode retention + GC** | `episode-gc.ts` + `msp-episode-gc` CLI; default policy from `ADR--EPISODE-GC-POLICY`. | #126 |
+
+F3 (master recall ergonomics) was rolled into F1's `findActiveMaster` helper and did not need its own PR. Full roll-up in [`AUDIT--PHASE-F-COMPLETE`](./gks/audit/AUDIT--PHASE-F-COMPLETE.md).
 
 ---
 
