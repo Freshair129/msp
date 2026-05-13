@@ -7,8 +7,9 @@ import { fileURLToPath } from 'node:url'
 
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
-const hookSrc = join(repoRoot, 'examples/hooks/pre-push-verify.sh')
+const packageRoot = fileURLToPath(new URL('../..', import.meta.url))
+const repoRoot = resolve(packageRoot, '../..')
+const hookSrc = join(packageRoot, 'examples/hooks/pre-push-verify.sh')
 
 /**
  * Find the workspace node_modules by walking up from `start`. In npm
@@ -33,7 +34,7 @@ function findWorkspaceNodeModules(start: string): string {
   throw new Error(`no node_modules with @freshair129/gks found above '${start}'`)
 }
 
-const workspaceNodeModules = findWorkspaceNodeModules(repoRoot)
+const workspaceNodeModules = findWorkspaceNodeModules(packageRoot)
 
 /**
  * Ensure `node_modules/.bin/gks` exists. npm has a known quirk where

@@ -15,7 +15,7 @@ tags:
   - tree-sitter
   - leiden
   - upstream-gks
-crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--KNOWLEDGE-3-TIER","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--KNOWLEDGE-3-TIER","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--SYMBOL-GRAPH-PIPELINE","ADR--SYMBOL-GRAPH-PROCESSING-STAGES","PROTO--TRACE-INVARIANTS"]}
 created_at: 2026-05-09T16:30:00.000+07:00
 ---
 
@@ -46,6 +46,21 @@ This frame adds an orthogonal **structural** axis: a graph over **source-code sy
 ```
 
 The two graphs are **independently queryable** and **link via** `linked_symbols[]` on FEAT atoms. An atom can point to its implementation symbols; a symbol can be looked up to find the atoms that govern it.
+
+## Symbol Graph Processing Pipeline (12-Stage DAG)
+
+เพื่อให้ Symbol Graph มีความแม่นยำเชิงสถาปัตยกรรม (Architectural Meaning) ระบบต้องผ่านกระบวนการประมวลผล 12 ระยะ (Specified by `CONCEPT--SYMBOL-GRAPH-PIPELINE`):
+
+1. **Discovery:** Scan & Structure
+2. **Specialized:** Markdown & COBOL (Legacy support)
+3. **Extraction:** Symbolic Parse (AST)
+4. **Framework:** Routes, Tools (MCP), ORM (Prisma/Supabase)
+5. **Relationship:** Cross-File Resolution & MRO (Heritage)
+6. **Abstract:** Communities (Leiden) & Processes (Execution Flow)
+
+## Path to GenesisGraphBackend
+
+ข้อมูลที่ประมวลผลแล้วจะถูกจัดเก็บใน **GenesisGraphBackend** เพื่อรักษาคุณสมบัติความเป็น SSOT ของโครงสร้างซอฟต์แวร์ และอนุญาตให้ Agent ทำการ Query ความสัมพันธ์เชิงลึก (Deep Reasoning) ได้ทันที
 
 ## Why this matters
 
@@ -84,7 +99,8 @@ The 6-PR sequence (PR-1 atoms → PR-6 audit + upstream proposal) is the impleme
 
 ## Source
 
-- User design dialogue 2026-05-09 — proposed Tree-sitter + Leiden combination
-- `FRAMEWORK--MSP-ARCHITECTURE-V2` — base architecture; this frame extends it orthogonally
+- User design dialogue 2026-05-13 — Defined 12-stage DAG for architectural knowledge transformation
+- `FRAMEWORK--MSP-ARCHITECTURE-V2` — base architecture
+- `PROTO--TRACE-INVARIANTS` — ensures acyclic integrity
 - `FRAMEWORK--KNOWLEDGE-3-TIER` — conceptual axis sibling
 - Prior art: ctags, sourcegraph SCIP, scope-graphs (stack-graphs), comby AST-based search

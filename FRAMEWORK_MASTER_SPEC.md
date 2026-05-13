@@ -698,6 +698,31 @@ crosslinks:         # ความเชื่อมโยงแบบ Knowledge
 
 MSP มีบทบาทในการดูแลจัดการความจำข้าม session, project และ workspace ด้วยระบบที่เรียบง่ายแต่ผูกพันธ์กับ Atomic Knowledge ที่เกิดขึ้นระหว่างทาง
 
+## 8. Symbol Graph & Processing Pipeline (12-Stage DAG)
+เพื่อให้ Codebase ถูกเปลี่ยนสภาพเป็น **Architectural Knowledge Graph** ที่ AI Agents สามารถเข้าใจความหมายเชิงสถาปัตยกรรมได้ MSP บังคับใช้กระบวนการประมวลผลแบบ **Directed Acyclic Graph (DAG)** ทั้งหมด 12 ระยะหลัก:
+
+### 8.1 The 12 Stages
+1. **Scan (การสแกน):** สำรวจเส้นทางไฟล์ (File paths) และขนาดข้อมูลทั้งหมดเพื่อสร้างแผนผังพื้นฐานของ Repository
+2. **Structure (โครงสร้าง):** จับคู่ความสัมพันธ์โฟลเดอร์/ไฟล์ เพื่อสร้างลำดับชั้น (Hierarchy Tree) ของซอฟต์แวร์
+3. **Specialized Parse - Markdown:** วิเคราะห์ไฟล์ `.md` เพื่อสกัดความรู้ (Atoms) และเชื่อมโยงเนื้อหาอธิบายเข้ากับระบบ
+4. **Specialized Parse - COBOL:** วิเคราะห์โค้ด Legacy (COBOL) เพื่อให้ระบบรองรับการวิเคราะห์ข้ามยุคสมัย
+5. **Symbolic Parse:** สกัดสัญลักษณ์ (Functions, Classes, Methods, Interfaces) โดยใช้ **Tree-sitter AST**
+6. **Framework - Routes:** วิเคราะห์เส้นทาง API (เช่น Next.js App Router) เพื่อระบุ Entry Points ของระบบ
+7. **Framework - Tools:** สกัดคำนิยามของ MCP tools หรือ RPC handlers ที่ระบุไว้ในโค้ด
+8. **Framework - ORM:** วิเคราะห์ระบบจัดการข้อมูล (เช่น Prisma, Supabase) เพื่อดูความสัมพันธ์กับ Database Schema
+9. **Cross-File Resolution:** เชื่อมโยงการ Import/Export สัญลักษณ์ระหว่างไฟล์ที่แยกจากกัน
+10. **MRO (Method Resolution Order):** จัดลำดับชั้นการสืบทอด (Heritage Map) เพื่อระบุการเรียกใช้งานจริงในระบบที่ซับซ้อน
+11. **Communities (การจัดกลุ่มชุมชน):** ใช้ **Leiden Algorithm** จัดกลุ่มสัญลักษณ์ที่มีความเกี่ยวข้องกันในเชิงหน้าที่ (Functional Cohesion)
+12. **Processes (กระบวนการประมวลผล):** ติดตามเส้นทางการไหลของข้อมูล (Execution Flows) จาก Entry Points ไปยังฟังก์ชันปลายทาง
+
+### 8.2 Persistence: GenesisGraphBackend
+ข้อมูลกราฟความรู้ที่ได้จากทั้ง 12 ระยะจะถูกบันทึกลงใน **GenesisGraphBackend (DB)**:
+- **Graph Storage:** จัดเก็บในรูปแบบที่รองรับการ Query ความสัมพันธ์ที่ซับซ้อนและลึก (Deep Traversal)
+- **Agent Accessibility:** ข้อมูลใน DB นี้จะถูก SURFACED ผ่าน MCP tools (เช่น `gks_backlinks`, `symbol_trace`) เพื่อให้ AI Agents สามารถเรียกใช้งานได้ทันที
+
+---
+
+
 - **Project Path Encoding:** กำหนด `<path-encoded>` ตาม location เช่น `D:/company/ProA` จะถูกตั้งค่าเป็น `D--ProA`
 - **Candidates Path:** `.brain/msp/projects/<path-encoded>/candidates/` (gitignored — per-user staging area ก่อน PR)
 

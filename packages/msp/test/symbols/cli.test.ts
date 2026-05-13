@@ -1,13 +1,14 @@
 import { spawn } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
-const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
-const cliSrc = `${repoRoot}/src/symbols/cli.ts`
+const packageRoot = fileURLToPath(new URL('../..', import.meta.url))
+const repoRoot = resolve(packageRoot, '../..')
+const cliSrc = `${packageRoot}/src/symbols/cli.ts`
 
 interface SpawnResult {
   code: number
