@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 
 import * as backlinksRebuild from './tools/backlinks-rebuild.js'
+import * as brainResolve from './tools/brain-resolve.js'
 import * as candidate from './tools/candidate.js'
 import * as compressTool from './tools/compress.js'
 import * as episodeAppend from './tools/episode-append.js'
@@ -29,6 +30,7 @@ export interface ServerOpts {
 
 const TOOLS = [
   validateTool,
+  brainResolve,
   candidate,
   runTask,
   sessionAppend,
