@@ -19,7 +19,7 @@ This is the project-internal contract for how Claude Code (and human contributor
 - `packages/gks/README.md` — GKS engine documentation
 - `packages/msp/ROADMAP.md` — Execution plan
 
-> **Naming disambiguation**: "Genesis Block" appears with two distinct meanings in this repo. (1) **Genesis Graph Backend** = the embedded graph DB at `packages/gks/src/memory/graph/genesis-graph.ts` (Cypher v0, JSONL log). (2) **Genesis Block** = the composite knowledge unit declared by a `FRAME--<NAME>` manifest atom per v2.3 taxonomy.
+> **Naming disambiguation**: "Genesis Block" appears with two distinct meanings in this repo. (1) **Genesis Graph Backend** = the embedded graph DB at `packages/gks/src/memory/graph/genesis-graph.ts` (Cypher v0, JSONL log). (2) **Genesis Block** = the composite knowledge unit declared by a `GENESIS--<NAME>` manifest atom per v2.3 taxonomy (contract: `SPEC--GENESIS-BLOCK-MANIFEST`).
 
 ## Monorepo Workflow
 

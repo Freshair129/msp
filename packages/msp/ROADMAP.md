@@ -112,9 +112,9 @@ Three PRs landed end-of-day 2026-05-13, each with CI green on Node 20 + 22. Stac
 
 | Item | What |
 |---|---|
-| `PROTO--KNOWLEDGE-BLOCK-MEMBERSHIP` | Machine-enforces `members.*` resolution + status cascade declared in `SPEC--GENESIS-BLOCK-MANIFEST` |
-| `BLUEPRINT--KNOWLEDGE-BLOCK-RUNTIME` | The loader/executor that reads a Block Manifest and invokes members |
-| `FRAME--IDENTITY-ENGINE` | First real Block Manifest — blocked on `COGNITIVE--EGO-DEATH-PASSPORT`, `STACK--MSP-NODE-RUNTIME`, `GUARD--IDENTITY-SCHEMA`, `SAFETY--PII-REDACTION` (none authored yet) |
+| `PROTO--GENESIS-BLOCK-MEMBERSHIP` | Machine-enforces `members.*` resolution + status cascade declared in `SPEC--GENESIS-BLOCK-MANIFEST` |
+| `BLUEPRINT--GENESIS-BLOCK-RUNTIME` | The loader/executor that reads a Block Manifest and invokes members |
+| `GENESIS--IDENTITY-ENGINE` | First real Block Manifest — blocked on `COGNITIVE--EGO-DEATH-PASSPORT`, `RUNBOOK--IDENTITY-MIGRATION`, `CONCEPT--IDENTITY-LAYER`, `PARAMS--IDENTITY-PROFILE-DEFAULTS` (some not authored yet) |
 | `SPEC--RESONANCE-INDEX` | From v1.2 draft; calculation of RI for block outputs |
 | `KNOWLEDGE-TYPES.md` long-form pass | Quick-lookup table is current; legacy `GUARDRAIL--` / pre-v2.3 `FRAME--` mentions in body sections still need a rewrite |
 | Root `gks/00_index/atomic_index.jsonl` cleanup | Pre-monorepo legacy snapshot (May 11, before the 2026-05-11 monorepo migration); 89 stale `FRAME--` refs — needs separate regen / removal decision |

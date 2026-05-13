@@ -9,7 +9,7 @@ This file documents mandatory rules that all AI agents operating in this reposit
 ## Atom taxonomy (v2.3)
 The atomic-knowledge prefix set is canonicalised in `packages/gks/docs/KNOWLEDGE-TYPES.md` and `packages/msp/gks/concept/CONCEPT--TAXONOMY-V2-3.md`. Key rules:
 
-- `FRAME--` = **Block Manifest** (v2.3+) — runtime entry-point of a Genesis Block. Frontmatter contract: `SPEC--GENESIS-BLOCK-MANIFEST`.
+- `GENESIS--` = **Block Manifest** (v2.3+) — runtime entry-point of a Genesis Block. Frontmatter contract: `SPEC--GENESIS-BLOCK-MANIFEST`. (Replaces retired placeholder `FRAME--`.)
 - `FRAMEWORK--` (v2.3+) = governance / architectural framework (the prior `FRAME--` meaning).
 - `GUARD--` = structural data-integrity invariants (renamed from `GUARDRAIL--` in v2.3).
 - New prefixes available: `STACK--`, `SPEC--`, `MOD--`, `COGNITIVE--`, `SAFETY--`.
@@ -24,5 +24,5 @@ Before any atom commit:
 
 ## Naming disambiguation
 "Genesis Block" appears with two distinct meanings in this repo. Always pick the right one:
-- **Genesis Block Engine** = the embedded graph DB (Cypher v0, JSONL log) — `packages/gks/src/memory/graph/genesis-graph.ts`.
-- **Genesis Block** = the composite knowledge unit (FRAME-- manifest + Cognitive/Algo/Guard members) — `SPEC--GENESIS-BLOCK-MANIFEST`.
+- **Genesis Graph Backend** = the embedded graph DB (Cypher v0, JSONL log) — `packages/gks/src/memory/graph/genesis-graph.ts`.
+- **Genesis Block** = the composite knowledge unit (GENESIS-- manifest + EVA 4.0 five-dimension core: Cognitive + Algo + Runbook + Concept + Params) — `SPEC--GENESIS-BLOCK-MANIFEST`.

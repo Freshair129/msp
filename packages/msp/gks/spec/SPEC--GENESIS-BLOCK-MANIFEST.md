@@ -6,7 +6,7 @@ status: stable
 tier: genesis
 source_type: axiomatic
 vault_id: default
-title: Genesis Block manifest — frontmatter contract for FRAME-- atoms (v2.3+)
+title: Genesis Block manifest — frontmatter contract for GENESIS-- atoms (v2.3+)
 tags:
   - msp
   - spec
@@ -26,23 +26,23 @@ This repo contains two distinct concepts that have been informally referred to a
 
 | Name | What it is | Where it lives |
 |---|---|---|
-| **Genesis Block** | A *composite knowledge unit* — a `FRAME--<NAME>` manifest atom + the member atoms it aggregates (Cognitive lens + executable Logic + structural Guard, plus optional Operational SOPs and external interfaces). Specified by **this atom**. | `packages/{gks,msp}/gks/framework/FRAME--<NAME>.md` (post-v2.3) |
+| **Genesis Block** | A *composite knowledge unit* — a `GENESIS--<NAME>` manifest atom + the member atoms it aggregates (five-dimension core per EVA 4.0: Cognitive + Algo + Runbook + Concept + Params, plus optional Guard/Safety/Stack/Protocol/Mod/Spec). Specified by **this atom**. | `packages/{gks,msp}/gks/genesis/GENESIS--<NAME>.md` (post-v2.3) |
 | **Genesis Graph Backend** | An embedded graph **database backend** with Cypher v0, JSONL append log, bi-temporal time-travel. Pure storage; persists `manifest.json` + `genesis-block.jsonl`. Specified by `CONCEPT--GENESIS-GRAPH-BACKEND`. | `packages/gks/src/memory/graph/genesis-graph.ts` |
 
 These are orthogonal — a Genesis Block can be *stored in* a Genesis Graph Backend (or in `GraphStore`, or in `PgGraphBackend`), but the composite identity is independent of the storage layer. Where existing prose says "Genesis Block" in the v2.3 taxonomy sense (composite knowledge), read it as "Genesis Block".
 
 ## 2. The manifest atom
 
-A **Block Manifest** is a `FRAME--<NAME>.md` atom under `packages/<pkg>/gks/framework/` that declares the membership and authority of one Genesis Block. The taxonomy v2.3 prefix table (`CONCEPT--TAXONOMY-V2-3`) reserves `FRAME--` for exactly this purpose.
+A **Block Manifest** is a `GENESIS--<NAME>.md` atom under `packages/<pkg>/gks/genesis/` that declares the membership and authority of one Genesis Block. The taxonomy v2.3 prefix table (`CONCEPT--TAXONOMY-V2-3`) reserves `GENESIS--` for exactly this purpose. (Note: the prior placeholder prefix `FRAME--` was retired in favour of `GENESIS--` because `FRAME--` collided visually with `FRAMEWORK--` — see `ADR--TAXONOMY-V2-3-MIGRATION` §"Follow-up rename".)
 
 ### 2.1 Frontmatter (validator-required, inherited from the atomic contract)
 
 These are required by `packages/msp/.brain/msp/LLM_Contract/atomic_contract.yaml` `required_fields.default` for every atom and apply unchanged here:
 
 ```yaml
-id: FRAME--<SLUG>            # e.g. FRAME--IDENTITY-ENGINE
+id: GENESIS--<SLUG>          # e.g. GENESIS--IDENTITY-ENGINE
 phase: 0                     # Block Manifests sit at P0 — they are foundational
-type: frame                  # use 'frame' (Block Manifest), not 'framework' (governance)
+type: genesis                # use 'genesis' (Block Manifest); 'framework' is for governance
 status: stable               # see §4 for status cascade rules
 title: <Genesis Block name — Engine — short purpose>
 created_at: <YYYY-MM-DDTHH:MM:SS+07:00>   # ICT, per repo timezone rule
@@ -100,7 +100,7 @@ Per `gks_genesis_knowledge_system_summary.md` §2.1 (the EVA 4.0 canonical struc
 | **Concept** | `CONCEPT--` | `Concept::X` | The "why" — origin reflection, self-consistency, ethical memory root |
 | **Params** | `PARAMS--` | `Param::X` | Tunable values (e.g. paradox_acceptance_threshold, principled_honesty, self_correction_urgency) |
 
-`FRAME--` is the *manifest itself*; it is not "a sixth member". The five core roles are closed.
+`GENESIS--` is the *manifest itself*; it is not "a sixth member". The five core roles are closed.
 
 > **Naming note**: in EVA 4.0 vocabulary, "Frame" means *mental framework* (a lens / model for interpreting events) — that maps to `COGNITIVE--` in v2.3. The v2.3 prefix `FRAMEWORK--` is a different concept (governance / architectural framework, used at the engineering layer). Do not confuse them.
 
@@ -137,7 +137,7 @@ Authors should set `status: draft` on a new manifest and only flip to `stable` a
 
 ### 4.3 Supersession
 
-When a Genesis Block evolves materially (a member is swapped for a different atom, a new role is added), publish a new `FRAME--<NAME>-V<N+1>` and supersede the old one via standard `crosslinks.supersedes` / `crosslinks.superseded_by` reciprocal links. `manifest_version` increments independently of supersession — patch/minor bumps stay on the same atom id; majors trigger a new manifest.
+When a Genesis Block evolves materially (a member is swapped for a different atom, a new role is added), publish a new `GENESIS--<NAME>-V<N+1>` and supersede the old one via standard `crosslinks.supersedes` / `crosslinks.superseded_by` reciprocal links. `manifest_version` increments independently of supersession — patch/minor bumps stay on the same atom id; majors trigger a new manifest.
 
 ## 5. Validation tier — this SPEC is descriptive, not enforced
 
@@ -154,13 +154,13 @@ That PROTO is **not** part of this PR (scope: SPEC only).
 
 ## 6. Worked example (mock — not authored)
 
-A future `FRAME--IDENTITY-ENGINE` Genesis Block might look like:
+A future `GENESIS--IDENTITY-ENGINE` Genesis Block might look like:
 
 ```yaml
 ---
-id: FRAME--IDENTITY-ENGINE
+id: GENESIS--IDENTITY-ENGINE
 phase: 0
-type: frame
+type: genesis
 status: draft
 title: Identity Engine — passport-bound agent identity resolution
 created_at: 2026-05-13T13:14:43+07:00

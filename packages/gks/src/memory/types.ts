@@ -37,7 +37,8 @@ export function isApprovedStatus(s: string | undefined | null): boolean {
 
 export type AtomicType =
   | 'concept'
-  | 'frame'
+  | 'genesis'
+  | 'frame'      // deprecated v2.3+ placeholder — use 'genesis' instead
   | 'framework'
   | 'blueprint'
   | 'adr'

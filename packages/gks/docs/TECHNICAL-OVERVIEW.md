@@ -19,17 +19,18 @@
 > history.
 >
 > **Atom prefix taxonomy (v2.3, 2026-05-13)**: this doc uses the v2.3
-> vocabulary — `FRAME--` (Block Manifest), `FRAMEWORK--` (governance /
-> architecture, formerly `FRAME--`), `GUARD--` (formerly `GUARDRAIL--`),
-> plus new prefixes `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`.
-> Canonical reference: [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md).
+> vocabulary — `GENESIS--` (Block Manifest, was placeholder `FRAME--`),
+> `FRAMEWORK--` (governance / architecture, formerly `FRAME--` pre-v2.3),
+> `GUARD--` (formerly `GUARDRAIL--`), plus new prefixes `STACK--`,
+> `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`. Canonical reference:
+> [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md).
 >
 > **Genesis Block disambiguation**: "Genesis Block" appears here in two
 > distinct senses. (1) **Genesis Graph Backend** — the embedded graph
 > backend implemented at `src/memory/graph/genesis-graph.ts` (Cypher v0,
 > JSONL log) — pure storage layer, slot under `GraphBackend`. (2)
 > **Genesis Block** — a composite knowledge unit declared by a
-> `FRAME--<NAME>` manifest atom (frontmatter contract: `SPEC--GENESIS-BLOCK-MANIFEST`).
+> `GENESIS--<NAME>` manifest atom (frontmatter contract: `SPEC--GENESIS-BLOCK-MANIFEST`).
 > A Genesis Block can be stored in a Genesis Graph Backend, but they're
 > orthogonal concepts.
 
