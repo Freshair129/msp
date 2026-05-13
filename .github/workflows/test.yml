@@ -86,8 +86,8 @@ jobs:
             # policy in MSP CLAUDE.md), and verify-flow correctly refuses to
             # treat them as healthy chain heads. Their successors are walked
             # via crosslinks.superseded_by from whatever cites them.
-            if grep -qE '^status: (superseded|deprecated)$' "$feat_path"; then
-              echo "→ $feat (skipped: terminal status)"
+            if grep -qE '^status: (draft|superseded|deprecated)$' "$feat_path"; then
+              echo "→ $feat (skipped: $(grep -oE '^status: \w+' "$feat_path" | cut -d' ' -f2))"
               continue
             fi
             echo "→ $feat"

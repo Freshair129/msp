@@ -20,30 +20,30 @@ ADR-012 — you can write directly into `gks/issues/` without the candidates ste
 ## Available templates
 
 ### Implementation flow
-- [`ADR.md`](./ADR.md) — architecture decision
-- [`FEAT.md`](./FEAT.md) — feature spec
-- [`ALGO.md`](./ALGO.md) — algorithm
-- [`FLOW.md`](./FLOW.md) — data / UI flow
-- [`ENTITY.md`](./ENTITY.md) — data schema
+- [`ADR--TEMPLATE.md`](./ADR--TEMPLATE.md) — architecture decision
+- [`FEAT--TEMPLATE.md`](./FEAT--TEMPLATE.md) — feature spec
+- [`ALGO--TEMPLATE.md`](./ALGO--TEMPLATE.md) — algorithm
+- [`FLOW--TEMPLATE.md`](./FLOW--TEMPLATE.md) — data / UI flow
+- [`ENTITY--TEMPLATE.md`](./ENTITY--TEMPLATE.md) — data schema
 - [`BLUEPRINT.yaml`](./BLUEPRINT.yaml) — implementation plan (YAML variant; MSP also accepts `.md` with YAML frontmatter)
-- [`AUDIT.md`](./AUDIT.md) — verification report
+- [`AUDIT--TEMPLATE.md`](./AUDIT--TEMPLATE.md) — verification report
 
 ### Agent governance
-- [`SKILL.md`](./SKILL.md) — agent capability
-- [`PROTOCOL.md`](./PROTOCOL.md) — interaction contract (HTTP/MCP-style, multi-step handshake)
-- [`GUARDRAIL.md`](./GUARDRAIL.md) — runtime-enforced policy
+- [`SKILL--TEMPLATE.md`](./SKILL--TEMPLATE.md) — agent capability
+- [`PROTOCOL--TEMPLATE.md`](./PROTOCOL--TEMPLATE.md) — interaction contract (HTTP/MCP-style, multi-step handshake)
+- [`GUARD--TEMPLATE.md`](./GUARD--TEMPLATE.md) — runtime-enforced policy
 
 ### Requirements engineering
-- [`FR.md`](./FR.md) — functional requirement
-- [`NFR.md`](./NFR.md) — non-functional requirement
+- [`FR--TEMPLATE.md`](./FR--TEMPLATE.md) — functional requirement
+- [`NFR--TEMPLATE.md`](./NFR--TEMPLATE.md) — non-functional requirement
 
 ### Ops governance
-- [`INC.md`](./INC.md) — incident post-mortem
-- [`ISSUE.md`](./ISSUE.md) — live issue (light-governance)
-- [`HOTFIX.md`](./HOTFIX.md) — hotfix escape hatch (48h backfill window, ADR-014)
-- [`RISK.md`](./RISK.md) — risk + mitigation
-- [`RUNBOOK.md`](./RUNBOOK.md) — operational response guide ("if you see X, do Y")
-- [`SLO.md`](./SLO.md) — service-level objective
+- [`INC--TEMPLATE.md`](./INC--TEMPLATE.md) — incident post-mortem
+- [`ISSUE--TEMPLATE.md`](./ISSUE--TEMPLATE.md) — live issue (light-governance)
+- [`HOTFIX--TEMPLATE.md`](./HOTFIX--TEMPLATE.md) — hotfix escape hatch (48h backfill window, ADR-014)
+- [`RISK--TEMPLATE.md`](./RISK--TEMPLATE.md) — risk + mitigation
+- [`RUNBOOK--TEMPLATE.md`](./RUNBOOK--TEMPLATE.md) — operational response guide ("if you see X, do Y")
+- [`SLO--TEMPLATE.md`](./SLO--TEMPLATE.md) — service-level objective
 
 ### Types without bundled templates
 For these, create the file by hand following the schema in KNOWLEDGE-TYPES.md:

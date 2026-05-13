@@ -3,7 +3,9 @@
 # without prose stripping.
 
 metadata:
-  id: BLUEPRINT--FEAT-<NNN>
+  id: BLUEPRINT--TEMPLATE
+  tier: process
+  created_at: 2026-05-13T12:00:00.000+07:00
   name: <human-readable>
   module: <MOD-- this builds inside>
   status: draft                 # draft | approved | implemented

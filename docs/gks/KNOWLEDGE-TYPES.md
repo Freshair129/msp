@@ -3,7 +3,7 @@
 > The atomic-knowledge prefix taxonomy GKS recognises. Every `.md` file
 > under `gks/` should have a frontmatter `id: TYPE--SLUG` whose `TYPE`
 > appears in this document. ADR-012 records why this list exists.
-> **Taxonomy v2.3** (2026-05-13) redefines `FRAME--` as Block Manifest,
+> **Taxonomy v2.3** (2026-05-13) redefines `GENESIS--` as Block Manifest,
 > introduces `FRAMEWORK--` for the prior `FRAME--` meaning, renames
 > `GUARDRAIL--` to `GUARD--`, and adds engine-layer prefixes (`STACK--`,
 > `SPEC--`, `SAFETY--`, `COGNITIVE--`). Canonical migration record:
@@ -13,7 +13,7 @@
 > meanings in this repo. (1) **Genesis Graph Backend** — the embedded
 > graph DB at `packages/gks/src/memory/graph/genesis-graph.ts` (Cypher
 > v0, JSONL log); see `CONCEPT--GENESIS-GRAPH-BACKEND`. (2) **Knowledge
-> Block** — a composite knowledge unit (FRAME-- manifest + Cognitive +
+> Block** — a composite knowledge unit (GENESIS-- manifest + Cognitive +
 > Algo + Guard atoms); see `SPEC--GENESIS-BLOCK-MANIFEST`. These are
 > orthogonal: a Genesis Block can be stored in a Genesis Graph Backend
 > but is not the same thing.
@@ -21,6 +21,23 @@
 This is the **reference** — when you ask "where does this concept go?"
 the answer is here. Templates for each prefix live in
 [`examples/atom-templates/`](../examples/atom-templates/).
+
+## Meta Learning Loop (MLL) & 4D Completeness
+
+Taxonomy v2.4 introduces the **Meta Learning Loop (MLL)** as the governing framework for knowledge evolution.
+
+### 4D Completeness Matrix
+For any knowledge unit to be considered **Master** tier or **Stable**, it must ideally satisfy the **4D Completeness** rule by having at least one atom of each type in its cluster:
+1.  **Algo** (`ALGO--`): Deterministic steps.
+2.  **Concept** (`CONCEPT--`): Semantic definition.
+3.  **Frame** (`FRAMEWORK--`): Cognitive context.
+4.  **Proto** (`PROTOCOL--` / `PROTO--`): Invariant / Interaction contract.
+
+### MLL Metadata
+Atoms generated or refined by the MLL may include the following metadata fields:
+- `mll_stability_score`: 0.0 - 1.0 (consensus across multiple LLMs).
+- `mll_tension_detected`: Boolean (if drift was detected via 12-Stage pipeline).
+- `mll_source_episodes`: List of session IDs that contributed to this atom.
 
 ## Quick lookup
 
@@ -38,10 +55,10 @@ the answer is here. Templates for each prefix live in
 | `ENDPOINT--` | Implementation | One API path / method |
 | `ENTRYPOINT--` | Implementation | Auth / middleware / access logic |
 | `PARAMS--` | Implementation | Constants / business config |
-| `FRAME--` | Implementation | **(v2.3+)** Block Manifest — runtime entry-point of a Genesis Block |
+| `GENESIS--` | Implementation | **(v2.3+)** Block Manifest — runtime entry-point of a Genesis Block |
 | `FRAMEWORK--` | Implementation | **(v2.3+)** Governance / architectural framework (was `FRAME--` pre-v2.3) |
 | `STACK--` | Implementation | Technology stack — language/runtime/library inventory |
-| `SPEC--` | Implementation | Specification — JSON Schema, API data shape, wire format. First example: `SPEC--GENESIS-BLOCK-MANIFEST` (frontmatter contract for `FRAME--` Block Manifests). |
+| `SPEC--` | Implementation | Specification — JSON Schema, API data shape, wire format. First example: `SPEC--GENESIS-BLOCK-MANIFEST` (frontmatter contract for `GENESIS--` Block Manifests). |
 | `COGNITIVE--` | Implementation | Mental model / interpretive lens (e.g. Erikson stages) |
 | `SAFETY--` | Governance | Ethical safety — AI alignment + behavioural guardrails |
 | `MASTER--` | Implementation | Root-level policy / genesis rule (e.g. contradiction policy, write boundaries) |
@@ -114,6 +131,16 @@ where most contributions go.
 - **Phase:** P2.
 - **Tip:** also valid as `.canvas` files for Obsidian Canvas diagrams.
 
+### `FR--` · functional requirement
+- **Use for:** specific functional needs that code symbols must implement.
+- **Don't use for:** high-level concepts (use `CONCEPT--`).
+- **Phase:** P1.
+
+### `NFR--` · non-functional requirement
+- **Use for:** quality attributes like performance, security, or reliability.
+- **Don't use for:** behavioral rules (use `GUARD--`).
+- **Phase:** P1.
+
 ### `ENTITY--` · data schema
 - **Use for:** data model / DB schema definitions.
 - **Don't use for:** API request/response shapes (use `ENDPOINT--`).
@@ -134,22 +161,27 @@ where most contributions go.
 - **Don't use for:** business logic that runs after the entrypoint (use `FEAT--` / `ALGO--`).
 - **Phase:** P2.
 
+### `HOOK--` · event-driven entrypoint
+- **Use for:** webhooks, git hooks (pre-commit/pre-push), and system event listeners.
+- **Don't use for:** standard API endpoints (use `ENDPOINT--`).
+- **Phase:** P2.
+
 ### `PARAMS--` · constants / business config
 - **Use for:** business-meaningful numbers, threshold lists, configuration tables.
 - **Don't use for:** infra constants (Postgres pool size etc.) — those live in `ops/` configs.
 - **Phase:** P2.
 
-### `FRAME--` · Block Manifest (v2.3+)
+### GENESIS-- · Block Manifest (v2.3+)
 - **Use for:** the runtime entry-point of a **Genesis Block** — a manifest atom that aggregates `COGNITIVE--`, `ALGO--`, `GUARD--` (and optionally `RUNBOOK--`, `PROTOCOL--`, `STACK--`, `SAFETY--`) atoms into a composite knowledge engine.
 - **Don't use for:** governance/architecture frameworks — those moved to `FRAMEWORK--` in v2.3.
 - **Frontmatter contract:** `SPEC--GENESIS-BLOCK-MANIFEST` — declares the `members.core` / `members.optional` / `daci:` / `manifest_version:` shape.
 - **Phase:** P0 (Block Manifests are foundational).
 - **Status cascade:** `status(block) = min(status(member))` — see SPEC §4.2.
-- **Examples (proposed):** `FRAME--IDENTITY-ENGINE` aggregates the identity-resolution Genesis Block.
+- **Examples (proposed):** `GENESIS--IDENTITY-ENGINE` aggregates the identity-resolution Genesis Block.
 
 ### `FRAMEWORK--` · governance / architectural framework (v2.3+)
 - **Use for:** architectural patterns, governance frameworks, higher-level invariant methodologies (Knowledge 3-Tier model, JTBD, Design Thinking, phase governance), and code standards ("all DB calls go through repositories", "components ≤ 500 LOC", lint policy).
-- **Don't use for:** runtime behavioural constraints — those are `GUARD--`. For Block Manifest entries, use `FRAME--`.
+- **Don't use for:** runtime behavioural constraints — those are `GUARD--`. For Block Manifest entries, use `GENESIS--`.
 - **Phase:** P0/P2.
 - **Examples:** `FRAMEWORK--MSP-ARCHITECTURE-V2`, `FRAMEWORK--PHASE-GOVERNANCE`, `FRAMEWORK--SCALING-LEVELS`, `FRAMEWORK--AUTHORITY-MATRIX`.
 - **Renamed from:** `FRAME--` (pre-v2.3). The taxonomy migration script handles existing references.
@@ -164,7 +196,7 @@ where most contributions go.
 - **Use for:** JSON Schema, API data shape, wire format, frontmatter contract.
 - **Don't use for:** decisions (use `ADR--`) or behavioural rules (use `PROTO--`).
 - **Phase:** P2.
-- **Examples:** `SPEC--GENESIS-BLOCK-MANIFEST` (frontmatter contract for FRAME-- atoms).
+- **Examples:** `SPEC--GENESIS-BLOCK-MANIFEST` (frontmatter contract for GENESIS-- atoms).
 
 ### `COGNITIVE--` · mental model / interpretive lens (v2.3+)
 - **Use for:** psychological / cognitive-science models the system reasons with — Erikson stages, Ego Death, Qualia, retrieval-augmented attention, etc.
@@ -182,7 +214,7 @@ where most contributions go.
 
 ### `MASTER--` · root-level policy / genesis rule
 - **Use for:** the small set of root-level invariants that the rest of the atom graph defers to — contradiction policy, write boundaries, atom-body schema, supersession rules.
-- **Don't use for:** code-level standards (use `FRAME--`) or write-time validator rules (use `PROTO--`).
+- **Don't use for:** code-level standards (use `GENESIS--`) or write-time validator rules (use `PROTO--`).
 - **Distinguishing question:** *is this the rule that other rules cite?* → if yes, MASTER.
 - **Phase:** P0/P2 (depends on whether it's a genesis axiom or a derived policy).
 - **Examples:** `MASTER--ATOM-CONTRADICTION-POLICY`, `MASTER--ATOM-BODY-SCHEMA`.
@@ -229,6 +261,26 @@ where most contributions go.
 These prefixes were missing from the original taxonomy; they exist
 because every agentic project hits them within weeks. See ADR-012 for
 rationale.
+
+### `LLM--` · large reasoning engine
+- **Use for:** high-reasoning model configurations, system prompts, and architectural planning logic.
+- **Don't use for:** small execution tasks (use `SLM--`).
+- **Phase:** P2.
+
+### `SLM--` · small execution engine
+- **Use for:** specialized models for codegen, summarization, or microtasks.
+- **Don't use for:** heavy architectural reasoning (use `LLM--`).
+- **Phase:** P5.
+
+### `MCP--` · Model Context Protocol tool
+- **Use for:** technical definition of a tool or resource exposed via MCP JSON-RPC.
+- **Don't use for:** standard HTTP REST endpoints (use `ENDPOINT--`).
+- **Phase:** P2.
+
+### `CMD--` · executable system command
+- **Use for:** CLI tools, internal scripts, and background commands.
+- **Don't use for:** multi-step workflows (use `RUNBOOK--`).
+- **Phase:** P2.
 
 ### `SKILL--` · agent capability
 - **Use for:** an action / tool the agent has been given access to.
@@ -380,7 +432,7 @@ These have `MSP-` prefix and live in process-tracking storage, not in
         ├── Feature spec    → FEAT--
         ├── Algorithm       → ALGO--
         ├── Architectural framework → FRAMEWORK--
-        ├── Block manifest  → FRAME-- (v2.3+: aggregates atoms into a Genesis Block)
+        ├── Block manifest  → GENESIS-- (v2.3+: aggregates atoms into a Genesis Block)
         ├── Tech stack      → STACK--
         ├── Module           → MOD--
         ├── Data schema     → ENTITY--

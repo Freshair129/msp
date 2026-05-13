@@ -36,7 +36,7 @@ created_at: 2026-05-13T19:45:00.000+07:00
 9. **Cross-File Resolution:** เชื่อมโยง Imports/Exports ระหว่างไฟล์
 10. **MRO (Method Resolution Order):** วิเคราะห์ลำดับการสืบทอด (Heritage Map)
 11. **Communities (การจัดกลุ่มชุมชน):** ใช้ **Leiden Algorithm** จัดกลุ่มสัญลักษณ์ตามหน้าที่ (Functional Cohesion)
-12. **Processes (กระบวนการประมวลผล):** ติดตามเส้นทางการไหลของข้อมูล (Execution Flows)
+12. **Processes (กระบวนการประมวลผล):** ติดตามเส้นทางการไหลของข้อมูล (Execution Flows) — **เป็น Input หลักให้ MLL Skill Creator**
 
 ## Destination: GenesisGraphBackend
 

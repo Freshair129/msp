@@ -35,4 +35,5 @@ created_at: 2026-05-13T19:46:00.000+07:00
 - **Positive:** Agents สามารถมองเห็นภาพรวมของระบบ (Big Picture) ได้ทันทีผ่าน Graph DB
 - **Positive:** รองรับการทำ Impact Analysis ข้ามภาษาและข้ามระบบ (Legacy + Modern)
 - **Negative:** ใช้ทรัพยากรในการประมวลผลครั้งแรกสูง (Initial Indexing Cost) แต่จะคุ้มค่าในการ Query ครั้งต่อๆ ไป
+- **Positive:** ข้อมูลจาก Stage 12 (Processes) เป็นปัจจัยหลักที่ป้อนเข้าสู่ **MLL (Meta Learning Loop)** เพื่อใช้ในการสร้าง Skill อัตโนมัติและตรวจจับ Tension
 - **Constraint:** ต้องรันผ่าน `GenesisGraphBackend` เพื่อประสิทธิภาพในการจัดการความสัมพันธ์เชิงลึก

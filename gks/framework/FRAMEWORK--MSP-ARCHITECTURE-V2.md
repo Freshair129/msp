@@ -72,6 +72,7 @@ created_at: 2026-05-03T23:55:07.217+07:00
                 │  - identity / soul     │
                 │  - validator (gks adp.)│
                 │  - codegen runner      │
+                │  - Meta Learning (MLL) │
                 └───────────┬────────────┘
                             │ knowledge queries
                             ▼
@@ -118,6 +119,7 @@ Owns everything that **travels with the agent's identity**:
 | Symbol graph (parser + impact analysis) | `src/symbols/` | ✅ Symbol Graph PR-1..6 |
 | Candidates pipeline (writer + reviewer) | `src/memory/candidates/` | ✅ Inbound→Candidates Phase 1-3 |
 | MCP tool surface (19 tools) | `src/mcp/` | ✅ M6 + M7f + Phase B |
+| Meta Learning Loop (MLL) | `src/learning/` (proposed) | 🛠️ In-Design (FEAT--MLL) |
 | Hooks (pre-commit/pre-push) | `examples/hooks/` | ✅ M3a/M5a/M5b |
 
 ### GKS — knowledge

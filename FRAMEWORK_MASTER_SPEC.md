@@ -521,6 +521,11 @@ graph TD
     P4 -->|Coding| P5[P5 Deliver / Implementation - src/]
     P5 -->|Verify| P6[P6 Audit]
     P6 -->|Handover| Boss((Human Boss / PR review))
+    
+    %% The MLL Loop (Reverse Path)
+    P5 -.->|12-Stage Processing| MLL[MLL - Meta Learning Loop]
+    MLL -.->|Skill Creator / Tension Detection| P2
+    MLL -.->|4D Evolution| Boss
 ```
 
 > **Optional devlog chain (EVA-specific):** บางโปรเจกต์เพิ่ม process-tracking IDs `MSP-IMP-` (P3 plan) → `MSP-TSK-` (P4 task) → `MSP-ACT-` (P5 per-turn action) → `MSP-WKT-` (P6 walkthrough). MSP TypeScript ของ MSP monorepo **ไม่บังคับ** flow นี้ — เป็น convention ของ EVA's MSP-v9.1 (Python) ดู `docs/MSP_RELATIONSHIP.md` ของ GKS
@@ -1628,6 +1633,27 @@ npm run msp:hotfix:check 2>/dev/null  # ถ้ามี hotfix utility
 [ ] เขียน CONCEPT--PRD แรก + FRAME--TECH-STACK
 [ ] เปิด first PR ด้วย FEAT-- + BLUEPRINT-- + AUDIT-- เพื่อ test workflow end-to-end
 ```
+
+---
+
+## 11. Meta Learning Loop (MLL) — The Self-Improving Brain
+
+**Meta Learning Loop (MLL)** คือระบบที่ทำหน้าที่เป็น "โรงงานกลั่นความรู้" (Refinery) เพื่อเชื่อมโยงประสบการณ์การทำงาน (Experience) กลับไปเป็นความรู้ถาวร (Durable Knowledge)
+
+### 11.1 MLL Skill Creator (Hermes-style)
+เมื่อเอเจนต์ทำงานสำเร็จ (P5/P6) MLL จะสกัดเอา "ทักษะที่เพิ่งใช้งาน" ออกมาเป็น **`SKILL--`** หรือ **`TOOL--`** อัตโนมัติ:
+1.  **Immediate Learning:** วิเคราะห์ร่องรอยการทำงาน (Execution Trace) ทันทีที่จบ Task
+2.  **Candidate Stage:** สร้าง Atom ในโฟลเดอร์ `candidates/` (Staging Area)
+3.  **Human Verification:** ร้องขอให้ผู้ใช้ตรวจสอบความถูกต้องผ่านระบบ PR/Review ก่อนจะบันทึกลง GKS อย่างเป็นทางการ
+
+### 11.2 Bottom-up 4D Evolution
+MLL บังคับใช้เกณฑ์ **4D Completeness** สำหรับความรู้ที่สำคัญ (Master Tier):
+- ต้องมีครบ 4 มิติ: **Algo, Concept, Frame, Proto**
+- หากขาดมิติใด MLL จะสร้าง Task ให้เอเจนต์หรือมนุษย์เข้ามาเติมเต็มความรู้ส่วนที่หายไป
+
+### 11.3 Tension Detection (Drift Control)
+ตรวจสอบความขัดแย้งระหว่าง "สิ่งที่ระบบเชื่อ" (Atoms) กับ "ความเป็นจริงในโค้ด" (12-Stage Graph):
+- หากพบความขัดแย้ง MLL จะสร้าง **Tension Event** เพื่อแจ้งเตือนความเสี่ยง (Risk) หรือความคลาดเคลื่อนของข้อมูล
 
 ---
 

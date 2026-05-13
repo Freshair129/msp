@@ -9,3 +9,10 @@ packages/*/dist/
 packages/*/node_modules/
 gks/00_index/atomic_index.jsonl
 gks/00_index/backlinks.jsonl
+
+# Obsidian / Excalidraw editor cruft inside gks/
+gks/.obsidian/
+gks/.smart-env/
+gks/Excalidraw/
+gks/Untitled*.canvas
+gks/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
