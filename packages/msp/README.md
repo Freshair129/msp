@@ -3,6 +3,8 @@
 > **Agent-agnostic Memory OS** that travels with any cognitive-layer client (Claude Code, Gemini CLI, Antigravity, Cursor, EVA, Hermes, openclaw, custom MCP agents). Sits on top of [`@freshair129/gks`](../gks/) for atomic-markdown storage + vector / graph / Obsidian backends.
 >
 > **Note:** As of 2026-05-11 monorepo migration, the canonical source for `@freshair129/gks` lives at [`packages/gks/`](../gks/) in this monorepo. The previous standalone repo `Freshair129/GksV3` is archived (read-only) on GitHub.
+>
+> **Atom prefix taxonomy (v2.3, 2026-05-13)**: this README uses the v2.3 vocabulary — `FRAMEWORK--` (governance / architecture, formerly `FRAME--`), `FRAME--` (Block Manifest; contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`), `GUARD--` (was `GUARDRAIL--`), plus `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`. Full table: [`packages/gks/docs/KNOWLEDGE-TYPES.md`](../gks/docs/KNOWLEDGE-TYPES.md). "Genesis Block" appears with two meanings — the **Genesis Block Engine** (DB at `packages/gks/src/memory/graph/genesis-block.ts`) is distinct from a **Knowledge Block** (composite knowledge unit declared by a `FRAME--` manifest).
 
 ```
 COGNITIVE LAYER  EVA / Hermes / openclaw / Claude Code / Gemini CLI / Antigravity / Cursor
@@ -67,8 +69,10 @@ End-to-end demo: `npm run cognitive:quickstart` (runs `examples/cognitive-layer-
 
 | Doc | Role |
 |---|---|
-| [`gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md`](./gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md) | Architecture SSOT (3-layer ecosystem, storage layout) |
+| [`gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md`](./gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md) | Architecture SSOT (3-layer ecosystem, storage layout) |
 | [`msp_spec.md`](./msp_spec.md) v2.0.3 | Full technical spec |
+| [`gks/concept/CONCEPT--TAXONOMY-V2-3.md`](./gks/concept/CONCEPT--TAXONOMY-V2-3.md) | Atomic-knowledge prefix taxonomy (v2.3) |
+| [`gks/spec/SPEC--KNOWLEDGE-BLOCK-MANIFEST.md`](./gks/spec/SPEC--KNOWLEDGE-BLOCK-MANIFEST.md) | Frontmatter contract for `FRAME--` Block Manifests |
 | [`gks/concept/CONCEPT--AGENT-AGNOSTIC.md`](./gks/concept/CONCEPT--AGENT-AGNOSTIC.md) | MSP/agent boundary contract |
 | [`docs/AGENT-INTEGRATION.md`](./docs/AGENT-INTEGRATION.md) | Per-client wiring snippets |
 | [`ROADMAP.md`](./ROADMAP.md) | Milestone status + phase history |
@@ -83,7 +87,12 @@ msp/
 │   └── AGENT-INTEGRATION.md          per-client wiring guide
 ├── gks/                              canonical atom tree (committed)
 │   ├── 00_index/atomic_index.jsonl
-│   ├── frame/  concept/  adr/  feat/  blueprint/
+│   ├── frame/        FRAME--       (v2.3: Block Manifest atoms)
+│   ├── framework/    FRAMEWORK--   (v2.3: governance / arch, was FRAME--)
+│   ├── concept/  adr/  feat/  blueprint/
+│   ├── spec/         SPEC--        (v2.3: data contracts)
+│   ├── mod/          MOD--         (v2.3: module manifests)
+│   ├── protocol/     PROTOCOL--    (interaction contracts; A2A/MCP)
 │   └── audit/  proto/  task/  master/
 ├── src/
 │   ├── lib/                          msp-home (global root resolver)
@@ -178,8 +187,10 @@ See [`AUDIT--ATOM-WORKFLOW-SCRIPTS`](./gks/audit/AUDIT--ATOM-WORKFLOW-SCRIPTS.md
 ## Workflow (doc-to-code)
 
 ```
-P0 FRAME → P1 CONCEPT → P2 ADR/FEAT → P3 BLUEPRINT → (P4 TASK) → P5 src/ → P6 AUDIT
+P0 FRAMEWORK → P1 CONCEPT → P2 ADR/FEAT/SPEC → P3 BLUEPRINT → (P4 TASK) → P5 src/ → P6 AUDIT
 ```
+
+(`P0 FRAMEWORK--` was `P0 FRAME--` pre-v2.3; renamed per `ADR--TAXONOMY-V2-3-MIGRATION`. `FRAME--` now denotes a **Block Manifest** authored at P0 / alongside its member atoms.)
 
 ```sh
 # Runtime atom proposals: use msp_candidate MCP tool — writes to
