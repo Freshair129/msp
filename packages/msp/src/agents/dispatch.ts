@@ -1,9 +1,11 @@
+import { estimateCost, estimateTokens } from './cost-tracker.js'
 import { canEscalate, enforceTierCap } from './cost-policy.js'
 import { getAdapter } from './registry.js'
 import { recordEpisode } from './result-recorder.js'
 import { pick } from './routing.js'
 import type { TierAdapter } from './tiers/types.js'
 import type { DispatchResult, DispatchTask, Tier } from './types.js'
+import { recordUsage } from './usage-recorder.js'
 
 /**
  * BLUEPRINT--AGENT-DISPATCHER §"Routing flow" — public entry point.
@@ -89,11 +91,16 @@ export async function dispatch(task: DispatchTask): Promise<DispatchResult> {
     }
   }
 
-  // --- Step 5/6: build result.
+  // --- Step 5/6: build result (with cost estimate).
+  const inputTokens = estimateTokens(task.prompt)
+  const outputTokens = estimateTokens(runResult.output)
+  const cost_usd = estimateCost(tier, inputTokens, outputTokens)
+
   const result: DispatchResult = {
     tier_used: tier,
     output: runResult.output,
     duration_ms: Date.now() - startedAt,
+    cost_usd,
     ...(escalatedFrom ? { escalated_from: escalatedFrom } : {}),
   }
 
@@ -104,6 +111,14 @@ export async function dispatch(task: DispatchTask): Promise<DispatchResult> {
     // Log but never fail dispatch on episode-write errors.
     const msg = err instanceof Error ? err.message : String(err)
     process.stderr.write(`[dispatch] recordEpisode failed: ${msg}\n`)
+  }
+
+  // --- Best-effort usage-bucket recording.
+  try {
+    await recordUsage({ tier, cost_usd }, process.cwd())
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err)
+    process.stderr.write(`[dispatch] recordUsage failed: ${msg}\n`)
   }
 
   return result

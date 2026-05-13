@@ -92,6 +92,14 @@ required_fields:
       - status
       - title
       - created_at
+    usage:
+      - id
+      - phase
+      - type
+      - status
+      - title
+      - created_at
+      - tags
 
 # Reserved for M6: per-field constraints (length, regex, type).
 # Currently the loader ignores this section; summary length/placeholder

@@ -33,10 +33,13 @@ const mocks = vi.hoisted(() => {
       async (_task: unknown, _result: unknown, _root: unknown): Promise<string> =>
         '/fake/episode/path.md',
     ),
+    recordUsageMock: vi.fn(
+      async (_input: unknown, _root: unknown): Promise<string> => '/fake/usage/path.md',
+    ),
   }
 })
 
-const { fakeQwen, fakeGemini, fakeClaude, recordEpisodeMock } = mocks
+const { fakeQwen, fakeGemini, fakeClaude, recordEpisodeMock, recordUsageMock } = mocks
 
 vi.mock('../../src/agents/tiers/qwen.js', () => ({ qwenAdapter: mocks.fakeQwen }))
 vi.mock('../../src/agents/tiers/gemini.js', () => ({ geminiAdapter: mocks.fakeGemini }))
@@ -44,6 +47,10 @@ vi.mock('../../src/agents/tiers/claude.js', () => ({ claudeAdapter: mocks.fakeCl
 vi.mock('../../src/agents/result-recorder.js', () => ({
   recordEpisode: (task: unknown, result: unknown, root: unknown) =>
     mocks.recordEpisodeMock(task, result, root),
+}))
+vi.mock('../../src/agents/usage-recorder.js', () => ({
+  recordUsage: (input: unknown, root: unknown) =>
+    mocks.recordUsageMock(input, root),
 }))
 
 // Import AFTER vi.mock so the mocked deps are resolved.
@@ -72,6 +79,8 @@ beforeEach(() => {
   }
   recordEpisodeMock.mockReset()
   recordEpisodeMock.mockResolvedValue('/fake/episode/path.md')
+  recordUsageMock.mockReset()
+  recordUsageMock.mockResolvedValue('/fake/usage/path.md')
 })
 
 // --------------------------------------------------------------------------
@@ -236,6 +245,43 @@ describe('dispatch()', () => {
     it('omits escalated_from when no escalation occurred', async () => {
       const result = await dispatch(task({ type: 'summarize' }))
       expect(result.escalated_from).toBeUndefined()
+    })
+  })
+
+  describe('cost tracking', () => {
+    it('populates cost_usd on the result (T2 mocked adapter → > 0)', async () => {
+      // codegen/regular routes to T2 by default
+      const result = await dispatch(
+        task({ type: 'codegen', prompt: 'a'.repeat(4000) }),
+      )
+      expect(result.tier_used).toBe('T2')
+      expect(typeof result.cost_usd).toBe('number')
+      expect(result.cost_usd!).toBeGreaterThan(0)
+    })
+
+    it('cost_usd === 0 for T1', async () => {
+      const result = await dispatch(
+        task({ type: 'summarize', prompt: 'a'.repeat(4000) }),
+      )
+      expect(result.tier_used).toBe('T1')
+      expect(result.cost_usd).toBe(0)
+    })
+
+    it('calls recordUsage with tier and cost_usd', async () => {
+      await dispatch(task({ type: 'codegen', prompt: 'hello world' }))
+      expect(recordUsageMock).toHaveBeenCalledOnce()
+      const [recordedInput, recordedRoot] = recordUsageMock.mock.calls[0]!
+      const input = recordedInput as { tier: string; cost_usd: number }
+      expect(input.tier).toBe('T2')
+      expect(typeof input.cost_usd).toBe('number')
+      expect(typeof recordedRoot).toBe('string')
+    })
+
+    it('still returns OK when recordUsage throws', async () => {
+      recordUsageMock.mockRejectedValueOnce(new Error('disk on fire'))
+      const result = await dispatch(task({ type: 'summarize' }))
+      expect(result.tier_used).toBe('T1')
+      expect(result.cost_usd).toBe(0)
     })
   })
 })
