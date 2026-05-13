@@ -1188,7 +1188,7 @@ Resolved questions have moved to §0. The following remain open. Each is annotat
 
 ### Atoms to be produced from this spec (P1–P3 of doc-to-code)
 
-- `FRAME--UNIVERSAL-CONTEXT-FRAMEWORK` — architecture summary.
+- `FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK` — architecture summary.
 - `CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT` — 4-tuple model (§3).
 - `CONCEPT--ATTRIBUTE-BAG-MODEL` — open attribute schema (§4).
 - `CONCEPT--NAMESPACE-VAULT-BRAIN` — three-layer terminology (§5).
