@@ -1,13 +1,18 @@
 # CLAUDE.md — Monorepo guidance for Claude Code
 
+> **Multi-agent repo.** This project is worked on by Claude Code, Gemini CLI, Qwen CLI, and Antigravity (IDE).
+> Project-wide rules and co-existence requirements are in `AGENT.md` — read that first.
+> This file covers Claude Code-specific rules only.
+
 This is the project-internal contract for how Claude Code (and human contributors driving it) should work in this monorepo.
 
 ## What this repo is
 
-**MSP Monorepo** — collapses the GKS storage engine and the MSP orchestrator into a single workspace.
+**MSP Monorepo** — collapses the GKS storage engine, the MSP orchestrator, and the Genesis UI frontend into a single workspace.
 
 - **`packages/gks/`** — Genesis Knowledge System engine. Atomic storage, vector/graph logic, and validation.
 - **`packages/msp/`** — Memory & Soul Passport orchestrator. Uses GKS to manage agent memory and identity.
+- **`packages/ui/`** — Genesis UI frontend. Vite + React 19 + TypeScript knowledge graph explorer. Deployed to https://genesis-ui-eight.vercel.app/. See `packages/ui/CLAUDE.md` for full frontend guide.
 
 > **History note.** GKS used to live in a separate repo `Freshair129/GksV3`. As of the 2026-05-11 monorepo migration (`ADR--MONOREPO-STRUCTURE`), that repo is **archived (read-only) on GitHub** and the canonical source lives here at `packages/gks/`. Do not push to `GksV3`; do not look there for current code or docs.
 
@@ -41,6 +46,8 @@ Per-package commands:
 ```bash
 npm test --workspace=packages/gks
 npm run msp:validate --workspace=packages/msp
+npm run dev --workspace=packages/ui       # Genesis UI dev server → localhost:5173
+npm run build --workspace=packages/ui     # build Genesis UI
 ```
 
 ## Doc-to-code workflow (mandatory)
@@ -65,4 +72,11 @@ Every milestone follows this phase order:
 
 ## Environment Rules
 - **Timezone**: Use **UTC+07:00** (Indochina Time / ICT — Thailand) for human-readable timestamps in ISO 8601 offset format. Validator uses UTC absolute internally; `Date.parse()` handles offset correctly. Authoring rule: write `created_at: 2026-05-12T11:55:00.000+07:00` (TH wall-clock) — NOT `Z` suffix unless you've computed UTC yourself.
+
+## Antigravity Coexistence
+Antigravity (IDE agent) shares this working tree. Claude Code's worktrees have previously crashed it.
+- Always clean up worktrees: `git worktree prune` after any branch work.
+- `.claude/` must stay in `.gitignore` — verify before committing.
+- Never set `extensions.worktreeConfig` in git config without `repositoryformatversion=1`.
+- Full details and incident post-mortems: `AGENT.md §4` + `INCIDENT_REPORT--ANTIGRAVITY-*.md`
 

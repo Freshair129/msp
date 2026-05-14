@@ -1,68 +1,198 @@
-# GEMINI.md — Guidance for Gemini Agents
+# GEMINI.md — Guidance for Gemini CLI (T2 Agent)
 
-This file documents specific rules and context for Gemini models (Gemini CLI, Gemini API, qwen-cli subagents) operating in this repository.
-
-## 🌍 Environment Rules
-- **Timezone**: Use **UTC+07:00** (Indochina Time / ICT — Thailand) for all human-readable timestamps. 
-- **Format**: ISO 8601 with offset (e.g. `2026-05-13T11:55:00+07:00`). 
-- **Crucial**: Do NOT use the `Z` suffix unless you have computed UTC absolute yourself. Authoring rule: write `created_at: 2026-05-13T11:55:00.000+07:00` (TH wall-clock).
-- **Working directory**: The monorepo root is `C:\Users\freshair\cognitive_system`.
-
-## 🤖 Calling Gemini CLI as a subagent
-The CLI is installed globally (`gemini --version` → 0.42.0+). For headless invocation from scripts:
-
-```bash
-gemini --approval-mode plan -p "<prompt>"     # read-only investigation
-gemini --approval-mode yolo -p "<prompt>"     # auto-approve edits (use with care)
-```
-
-**Known caveats:**
-- **PowerShell**: Here-strings (`@'...'@`) can be misparsed as both a positional arg and a `-p` flag. Prefer Bash heredocs or pipe via stdin.
-- **Hidden Paths**: `--approval-mode plan` blocks `invoke_agent` and any file under `.brain/` (ignored by default policy). Use `--approval-mode yolo` or access these via shell commands if necessary.
-- **Windows**: The binary is `gemini.cmd`. Production code spawning it MUST pass `shell: true` or `shell: process.platform === 'win32'`.
-- **Git Redundancy**: Avoid scanning into `.claude/worktrees/`. These contain nested `.git` files that can confuse Git-based tools and cause agent crashes (Ref: `INCIDENT_REPORT--ANTIGRAVITY-AGENT-FAIL.md`).
-
-## 🏗️ Monorepo Workflow (Doc-Before-Code)
-Every feature implementation follows a strict phase order:
-1. **P1 CONCEPT**: Problem + intent (`gks/concept/`)
-2. **P2 ADR/FEAT**: Decisions + API Specs (`gks/adr/`, `gks/feat/`)
-3. **P3 BLUEPRINT**: Implementation plan (`gks/blueprint/`)
-4. **P5 CODE**: Actual implementation (`src/`, `test/`)
-5. **P6 AUDIT**: Post-implementation report (`gks/audit/`)
-
-**Checklist before implementation:**
-- [ ] `FEAT--` exists and is `status: stable/active`.
-- [ ] `BLUEPRINT--` (YAML or MD) exists and is `status: stable/active`.
-- [ ] All required `ADR--` references are `status: stable/active`.
-
-## ⚛️ Atom Taxonomy (v2.3)
-Canonical reference: `docs/gks/KNOWLEDGE-TYPES.md`.
-
-| Prefix | Change in v2.3 | Role |
-|---|---|---|
-| `FRAME--` | **New Meaning** | Block Manifest — runtime entry-point of a Genesis Block. |
-| `FRAMEWORK--`| **New Prefix** | Governance / architectural framework (prior `FRAME--` meaning). |
-| `GUARD--` | **Renamed** | Enforced behavioural policy (was `GUARDRAIL--`). |
-| `STACK--` | **New Prefix** | Technology stack inventory. |
-| `SPEC--` | **New Prefix** | Data shape specification (e.g. `SPEC--GENESIS-BLOCK-MANIFEST`). |
-| `MOD--` | **New Prefix** | Module manifest (boundary + dependencies). |
-
-**Authoring Rules:**
-- **Inbound**: `msp_propose` is REMOVED. Use the `msp_candidate` MCP tool to draft atoms to `.brain/msp/projects/<ns>/candidates/`.
-- **Promotion**: Atoms are promoted to `gks/<type>/` via **Human PR** only.
-- **Frontmatter**: Check `msp/LLM_Contract/atomic_contract.yaml` for required fields.
-- **Tier**: Must be one of {`safety`, `master`, `genesis`, `process`}.
-
-## 🛠️ Tooling & Strategy
-- **Parallelism**: Leverage parallel tool execution for independent tasks (e.g., reading multiple files, running independent tests).
-- **Surgical Edits**: Prefer `replace` over `write_file` for targeted updates to existing files. Ensure `old_string` is unique and provides enough context.
-- **Validation**: After any code change, run `npm test` and `npm run typecheck` in the relevant package.
-- **Atom Integrity**: Run `npm run msp:validate` and `npm run msp:check-links` before proposing new atoms.
-
-## 🌿 Git Guidelines
-- **Branching**: Use `gemini/msp-<milestone>-<slug>` or follow `AGENT.md` convention.
-- **Commit Messages**: Present tense, concise. `feat(scope): summary`.
-- **Merge**: Never push to `main` directly. Open a PR and squash-merge.
+> Project-wide rules live in `AGENT.md` — read that first.
+> This file covers Gemini CLI-specific invocation, known caveats, and context for this repo.
 
 ---
-*For project-wide rules, see `AGENT.md`. For Claude-specific guidance, see `CLAUDE.md`.*
+
+## 1. Role in This Repo
+
+Gemini CLI is the **T2 agent** — broad-context investigation, multi-file analysis, and
+subagent orchestration. It operates alongside Claude Code (T3), Qwen CLI (T1), and
+Antigravity (IDE). See `AGENT.md §1` for the full agent roster and co-existence rules.
+
+**Use Gemini for:**
+- Reading and reasoning across many files simultaneously
+- Drafting specs (CONCEPT--, FEAT--, BLUEPRINT--) before handing to Claude for code
+- Cross-package impact analysis
+- Orchestrating Qwen as a fast-codegen subagent
+
+**Do NOT use Gemini for:**
+- Committing directly to `main` — all code via PR
+- Writing inside `packages/ui/` without reading `packages/ui/CLAUDE.md` first
+- Atom authoring without running the validation gates in `AGENT.md §8`
+
+---
+
+## 2. Environment
+
+- **Timezone:** UTC+07:00 (Thailand / ICT). Format: `2026-05-14T11:30:00+07:00`. No `Z`.
+- **Working directory:** `C:\Users\freshair\cognitive_system` (monorepo root)
+- **Packages:** `packages/gks/` · `packages/msp/` · `packages/ui/` · `packages/qwen-cli/`
+- **Gemini CLI version:** `gemini --version` → 0.42.0+
+
+---
+
+## 3. Invocation
+
+```bash
+gemini --approval-mode plan -p "<prompt>"    # read-only investigation (safe default)
+gemini --approval-mode yolo -p "<prompt>"    # auto-approve file edits (use sparingly)
+```
+
+### Windows PowerShell caveats
+
+```powershell
+# BAD — here-strings get misparsed as positional arg + flag simultaneously
+gemini -p @'
+multi-line prompt
+'@
+
+# GOOD — use Bash heredoc or pipe via stdin
+bash -c 'gemini -p "$(cat prompt.txt)"'
+
+# GOOD — single-line with escaped quotes
+gemini --approval-mode plan -p "Analyze packages/gks/src/memory/graph/genesis-graph.ts"
+```
+
+The Gemini binary on Windows is `gemini.cmd`. Code that spawns it programmatically must pass
+`shell: true` (Node) or `shell=True` (Python). On PowerShell, `&&` chaining is not available —
+use `;` or `if ($?) { ... }`.
+
+---
+
+## 4. Antigravity Coexistence — Critical
+
+Antigravity is an IDE-embedded agent (VS Code extension) that shares this working tree.
+Two incidents have already caused Antigravity crashes due to Git state left by other agents.
+**Follow these rules to prevent recurrence:**
+
+### 4.1 Git Redundancy — `.claude/worktrees/` (INCIDENT_REPORT--ANTIGRAVITY-AGENT-FAIL)
+
+Claude Code creates Git worktrees under `.claude/worktrees/`. Each worktree contains a `.git`
+file. When Antigravity scans the project at startup, it can find these nested `.git` files
+before the real root, mis-identify the worktree as the project root, and crash.
+
+**Rules:**
+- Never leave stale worktrees. Prune immediately after the branch is merged:
+  `git worktree remove --force .claude/worktrees/<name>`
+- Verify `.gitignore` contains `.claude/` before any commit.
+- Do not create worktrees inside any `packages/*` subdirectory.
+- Gemini's `--approval-mode plan` mode already blocks access to `.brain/` — extend this
+  caution to `.claude/worktrees/` when scanning.
+
+```bash
+# Check for nested .git files (run after any Claude worktree session)
+git worktree list
+git worktree prune
+```
+
+### 4.2 Git Config Inconsistency (INCIDENT_REPORT--ANTIGRAVITY-GIT-CONFIG-CONFLICT)
+
+Setting `extensions.worktreeConfig=true` while `core.repositoryformatversion=0` causes
+Antigravity's Language Server to crash on startup with:
+`core.repositoryformatversion does not support extension: worktreeConfig`
+
+**Rules:**
+- Do not set `extensions.worktreeConfig` without also setting `repositoryformatversion=1`.
+- Prefer keeping the repo at `repositoryformatversion=0` with no extensions unless strictly needed.
+- After any worktree-related git operations, verify: `git config --list | grep extension`
+
+```bash
+# Safe state check
+git config core.repositoryformatversion   # expect: 0 (or 1 if extensions intentionally used)
+git config extensions.worktreeConfig      # expect: (empty — not set)
+```
+
+### 4.3 Lock File Hygiene
+
+Do not create `package-lock.json` inside individual `packages/*` subdirectories.
+Antigravity's dependency analysis reads lock files and multiple lock files at different
+levels cause incorrect resolution.
+
+- One `package-lock.json` at repo root — that's it.
+- If a sub-package auto-generates one: delete it and re-run from root.
+
+---
+
+## 5. Monorepo Workflow (Doc-Before-Code)
+
+Every implementation follows this phase order. Gemini typically operates at P1–P3.
+
+| Phase | Artifact prefix | Location |
+|---|---|---|
+| P1 | `CONCEPT--` | `gks/concept/` |
+| P2 | `ADR--` or `FEAT--` | `gks/adr/` or `gks/feat/` |
+| P3 | `BLUEPRINT--` | `gks/blueprint/` |
+| P5 | Code | `packages/*/src/` |
+| P6 | `AUDIT--` | `gks/audit/` |
+
+**Before handing off to Claude (T3) for code:**
+- [ ] `FEAT--` exists with `status: stable/active`
+- [ ] `BLUEPRINT--` exists with `status: stable/active`
+- [ ] All referenced `ADR--` are `status: stable/active`
+
+---
+
+## 6. Packages Overview (for context-loading)
+
+| Package | Name | Purpose | Key entry point |
+|---|---|---|---|
+| `packages/gks/` | `@freshair129/gks` | GKS engine library | `src/index.ts` |
+| `packages/msp/` | `@freshair129/msp` | MSP orchestrator | `src/index.ts`, `msp_spec.md` |
+| `packages/ui/` | `@freshair129/genesis-ui` | Genesis UI frontend | `src/App.tsx`, `CLAUDE.md` |
+| `packages/qwen-cli/` | — | Qwen T1 subagent | `qwen.py` |
+
+**When working in `packages/ui/`:** read `packages/ui/CLAUDE.md` before any edit.
+The UI reads GKS data via `packages/ui/src/data/gksData.json` (JSON snapshot) — it never
+imports from `packages/gks` directly.
+
+---
+
+## 7. Atom Taxonomy (v2.3)
+
+See `AGENT.md §7` for the full table. Key prefixes Gemini handles:
+
+| Prefix | When Gemini authors it |
+|---|---|
+| `CONCEPT--` | Problem definition, intent, north-star |
+| `FEAT--` | Feature spec with API contract |
+| `ADR--` | Decision record (present to Boss for approval) |
+| `BLUEPRINT--` | Step-by-step implementation plan for T1/T3 |
+| `AUDIT--` | Post-implementation review |
+
+Atom ID format: `^[A-Z][A-Z0-9_]*--[A-Z0-9][A-Z0-9_-]*$`
+
+---
+
+## 8. Git Branch Convention
+
+```
+gemini/msp-<milestone>-<slug>
+
+Examples:
+  gemini/msp-phase-g-episode-search
+  gemini/msp-p2-feat-inbox-pipeline
+```
+
+Commit style: `type(scope): summary` — present tense, ≤72 chars.
+Never commit directly to `main`. Open PR, Boss squash-merges.
+
+---
+
+## 9. Validation Before Committing
+
+```bash
+# Atoms
+npm run msp:index
+npm run msp:validate
+npm run msp:check-links
+
+# Code (run in affected package)
+npm run typecheck --workspace=packages/<name>
+npm test --workspace=packages/<name>
+```
+
+---
+
+*Last updated: 2026-05-14. For project-wide rules: `AGENT.md`. For Claude: `CLAUDE.md`. For Qwen: `qwen.md`.*
