@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'No tests for skeleton app' && exit 0"
   },
   "dependencies": {
     "commander": "^12.0.0"
