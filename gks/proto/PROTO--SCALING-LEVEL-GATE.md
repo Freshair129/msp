@@ -16,7 +16,7 @@ tags:
   - m8c
 crosslinks: {"enforces":["FRAMEWORK--SCALING-LEVELS"],"references":["CONCEPT--PROTO-SCALING-LEVEL-GATE","FEAT--PROTO-LOADER"]}
 linked_symbols:
-  - {"file":"src/validator/proto/scaling-level-gate.ts"}
+  - {"file":"packages/msp/src/validator/proto/scaling-level-gate.ts"}
 created_at: 2026-05-05T18:00:00.000+07:00
 ---
 

@@ -16,7 +16,7 @@ tags:
   - m8b
 crosslinks: {"enforces":["FRAMEWORK--PHASE-GOVERNANCE"],"references":["CONCEPT--PROTO-PHASE-GATES","CONCEPT--PROTO-PATTERN","FEAT--PROTO-LOADER"]}
 linked_symbols:
-  - {"file":"src/validator/proto/phase-gates.ts"}
+  - {"file":"packages/msp/src/validator/proto/phase-gates.ts"}
 created_at: 2026-05-05T18:00:00.000+07:00
 ---
 

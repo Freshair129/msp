@@ -16,7 +16,7 @@ tags:
   - m8a
 crosslinks: {"enforces":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["CONCEPT--PROTO-PATTERN","FEAT--PROTO-LOADER"]}
 linked_symbols:
-  - {"file":"src/validator/proto/sample.ts"}
+  - {"file":"packages/msp/src/validator/proto/sample.ts"}
 created_at: 2026-05-05T18:00:00.000+07:00
 ---
 

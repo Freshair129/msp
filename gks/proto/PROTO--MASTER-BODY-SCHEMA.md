@@ -16,7 +16,7 @@ tags:
   - 3-tier
 crosslinks: {"enforces":["FRAMEWORK--KNOWLEDGE-3-TIER"],"references":["FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY"]}
 linked_symbols:
-  - {"file":"src/validator/proto/master-body-schema.ts"}
+  - {"file":"packages/msp/src/validator/proto/master-body-schema.ts"}
 created_at: 2026-05-09T15:05:00.000+07:00
 ---
 
