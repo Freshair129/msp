@@ -18,7 +18,7 @@ tags:
   - m8d
 crosslinks: {"enforces":["FRAMEWORK--CROSSLINKS-VOCABULARY"],"references":["CONCEPT--PROTO-ALGO-PARAM-COUPLING","CONCEPT--PROTO-PATTERN","ADR--GRAPH-IS-GKS-DOMAIN"]}
 linked_symbols:
-  - {"file":"src/validator/proto/algo-param-coupling.ts"}
+  - {"file":"packages/msp/src/validator/proto/algo-param-coupling.ts"}
 created_at: 2026-05-05T18:11:00.000+07:00
 ---
 
