@@ -19,6 +19,9 @@ linked_symbols:
   - {"file":"scripts/msp/scaffold-atom.ts"}
   - {"file":"scripts/msp/supersede.ts"}
   - {"file":"packages/msp/test/scripts/workflow-scripts.test.ts"}
+phase_override:
+  skip_blueprint: true
+  reason: "Small atom-authoring CLI helper scripts (atom-date / scaffold-atom / supersede) — developer tooling, not a feature surface; a per-script phase-3 blueprint would be doc theater."
 created_at: 2026-05-12T22:05:00.000+07:00
 ---
 

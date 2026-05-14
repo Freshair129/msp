@@ -17,6 +17,9 @@ tags:
 crosslinks: {"references":["FEAT--MSP-PRECOMMIT-HOOK","FEAT--MSP-PREPUSH-HOOK"]}
 linked_symbols:
   - {"file":".github/workflows/test.yml"}
+phase_override:
+  skip_blueprint: true
+  reason: "M5f added a single shellcheck step to the CI workflow — a config change, not code; governed by FEAT--MSP-PRECOMMIT-HOOK / FEAT--MSP-PREPUSH-HOOK."
 created_at: 2026-05-03T18:01:44.015+07:00
 ---
 

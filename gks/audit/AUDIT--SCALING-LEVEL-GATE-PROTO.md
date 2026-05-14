@@ -19,6 +19,9 @@ linked_symbols:
   - {"file":"src/validator/proto/scaling-level-gate.ts"}
   - {"file":"gks/proto/PROTO--SCALING-LEVEL-GATE.md"}
   - {"file":"test/validator/proto/scaling-level-gate.test.ts"}
+phase_override:
+  skip_blueprint: true
+  reason: "Incremental PROTO rule plugged into the already-blueprinted loader scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain: CONCEPT--PROTO-SCALING-LEVEL-GATE -> PROTO--SCALING-LEVEL-GATE -> predicate -> this audit; per-rule predicates do not each warrant a separate phase-3 blueprint."
 created_at: 2026-05-05T18:00:00.000+07:00
 ---
 

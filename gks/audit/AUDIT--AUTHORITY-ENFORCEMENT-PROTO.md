@@ -18,6 +18,9 @@ linked_symbols:
   - {"file":"src/validator/proto/authority-enforcement.ts"}
   - {"file":"gks/proto/PROTO--AUTHORITY-ENFORCEMENT.md"}
   - {"file":"test/validator/proto/authority-enforcement.test.ts"}
+phase_override:
+  skip_blueprint: true
+  reason: "Incremental PROTO rule plugged into the already-blueprinted loader scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain: CONCEPT--PROTO-AUTHORITY-ENFORCEMENT -> PROTO--AUTHORITY-ENFORCEMENT -> predicate -> this audit; per-rule predicates do not each warrant a separate phase-3 blueprint."
 created_at: 2026-05-05T18:12:00.000+07:00
 ---
 

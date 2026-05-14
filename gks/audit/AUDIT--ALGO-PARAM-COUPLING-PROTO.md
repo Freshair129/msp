@@ -21,6 +21,9 @@ linked_symbols:
   - {"file":"src/validator/proto/algo-param-coupling.ts"}
   - {"file":"test/validator/proto/algo-param-coupling.test.ts"}
   - {"file":"gks/proto/PROTO--ALGO-PARAM-COUPLING.md"}
+phase_override:
+  skip_blueprint: true
+  reason: "Incremental PROTO rule plugged into the already-blueprinted loader scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain: CONCEPT--PROTO-ALGO-PARAM-COUPLING -> PROTO--ALGO-PARAM-COUPLING -> predicate -> this audit; per-rule predicates do not each warrant a separate phase-3 blueprint."
 created_at: 2026-05-05T18:11:00.000+07:00
 ---
 

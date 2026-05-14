@@ -19,6 +19,9 @@ linked_symbols:
   - {"file":"src/validator/proto/summary-min.ts"}
   - {"file":"src/validator/proto/adr-monotonic.ts"}
   - {"file":"src/validator/proto/evidence-for-decisions.ts"}
+phase_override:
+  skip_blueprint: true
+  reason: "Incremental PROTO rule predicates plugged into the already-blueprinted loader scaffold (BLUEPRINT--PROTO-LOADER); planned via CONCEPT--PROTO-AUDIT-EXISTING-RULES — per-rule predicates do not each warrant a separate phase-3 blueprint."
 created_at: 2026-05-05T20:00:00.000+07:00
 ---
 
