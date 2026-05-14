@@ -1,8 +1,0 @@
-qwen.py
-setup.py
-qwen_cli.egg-info/PKG-INFO
-qwen_cli.egg-info/SOURCES.txt
-qwen_cli.egg-info/dependency_links.txt
-qwen_cli.egg-info/entry_points.txt
-qwen_cli.egg-info/requires.txt
-qwen_cli.egg-info/top_level.txt

@@ -16,7 +16,7 @@ only if every agent respects the boundaries below.
 |---|---|---|---|
 | **Claude Code** | Anthropic CLI / Desktop | T3 — architecture, deep refactors, atom authoring, design | `CLAUDE.md` |
 | **Gemini CLI** | Google CLI (`gemini`) | T2 — broad context, investigation, multi-file analysis, subagent orchestration | `GEMINI.md` |
-| **Qwen CLI** | Python script (`packages/qwen-cli/`) | T1 — fast codegen, small targeted edits | `qwen.md` |
+| **Qwen CLI** | Python script (`apps/qwen/`) | T1 — fast codegen, small targeted edits | `qwen.md` |
 | **Antigravity** | IDE extension (VS Code) | IDE-embedded code assistant — inline completions, local context, quick fixes | _(this file §4)_ |
 | **Human (Boss)** | Terminal / IDE | Owner, final approver, PR merger | — |
 
@@ -31,11 +31,11 @@ cognitive_system/                    ← monorepo root (git root)
   packages/                          ← shared libraries (imported by apps)
     gks/          @freshair129/gks   ← GKS engine library
     msp/          @freshair129/msp   ← MSP orchestrator
-    ui/           @freshair129/genesis-ui  ← Genesis UI web app (→ apps/web/ when apps/ matures)
-    qwen-cli/                        ← Qwen subagent CLI (→ apps/qwen/ eventually)
     skill-creator/                   ← Skill authoring tool
   apps/                              ← deployable clients (NOT imported as libraries)
-    cli/          @freshair129/gks-cli    ← CLI for humans + AI agents (SKELETON)
+    web/          @freshair129/genesis-ui  ← React web app (Vite + TS)
+    qwen/         @freshair129/qwen-cli   ← Qwen subagent CLI
+    cli/          @freshair129/gks-cli    ← GKS CLI for humans + AI agents (SKELETON)
     mcp/          @freshair129/gks-mcp    ← MCP server for AI agents (SKELETON)
     tui/          @freshair129/gks-tui    ← Terminal UI (SKELETON)
     desktop/                         ← Tauri desktop app (PLACEHOLDER)
@@ -62,7 +62,7 @@ cognitive_system/                    ← monorepo root (git root)
 **Boundary rules (ADR--MONOREPO-STRUCTURE):**
 - `packages/gks/` MUST NOT import from `packages/msp/` or any `apps/*`
 - `packages/msp/` depends on `packages/gks/` via `workspace:*`
-- `packages/ui/` reads GKS data via a **JSON snapshot only**, never imports gks/msp directly
+- `apps/web/` reads GKS data via a **JSON snapshot only**, never imports gks/msp directly
 - `apps/cli/` and `apps/mcp/` import `packages/gks` + `packages/msp` directly (same Node.js runtime)
 - `apps/ios/` and `apps/android/` communicate via `server/api/` REST (cannot run Node.js)
 - Every `apps/*` directory has its own `CLAUDE.md` — read it before working in that directory

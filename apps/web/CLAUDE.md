@@ -1,8 +1,9 @@
 # Genesis UI — Frontend CLAUDE.md
-# Created At: 2026-05-14 12:00:00 +07:00 (v1.0.0)
+# Created At: 2026-05-14 12:00:00 +07:00 (v1.1.0)
+# Last Updated: 2026-05-14 14:30:00 +07:00 (v1.1.0) — moved packages/ui → apps/web
 
-> Read this before doing anything in `packages/ui/`.
-> This is the frontend workspace for Genesis Knowledge System.
+> Read this before doing anything in `apps/web/`.
+> This is the web frontend for Genesis Knowledge System.
 
 ---
 
@@ -18,7 +19,7 @@ This is a **read-only visualization layer** over GKS data. It does not write to 
 
 ## Commands
 
-Run from `packages/ui/` (NOT from repo root):
+Run from `apps/web/` (NOT from repo root):
 
 ```bash
 npm run dev       # dev server → http://localhost:5173
@@ -29,8 +30,8 @@ vercel deploy --prod   # deploy to genesis-ui-eight.vercel.app
 
 From repo root:
 ```bash
-npm run dev --workspace=packages/ui
-npm run build --workspace=packages/ui
+npm run dev --workspace=apps/web
+npm run build --workspace=apps/web
 ```
 
 ---
@@ -38,7 +39,7 @@ npm run build --workspace=packages/ui
 ## File Structure
 
 ```
-packages/ui/
+apps/web/
   src/
     App.tsx                    # root — tabs, routing, global state
     index.css                  # all CSS variables + global styles
@@ -76,6 +77,7 @@ packages/ui/
   public/
     favicon.svg
     icons.svg                  # SVG sprite for Icon component
+  DESIGN-SYSTEM.md             # Genesis UI design tokens (VS Code dark theme)
 ```
 
 ---
@@ -84,59 +86,25 @@ packages/ui/
 
 ```
 GKS atomic_index.jsonl
-  → node scripts/sync-gks.mjs
+  → node apps/web/scripts/sync-gks.mjs
   → src/data/gksData.json
   → gksService.tsx (GKS_SERVICE singleton)
   → components (via props: notes[], edges[], focusId, onOpen)
 ```
 
-Run sync: `node packages/ui/scripts/sync-gks.mjs`
+Run sync: `node apps/web/scripts/sync-gks.mjs`
 
 GKS index path (hardcoded in sync-gks.mjs):
 `C:/Users/freshair/cognitive_system/gks/00_index/atomic_index.jsonl`
 
 ---
 
-## Design System (Genesis UI Theme)
+## Design System
 
-Genesis UI uses a **dark, space-inspired theme** (NOT the Zuri amber theme).
+Full spec: **`apps/web/DESIGN-SYSTEM.md`** — read before touching CSS or components.
 
-### CSS Variables (defined in src/index.css)
-
-```css
---bg:         #0d0f1a   /* page background — deep space dark */
---bg-2:       #141728   /* card / panel background */
---bg-3:       #1b1f35   /* hover / active states */
---border:     rgba(255,255,255,0.08)
---text:        #e8eaf6   /* primary text */
---text-mute:  #7b7fa8   /* secondary / muted text */
---accent:     #7c5cff   /* nova theme default (overridden by useTweaks) */
---accent-soft: rgba(124,92,255,0.16)
---font-mono:  'JetBrains Mono', monospace
-```
-
-### Themes (user-selectable via Settings)
-| Theme | --accent | Feel |
-|---|---|---|
-| nova (default) | #7c5cff | Purple neural |
-| citrus | #fbbf24 | Amber warm |
-| bloom | #f472b6 | Pink soft |
-| mono | #a4a9be | Greyscale |
-| cyber | #4dd6e8 | Cyan digital |
-
-Theme is applied to `document.documentElement` CSS variables via `App.tsx`.
-
-### Atom Type Colors (from gksService.tsx TYPE_META)
-
-Each GKS atom type has a `raw` hex color used in graph nodes and dots:
-- `MOC` — #7c5cff (accent purple)
-- `CONCEPT` — #4dd6e8 (cyan)
-- `ENTITY` — #f472b6 (pink)
-- `FACT` — #fbbf24 (amber)
-- `PROCESS` — #22c55e (green)
-- `EPISODE` — #f97316 (orange)
-
-Always use `GKS_SERVICE.TYPE_META[type]?.raw` — never hardcode these.
+Genesis UI uses a **VS Code dark dev-tool theme** (NOT the Zuri amber theme).
+Do NOT use Zuri tokens (`--brand`, `--surface`, IBM Plex Sans Thai, Amber Citrus palette).
 
 ---
 
@@ -160,13 +128,12 @@ timeRef.current += dt;
 ## Deployment
 
 Vercel project: `genesis-ui` (ID: `prj_aELlyAqrhvnGBAPxl70HpE24DLrR`)
-Deploy from `packages/ui/` directory:
+Deploy from `apps/web/` directory:
 ```bash
-cd packages/ui && vercel deploy --prod
+cd apps/web && vercel deploy --prod
 ```
 
-Build output: `dist/` — Vite SPA build.
-No server-side rendering. Pure static deployment.
+Build output: `dist/` — Vite SPA build. No SSR. Pure static deployment.
 
 ---
 
@@ -178,4 +145,4 @@ No server-side rendering. Pure static deployment.
 4. **Use `useRef` for animation state** (time, positions) — not `useState` (causes re-renders + effect resets).
 5. **TypeScript**: Use `n.type as keyof typeof GKS_SERVICE.TYPE_META` when indexing TYPE_META.
 6. **Theme tokens**: Always use `var(--accent)`, `var(--bg)` etc. — never hardcode hex in TSX.
-7. **No backend calls** from this package — all data is local JSON.
+7. **No backend calls** from this app — all data is local JSON.

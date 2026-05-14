@@ -1,9 +1,0 @@
-Metadata-Version: 2.4
-Name: qwen-cli
-Version: 1.0.0
-Summary: Local LLM CLI for Claude delegation via Ollama
-Requires-Python: >=3.8
-Requires-Dist: requests
-Dynamic: requires-dist
-Dynamic: requires-python
-Dynamic: summary

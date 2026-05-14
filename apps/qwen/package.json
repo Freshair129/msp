@@ -1,5 +1,5 @@
 {
-  "name": "qwen-cli-tools",
+  "name": "@freshair129/qwen-cli",
   "version": "1.0.0",
   "dependencies": {
     "docx": "^9.6.1"

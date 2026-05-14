@@ -13,8 +13,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@freshair129/gks": "workspace:*",
-    "@freshair129/msp": "workspace:*",
     "commander": "^12.0.0"
   },
   "devDependencies": {

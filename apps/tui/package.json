@@ -10,8 +10,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@freshair129/gks": "workspace:*",
-    "@freshair129/msp": "workspace:*",
     "ink": "^5.0.0",
     "react": "^18.0.0"
   },

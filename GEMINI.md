@@ -19,7 +19,7 @@ Antigravity (IDE). See `AGENT.md §1` for the full agent roster and co-existence
 
 **Do NOT use Gemini for:**
 - Committing directly to `main` — all code via PR
-- Writing inside `packages/ui/` without reading `packages/ui/CLAUDE.md` first
+- Writing inside `apps/web/` without reading `apps/web/CLAUDE.md` first
 - Atom authoring without running the validation gates in `AGENT.md §8`
 
 ---
@@ -28,7 +28,7 @@ Antigravity (IDE). See `AGENT.md §1` for the full agent roster and co-existence
 
 - **Timezone:** UTC+07:00 (Thailand / ICT). Format: `2026-05-14T11:30:00+07:00`. No `Z`.
 - **Working directory:** `C:\Users\freshair\cognitive_system` (monorepo root)
-- **Packages:** `packages/gks/` · `packages/msp/` · `packages/ui/` · `packages/qwen-cli/`
+- **Packages:** `packages/gks/` · `packages/msp/` · `apps/web/` · `packages/qwen-cli/`
 - **Gemini CLI version:** `gemini --version` → 0.42.0+
 
 ---
@@ -140,11 +140,11 @@ Every implementation follows this phase order. Gemini typically operates at P1�
 |---|---|---|---|
 | `packages/gks/` | `@freshair129/gks` | GKS engine library | `src/index.ts` |
 | `packages/msp/` | `@freshair129/msp` | MSP orchestrator | `src/index.ts`, `msp_spec.md` |
-| `packages/ui/` | `@freshair129/genesis-ui` | Genesis UI frontend | `src/App.tsx`, `CLAUDE.md` |
+| `apps/web/` | `@freshair129/genesis-ui` | Genesis UI frontend | `src/App.tsx`, `CLAUDE.md` |
 | `packages/qwen-cli/` | — | Qwen T1 subagent | `qwen.py` |
 
-**When working in `packages/ui/`:** read `packages/ui/CLAUDE.md` before any edit.
-The UI reads GKS data via `packages/ui/src/data/gksData.json` (JSON snapshot) — it never
+**When working in `apps/web/`:** read `apps/web/CLAUDE.md` before any edit.
+The UI reads GKS data via `apps/web/src/data/gksData.json` (JSON snapshot) — it never
 imports from `packages/gks` directly.
 
 ---

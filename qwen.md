@@ -8,15 +8,15 @@ This file documents specific rules and context for Qwen models (qwen-cli) operat
 - **Working directory**: The monorepo root is `C:\Users\freshair\cognitive_system`.
 
 ## 🤖 Calling Qwen CLI as a subagent
-The Qwen CLI is a Python-based tool located in `packages/qwen-cli/`.
+The Qwen CLI is a Python-based tool located in `apps/qwen/`.
 
 Invocation pattern:
 ```bash
-python packages/qwen-cli/qwen.py --prompt "<prompt>"
+python apps/qwen/qwen.py --prompt "<prompt>"
 ```
 
 **Known caveats:**
-- **Python-based**: Ensure the environment has the necessary dependencies installed (see `packages/qwen-cli/setup.py`).
+- **Python-based**: Ensure the environment has the necessary dependencies installed (see `apps/qwen/setup.py`).
 - **SLM Provider**: Qwen is not yet wired as a pluggable `MSP_SLM_PROVIDER` alternative.
 
 ## 🏗️ Monorepo Workflow

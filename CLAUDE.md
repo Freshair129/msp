@@ -12,7 +12,7 @@ This is the project-internal contract for how Claude Code (and human contributor
 
 - **`packages/gks/`** — Genesis Knowledge System engine. Atomic storage, vector/graph logic, and validation.
 - **`packages/msp/`** — Memory & Soul Passport orchestrator. Uses GKS to manage agent memory and identity.
-- **`packages/ui/`** — Genesis UI frontend. Vite + React 19 + TypeScript knowledge graph explorer. Deployed to https://genesis-ui-eight.vercel.app/. See `packages/ui/CLAUDE.md` for full frontend guide.
+- **`apps/web/`** — Genesis UI frontend. Vite + React 19 + TypeScript knowledge graph explorer. Deployed to https://genesis-ui-eight.vercel.app/. See `apps/web/CLAUDE.md` for full frontend guide.
 
 > **History note.** GKS used to live in a separate repo `Freshair129/GksV3`. As of the 2026-05-11 monorepo migration (`ADR--MONOREPO-STRUCTURE`), that repo is **archived (read-only) on GitHub** and the canonical source lives here at `packages/gks/`. Do not push to `GksV3`; do not look there for current code or docs.
 
