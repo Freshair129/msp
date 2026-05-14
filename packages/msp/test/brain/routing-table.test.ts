@@ -12,6 +12,7 @@ const PROJECT_ONLY_TYPES: AtomType[] = [
   'FRAMEWORK',
   'SPEC',
   'PROTOCOL',
+  'EPISODE',
   'MOD',
   'MASTER',
   'HOTFIX',
@@ -21,7 +22,7 @@ const PROJECT_ONLY_TYPES: AtomType[] = [
 
 const GLOBAL_FIRST_TYPES: AtomType[] = ['SKILL', 'ALGO', 'PROTO', 'PARAMS'];
 
-const GLOBAL_ONLY_TYPES: AtomType[] = ['EPISODE', 'IDENTITY', 'REGISTRY'];
+const GLOBAL_ONLY_TYPES: AtomType[] = ['IDENTITY', 'REGISTRY'];
 
 describe('routingFor — project-only atom types', () => {
   for (const t of PROJECT_ONLY_TYPES) {

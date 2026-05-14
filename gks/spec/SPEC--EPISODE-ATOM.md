@@ -14,6 +14,7 @@ crosslinks:
     - ADR--AGENT-TIER-COST-POLICY
     - CONCEPT--AGENT-TIER-ROUTING
     - ADR--BRAIN-PATH-RESOLUTION
+    - ADR--EPISODE-GC-POLICY
 created_at: 2026-05-14T03:00:00.000+07:00
 ---
 
@@ -95,24 +96,21 @@ This contrasts with `ADR`, `CONCEPT`, etc., which can be superseded — for thos
 
 ## 6. Storage location
 
-Per `ADR--BRAIN-PATH-RESOLUTION` §Routing table, `EPISODE` atoms are classified **global-only**: read from and written to `~/.brain/episodic/`. They are cross-project state — an agent's run history follows the agent, not any one repo.
+Per `ADR--BRAIN-PATH-RESOLUTION` §Routing table (as amended 2026-05-14), `EPISODE` atoms are **project-only**: read from and written to `<root>/gks/episode/`. An episode records a task run against *this* repo — it is project-scoped state, the reverse-path evidence the Meta-Learning Loop consumes.
 
 The canonical write target is therefore:
 
 ```
-~/.brain/episodic/EPISODE--AGENT-RUN-<isoTimestamp>.md
+<root>/gks/episode/EPISODE--AGENT-RUN-<isoTimestamp>.md
 ```
 
-## 7. Open question — impl/ADR contradiction
+Episodes garbage-collected under the Phase F4 retention policy (`ADR--EPISODE-GC-POLICY`) are moved to `<root>/gks/episode/_archive/<YYYY-MM>/`.
 
-`packages/msp/src/agents/result-recorder.ts` (Phase D Stream C P4) currently writes episodes to **`<root>/gks/episode/`** — the project brain — not `~/.brain/episodic/`. This contradicts `ADR--BRAIN-PATH-RESOLUTION` which lists `EPISODE` as global-only.
+## 7. Resolution — impl/ADR contradiction (closed 2026-05-14)
 
-Two reconciliation paths exist; this SPEC documents the contradiction but does **not** mandate which path wins. The Phase D closeout PR introduces this SPEC; the impl fix (or ADR amendment) is deferred:
+This section originally flagged a contradiction: `result-recorder.ts` wrote episodes to `<root>/gks/episode/` while `ADR--BRAIN-PATH-RESOLUTION` listed `EPISODE` as global-only.
 
-1. **Impl follows ADR** — patch `result-recorder.ts` to write to `~/.brain/episodic/`. Cross-project run history accumulates in one place; project repos stay clean.
-2. **ADR follows impl** — amend `ADR--BRAIN-PATH-RESOLUTION` to route `EPISODE` to project (or to both, with explicit semantics). Keeps run history co-located with the codebase it was produced from.
-
-Until reconciled, validators MUST accept episode atoms at either location. The SPEC's normative storage target is **`~/.brain/episodic/`** (option 1); deviation is tolerated but flagged.
+**Resolved in favour of option 2 — ADR follows impl.** The Phase D runtime (`result-recorder.ts`), the Phase D integration test, and the Phase F4 GC (`episode-gc.ts`) had all independently treated episodes as project-local; three phases of implementation agreed. `ADR--BRAIN-PATH-RESOLUTION` was amended to route `EPISODE` to project-only, and the brain routing table (`packages/msp/src/brain/routing-table.ts`), `global-vault.ts`, and `project-vault.ts` were updated to match. `result-recorder.ts` was already correct and is unchanged.
 
 ## 8. Validation
 
@@ -120,7 +118,7 @@ Until reconciled, validators MUST accept episode atoms at either location. The S
 
 ## 9. Out of scope
 
-- Retention policy / garbage collection.
+- Retention policy / garbage collection — shipped in Phase F4; see `ADR--EPISODE-GC-POLICY`.
 - Episode compression into longer-form `SUMMARY--` atoms (handled by `packages/msp/src/orchestrator/consolidator/`).
-- Cross-machine sync of `~/.brain/episodic/`.
+- Cross-machine sync of the project brain's run history.
 - Encryption at rest of episode bodies (may contain sensitive prompts).

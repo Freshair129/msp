@@ -18,6 +18,7 @@ crosslinks:
     - CONCEPT--TWO-BRAIN-ARCHITECTURE
     - ADR--GLOBAL-VS-WORKSPACE
     - CONCEPT--NAMESPACE-VAULT-BRAIN
+    - SPEC--EPISODE-ATOM
 created_at: 2026-05-14T01:55:00.000+07:00
 ---
 
@@ -40,9 +41,12 @@ Adopt a deterministic, per-atom-type routing table that resolves every read/writ
 | `ADR`, `FEAT`, `BLUEPRINT`, `AUDIT`, `CONCEPT` | project ONLY | project |
 | `FRAMEWORK`, `SPEC`, `PROTOCOL` | project ONLY | project |
 | `SKILL`, `ALGO`, `PROTO`, `PARAMS` | global → project (fallback) | global by default; project iff `vault_id` set |
-| `EPISODE`, `IDENTITY`, `REGISTRY` | global ONLY | global |
+| `EPISODE` | project ONLY | project |
+| `IDENTITY`, `REGISTRY` | global ONLY | global |
 | `MOD`, `MASTER` | project ONLY | project |
 | `HOTFIX`, `INC`, `ISSUE` | project ONLY | project |
+
+> **Amendment (2026-05-14).** `EPISODE` was originally classified global-only. It is now **project-only**. A dispatch episode records a task run *against a specific repo* — it is the reverse-path evidence the Meta-Learning Loop consumes (Code → AST → Symbol Graph → Execution Trace), which is project-scoped. The Phase D runtime (`result-recorder.ts`), the Phase D integration test, and the Phase F4 GC (`episode-gc.ts`, archives to `gks/episode/_archive/`) all already treated episodes as project-local; this amendment makes the routing table agree with three phases of implementation. The contradiction was tracked in `SPEC--EPISODE-ATOM` §7. Cross-machine agent run-history sync remains out of scope.
 
 ## Rationale per category
 
@@ -50,7 +54,7 @@ Adopt a deterministic, per-atom-type routing table that resolves every read/writ
 
 **Global-first, project-fallback** = reusable patterns. A `SKILL--CODE-REVIEW` written once in `~/.brain/skills/` should be usable in every project, but a project may shadow it with a `vault_id`-scoped variant.
 
-**Global-only** = cross-project state that has no per-project meaning. `IDENTITY--AGENT-PROFILE` is the agent's persona; it doesn't change per repo.
+**Global-only** = cross-project state that has no per-project meaning. `IDENTITY--AGENT-PROFILE` is the agent's persona; it doesn't change per repo. (`EPISODE` was originally placed here; the 2026-05-14 amendment moved it to project-only — see above.)
 
 ## Conflict resolution
 
@@ -65,13 +69,13 @@ If a global atom and a project atom have the same `id`, the project wins for **r
 ├── skills/
 │   ├── skill-creator/
 │   └── code-review/
-├── episodic/cross-project.jsonl
 ├── proto/
 └── params/
 
 <repo>/gks/                       (project, in git)
 ├── 00_index/                     (gitignored)
 ├── adr/ concept/ feat/ ...
+├── episode/                      (dispatch episodes; _archive/ holds GC'd ones)
 └── (NO .brain/ subdir — superseded by ~/.brain/ at home)
 ```
 

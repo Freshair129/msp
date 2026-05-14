@@ -16,6 +16,7 @@ const PROJECT_SUBDIR: Partial<Record<AtomType, string>> = {
   ALGO: 'algo',
   PROTO: 'proto',
   PARAMS: 'params',
+  EPISODE: 'episode',
   MOD: 'mod',
   MASTER: 'master',
   HOTFIX: 'hotfix',

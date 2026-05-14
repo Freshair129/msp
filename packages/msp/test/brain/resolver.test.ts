@@ -99,18 +99,18 @@ describe('resolve — combines P1 routing + P2 vaults', () => {
     expect(hits[0]!.atom.id).toBe('SKILL--FOO');
   });
 
-  it('returns [] without error when the global subdir is missing', async () => {
-    // EPISODE is GLOBAL_ONLY; the global episodic/ dir does not exist.
-    const hits = await resolve({ type: 'EPISODE' });
+  it('returns [] without error when the routed subdirs are missing', async () => {
+    // ALGO is global-first/project-fallback; neither algo/ dir exists here.
+    const hits = await resolve({ type: 'ALGO' });
     expect(hits).toEqual([]);
   });
 
   it('returns [] without error when the global brain root is missing', async () => {
-    // Point globalRoot at a nonexistent path.
+    // IDENTITY is GLOBAL_ONLY; point globalRoot at a nonexistent path.
     vi.spyOn(globalVault, 'globalRoot').mockReturnValue(
       path.join(tmp, 'no-global'),
     );
-    const hits = await resolve({ type: 'EPISODE' });
+    const hits = await resolve({ type: 'IDENTITY' });
     expect(hits).toEqual([]);
   });
 

@@ -9,7 +9,6 @@ const GLOBAL_SUBDIR: Partial<Record<AtomType, string>> = {
   ALGO: 'algo',
   PROTO: 'proto',
   PARAMS: 'params',
-  EPISODE: 'episodic',
   IDENTITY: '.',
   REGISTRY: '.',
 };

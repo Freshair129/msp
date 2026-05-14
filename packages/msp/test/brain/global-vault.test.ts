@@ -84,12 +84,12 @@ describe('globalSubdir', () => {
     expect(globalSubdir('PARAMS')).toBe(path.join('/x', 'brain', 'params'));
   });
 
-  it('returns episodic/ for EPISODE', () => {
-    expect(globalSubdir('EPISODE')).toBe(path.join('/x', 'brain', 'episodic'));
-  });
-
   it('throws for atom types not routed to global (e.g. ADR)', () => {
     expect(() => globalSubdir('ADR')).toThrow(/not routed to the global brain/);
+  });
+
+  it('throws for EPISODE — routed to the project brain, not global', () => {
+    expect(() => globalSubdir('EPISODE')).toThrow(/not routed to the global brain/);
   });
 });
 
