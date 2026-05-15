@@ -8,7 +8,7 @@
 
 ## 1. Vision & Strategy
 
-The **Meta Learning Loop (MLL)** is the "Refinery" of the Cognitive System. It ensures that the system doesn't just "execute" tasks but "learns" from them. It bridges the **7-Phase Creation Lifecycle** (Forward) and the **12-Stage Processing Pipeline** (Reverse) to create a continuous improvement loop.
+The **Meta Learning Loop (MLL)** is the "Refinery" of the Cognitive System. It ensures that the system doesn't just "execute" tasks but "learns" from them. It bridges the **Block Assembly (7-Phase Doc-to-Code Flow, Forward)** and the **Block Decomposition (12-Stage Symbol Graph DAG, Reverse)** to create a continuous improvement loop — together these two halves form the **Genesis Block Cycle** (see `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary).
 
 ## 2. Key Features
 

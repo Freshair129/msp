@@ -49,6 +49,8 @@ The two graphs are **independently queryable** and **link via** `linked_symbols[
 
 ## Symbol Graph Processing Pipeline (12-Stage DAG)
 
+> Alias: **Block Decomposition** — the top-down half of the Genesis Block Cycle (the bottom-up `Block Assembly` half is governed by `FRAMEWORK--PHASE-GOVERNANCE`). See `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary.
+
 เพื่อให้ Symbol Graph มีความแม่นยำเชิงสถาปัตยกรรม (Architectural Meaning) ระบบต้องผ่านกระบวนการประมวลผล 12 ระยะ (Specified by `CONCEPT--SYMBOL-GRAPH-PIPELINE`):
 
 1. **Discovery:** Scan & Structure

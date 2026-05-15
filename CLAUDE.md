@@ -52,6 +52,8 @@ npm run build --workspace=packages/ui     # build Genesis UI
 
 ## Doc-to-code workflow (mandatory)
 
+> Alias: **Block Assembly** (bottom-up half of the Genesis Block Cycle) — see `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary and its `Block Decomposition` counterpart.
+
 Every milestone follows this phase order:
 1. **FRAMEWORK** (architecture / governance) -> `gks/framework/` (was `FRAME--` pre-v2.3; see `ADR--TAXONOMY-V2-3-MIGRATION`)
 2. **CONCEPT** (intent) -> `gks/concept/`

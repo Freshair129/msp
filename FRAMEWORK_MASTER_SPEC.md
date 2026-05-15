@@ -704,6 +704,9 @@ crosslinks:         # ความเชื่อมโยงแบบ Knowledge
 MSP มีบทบาทในการดูแลจัดการความจำข้าม session, project และ workspace ด้วยระบบที่เรียบง่ายแต่ผูกพันธ์กับ Atomic Knowledge ที่เกิดขึ้นระหว่างทาง
 
 ## 8. Symbol Graph & Processing Pipeline (12-Stage DAG)
+
+> Alias: **Block Decomposition** (top-down half of the Genesis Block Cycle) — see `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary and its `Block Assembly` counterpart.
+
 เพื่อให้ Codebase ถูกเปลี่ยนสภาพเป็น **Architectural Knowledge Graph** ที่ AI Agents สามารถเข้าใจความหมายเชิงสถาปัตยกรรมได้ MSP บังคับใช้กระบวนการประมวลผลแบบ **Directed Acyclic Graph (DAG)** ทั้งหมด 12 ระยะหลัก:
 
 ### 8.1 The 12 Stages

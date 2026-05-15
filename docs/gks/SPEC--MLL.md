@@ -6,15 +6,15 @@
 
 ## 1. System Architecture
 
-MLL sits as a management layer between **GKS (Storage)** and **MSP (Orchestrator)**.
+MLL sits as a management layer between **GKS (Storage)** and **MSP (Orchestrator)**. The two arrows in the diagram below are the two halves of the **Genesis Block Cycle** — `Block Decomposition` (↓ via `12-Stage Symbol Graph DAG`) and `Block Assembly` (↑ via the 7-Phase Doc-to-Code Flow). See `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary.
 
 ```mermaid
 graph LR
-    Code[Source Code] -->|12-Stage Pipeline| Graph[Knowledge Graph]
+    Code[Source Code] -->|Block Decomposition: 12-Stage Symbol Graph DAG| Graph[Knowledge Graph]
     Graph -->|Analysis| MLL[Meta Learning Loop]
     MLL -->|Candidates| Staging[candidates/ folder]
     Staging -->|Human PR| GKS[GKS Vault]
-    GKS -->|Planning| 7P[7-Phase Lifecycle]
+    GKS -->|Planning| 7P[Block Assembly: 7-Phase Doc-to-Code Flow]
     7P -->|Coding| Code
 ```
 
@@ -71,7 +71,7 @@ MLL implements a `check_stability()` function that:
 3.  Calculates semantic similarity between the summaries.
 4.  If similarity > 0.85, the definition is considered **Stable**.
 
-## 5. Integration with 12-Stage Pipeline
+## 5. Integration with Block Decomposition (12-Stage Symbol Graph DAG)
 
 - **Stage 3 (Markdown):** MLL reads all existing Atoms to build the baseline.
 - **Stage 12 (Processes):** MLL monitors execution traces. If a trace matches a known `SKILL--` but the code has changed, MLL flags a **Tension Event**.

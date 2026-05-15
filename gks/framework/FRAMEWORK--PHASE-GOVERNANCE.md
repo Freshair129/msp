@@ -19,6 +19,8 @@ created_at: 2026-05-03T14:01:48.299+07:00
 
 # FRAME — phase governance
 
+> Alias: **Block Assembly** — the bottom-up half of the Genesis Block Cycle (the top-down `Block Decomposition` half is governed by `FRAMEWORK--SYMBOL-GRAPH` and `FRAMEWORK_MASTER_SPEC §8`). See `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary.
+
 MSP enforces a six-phase flow that every feature must traverse before code merges. The phases are mechanical — `gks verify-flow FEAT--<id>` walks the chain and refuses to exit-0 unless every required atom for the chosen scaling level is `stable`.
 
 ## Phases at a glance

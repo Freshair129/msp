@@ -22,6 +22,8 @@ walkthrough relies on.
 
 ## The phases at a glance
 
+> The P0..P6 chain below is the **Block Assembly** half of the Genesis Block Cycle; its top-down counterpart is **Block Decomposition** (12-Stage Symbol Graph DAG). See `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary.
+
 ```
 P0 FRAMEWORK  →  P1 CONCEPT  →  P2 ADR/FEAT/ENTITY/SPEC  →  P3 BLUEPRINT  →  P4 TASK  →  P5 src/  →  P6 AUDIT
    foundation     why?          what?                       how-plan?       chunks      code         results

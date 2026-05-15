@@ -186,6 +186,8 @@ See [`AUDIT--ATOM-WORKFLOW-SCRIPTS`](./gks/audit/AUDIT--ATOM-WORKFLOW-SCRIPTS.md
 
 ## Workflow (doc-to-code)
 
+The P0..P6 chain below is the **Block Assembly** (bottom-up) half of the **Genesis Block Cycle**; its top-down counterpart is **Block Decomposition** (12-Stage Symbol Graph DAG). See `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md` for the unified vocabulary.
+
 ```
 P0 FRAMEWORK → P1 CONCEPT → P2 ADR/FEAT/SPEC → P3 BLUEPRINT → (P4 TASK) → P5 src/ → P6 AUDIT
 ```

@@ -7,10 +7,11 @@
 > This document is the **standalone technical reference** for GKS. It is
 > intentionally separate from `FRAMEWORK_MASTER_SPEC.md` — that file
 > describes the EVA project's full meta-framework (multi-agent workflow,
-> 7-phase build pipeline, governance), while this file describes only
-> what GKS itself does, why it does it, and how to use it. If you want
-> the storage engine without the rest of the EVA stack, this is the
-> only doc you need.
+> the **Genesis Block Cycle** of Block Assembly ↑ + Block Decomposition ↓,
+> governance — see `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md`), while this
+> file describes only what GKS itself does, why it does it, and how to
+> use it. If you want the storage engine without the rest of the EVA
+> stack, this is the only doc you need.
 >
 > **Audience:** engineers integrating GKS into an agent system, building
 > on top of it, or extending it via its plugin points.
