@@ -27,6 +27,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [size, setSize] = useState({ w: 800, h: 600 });
   const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
+  const [nodeSize, setNodeSize] = useState(1.0);
 
   // Simulation state
   const simRef = useRef<{ nodes: SimNode[]; links: SimLink[] }>({ nodes: [], links: [] });
@@ -77,6 +78,68 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
     return () => ro.disconnect();
   }, []);
 
+  const draw = React.useCallback(() => {
+    const canvas = canvasRef.current; if (!canvas) return;
+    const ctx = canvas.getContext('2d'); if (!ctx) return;
+    const dpr = window.devicePixelRatio || 1;
+    if (canvas.width !== size.w * dpr) {
+      canvas.width = size.w * dpr;
+      canvas.height = size.h * dpr;
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const { nodes, links } = simRef.current;
+    const { x, y, k } = transform.current;
+    const CX = size.w / 2 + x, CY = size.h / 2 + y;
+
+    ctx.fillStyle = '#111111';
+    ctx.fillRect(0, 0, size.w, size.h);
+
+    const neighbors = new Set<string>();
+    if (focusId) {
+      links.forEach(l => {
+        if (l.source.id === focusId) neighbors.add(l.target.id);
+        if (l.target.id === focusId) neighbors.add(l.source.id);
+      });
+    }
+
+    // Edges
+    for (const l of links) {
+      const isFocus = focusId && (l.source.id === focusId || l.target.id === focusId);
+      const isDim = focusId && !isFocus;
+      ctx.strokeStyle = isFocus ? 'rgba(124, 92, 255, 0.8)' : `rgba(70, 75, 90, ${isDim ? 0.15 : 0.35})`;
+      ctx.lineWidth = isFocus ? 1.5 : 0.75;
+      ctx.beginPath();
+      ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
+      ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
+      ctx.stroke();
+    }
+
+    // Nodes
+    for (const n of nodes) {
+      const isFocus = n.id === focusId;
+      const isNbr = neighbors.has(n.id);
+      const isDim = focusId && !isFocus && !isNbr;
+      const r = Math.max(2, (3 + Math.sqrt(n.deg) * 1.5) * k * nodeSize);
+
+      const meta = GKS_SERVICE.TYPE_META[n.type as NoteType] || { raw: '#6b7390' };
+      
+      ctx.beginPath();
+      ctx.arc(CX + n.x * k, CY + n.y * k, r, 0, Math.PI * 2);
+      ctx.fillStyle = meta.raw;
+      ctx.globalAlpha = isDim ? 0.2 : 1;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      if (isFocus || isNbr || (k > 1.2 && n.deg >= 10)) {
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.font = `${isFocus ? '600' : '400'} 10px Inter`;
+        ctx.textAlign = 'center';
+        ctx.fillText(n.title, CX + n.x * k, CY + n.y * k + r + 12);
+      }
+    }
+  }, [size, focusId, nodeSize]);
+
   // Animation Loop
   useEffect(() => {
     let raf: number;
@@ -86,7 +149,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
       const { nodes, links } = simRef.current;
       if (!nodes.length) return;
 
-      // ── Simulation Physics ──────────────────────────────────────────────────
+      // Simulation Physics
       if (alpha > 0.01) {
         const repulsion = -150 * alpha;
         const linkForce = 0.045 * alpha;
@@ -100,10 +163,12 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
             const b = nodes[j];
             const dx = b.x - a.x;
             const dy = b.y - a.y;
-            const d2 = dx * dx + dy * dy + 1;
+            const d2 = dx * dx + dy * dy + 0.1;
             if (d2 > 400 * 400) continue;
+            const d = Math.sqrt(d2);
             const f = repulsion / d2;
-            const fx = dx * f, fy = dy * f;
+            const fx = (dx / d) * f;
+            const fy = (dy / d) * f;
             a.vx += fx; a.vy += fy;
             b.vx -= fx; b.vy -= fy;
           }
@@ -113,9 +178,10 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
         for (const l of links) {
           const dx = l.target.x - l.source.x;
           const dy = l.target.y - l.source.y;
-          const d = Math.sqrt(dx * dx + dy * dy) || 1;
-          const f = (d - 80) * linkForce;
-          const fx = (dx / d) * f, fy = (dy / d) * f;
+          const d = Math.sqrt(dx * dx + dy * dy) || 0.1;
+          const f = (d - 100) * linkForce;
+          const fx = (dx / d) * f;
+          const fy = (dy / d) * f;
           l.source.vx += fx; l.source.vy += fy;
           l.target.vx -= fx; l.target.vy -= fy;
         }
@@ -139,91 +205,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [size, focusId]);
-
-  const draw = () => {
-    const canvas = canvasRef.current; if (!canvas) return;
-    const ctx = canvas.getContext('2d'); if (!ctx) return;
-    const dpr = window.devicePixelRatio || 1;
-    if (canvas.width !== size.w * dpr) {
-      canvas.width = size.w * dpr;
-      canvas.height = size.h * dpr;
-    }
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const { nodes, links } = simRef.current;
-    const { x, y, k } = transform.current;
-    const CX = size.w / 2 + x, CY = size.h / 2 + y;
-
-    ctx.fillStyle = '#111111';
-    ctx.fillRect(0, 0, size.w, size.h);
-
-    // Edges
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.lineWidth = 0.5 * k;
-    for (const l of links) {
-      const isHot = focusId && (l.source.id === focusId || l.target.id === focusId);
-      if (isHot) continue; // Draw hot later
-      ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
-      ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
-    }
-    ctx.stroke();
-
-    // Hot Edges
-    if (focusId) {
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(124, 92, 255, 0.6)';
-      ctx.lineWidth = 1.2 * k;
-      for (const l of links) {
-        if (l.source.id === focusId || l.target.id === focusId) {
-          ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
-          ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
-        }
-      }
-      ctx.stroke();
-    }
-
-    // Nodes
-    const neighbors = new Set<string>();
-    if (focusId) {
-      links.forEach(l => {
-        if (l.source.id === focusId) neighbors.add(l.target.id);
-        if (l.target.id === focusId) neighbors.add(l.source.id);
-      });
-    }
-
-    for (const n of nodes) {
-      const nx = CX + n.x * k, ny = CY + n.y * k;
-      if (nx < -50 || nx > size.w + 50 || ny < -50 || ny > size.h + 50) continue;
-
-      const isFocus = n.id === focusId;
-      const isNbr = neighbors.has(n.id);
-      const isDim = focusId && !isFocus && !isNbr;
-      const r = Math.max(2, (3 + Math.sqrt(n.deg) * 1.5) * k);
-
-      const meta = GKS_SERVICE.TYPE_META[n.type as NoteType] || { raw: '#6b7390' };
-      
-      ctx.fillStyle = isDim ? 'rgba(60, 60, 70, 0.3)' : meta.raw;
-      ctx.beginPath();
-      ctx.arc(nx, ny, r, 0, Math.PI * 2);
-      ctx.fill();
-
-      if (isFocus) {
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      }
-
-      // Labels
-      if (k > 0.6 && (isFocus || isNbr || (k > 1.2 && n.deg > 5))) {
-        ctx.fillStyle = isFocus ? '#fff' : 'rgba(230, 232, 240, 0.7)';
-        ctx.font = `${isFocus ? '600 ' : ''}10px var(--font-sans)`;
-        ctx.textAlign = 'center';
-        ctx.fillText(n.title, nx, ny + r + 12);
-      }
-    }
-  };
+  }, [size, focusId, draw]);
 
   // Interaction handlers
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -252,7 +234,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
         const nx = CX + n.x * k, ny = CY + n.y * k;
         const r = Math.max(5, (3 + Math.sqrt(n.deg) * 1.5) * k);
         const dx = mx - nx, dy = my - ny;
-        if (dx * dx + dy * dy < r * r) {
+        if (dx * dx + dy * dy < (r + 6) * (r + 6)) {
           hit = n; break;
         }
       }
@@ -264,7 +246,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
     if (isDragging) {
       const dx = Math.abs(e.clientX - drag.current.lx);
       const dy = Math.abs(e.clientY - drag.current.ly);
-      if (dx < 3 && dy < 3) {
+      if (dx < 4 && dy < 4) {
         // Was a click
         if (hover) onOpen?.(hover.id);
       }
@@ -291,6 +273,13 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
         <h4>Obsidian Style · 2D Force</h4>
         <div style={{ color: 'var(--text-mute)', fontSize: 11 }}>
           drag to pan · scroll to zoom · click to focus
+        </div>
+      </div>
+      <div className="graph-controls">
+        <div className="row">
+          <label>Node size</label>
+          <input type="range" min="0.3" max="3" step="0.1" value={nodeSize}
+                 onChange={e => setNodeSize(+e.target.value)} />
         </div>
       </div>
       {hover && (

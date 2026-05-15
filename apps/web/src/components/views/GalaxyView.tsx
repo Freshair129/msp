@@ -50,7 +50,7 @@ function gxHexA(hex: string, a: number): string {
   return `rgba(${r},${g},${b},${a.toFixed(3)})`;
 }
 
-export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _focusId, onOpen }) => {
+export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, onOpen }) => {
   const wrapRef   = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [size, setSize] = useState({ w: 800, h: 600 });
@@ -61,6 +61,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
     speed:         0.55,
     showParticles: true,
     showLabels:    true,
+    nodeSize:      1.0,
   });
 
   // Camera refs
@@ -239,35 +240,8 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
     camTgt.current.dist = Math.max(100, Math.min(2200, camTgt.current.dist * Math.exp(e.deltaY * 0.001)));
   };
 
-  // ── Animation loop ────────────────────────────────────────────────────────────
-  useEffect(() => {
-    let raf: number, t0 = performance.now();
-
-    const tick = (now: number) => {
-      const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
-      timeRef.current += dt; // accumulate — survives re-mounts
-
-      if (params.autoRotate) camTgt.current.yaw += dt * 0.2 * params.speed;
-
-      const c = cam.current, ct = camTgt.current;
-      c.yaw   += (ct.yaw   - c.yaw)   * 0.08;
-      c.pitch += (ct.pitch - c.pitch) * 0.08;
-      c.dist  += (ct.dist  - c.dist)  * 0.08;
-      const la = lookAt.current, lt = lookAtTgt.current;
-      la.x += (lt.x - la.x) * 0.07;
-      la.y += (lt.y - la.y) * 0.07;
-      la.z += (lt.z - la.z) * 0.07;
-
-      draw(timeRef.current);
-      raf = requestAnimationFrame(tick);
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [size, params, pinned]);
-
   // ── Draw ──────────────────────────────────────────────────────────────────────
-  const draw = (time: number) => {
+  const draw = React.useCallback((time: number) => {
     const canvas = canvasRef.current; if (!canvas) return;
     const data   = dataRef.current;   if (!data)   return;
     const dpr = window.devicePixelRatio || 1;
@@ -295,21 +269,21 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
       ctx.beginPath(); ctx.arc(sx, sy, sr, 0, Math.PI * 2); ctx.fill();
     }
 
-    // Core is now just empty or a simple point if desired, but we'll leave it clean.
-
     // Background particles - using fillRect for speed
     if (params.showParticles) {
-      for (const p of data.particles) {
-        const prj = project(p.x, p.y, p.z, W, H); if (!prj) continue;
-        if (prj.depth > cam.current.dist + 600) continue;
-        const px  = CX + prj.sx, py = CY + prj.sy;
-        const df     = Math.max(0, Math.min(1, 1 - (prj.depth - 350) / 1400));
-        const twinkle = 0.75 + Math.sin(time * 2.1 + p.x * 0.07 + p.z * 0.05) * 0.25;
-        const al  = p.alpha * df * twinkle;
-        if (al < 0.015) continue;
-        const sz  = Math.max(0.4, p.sz * prj.scale * 0.65);
+      const pts = data.particles;
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i];
+        const proj = project(p.x, p.y, p.z, W, H);
+        if (!proj) continue;
+        const x = CX + proj.sx, y = CY + proj.sy;
+        if (x < 0 || x > W || y < 0 || y > H) continue;
+
+        const al = p.alpha * Math.max(0, Math.min(1, 400 / proj.depth));
+        if (al < 0.05) continue;
+
         ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${al.toFixed(3)})`;
-        ctx.fillRect(px - sz, py - sz, sz * 2, sz * 2);
+        ctx.fillRect(x, y, p.sz * proj.scale, p.sz * proj.scale);
       }
     }
 
@@ -317,22 +291,21 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
     const pinN = pinned ? data.nodeMap[pinned] : null;
     const nbrs = new Set<string>();
     if (pinN) {
-      data.klinks.forEach(l => {
-        if (l.source === pinN.id) nbrs.add(l.target);
-        if (l.target === pinN.id) nbrs.add(l.source);
+      edges.forEach(e => {
+        if (e.source === pinN.id) nbrs.add(e.target);
+        if (e.target === pinN.id) nbrs.add(e.source);
       });
     }
 
     // Project all knowledge nodes
-    const prjMap = new Map<string, Projected>();
-    for (const n of data.knodes) {
-      const p = project(n.x, n.y, n.z, W, H);
-      if (p) prjMap.set(n.id, p);
-    }
+    const sorted = data.knodes
+      .map(n => ({ n, p: project(n.x, n.y, n.z, W, H) }))
+      .filter((o): o is { n: GalaxyNode, p: Projected } => !!o.p)
+      .sort((a, b) => b.p.depth - a.p.depth);
 
-    // Edges
     for (const l of data.klinks) {
-      const pa = prjMap.get(l.source), pb = prjMap.get(l.target);
+      const pa = project(data.nodeMap[l.source].x, data.nodeMap[l.source].y, data.nodeMap[l.source].z, W, H);
+      const pb = project(data.nodeMap[l.target].x, data.nodeMap[l.target].y, data.nodeMap[l.target].z, W, H);
       if (!pa || !pb) continue;
       const hot = pinN && (l.source === pinN.id || l.target === pinN.id);
       const dim = pinN && !hot;
@@ -359,14 +332,9 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
       }
     }
 
-    // Nodes (depth-sorted)
-    const sorted = data.knodes
-      .map(n => ({ n, p: prjMap.get(n.id) }))
-      .filter((o): o is { n: GalaxyNode; p: Projected } => !!o.p)
-      .sort((a, b) => b.p.depth - a.p.depth);
-
+    // Nodes
     for (const { n, p } of sorted) {
-      const meta  = GKS_SERVICE.TYPE_META[n.type as keyof typeof GKS_SERVICE.TYPE_META]
+      const meta = GKS_SERVICE.TYPE_META[n.type as keyof typeof GKS_SERVICE.TYPE_META]
         ?? { raw: '#a4a9be', label: n.type };
       const x = CX + p.sx, y = CY + p.sy;
       const isFocus = pinN?.id === n.id;
@@ -375,9 +343,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
       const df      = Math.max(0.12, Math.min(1, 850 / p.depth));
       const al      = (dim ? 0.14 : 1) * df;
       const pulse   = 1 + Math.sin(time * 2.2 + n.radius * 0.012) * 0.13;
-      const r       = Math.max(3, (3.5 + Math.sqrt(n.deg) * 1.6) * Math.max(0.3, p.scale));
-
-      // Halos and spikes removed for 'Dev Tool' sharpness
+      const r       = Math.max(3, (3.5 + Math.sqrt(n.deg) * 1.6) * Math.max(0.3, p.scale) * params.nodeSize);
 
       // Star core
       ctx.beginPath(); ctx.arc(x, y, r * pulse, 0, Math.PI * 2);
@@ -429,7 +395,36 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
         }
       }
     }
-  };
+  }, [size, params, pinned, hover, edges]);
+
+  // ── Animation loop ────────────────────────────────────────────────────────────
+  useEffect(() => {
+    let raf: number;
+    let t0 = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - t0) / 1000);
+      t0 = now;
+      timeRef.current += dt; // accumulate — survives re-mounts
+
+      if (params.autoRotate) camTgt.current.yaw += dt * 0.2 * params.speed;
+
+      const c = cam.current, ct = camTgt.current;
+      c.yaw += (ct.yaw - c.yaw) * 0.08;
+      c.pitch += (ct.pitch - c.pitch) * 0.08;
+      c.dist += (ct.dist - c.dist) * 0.08;
+      const la = lookAt.current, lt = lookAtTgt.current;
+      la.x += (lt.x - la.x) * 0.07;
+      la.y += (lt.y - la.y) * 0.07;
+      la.z += (lt.z - la.z) * 0.07;
+
+      draw(timeRef.current);
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [params.autoRotate, params.speed, draw]);
 
   return (
     <div className="graph-wrap" ref={wrapRef}>
@@ -497,6 +492,11 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
             className={'toggle' + (params.showLabels ? ' on' : '')}
             onClick={() => setParams(p => ({ ...p, showLabels: !p.showLabels }))}
           />
+        </div>
+        <div className="row">
+          <label>Node size</label>
+          <input type="range" min="0.3" max="3" step="0.1" value={params.nodeSize}
+                 onChange={e => setParams(p => ({ ...p, nodeSize: +e.target.value }))} />
         </div>
         {pinned && (
           <div className="row">
