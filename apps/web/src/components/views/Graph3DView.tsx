@@ -29,7 +29,7 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
   const [size, setSize] = useState({ w: 800, h: 600 });
   const [hover, setHover] = useState<{ id: string, x: number, y: number } | null>(null);
   const [params, setParams] = useState({
-    autoRotate: true, signals: true, neurites: true, depth: true, speed: 0.3,
+    autoRotate: true, signals: true, neurites: true, depth: true, speed: 0.3, nodeSize: 1.0,
   });
 
   // Camera state
@@ -102,7 +102,7 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
     return { sx: x1 * s, sy: y1 * s, depth: zEye, scale: s };
   };
 
-  const nodeR = (n: SimNode, scale: number) => Math.max(2.4, (3 + Math.sqrt(n.deg) * 1.4) * scale * 0.9);
+  const nodeR = (n: SimNode, scale: number) => Math.max(2.4, (3 + Math.sqrt(n.deg) * 1.4) * scale * 0.9 * params.nodeSize);
 
   const pickNode = (mx: number, my: number) => {
     const sim = simRef.current; if (!sim) return null;
@@ -395,6 +395,11 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
           <label>Signals</label>
           <span className={"toggle" + (params.signals ? " on" : "")}
                 onClick={() => setParams(p => ({ ...p, signals: !p.signals }))} />
+        </div>
+        <div className="row">
+          <label>Node size</label>
+          <input type="range" min="0.3" max="3" step="0.1" value={params.nodeSize}
+                 onChange={e => setParams(p => ({ ...p, nodeSize: +e.target.value }))} />
         </div>
       </div>
     </div>

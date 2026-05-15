@@ -61,6 +61,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
     speed:         0.55,
     showParticles: true,
     showLabels:    true,
+    nodeSize:      1.0,
   });
 
   // Camera refs
@@ -375,7 +376,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
       const df      = Math.max(0.12, Math.min(1, 850 / p.depth));
       const al      = (dim ? 0.14 : 1) * df;
       const pulse   = 1 + Math.sin(time * 2.2 + n.radius * 0.012) * 0.13;
-      const r       = Math.max(3, (3.5 + Math.sqrt(n.deg) * 1.6) * Math.max(0.3, p.scale));
+      const r       = Math.max(3, (3.5 + Math.sqrt(n.deg) * 1.6) * Math.max(0.3, p.scale) * params.nodeSize);
 
       // Halos and spikes removed for 'Dev Tool' sharpness
 
@@ -497,6 +498,11 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
             className={'toggle' + (params.showLabels ? ' on' : '')}
             onClick={() => setParams(p => ({ ...p, showLabels: !p.showLabels }))}
           />
+        </div>
+        <div className="row">
+          <label>Node size</label>
+          <input type="range" min="0.3" max="3" step="0.1" value={params.nodeSize}
+                 onChange={e => setParams(p => ({ ...p, nodeSize: +e.target.value }))} />
         </div>
         {pinned && (
           <div className="row">

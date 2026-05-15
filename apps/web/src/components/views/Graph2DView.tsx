@@ -27,6 +27,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [size, setSize] = useState({ w: 800, h: 600 });
   const [hover, setHover] = useState<{ id: string; x: number; y: number } | null>(null);
+  const [nodeSize, setNodeSize] = useState(1.0);
 
   // Simulation state
   const simRef = useRef<{ nodes: SimNode[]; links: SimLink[] }>({ nodes: [], links: [] });
@@ -200,7 +201,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
       const isFocus = n.id === focusId;
       const isNbr = neighbors.has(n.id);
       const isDim = focusId && !isFocus && !isNbr;
-      const r = Math.max(2, (3 + Math.sqrt(n.deg) * 1.5) * k);
+      const r = Math.max(2, (3 + Math.sqrt(n.deg) * 1.5) * k * nodeSize);
 
       const meta = GKS_SERVICE.TYPE_META[n.type as NoteType] || { raw: '#6b7390' };
       
@@ -291,6 +292,13 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
         <h4>Obsidian Style · 2D Force</h4>
         <div style={{ color: 'var(--text-mute)', fontSize: 11 }}>
           drag to pan · scroll to zoom · click to focus
+        </div>
+      </div>
+      <div className="graph-controls">
+        <div className="row">
+          <label>Node size</label>
+          <input type="range" min="0.3" max="3" step="0.1" value={nodeSize}
+                 onChange={e => setNodeSize(+e.target.value)} />
         </div>
       </div>
       {hover && (
