@@ -79,4 +79,97 @@ describe('GenesisGraphBackend — Cypher v0', () => {
     )
     expect(rows).toEqual([])
   })
+
+  it('empty query rejects with GenesisGraphUnsupportedCypher', async () => {
+    const g = createGenesisGraphBackend({ path: dir })
+    await g.load()
+    await expect(g.cypher('')).rejects.toBeInstanceOf(GenesisGraphUnsupportedCypher)
+    await expect(g.cypher('   ')).rejects.toBeInstanceOf(GenesisGraphUnsupportedCypher)
+  })
+
+  it('missing RETURN clause rejects with GenesisGraphUnsupportedCypher', async () => {
+    const g = await seedAtomVault()
+    await expect(
+      g.cypher(`MATCH (a:Atom {id: 'FEAT--A'})-[r:references]->(b:Atom)`),
+    ).rejects.toBeInstanceOf(GenesisGraphUnsupportedCypher)
+  })
+
+  it('inverted hop range *5..3 rejects with GenesisGraphUnsupportedCypher', async () => {
+    const g = await seedAtomVault()
+    await expect(
+      g.cypher(`MATCH (a:Atom {id: 'FEAT--A'})-[r:references*5..3]->(b:Atom) RETURN b.id`),
+    ).rejects.toBeInstanceOf(GenesisGraphUnsupportedCypher)
+  })
+
+  it.each([
+    ['CREATE', `CREATE (n:Atom {id: 'X'}) RETURN n`],
+    ['MERGE', `MERGE (n:Atom {id: 'X'}) RETURN n`],
+    ['DELETE', `MATCH (a:Atom {id: 'FEAT--A'}) DELETE a RETURN a`],
+    ['SET', `MATCH (a:Atom {id: 'FEAT--A'}) SET a.flag = 'x' RETURN a.id`],
+    ['UNWIND', `UNWIND [1,2,3] AS x RETURN x`],
+    ['WITH', `MATCH (a:Atom {id: 'FEAT--A'})-[r:references]->(b:Atom) WITH b RETURN b.id`],
+    [
+      'UNION',
+      `MATCH (a:Atom {id: 'FEAT--A'})-[r:references]->(b:Atom) RETURN b.id UNION MATCH (a:Atom {id: 'ADR--A'})-[r:implements]->(b:Atom) RETURN b.id`,
+    ],
+  ])('unsupported keyword %s rejects with GenesisGraphUnsupportedCypher', async (_kw, query) => {
+    const g = await seedAtomVault()
+    await expect(g.cypher(query)).rejects.toBeInstanceOf(GenesisGraphUnsupportedCypher)
+  })
+
+  it('WHERE predicate on seed alias a filters the seed', async () => {
+    const g = await seedAtomVault()
+    const match = await g.cypher(
+      `MATCH (a:Atom {id: 'FEAT--A'})-[r:references]->(b:Atom) WHERE a.type = 'feat' RETURN b.id`,
+    )
+    expect(match).toEqual([{ 'b.id': 'ADR--A' }])
+
+    const miss = await g.cypher(
+      `MATCH (a:Atom {id: 'FEAT--A'})-[r:references]->(b:Atom) WHERE a.type = 'adr' RETURN b.id`,
+    )
+    expect(miss).toEqual([])
+  })
+
+  it('WHERE with AND combines predicates conjunctively', async () => {
+    const g = await seedAtomVault()
+    const rows = await g.cypher(
+      `MATCH (a:Atom {id: 'FEAT--A'})-[r:references|implements*1..6]->(b:Atom) WHERE b.status = 'stable' AND b.type = 'adr' RETURN b.id`,
+    )
+    expect(rows).toEqual([{ 'b.id': 'ADR--A' }])
+  })
+
+  it('length(r) without AS uses default key length_r', async () => {
+    const g = await seedAtomVault()
+    const rows = await g.cypher(
+      `MATCH (a:Atom {id: 'FEAT--A'})-[r:references|implements*1..6]->(b:Atom) RETURN b.id, length(r)`,
+    )
+    expect(rows).toContainEqual({ 'b.id': 'ADR--A', length_r: 1 })
+    expect(rows).toContainEqual({ 'b.id': 'CONCEPT--A', length_r: 2 })
+  })
+
+  it('rel-type union r:references|implements walks both edge types', async () => {
+    const g = await seedAtomVault()
+    const rows = await g.cypher(
+      `MATCH (a:Atom {id: 'FEAT--A'})-[r:references|implements*1..6]->(b:Atom) RETURN b.id, length(r) AS hops`,
+    )
+    expect(rows).toHaveLength(2)
+    expect(rows).toContainEqual({ 'b.id': 'ADR--A', hops: 1 })
+    expect(rows).toContainEqual({ 'b.id': 'CONCEPT--A', hops: 2 })
+  })
+
+  it('keywords are case-insensitive', async () => {
+    const g = await seedAtomVault()
+    const rows = await g.cypher(
+      `match (a:Atom {id: 'FEAT--A'})-[r:references]->(b:Atom) Where b.status = 'stable' return b.id`,
+    )
+    expect(rows).toEqual([{ 'b.id': 'ADR--A' }])
+  })
+
+  it('seed label mismatch yields empty result', async () => {
+    const g = await seedAtomVault()
+    const rows = await g.cypher(
+      `MATCH (a:Concept {id: 'FEAT--A'})-[r:references]->(b:Atom) RETURN b.id`,
+    )
+    expect(rows).toEqual([])
+  })
 })
