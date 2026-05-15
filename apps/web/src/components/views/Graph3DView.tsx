@@ -102,7 +102,7 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
     return { sx: x1 * s, sy: y1 * s, depth: zEye, scale: s };
   };
 
-  const nodeR = (n: SimNode, scale: number) => Math.max(2.4, (3 + Math.sqrt(n.deg) * 1.4) * scale * 0.9);
+  const nodeR = (n: SimNode, scale: number) => Math.max(2.4, (3 + Math.sqrt(n.deg) * 1.4) * scale * 0.9 * params.nodeSize);
 
   const pickNode = (mx: number, my: number) => {
     const sim = simRef.current; if (!sim) return null;
