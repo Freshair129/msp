@@ -88,8 +88,9 @@ Atoms generated or refined by the MLL may include the following metadata fields:
 
 ## Cluster 1 — Implementation Flow
 
-Phase-aligned with the build pipeline (P0 → P6). When in doubt, this is
-where most contributions go.
+Phase-aligned with the build pipeline (P0 → P6) — the **Block Assembly**
+half of the Genesis Block Cycle (see `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md`).
+When in doubt, this is where most contributions go.
 
 ### `IDEA--` · raw spark
 - **Use for:** the original prompt / one-line idea before any analysis.

@@ -25,7 +25,9 @@ gks/
 
 The intuition was that the phase number telegraphs "where in the build
 pipeline this atom belongs" — useful when the framework's mental model
-is the 7-phase assembly line in `FRAMEWORK_MASTER_SPEC.md`.
+is the 7-phase assembly line in `FRAMEWORK_MASTER_SPEC.md` (now also
+known as **Block Assembly** under the Genesis Block Cycle vocabulary —
+see `docs/gks/PRD--GENESIS-BLOCK-CYCLE.md`).
 
 In practice it produced three problems:
 
