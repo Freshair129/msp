@@ -36,7 +36,7 @@ export function defaultKeepResult(): Tier2Result {
  */
 export function buildTier2Prompt(chunk: Turn[]): string {
   const body = chunk
-    .map((t) => `[${t.speakerId}] ${t.content}`)
+    .map((t) => `[${t.speakerId ?? t.speaker}] ${t.content ?? t.text}`)
     .join('\n')
   return `${PROMPT_HEAD}\n${body}\n${PROMPT_TAIL}\n`
 }

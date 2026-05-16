@@ -69,7 +69,12 @@ export async function readSessionTurns(
       const trimmed = line.trim()
       if (!trimmed) continue
       try {
-        out.push(JSON.parse(trimmed) as Turn)
+        const turn = JSON.parse(trimmed) as Turn
+        if (turn.id && !turn.turnId) {
+          const match = turn.id.match(/\d+$/)
+          turn.turnId = match ? parseInt(match[0], 10) : 0
+        }
+        out.push(turn)
       } catch {
         /* skip malformed line */
       }
@@ -78,7 +83,7 @@ export async function readSessionTurns(
     if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err
   }
   // Stable ordering by turnId to defend against out-of-order writes.
-  out.sort((a, b) => a.turnId - b.turnId)
+  out.sort((a, b) => (a.turnId ?? 0) - (b.turnId ?? 0))
   return out
 }
 
