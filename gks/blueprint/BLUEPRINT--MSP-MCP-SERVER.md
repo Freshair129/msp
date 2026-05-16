@@ -25,6 +25,10 @@ linked_symbols:
   - {"file":"packages/msp/src/mcp/tools/episode-append.ts"}
   - {"file":"packages/msp/src/mcp/tools/backlinks-rebuild.ts"}
 created_at: 2026-05-03T18:13:55.210+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — MSP MCP server

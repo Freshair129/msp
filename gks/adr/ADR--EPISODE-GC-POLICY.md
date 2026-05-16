@@ -21,6 +21,10 @@ crosslinks:
     - SPEC--EPISODE-ATOM
     - AUDIT--PHASE-F4-EPISODE-GC
 created_at: 2026-05-14T05:05:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Episode GC policy

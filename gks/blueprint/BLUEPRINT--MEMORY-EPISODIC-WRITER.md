@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/memory/episodic/atomic-write.ts"}
   - {"file":"packages/msp/src/memory/episodic/summarisers/heuristic.ts"}
 created_at: 2026-05-03T14:16:41.255+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — episodic writer

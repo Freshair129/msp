@@ -14,6 +14,10 @@ tags:
   - rules
 crosslinks: {"references":["CONCEPT--ATOMIC-WRITE-CONTRACT","ADR--GRAPH-IS-GKS-DOMAIN"],"implements":["FEAT--MSP-VALIDATOR"]}
 created_at: 2026-05-03T14:08:41.252+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — anti-hallucination rules

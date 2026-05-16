@@ -17,6 +17,10 @@ tags:
 crosslinks: {"references":["ADR--EMBEDDING-MODEL-PARITY","ADR--MSP-OBSIDIAN-INTEGRATION","ADR--GRAPH-IS-GKS-DOMAIN","CONCEPT--EMBEDDING-STRATEGY","AUDIT--M7-PREP-FOLLOWUP"]}
 linked_symbols: []
 created_at: 2026-05-04T12:55:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — two-repo validation

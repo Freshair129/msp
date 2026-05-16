@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/src/validator/cli.ts"}
   - {"file":"packages/msp/test/validator/contract.test.ts"}
 created_at: 2026-05-03T15:43:36.814+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — runtime contract loader

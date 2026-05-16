@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"packages/msp/src/policy/task-scope.ts"}
   - {"file":"packages/msp/src/policy/escalation.ts"}
 created_at: 2026-05-14T22:21:53.742+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Phase 2: subagent scope filtering

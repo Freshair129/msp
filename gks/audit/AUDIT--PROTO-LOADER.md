@@ -23,6 +23,10 @@ linked_symbols:
   - {"file":"packages/msp/test/validator/proto/loader.test.ts"}
   - {"file":"packages/msp/test/validator/proto/sample.test.ts"}
 created_at: 2026-05-05T18:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M8a — PROTO loader (foundation)

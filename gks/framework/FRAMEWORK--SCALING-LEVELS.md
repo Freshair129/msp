@@ -14,6 +14,10 @@ tags:
   - foundation
 crosslinks: {"references":["FRAMEWORK--PHASE-GOVERNANCE"]}
 created_at: 2026-05-03T14:01:48.787+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — scaling levels

@@ -14,6 +14,10 @@ tags:
   - anti-hallucination
 crosslinks: {"references":["CONCEPT--ATOMIC-WRITE-CONTRACT"]}
 created_at: 2026-05-03T14:01:54.801+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — epistemic metadata

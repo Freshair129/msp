@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"scripts/msp/chmod-bins.mjs"}
   - {"file":".github/workflows/test.yml"}
 created_at: 2026-05-03T16:20:06.903+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — M4a bin entries + CI

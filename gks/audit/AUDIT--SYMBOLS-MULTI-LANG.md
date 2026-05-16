@@ -23,6 +23,10 @@ linked_symbols:
   - {"file":"packages/msp/test/symbols/parser-python.test.ts"}
   - {"file":"packages/msp/test/symbols/parser-cobol.test.ts"}
 created_at: 2026-05-12T05:12:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Multi-language symbol parsing

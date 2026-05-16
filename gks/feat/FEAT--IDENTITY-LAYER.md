@@ -25,6 +25,10 @@ linked_symbols:
   - {"file":"packages/msp/src/identity/preferences.ts"}
   - {"file":"packages/msp/src/identity/store.ts"}
 created_at: 2026-05-05T00:26:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # Identity layer — namespaced JSON store with profile / voice / preferences

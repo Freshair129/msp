@@ -21,6 +21,10 @@ crosslinks:
     - SPEC--USAGE-ROLLUP-ATOM
     - BLUEPRINT--MASTER-RUNTIME-INTEGRATION
 created_at: 2026-05-14T05:30:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Phase F (refinements) — implementation complete

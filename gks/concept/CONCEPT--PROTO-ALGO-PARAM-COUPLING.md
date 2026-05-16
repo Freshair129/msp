@@ -17,6 +17,10 @@ tags:
   - m8d
 crosslinks: {"references":["CONCEPT--PROTO-PATTERN","ADR--GRAPH-IS-GKS-DOMAIN"]}
 created_at: 2026-05-05T16:28:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — [[PROTO--ALGO-PARAM-COUPLING]]

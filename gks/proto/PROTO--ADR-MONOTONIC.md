@@ -18,6 +18,10 @@ crosslinks: {"enforces":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["CONCEP
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/adr-monotonic.ts"}
 created_at: 2026-05-05T20:00:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — ADR-MONOTONIC

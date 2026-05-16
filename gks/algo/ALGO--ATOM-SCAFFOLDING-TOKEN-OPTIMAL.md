@@ -11,6 +11,10 @@ tags:
   - msp
 crosslinks: {}
 created_at: 2026-05-17T04:07:43.742+07:00
+aliases:
+  - ALGO
+  - implementation_flow
+  - Algorithm definition
 ---
 
 # ALGO — Token-Optimal Atom Scaffolding

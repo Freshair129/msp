@@ -18,6 +18,10 @@ tags:
   - plugins
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT"]}
 created_at: 2026-05-13T08:59:39.761+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Attribute bag

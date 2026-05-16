@@ -11,6 +11,10 @@ tags: [taxonomy, governance, issue-tracking, scope]
 crosslinks:
   references: [FRAMEWORK--FOUR-LAYERS, ADR--FLAT-ATOM-LAYOUT, CONCEPT--TAXONOMY-V2-3, ADR--REGISTRY-DRIVEN-SCAFFOLDING]
   resolves: []
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Extended atomic taxonomy

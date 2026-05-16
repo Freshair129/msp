@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/src/policy/operators.ts"}
   - {"file":"packages/msp/src/policy/shadow-log.ts"}
 created_at: 2026-05-14T22:21:52.912+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Phase 1: PDP in shadow mode

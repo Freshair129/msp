@@ -22,6 +22,10 @@ crosslinks:
     - SPEC--EPISODE-ATOM
 linked_symbols: []
 created_at: 2026-05-14T05:08:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Phase F4 episode retention + GC

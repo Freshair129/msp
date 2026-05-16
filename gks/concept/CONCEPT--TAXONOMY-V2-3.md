@@ -15,6 +15,10 @@ tags:
   - foundation
 crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--ATOMIC-WRITE-CONTRACT","FRAMEWORK--CROSSLINKS-VOCABULARY","ADR--TAXONOMY-V2-3-MIGRATION","SPEC--GENESIS-BLOCK-MANIFEST"]}
 created_at: 2026-05-13T12:21:49+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Taxonomy v2.3

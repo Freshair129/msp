@@ -15,6 +15,10 @@ linked_symbols:
   - { file: "src/memory/types.ts", fn: AtomicType }
   - { file: "src/scaffold/new-feature.ts", fn: scaffoldNewFeature }
   - { file: "bin/gks.ts", fn: cmdNewFeature }
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Task tracking belongs to the orchestrator, not GKS

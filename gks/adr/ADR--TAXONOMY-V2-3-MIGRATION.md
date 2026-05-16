@@ -15,6 +15,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--TAXONOMY-V2-3","FRAMEWORK--CROSSLINKS-VOCABULARY","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-13T12:21:49+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Taxonomy v2.3 migration

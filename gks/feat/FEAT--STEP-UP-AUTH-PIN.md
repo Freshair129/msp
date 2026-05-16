@@ -15,6 +15,10 @@ tags:
   - step-up
 crosslinks: {"references":["CONCEPT--STEP-UP-AUTH","CONCEPT--ABAC-POLICY-ENGINE","FEAT--POLICY-DECISION-POINT"]}
 created_at: 2026-05-14T19:42:04.304+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Step-up auth: PIN provider

@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/src/memory/sessions/lock.ts"}
   - {"file":"packages/msp/src/memory/sessions/schema.ts"}
 created_at: 2026-05-03T14:16:39.446+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — sessions writer

@@ -26,6 +26,10 @@ tags:
   - instinct
 crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY","BLUEPRINT--CONTRADICTION-DETECTION-IMPL"]}
 created_at: 2026-05-09T15:01:30.000+07:00
+aliases:
+  - MASTER
+  - implementation_flow
+  - Root-level policy / genesis rule
 ---
 
 # MASTER — Atom contradiction policy (Layer 0 supersession discipline)

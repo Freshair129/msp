@@ -18,6 +18,10 @@ crosslinks: {"enforces":["FRAMEWORK--KNOWLEDGE-3-TIER"],"references":["FRAMEWORK
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/master-body-schema.ts"}
 created_at: 2026-05-09T15:05:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — MASTER-BODY-SCHEMA

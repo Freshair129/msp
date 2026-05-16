@@ -23,6 +23,10 @@ linked_symbols:
   - {"file":"packages/msp/src/obsidian/env.ts"}
   - {"file":"packages/msp/test/obsidian/client.test.ts"}
 created_at: 2026-05-04T12:25:22.543+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — MSP Obsidian client implementation plan

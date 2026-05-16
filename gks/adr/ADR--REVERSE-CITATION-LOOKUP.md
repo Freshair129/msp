@@ -15,6 +15,10 @@ crosslinks:
 linked_symbols:
   - { file: "src/memory/gks.ts", fn: searchBySymbol }
   - { file: "src/memory/index.ts", fn: lookupBySymbol }
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Reverse citation lookup

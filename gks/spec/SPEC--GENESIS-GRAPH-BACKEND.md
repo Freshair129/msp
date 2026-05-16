@@ -15,6 +15,10 @@ tags:
   - storage
 crosslinks: {"references":["CONCEPT--GENESIS-GRAPH-BACKEND","ADR--SYMBOL-GRAPH-PROCESSING-STAGES"]}
 created_at: 2026-05-13T12:00:00.000+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
 ---
 
 # SPEC — Genesis Graph Backend

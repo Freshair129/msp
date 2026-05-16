@@ -27,6 +27,7 @@ import { access, readFile, rename, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
 import { appendRegistry } from './registry.js'
+import { buildAliases } from '../validator/utils/registry.js'
 
 export interface ApplyResult {
   readonly master_id: string
@@ -157,6 +158,32 @@ function stampFrontmatter(frontmatter: string, promotedAt: string): string {
     updated = updated.replace(/^tier:.*$/m, 'tier: master')
   } else {
     updated = insertBeforeClosingDelim(updated, 'tier: master')
+  }
+
+  // Inject or overwrite `aliases:`.
+  const idMatch = updated.match(/^id:\s*(MASTER--[A-Z0-9][A-Z0-9_-]*)\s*$/m)
+  if (idMatch) {
+    const masterId = idMatch[1]!
+    
+    // Extract existing aliases from updated frontmatter if present
+    const aliasesMatch = updated.match(/^aliases:\r?\n((?:\s+-\s+.*\r?\n?)*)/m)
+    let existing: string[] = []
+    if (aliasesMatch) {
+      existing = aliasesMatch[1]!
+        .split('\n')
+        .map(x => x.replace(/^\s*-\s*/, '').trim())
+        .filter(x => x.length > 0)
+    }
+
+    const aliases = buildAliases(masterId, existing, process.cwd())
+    const newAliasesBlock = `aliases:\n${aliases.map(a => `  - ${a}`).join('\n')}`
+    
+    const aliasesRegex = /^aliases:(?:\r?\n(?:\s+-\s+.*)*)?/m
+    if (/^aliases:/m.test(updated)) {
+      updated = updated.replace(aliasesRegex, newAliasesBlock)
+    } else {
+      updated = insertBeforeClosingDelim(updated, newAliasesBlock)
+    }
   }
 
   return updated

@@ -14,6 +14,10 @@ tags:
   - slm
 crosslinks: {"references":["CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
 created_at: 2026-05-03T14:08:42.151+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — codegen forbidden imports + patterns

@@ -14,6 +14,10 @@ tags:
   - graph-processing
 crosslinks: {"references":["CONCEPT--SYMBOL-GRAPH-PIPELINE","FRAMEWORK--SYMBOL-GRAPH"]}
 created_at: 2026-05-13T19:46:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Symbol Graph Processing Stages

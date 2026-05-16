@@ -11,6 +11,10 @@ tags:
   - msp
 crosslinks: {}
 created_at: 2026-05-17T04:07:41.308+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
 ---
 
 # SPEC — Atom Registry Schema
@@ -29,6 +33,7 @@ The YAML structure contract for the registry is defined as follows:
       - `tier`: Governance tier (`process`, `master`, `safety`).
       - `folder`: The lowercase folder name under `gks/`.
       - `sections`: An array of section headers required for this atom type.
+      - `db_id` (optional): The database identifier field name used for Supabase integration (e.g. `atomId`, `reqId`).
       - `description` (optional): Extended semantics.
       - `lifecycle` (optional): Intended longevity.
 

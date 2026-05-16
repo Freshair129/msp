@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/src/validator/rules/required-fields.ts"}
   - {"file":"packages/msp/src/validator/types.ts"}
 created_at: 2026-05-03T17:58:58.818+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — required_fields contract loader

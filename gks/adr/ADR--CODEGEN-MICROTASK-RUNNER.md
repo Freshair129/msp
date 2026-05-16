@@ -15,6 +15,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--CODEGEN-MICROTASK-RUNNER","ADR--CODEGEN-RETRY-POLICY","ADR--CODEGEN-FORBIDDEN-PATTERNS","ADR--CODEGEN-POST-PROCESSING"]}
 created_at: 2026-05-03T14:16:36.663+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — codegen runner shape

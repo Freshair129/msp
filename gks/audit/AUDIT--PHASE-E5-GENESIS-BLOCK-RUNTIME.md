@@ -13,6 +13,8 @@ tags:
   - runtime
   - audit
   - phase-e5
+  - anti-hallucination
+  - cognitive
 crosslinks:
   references:
     - CONCEPT--GENESIS-BLOCK-RUNTIME
@@ -20,12 +22,16 @@ crosslinks:
     - SPEC--GENESIS-BLOCK-MANIFEST
     - BLUEPRINT--AGENT-DISPATCHER
 linked_symbols:
-  - {"file":"packages/msp/src/genesis/types.ts"}
-  - {"file":"packages/msp/src/genesis/loader.ts"}
-  - {"file":"packages/msp/src/genesis/composer.ts"}
-  - {"file":"packages/msp/src/genesis/executor.ts"}
-  - {"file":"packages/msp/src/genesis/cli.ts"}
+  - file: packages/msp/src/genesis/types.ts
+  - file: packages/msp/src/genesis/loader.ts
+  - file: packages/msp/src/genesis/composer.ts
+  - file: packages/msp/src/genesis/executor.ts
+  - file: packages/msp/src/genesis/cli.ts
 created_at: 2026-05-14T03:40:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Phase E5 Genesis Block Runtime

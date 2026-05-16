@@ -22,6 +22,10 @@ linked_symbols:
   - { file: "packages/gks/src/memory/graph/genesis-graph-errors.ts" }
   - { file: "packages/gks/src/memory/index.ts" }
 created_at: 2026-05-12T22:49:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Genesis Block Phase 0 (TS-first)

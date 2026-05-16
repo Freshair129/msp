@@ -12,6 +12,10 @@ linked_symbols:
   - {"file":"packages/msp/src/validator/proto/types.ts"}
   - {"file":"packages/msp/src/validator/proto/loader.ts"}
 created_at: 2026-05-16T01:00:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Predicate Context Extension for Symbol Graph

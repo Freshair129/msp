@@ -66,4 +66,64 @@ describe('requiredFields', () => {
     const errs = requiredFields(atom({}), ctx(cfg))
     for (const e of errs) expect(e.rule).toBe('required-fields')
   })
+
+  describe('aliases validation', () => {
+    const aliasCfg: RequiredFieldsConfig = {
+      default: ['aliases'],
+      byType: new Map([
+        ['concept', ['aliases']],
+      ]),
+    }
+
+    it('passes when aliases is present, is a non-empty array of strings, and primary matches type prefix, cluster, and role', () => {
+      expect(
+        requiredFields(
+          atom({ id: 'CONCEPT--FOO', aliases: ['CONCEPT', 'implementation_flow', 'Strategic intent / PRD', 'custom'] }),
+          ctx(aliasCfg),
+        ),
+      ).toEqual([])
+    })
+
+    it('flags missing aliases', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO' }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.offending).toBe('aliases')
+    })
+
+    it('flags aliases that is not an array', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO', aliases: 'not-an-array' }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain('must be a non-empty string array')
+    })
+
+    it('flags empty aliases array', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO', aliases: [] }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain("missing required field 'aliases'")
+    })
+
+    it('flags aliases array where first item is not string', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO', aliases: [123] }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain('must be a non-empty string array')
+    })
+
+    it('flags aliases array where primary alias does not match ID type prefix', () => {
+      const errs = requiredFields(
+        atom({ id: 'CONCEPT--FOO', aliases: ['FEAT', 'implementation_flow', 'Strategic intent / PRD'] }),
+        ctx(aliasCfg),
+      )
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain("alias at index 0 must match the expected 'CONCEPT'")
+    })
+
+    it('checks proposed_id prefix if id is not present (for candidates)', () => {
+      expect(
+        requiredFields(
+          atom({ proposed_id: 'CONCEPT--FOO', aliases: ['CONCEPT', 'implementation_flow', 'Strategic intent / PRD'] }),
+          ctx(aliasCfg),
+        ),
+      ).toEqual([])
+    })
+  })
 })

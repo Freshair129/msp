@@ -17,6 +17,10 @@ tags:
   - decision
 crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","BLUEPRINT--CONTRADICTION-DETECTION-IMPL","MASTER--ATOM-CONTRADICTION-POLICY","ADR--CONTRADICTION-DETECTION-STACK","CONCEPT--ATOM-CONTRADICTION-DETECTION"]}
 created_at: 2026-05-09T15:03:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — promote contradiction policy to Master

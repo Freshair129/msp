@@ -9,6 +9,10 @@ created_at: 2026-05-14T11:00:00+07:00
 tags: [validator, proto, trace-invariants]
 crosslinks:
   references: [PROTO--SYMBOLS-TRACE-INVARIANTS, BLUEPRINT--PROTO-LOADER]
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Trace Invariants Atom-Graph Rules

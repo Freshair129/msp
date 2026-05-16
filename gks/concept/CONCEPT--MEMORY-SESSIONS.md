@@ -14,6 +14,10 @@ tags:
   - jsonl
 crosslinks: {"references":["CONCEPT--MEMORY-SUBSYSTEM"]}
 created_at: 2026-05-03T14:01:53.330+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — memory sessions

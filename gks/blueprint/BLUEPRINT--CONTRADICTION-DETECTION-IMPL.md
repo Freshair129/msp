@@ -29,6 +29,10 @@ linked_symbols:
   - {"file":"scripts/msp/contradiction-judge.mjs"}
   - {"file":".github/contradiction-detection.yml"}
 created_at: 2026-05-08T17:34:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — contradiction detection implementation

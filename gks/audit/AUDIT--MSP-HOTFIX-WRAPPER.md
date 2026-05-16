@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"package.json"}
   - {"file":"packages/msp/src/validator/rules/id-format.ts"}
 created_at: 2026-05-03T18:01:45.299+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — hotfix wrapper (M5b)

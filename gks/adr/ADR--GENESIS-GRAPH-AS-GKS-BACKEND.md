@@ -19,6 +19,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--GENESIS-GRAPH-BACKEND","FRAMEWORK--MSP-ARCHITECTURE-V2","PROTOCOL--GENESIS-GRAPH-FFI"]}
 created_at: 2026-05-12T11:57:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Genesis Graph Backend as a GKS backend

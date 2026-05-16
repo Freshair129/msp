@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/src/validator/rules/summary-min.ts"}
   - {"file":"packages/msp/src/validator/rules/phase-status.ts"}
 created_at: 2026-05-03T13:34:05.276+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — MSP validator M2 acceptance

@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"scripts/msp/propose.mjs"}
   - {"file":"packages/msp/src/memory/backlinks/"}
 created_at: 2026-05-08T13:22:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — monorepo migration

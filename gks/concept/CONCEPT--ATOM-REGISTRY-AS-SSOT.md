@@ -11,6 +11,10 @@ tags:
   - msp
 crosslinks: {}
 created_at: 2026-05-17T04:07:38.843+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Atom Registry as Single Source of Truth

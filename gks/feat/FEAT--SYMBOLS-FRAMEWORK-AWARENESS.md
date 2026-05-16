@@ -23,6 +23,10 @@ linked_symbols:
   - {"file":"packages/msp/src/symbols/parser/framework.ts"}
   - {"file":"packages/msp/src/symbols/parser/orm.ts"}
 created_at: 2026-05-12T04:48:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Framework-aware symbol indexing

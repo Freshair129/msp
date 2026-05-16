@@ -14,6 +14,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--MSP-PREPUSH-HOOK","FEAT--MSP-VALIDATOR","ADR--MSP-PRECOMMIT-HOOK"]}
 created_at: 2026-05-03T17:39:27.995+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — pre-push hook scope

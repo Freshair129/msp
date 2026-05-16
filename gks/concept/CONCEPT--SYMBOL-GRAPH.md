@@ -14,6 +14,10 @@ tags:
   - prior-art
 crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-09T16:31:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Symbol Graph

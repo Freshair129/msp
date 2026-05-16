@@ -15,6 +15,10 @@ tags:
   - foundation
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-03T14:01:48.299+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — phase governance

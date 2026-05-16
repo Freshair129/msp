@@ -17,6 +17,10 @@ tags:
   - phase-f1
 crosslinks: {"references":["CONCEPT--MASTER-PROMOTION","SPEC--GENESIS-BLOCK-MANIFEST","CONCEPT--GENESIS-BLOCK-RUNTIME","FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","ADR--HUMAN-REVIEW-GATES"]}
 created_at: 2026-05-14T05:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Promoted-Block Registry

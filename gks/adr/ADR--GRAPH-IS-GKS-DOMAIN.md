@@ -15,6 +15,10 @@ tags:
   - governance
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--CROSSLINKS-VOCABULARY","ADR--ANTI-HALLUCINATION-RULES","CONCEPT--GENESIS-GRAPH-BACKEND"]}
 created_at: 2026-05-04T09:02:48.270+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — atomic graph is GKS domain

@@ -20,6 +20,10 @@ crosslinks:
     - CONCEPT--PROTO-PATTERN
     - ADR--MONOREPO-STRUCTURE
 created_at: 2026-05-14T19:10:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — PROTO linked_symbols path drift

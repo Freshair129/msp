@@ -13,11 +13,22 @@ tags:
   - cli
   - feat
   - bin
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
+crosslinks:
+  implements:
+    - ADR--SYMBOL-GRAPH-PERSISTENCE
+    - ADR--LEIDEN-COMMUNITY-DETECTION
+  references:
+    - FRAMEWORK--SYMBOL-GRAPH
+    - CONCEPT--PARSER-CHOICE
 linked_symbols:
-  - {"file":"packages/msp/src/symbols/cli.ts"}
-  - {"file":"package.json"}
+  - file: packages/msp/src/symbols/cli.ts
+  - file: package.json
 created_at: 2026-05-09T16:53:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
+  - Feature
 ---
 
 # FEAT — msp:graph CLI

@@ -16,6 +16,10 @@ tags:
   - boundary
 crosslinks: {"references":["ADR--AGENT-WRITE-BOUNDARIES","ADR--MSP-INTERFACE-LAYER","ADR--MSP-MCP-SERVER","ADR--GEMINI-AS-SLM-PROVIDER"]}
 created_at: 2026-05-17T00:00:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — msp-candidate CLI (non-MCP agent path)

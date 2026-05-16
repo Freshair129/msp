@@ -7,6 +7,10 @@ status: draft
 tier: genesis
 created_at: 2026-05-13T23:43:00.000+07:00
 owner: Genesis Architect (Antigravity)
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 # FEAT — Meta Learning Loop (MLL)
 **Reference:** `d:\The Human Algorithm\T2\meta_learning_loop_technical_manual.md`

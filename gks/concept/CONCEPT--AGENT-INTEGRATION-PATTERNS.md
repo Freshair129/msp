@@ -15,6 +15,10 @@ tags:
   - patterns
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--NAMED-PROJECT-REGISTRY","ADR--GLOBAL-VS-WORKSPACE"]}
 created_at: 2026-05-10T07:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Agent integration patterns

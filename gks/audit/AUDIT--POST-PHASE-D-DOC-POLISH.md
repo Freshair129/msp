@@ -15,6 +15,10 @@ tags:
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--AGENT-INTEGRATION-PATTERNS","ADR--GLOBAL-VS-WORKSPACE","AUDIT--ARCH-DOC-CLEANUP","AUDIT--PHASE-B-IMPL-COMPLETE","AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS"]}
 linked_symbols: []
 created_at: 2026-05-10T07:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Post-Phase-D doc polish

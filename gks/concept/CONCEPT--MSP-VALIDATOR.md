@@ -15,6 +15,10 @@ tags:
   - anti-hallucination
 crosslinks: {"references":[]}
 created_at: 2026-05-03T13:24:23.832+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — MSP validator pipeline

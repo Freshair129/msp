@@ -16,6 +16,10 @@ tags:
   - obsidian
 crosslinks: {"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","ADR--EMBEDDING-MODEL-PARITY","ADR--GRAPH-IS-GKS-DOMAIN"]}
 created_at: 2026-05-03T23:55:05.902+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — embedding strategy

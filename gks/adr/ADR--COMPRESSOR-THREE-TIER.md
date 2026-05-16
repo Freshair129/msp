@@ -16,6 +16,10 @@ tags:
   - m7d
 crosslinks: {"references":["CONCEPT--CONTEXT-COMPRESSION","ADR--CONSOLIDATOR-HYBRID-SCORING"]}
 created_at: 2026-05-05T16:10:30.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — compressor three-tier strategy

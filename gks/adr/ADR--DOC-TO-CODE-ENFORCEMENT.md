@@ -23,6 +23,10 @@ linked_symbols:
   - { file: "bin/gks.ts", fn: cmdValidate }
   - { file: "bin/gks.ts", fn: cmdNewFeature }
   - { file: "bin/gks.ts", fn: cmdHotfix }
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Doc-to-code enforcement model

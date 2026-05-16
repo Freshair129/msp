@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/test/master/trigger-eval.test.ts"}
   - {"file":"packages/msp/test/master/compose-cli.test.ts"}
 created_at: 2026-05-17T02:50:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — msp master compose CLI loader

@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/test/mcp/server.test.ts"}
   - {"file":"packages/msp/test/mcp/bin.test.ts"}
 created_at: 2026-05-05T16:35:30.812+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M7f — MCP tool expansion (4 of 5 passport tools shipped; msp_compress deferred)

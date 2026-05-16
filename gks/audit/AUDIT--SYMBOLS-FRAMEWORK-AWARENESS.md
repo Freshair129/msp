@@ -16,6 +16,10 @@ tags:
   - fastapi
 crosslinks: {"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","ADR--SYMBOLS-FRAMEWORK-AWARENESS","ALGO--SYMBOLS-FRAMEWORK-RECOGNITION","PROTO--SYMBOLS-FRAMEWORK-INVARIANTS"]}
 created_at: 2026-05-12T22:30:00.000+08:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Framework-awareness recognizers

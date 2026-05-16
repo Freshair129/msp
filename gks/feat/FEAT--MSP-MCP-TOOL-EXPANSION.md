@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/mcp/tools/identity-get.ts"}
   - {"file":"packages/msp/src/mcp/tools/identity-set.ts"}
 created_at: 2026-05-05T16:15:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # MSP MCP tools — passport-side surface (M7f)

@@ -17,6 +17,10 @@ crosslinks:
     - CONCEPT--AGENT-TIER-ROUTING
     - CONCEPT--TWO-BRAIN-ARCHITECTURE
 created_at: 2026-05-14T03:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Phase D Agentic Runtime — implementation complete

@@ -15,6 +15,10 @@ tags:
   - reconciliation
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--KNOWLEDGE-3-TIER","ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-09T16:30:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — CORE_FRAMEWORK reconciliation v1

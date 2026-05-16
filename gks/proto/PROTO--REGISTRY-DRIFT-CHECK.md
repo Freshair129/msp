@@ -11,6 +11,10 @@ tags:
   - msp
 crosslinks: {}
 created_at: 2026-05-17T04:07:44.976+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — Registry Drift Check

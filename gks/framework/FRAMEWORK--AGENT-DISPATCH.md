@@ -23,6 +23,10 @@ crosslinks:
     - ADR--AGENT-TIER-COST-POLICY
     - BLUEPRINT--AGENT-DISPATCHER
 created_at: 2026-05-14T03:05:00.000+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAMEWORK — Agent Dispatch

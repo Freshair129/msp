@@ -15,6 +15,10 @@ linked_symbols:
   - {file: "scripts/msp/codegen-schemas.ts"}
   - {file: "packages/msp/src/validator/rules/registry-drift.ts"}
 created_at: 2026-05-17T04:07:42.521+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Registry-Driven Atom CLI

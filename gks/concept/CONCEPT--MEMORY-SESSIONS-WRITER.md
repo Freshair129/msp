@@ -14,6 +14,10 @@ tags:
   - writer
 crosslinks: {"references":["CONCEPT--MEMORY-SESSIONS","CONCEPT--MEMORY-SUBSYSTEM"]}
 created_at: 2026-05-03T14:16:38.088+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — memory sessions writer

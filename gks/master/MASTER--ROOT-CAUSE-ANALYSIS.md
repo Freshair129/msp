@@ -25,6 +25,10 @@ tags:
   - instinct
 crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","CONCEPT--ROOT-CAUSE-ANALYSIS","ADR--MASTER-PROMOTION-ROOT-CAUSE-ANALYSIS"]}
 created_at: 2026-05-17T02:10:00.000+07:00
+aliases:
+  - MASTER
+  - implementation_flow
+  - Root-level policy / genesis rule
 ---
 
 # MASTER — Root Cause Analysis

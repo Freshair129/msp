@@ -15,6 +15,10 @@ tags:
   - projects
 crosslinks: {"references":["ADR--GLOBAL-VS-WORKSPACE","ALGO--IDENTITY-RESOLUTION"]}
 created_at: 2026-05-14T20:10:00+07:00
+aliases:
+  - RUNBOOK
+  - ops
+  - Operational response guide
 ---
 
 # RUNBOOK — Identity Migration

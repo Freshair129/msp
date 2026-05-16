@@ -20,6 +20,10 @@ linked_symbols:
   - {"file":"packages/msp/src/validator/proto/types.ts"}
   - {"file":"packages/msp/src/validator/proto/sample.ts"}
 created_at: 2026-05-05T16:18:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — PROTO loader

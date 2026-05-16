@@ -15,6 +15,10 @@ tags:
   - technical
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-14T20:20:00+07:00
+aliases:
+  - STACK
+  - implementation_flow
+  - Technology stack inventory
 ---
 
 # STACK — MSP Node.js Runtime

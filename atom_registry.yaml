@@ -11,6 +11,7 @@ taxonomy:
           role: "Raw prompt / spark"
           tier: "process"
           folder: "idea"
+          db_id: "atomId"
           sections: ["Spark", "Source"]
           lifecycle: "Short-lived; promoted into CONCEPT-- within days."
         CONCEPT:
@@ -18,6 +19,7 @@ taxonomy:
           role: "Strategic intent / PRD"
           tier: "process"
           folder: "concept"
+          db_id: "atomId"
           sections: ["Problem", "Hypothesis", "Scope", "Out of scope", "Verification", "Source"]
           description: "Human-readable requirement / vision."
         ADR:
@@ -25,6 +27,7 @@ taxonomy:
           role: "Architecture decision record"
           tier: "process"
           folder: "adr"
+          db_id: "atomId"
           sections: ["Context", "Decision", "Consequences", "Alternatives considered", "Source"]
           description: "Load-bearing technical or organisational decisions."
         MOD:
@@ -32,6 +35,7 @@ taxonomy:
           role: "Module manifest"
           tier: "process"
           folder: "mod"
+          db_id: "atomId"
           sections: ["Module boundary", "Public API", "Dependencies", "Source"]
           description: "Declares a module's scope, public API, and ownership boundary."
         FEAT:
@@ -39,6 +43,7 @@ taxonomy:
           role: "Feature spec"
           tier: "process"
           folder: "feat"
+          db_id: "atomId"
           sections: ["User-facing behaviour", "Verification", "Out of scope", "Source"]
           description: "User-facing system behaviour."
         ALGO:
@@ -46,6 +51,7 @@ taxonomy:
           role: "Algorithm definition"
           tier: "process"
           folder: "algo"
+          db_id: "atomId"
           sections: ["Inputs", "Algorithm", "Complexity", "Edge cases", "Source"]
           description: "Computational steps, scoring formulas, ranking logic."
         FLOW:
@@ -53,42 +59,49 @@ taxonomy:
           role: "Data / UI flow"
           tier: "process"
           folder: "flow"
+          db_id: "atomId"
           sections: ["Flow Diagram", "Sequence", "Source"]
         ENTITY:
           phase: 2
           role: "Data schema"
           tier: "process"
           folder: "entity"
+          db_id: "atomId"
           sections: ["Schema definition", "Relations", "Source"]
         API:
           phase: 2
           role: "OpenAPI master hub"
           tier: "process"
           folder: "api"
+          db_id: "atomId"
           sections: ["API Overview", "Base URL", "Authentication", "Source"]
         ENDPOINT:
           phase: 2
           role: "One API path / method"
           tier: "process"
           folder: "endpoint"
+          db_id: "atomId"
           sections: ["Contract", "Request", "Response", "Errors", "Source"]
         ENTRYPOINT:
           phase: 2
           role: "Auth / middleware / access logic"
           tier: "process"
           folder: "entrypoint"
+          db_id: "atomId"
           sections: ["Access Logic", "Middleware", "Source"]
         PARAMS:
           phase: 2
           role: "Constants / business config"
           tier: "process"
           folder: "params"
+          db_id: "atomId"
           sections: ["Configuration", "Thresholds", "Source"]
         GENESIS:
           phase: 0
           role: "Block Manifest (v2.3+)"
           tier: "master"
           folder: "genesis"
+          db_id: "atomId"
           sections: ["Manifest Members", "DACI", "Source"]
           description: "Runtime entry-point of a Genesis Block."
         FRAMEWORK:
@@ -96,6 +109,7 @@ taxonomy:
           role: "Governance / architectural framework"
           tier: "master"
           folder: "framework"
+          db_id: "atomId"
           sections: ["Pattern", "When to apply", "Governance", "Source"]
           description: "Architectural patterns, governance frameworks."
         STACK:
@@ -103,48 +117,56 @@ taxonomy:
           role: "Technology stack inventory"
           tier: "process"
           folder: "stack"
+          db_id: "atomId"
           sections: ["Inventory", "Versions", "Rationale", "Source"]
         SPEC:
           phase: 2
           role: "Technical specification"
           tier: "process"
           folder: "spec"
+          db_id: "atomId"
           sections: ["Data Shape", "Wire Format", "Source"]
         COGNITIVE:
           phase: 1
           role: "Mental model / interpretive lens"
           tier: "process"
           folder: "cognitive"
+          db_id: "atomId"
           sections: ["Mental Model", "Interpretive Lens", "When to apply", "Source"]
         SAFETY:
           phase: 0
           role: "Ethical safety / AI alignment"
           tier: "safety"
           folder: "safety"
+          db_id: "atomId"
           sections: ["Alignment Rule", "Ethical Guardrail", "Enforcement", "Source"]
         MASTER:
           phase: 0
           role: "Root-level policy / genesis rule"
           tier: "master"
           folder: "master"
+          db_id: "atomId"
           sections: ["Policy", "Scope", "Enforcement", "Source"]
         PROTO:
           phase: 2
           role: "Machine-enforced invariant"
           tier: "safety"
           folder: "proto"
+          db_id: "atomId"
           sections: ["Rule", "Severity", "Enforcement", "Counter-example", "Source"]
         BLUEPRINT:
           phase: 3
           role: "Implementation plan"
           tier: "process"
           folder: "blueprint"
+          db_id: "atomId"
           sections: ["Geography", "Acceptance", "Dependencies", "Tasks", "Source"]
         AUDIT:
           phase: 6
           role: "Test results / quality report"
           tier: "process"
           folder: "audit"
+          db_id: "atomId"
           sections: ["Scope verified", "Test results", "Deviations", "Anti-hallucination check", "Follow-ups", "Source"]
 
     agent_governance:
@@ -155,54 +177,63 @@ taxonomy:
           role: "Large reasoning engine"
           tier: "process"
           folder: "llm"
+          db_id: "llmId"
           sections: ["Model Config", "System Prompt", "Source"]
         SLM:
           phase: 5
           role: "Small execution engine"
           tier: "process"
           folder: "slm"
+          db_id: "slmId"
           sections: ["Specialized Config", "Task Scope", "Source"]
         MCP:
           phase: 2
           role: "Model Context Protocol tool"
           tier: "process"
           folder: "mcp"
+          db_id: "mcpId"
           sections: ["Tool Definition", "JSON-RPC Contract", "Source"]
         CMD:
           phase: 2
           role: "Executable system command"
           tier: "process"
           folder: "cmd"
+          db_id: "cmdId"
           sections: ["Command usage", "Flags", "Source"]
         SKILL:
           phase: 2
           role: "Agent capability"
           tier: "process"
           folder: "skill"
+          db_id: "skillId"
           sections: ["Capability", "Trigger", "Source"]
         PROTOCOL:
           phase: 2
           role: "Interaction contract"
           tier: "process"
           folder: "protocol"
+          db_id: "protocolId"
           sections: ["Interaction surface", "Message shape", "Error semantics", "Source"]
         GUARD:
           phase: 2
           role: "Structural / behavioural guardrail"
           tier: "safety"
           folder: "guard"
+          db_id: "guardId"
           sections: ["Constraint", "Enforcement", "Source"]
         POLICY:
           phase: 2
           role: "Operational policy"
           tier: "process"
           folder: "policy"
+          db_id: "policyId"
           sections: ["Policy definition", "Access/Retention", "Source"]
         PERSONA:
           phase: 2
           role: "Agent identity"
           tier: "process"
           folder: "persona"
+          db_id: "personaId"
           sections: ["Role", "Voice", "System Prompt Seed", "Source"]
 
     requirements:
@@ -213,24 +244,28 @@ taxonomy:
           role: "Umbrella requirement"
           tier: "process"
           folder: "req"
+          db_id: "reqId"
           sections: ["Goal", "Scope", "Source"]
         FR:
           phase: 1
           role: "Functional requirement"
           tier: "process"
           folder: "fr"
+          db_id: "frId"
           sections: ["Requirement", "Verification", "Source"]
         NFR:
           phase: 1
           role: "Non-functional requirement"
           tier: "process"
           folder: "nfr"
+          db_id: "nfrId"
           sections: ["Quality attribute", "Verification", "Source"]
         CONSTRAINT:
           phase: 1
           role: "Hard external constraint"
           tier: "process"
           folder: "constraint"
+          db_id: "constId"
           sections: ["Constraint", "Compliance", "Source"]
 
     ops:
@@ -241,36 +276,42 @@ taxonomy:
           role: "Incident post-mortem"
           tier: "process"
           folder: "inc"
+          db_id: "incId"
           sections: ["Lessons learned", "Triage summary", "Source"]
         HOTFIX:
           phase: 5
           role: "Hotfix escape-hatch atom"
           tier: "process"
           folder: "hotfix"
+          db_id: "hotfixId"
           sections: ["Fix description", "Valid until", "Commit SHA", "Source"]
         ISSUE:
           phase: 6
           role: "Live issue tracker"
           tier: "process"
           folder: "issues"
+          db_id: "issueId"
           sections: ["Description", "Reproduction", "Discussion", "Resolution", "Source"]
         RISK:
           phase: 1
           role: "Identified risk + mitigation"
           tier: "process"
           folder: "risk"
+          db_id: "riskId"
           sections: ["Risk", "Mitigation", "Source"]
         RUNBOOK:
           phase: 6
           role: "Operational response guide"
           tier: "process"
           folder: "runbook"
+          db_id: "runbookId"
           sections: ["Trigger", "Response steps", "Source"]
         SLO:
           phase: 1
           role: "Service-level objective"
           tier: "process"
           folder: "slo"
+          db_id: "sloId"
           sections: ["Objective", "Alert thresholds", "Source"]
 
     memory:
@@ -281,30 +322,35 @@ taxonomy:
           role: "Session-derived observation"
           tier: "process"
           folder: "usage"
+          db_id: "insightId"
           sections: ["Observation", "Source"]
         FACT:
           phase: 1
           role: "Retain-derived fact"
           tier: "process"
           folder: "usage"
+          db_id: "factId"
           sections: ["Fact", "Source"]
         RULE:
           phase: 1
           role: "Derived behavioural rule"
           tier: "process"
           folder: "usage"
+          db_id: "ruleId"
           sections: ["Rule", "Pattern", "Source"]
         USAGE:
           phase: 6
           role: "Usage metrics rollup"
           tier: "process"
           folder: "usage"
+          db_id: "usageId"
           sections: ["Metrics", "Source"]
         EPISODE:
           phase: 6
           role: "Execution episode log"
           tier: "process"
           folder: "episode"
+          db_id: "episodeId"
           sections: ["Summary", "Source"]
 
 process_tracking:

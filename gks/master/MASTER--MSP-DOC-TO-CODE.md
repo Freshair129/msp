@@ -25,6 +25,10 @@ tags:
   - instinct
 crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-DOC-TO-CODE","CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
 created_at: 2026-05-09T15:00:30.000+07:00
+aliases:
+  - MASTER
+  - implementation_flow
+  - Root-level policy / genesis rule
 ---
 
 # MASTER — Doc-to-code (atoms before code, every milestone)

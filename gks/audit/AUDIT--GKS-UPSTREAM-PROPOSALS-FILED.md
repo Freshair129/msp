@@ -16,6 +16,10 @@ tags:
 crosslinks: {"references":["AUDIT--TWO-REPO-VALIDATION","ADR--EMBEDDING-MODEL-PARITY"]}
 linked_symbols: []
 created_at: 2026-05-07T03:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — GKS upstream proposals filed

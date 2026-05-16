@@ -15,6 +15,10 @@ tags:
   - cherry-pick
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--CONSOLIDATOR"]}
 created_at: 2026-05-09T07:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — `msp_observe` hot-path extraction

@@ -26,6 +26,10 @@ linked_symbols:
   - {"file":"packages/msp/test/orchestrator/compressor/resummarise.test.ts"}
   - {"file":"packages/msp/test/orchestrator/compressor/index.test.ts"}
 created_at: 2026-05-05T16:11:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — compressor implementation plan

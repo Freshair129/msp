@@ -26,6 +26,10 @@ linked_symbols:
   - {"file":"gks/blueprint/BLUEPRINT--ATOM-CREATOR-SKILL.md"}
   - {"file":"gks/adr/ADR--MSP-CANDIDATE-CLI.md"}
 created_at: 2026-05-17T03:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 ## Scope

@@ -33,6 +33,10 @@ linked_symbols:
   - {"file":"packages/msp/test/projects/registry.test.ts"}
   - {"file":"packages/msp/test/projects/resolve.test.ts"}
 created_at: 2026-05-09T07:00:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — global vs workspace storage migration

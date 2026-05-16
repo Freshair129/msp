@@ -16,6 +16,10 @@ tags:
   - inbound-removal
 crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","FRAMEWORK--MSP-ARCHITECTURE-V2","ADR--HUMAN-REVIEW-GATES"],"supersedes":["ADR--PROMOTION-WORKFLOW","ADR--PROMOTION-LEVELS"]}
 created_at: 2026-05-08T17:01:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — agent write boundaries

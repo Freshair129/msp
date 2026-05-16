@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/mcp/tools/episode-append.ts"}
   - {"file":"packages/msp/src/mcp/tools/backlinks-rebuild.ts"}
 created_at: 2026-05-03T18:13:54.737+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — msp-mcp-server

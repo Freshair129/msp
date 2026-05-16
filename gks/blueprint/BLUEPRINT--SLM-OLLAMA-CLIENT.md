@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/slm/types.ts"}
   - {"file":"packages/msp/src/codegen/slm/errors.ts"}
 created_at: 2026-05-03T16:22:31.964+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Ollama SLM client

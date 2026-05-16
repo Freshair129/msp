@@ -14,6 +14,10 @@ tags:
   - validator
 crosslinks: {"references":["ADR--ANTI-HALLUCINATION-RULES","ADR--FORBIDDEN-FIELDS-LIST","CONCEPT--MSP-VALIDATOR"]}
 created_at: 2026-05-03T14:08:43.977+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — legacy files allowance

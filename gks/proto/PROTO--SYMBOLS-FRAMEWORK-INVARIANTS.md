@@ -17,6 +17,10 @@ tags:
 crosslinks: {"implements":["ADR--SYMBOLS-FRAMEWORK-AWARENESS"],"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","ALGO--SYMBOLS-FRAMEWORK-RECOGNITION"]}
 linked_symbols: [{"file":"packages/msp/src/validator/proto/framework-invariants.ts"}]
 created_at: 2026-05-12T12:38:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — Framework-aware symbol invariants

@@ -17,6 +17,10 @@ tags:
   - mcp
 crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
 created_at: 2026-05-12T05:35:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Framework-aware symbol indexing

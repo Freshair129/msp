@@ -17,6 +17,10 @@ tags:
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--OBSIDIAN-AS-RUNTIME","CONCEPT--EMBEDDING-STRATEGY","ADR--MSP-OBSIDIAN-INTEGRATION","ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS"]}
 linked_symbols: []
 created_at: 2026-05-03T23:55:51.476+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — M7-prep architecture v2

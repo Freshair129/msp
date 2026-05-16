@@ -24,6 +24,10 @@ linked_symbols:
   - {"file":"packages/msp/src/orchestrator/retrieval/sources/episodic.ts"}
   - {"file":"packages/msp/src/orchestrator/retrieval/sources/backlinks.ts"}
 created_at: 2026-05-05T15:56:30.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — retrieval orchestration implementation plan

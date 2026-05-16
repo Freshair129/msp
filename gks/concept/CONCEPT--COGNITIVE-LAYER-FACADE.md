@@ -15,6 +15,10 @@ tags:
   - agent-agnostic
 crosslinks: {"references":["CONCEPT--AGENT-AGNOSTIC","CONCEPT--AGENT-INTEGRATION-PATTERNS","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-12T22:45:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Cognitive Layer facade

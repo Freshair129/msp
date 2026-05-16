@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"packages/msp/src/cognitive/compose.ts"}
   - {"file":"packages/msp/src/cognitive/marker-constants.ts","symbol":"PROTO_AUTO_GENERATED_MARKER"}
 created_at: 2026-05-12T22:51:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — AUTO-GENERATED-MARKER

@@ -16,6 +16,10 @@ tags:
   - framework
 crosslinks: {"references":["AUDIT--ARCH-DOC-CLEANUP","FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--KNOWLEDGE-3-TIER","FRAMEWORK--PHASE-GOVERNANCE"]}
 created_at: 2026-05-11T17:26:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Broad FRAME-- definition upstreamed

@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/acceptance/sandbox.ts"}
   - {"file":"packages/msp/src/codegen/acceptance/types.ts"}
 created_at: 2026-05-03T16:27:18.409+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — vitest acceptance runner

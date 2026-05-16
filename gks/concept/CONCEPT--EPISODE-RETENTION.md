@@ -20,6 +20,10 @@ crosslinks:
     - ADR--EPISODE-GC-POLICY
     - ADR--BRAIN-PATH-RESOLUTION
 created_at: 2026-05-14T05:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Episode retention

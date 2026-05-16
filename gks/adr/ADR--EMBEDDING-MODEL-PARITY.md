@@ -16,6 +16,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--EMBEDDING-STRATEGY","ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS","CONCEPT--OBSIDIAN-AS-RUNTIME"]}
 created_at: 2026-05-04T09:02:48.728+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — embedding model parity

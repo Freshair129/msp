@@ -14,6 +14,10 @@ tags:
   - microtask
 crosslinks: {"references":["CONCEPT--CODEGEN-MICROTASK-CONTRACT","ADR--CODEGEN-RETRY-POLICY"]}
 created_at: 2026-05-03T14:16:36.203+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — codegen microtask runner

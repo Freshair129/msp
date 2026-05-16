@@ -13,6 +13,10 @@ crosslinks:
 linked_symbols:
   - { file: "scripts/msp/re-indexer.ts" }
   - { file: "src/memory/gks.ts", fn: readBody }
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Atom folders by type, not by phase

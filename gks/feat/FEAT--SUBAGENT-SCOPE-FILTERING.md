@@ -16,6 +16,10 @@ tags:
   - codegen
 crosslinks: {"references":["CONCEPT--SUBAGENT-CONTEXT-SCOPING","CONCEPT--ABAC-POLICY-ENGINE","ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT","CONCEPT--RESOLUTION-GRADIENT"]}
 created_at: 2026-05-14T19:42:03.565+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Subagent scope filtering

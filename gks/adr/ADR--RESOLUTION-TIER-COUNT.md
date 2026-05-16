@@ -15,6 +15,10 @@ tags:
   - retrieval
 crosslinks: {"references":["CONCEPT--RESOLUTION-GRADIENT","FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK"]}
 created_at: 2026-05-14T18:37:53.303+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Resolution tier count

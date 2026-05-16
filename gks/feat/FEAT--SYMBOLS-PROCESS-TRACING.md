@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"packages/msp/src/symbols/tracer.ts"}
   - {"file":"packages/msp/src/mcp/tools/symbol-trace.ts"}
 created_at: 2026-05-12T04:48:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — End-to-end process tracing

@@ -14,6 +14,10 @@ tags:
   - writer
 crosslinks: {"references":["CONCEPT--MEMORY-EPISODIC","CONCEPT--MEMORY-SESSIONS","FEAT--MEMORY-SESSIONS-WRITER"]}
 created_at: 2026-05-03T14:16:39.910+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — memory episodic writer

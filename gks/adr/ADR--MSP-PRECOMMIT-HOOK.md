@@ -15,6 +15,10 @@ tags:
   - bash
 crosslinks: {"references":["CONCEPT--MSP-PRECOMMIT-HOOK","FEAT--MSP-VALIDATOR"]}
 created_at: 2026-05-03T14:39:04.838+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — pre-commit hook implementation shape

@@ -16,6 +16,10 @@ crosslinks: {"references":["ADR--HUMAN-REVIEW-GATES","ADR--PATH-ENCODING","ADR--
 linked_symbols:
   - {"file":"msp_spec.md"}
 created_at: 2026-05-03T18:01:43.397+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — M5e

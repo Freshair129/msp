@@ -16,6 +16,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--EMBEDDING-STRATEGY","ADR--EMBEDDING-MODEL-PARITY","ADR--MSP-OBSIDIAN-INTEGRATION"]}
 created_at: 2026-05-03T23:55:06.784+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — semantic search topology

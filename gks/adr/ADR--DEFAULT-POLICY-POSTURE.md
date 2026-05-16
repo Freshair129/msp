@@ -16,6 +16,10 @@ tags:
   - rollout
 crosslinks: {"references":["CONCEPT--ABAC-POLICY-ENGINE","ADR--POLICY-AS-DATA-NOT-CODE","FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK"]}
 created_at: 2026-05-14T18:37:54.914+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Default policy posture

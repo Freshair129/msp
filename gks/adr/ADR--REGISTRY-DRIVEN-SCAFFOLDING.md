@@ -11,6 +11,10 @@ tags:
   - msp
 crosslinks: {"references":["CONCEPT--ATOM-REGISTRY-AS-SSOT"]}
 created_at: 2026-05-17T04:07:40.095+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Registry-Driven Scaffolding

@@ -29,6 +29,10 @@ linked_symbols:
   - {"file":"packages/msp/test/mcp/tools/identity-get.test.ts"}
   - {"file":"packages/msp/test/mcp/tools/identity-set.test.ts"}
 created_at: 2026-05-05T16:15:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — MSP MCP tool expansion

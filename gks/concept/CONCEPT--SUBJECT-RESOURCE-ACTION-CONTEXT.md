@@ -17,6 +17,10 @@ tags:
   - request-shape
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","CONCEPT--ATTRIBUTE-BAG-MODEL"]}
 created_at: 2026-05-13T08:59:38.431+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Subject / Resource / Action / Context

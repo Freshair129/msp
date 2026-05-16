@@ -14,6 +14,10 @@ tags:
   - foundation
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","ADR--AGENT-WRITE-BOUNDARIES","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-03T14:01:49.281+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — authority matrix

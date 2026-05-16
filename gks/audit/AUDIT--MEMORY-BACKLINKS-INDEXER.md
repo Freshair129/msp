@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/memory/backlinks/atomic-write.ts"}
   - {"file":"packages/msp/src/memory/backlinks/cli.ts"}
 created_at: 2026-05-03T15:43:37.417+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — memory backlinks indexer

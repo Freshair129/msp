@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/orchestrator/resolution/tier.ts"}
   - {"file":"packages/msp/src/orchestrator/resolution/budget.ts"}
 created_at: 2026-05-14T22:21:54.630+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Phase 3: vault composition + resolution gradient

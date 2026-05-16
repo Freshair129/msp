@@ -17,6 +17,10 @@ tags:
   - resolution
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT","CONCEPT--ATTRIBUTE-BAG-MODEL","CONCEPT--NAMESPACE-VAULT-BRAIN","CONCEPT--COGNITIVE-LAYER-FACADE","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-13T08:59:37.161+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — Universal Context Framework

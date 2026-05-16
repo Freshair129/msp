@@ -24,6 +24,10 @@ phase_override:
   skip_blueprint: true
   reason: "Incremental PROTO rule plugged into the already-blueprinted loader scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain: CONCEPT--DECISION-ATROPHY-GUARDS -> PROTO--VALID-UNTIL -> predicate -> this audit; per-rule predicates do not each warrant a separate phase-3 blueprint."
 created_at: 2026-05-05T18:11:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M9a — [[PROTO--VALID-UNTIL]] (draft)

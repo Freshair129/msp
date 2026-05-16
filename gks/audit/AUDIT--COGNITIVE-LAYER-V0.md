@@ -31,6 +31,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/runner.ts"}
   - {"file":"packages/msp/examples/cognitive-layer-quickstart.ts"}
 created_at: 2026-05-12T22:55:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Cognitive Layer V0

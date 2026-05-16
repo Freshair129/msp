@@ -19,6 +19,10 @@ crosslinks: {"enforces":["SPEC--GENESIS-BLOCK-MANIFEST"],"references":["SPEC--GE
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/genesis-block-membership.ts"}
 created_at: 2026-05-14T18:30:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — GENESIS-BLOCK-MEMBERSHIP

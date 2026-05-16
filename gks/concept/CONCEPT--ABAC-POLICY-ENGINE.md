@@ -19,6 +19,10 @@ tags:
   - policy
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT","CONCEPT--ATTRIBUTE-BAG-MODEL"]}
 created_at: 2026-05-13T17:22:01.640+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — ABAC policy engine

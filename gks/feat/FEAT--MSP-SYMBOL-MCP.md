@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/mcp/tools/symbol-search.ts"}
   - {"file":"packages/msp/src/mcp/server.ts"}
 created_at: 2026-05-09T16:52:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — msp_symbol_* MCP tool surface

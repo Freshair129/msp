@@ -14,6 +14,10 @@ tags:
   - decision
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--MEMORY-STORE"]}
 created_at: 2026-05-12T22:48:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — MemoryStore graphBackend wiring

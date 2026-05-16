@@ -21,6 +21,10 @@ phase_override:
   skip_blueprint: true
   reason: "The one touched file is a PROTO predicate on the already-blueprinted loader scaffold (BLUEPRINT--PROTO-LOADER); the decomposition work itself is governed by ADR--SYMBOLS-FRAMEWORK-AWARENESS + CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS."
 created_at: 2026-05-12T05:42:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — FEAT decomposition + validator hardening

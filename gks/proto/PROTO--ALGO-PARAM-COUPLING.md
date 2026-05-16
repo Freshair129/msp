@@ -20,6 +20,10 @@ crosslinks: {"enforces":["FRAMEWORK--CROSSLINKS-VOCABULARY"],"references":["CONC
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/algo-param-coupling.ts"}
 created_at: 2026-05-05T18:11:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — ALGO-PARAM-COUPLING

@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/orchestrator/consolidator/boundary.ts"}
   - {"file":"packages/msp/src/orchestrator/consolidator/summarise.ts"}
 created_at: 2026-05-04T17:06:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # Consolidator — session → episode hybrid-scored gate

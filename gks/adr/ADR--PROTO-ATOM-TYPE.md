@@ -15,6 +15,10 @@ tags:
   - m8a
 crosslinks: {"references":["CONCEPT--PROTO-PATTERN","CONCEPT--ATOMIC-WRITE-CONTRACT","ADR--FORBIDDEN-FIELDS-LIST"]}
 created_at: 2026-05-05T16:18:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — PROTO atom type

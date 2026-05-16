@@ -1,3 +1,4 @@
+import { buildAliases } from '../utils/registry.js'
 import type { ParsedAtom, ValidationContext, ValidationError } from '../types.js'
 
 function isPresent(v: unknown): boolean {
@@ -24,8 +25,11 @@ export function requiredFields(
   const cfg = ctx.requiredFields
   if (!cfg) return []
 
-  const type = typeof atom.fm.type === 'string' ? atom.fm.type.toLowerCase() : ''
-  const list = cfg.byType.get(type) ?? cfg.default
+  const type = atom.fm['type']
+  const list =
+    typeof type === 'string'
+      ? cfg.byType.get(type.toLowerCase()) ?? cfg.default
+      : cfg.default
   if (list.length === 0) return []
 
   const errors: ValidationError[] = []
@@ -37,6 +41,36 @@ export function requiredFields(
         message: `frontmatter is missing required field '${field}' (for type '${type || '<unknown>'}')`,
         offending: field,
       })
+      continue
+    }
+
+    if (field === 'aliases') {
+      const val = atom.fm[field]
+      if (!Array.isArray(val) || val.length === 0 || typeof val[0] !== 'string') {
+        errors.push({
+          rule: 'required-fields',
+          severity: 'error',
+          message: `frontmatter field 'aliases' must be a non-empty string array`,
+          offending: 'aliases',
+        })
+        continue
+      }
+      const expectedPrimary = (atom.fm.id ?? atom.fm.proposed_id) as string | undefined
+      if (expectedPrimary !== undefined) {
+        const root = ctx.root ?? process.cwd()
+        const target = buildAliases(expectedPrimary, undefined, root)
+        
+        for (let i = 0; i < target.length; i++) {
+          if (val[i] !== target[i]) {
+            errors.push({
+              rule: 'required-fields',
+              severity: 'error',
+              message: `alias at index ${i} must match the expected '${target[i]}'`,
+              offending: 'aliases',
+            })
+          }
+        }
+      }
     }
   }
   return errors

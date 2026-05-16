@@ -17,6 +17,10 @@ tags:
   - m7e
 crosslinks: {"references":["FEAT--IDENTITY-LAYER","ADR--IDENTITY-STORAGE-SHAPE","CONCEPT--IDENTITY-LAYER","ADR--ANTI-HALLUCINATION-RULES"]}
 created_at: 2026-05-05T12:30:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — identity profile guardrails + extensions

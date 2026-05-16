@@ -17,6 +17,10 @@ tags:
   - decision
 crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","ADR--SYMBOL-GRAPH-PERSISTENCE"]}
 created_at: 2026-05-09T16:51:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Leiden community detection

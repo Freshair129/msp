@@ -24,6 +24,10 @@ linked_symbols:
   - {"file":"packages/msp/src/symbols/framework/orm.ts"}
   - {"file":"packages/msp/src/symbols/framework/mcp-tools.ts"}
 created_at: 2026-05-12T05:37:00.000+07:00
+aliases:
+  - ALGO
+  - implementation_flow
+  - Algorithm definition
 ---
 
 # ALGO — Framework recognition algorithms

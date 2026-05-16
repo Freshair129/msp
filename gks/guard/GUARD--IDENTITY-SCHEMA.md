@@ -15,6 +15,10 @@ tags:
   - identity
 crosslinks: {"references":["CONCEPT--IDENTITY-LAYER"]}
 created_at: 2026-05-14T20:40:00+07:00
+aliases:
+  - GUARD
+  - agent_governance
+  - Structural / behavioural guardrail
 ---
 
 # GUARD — Identity Schema

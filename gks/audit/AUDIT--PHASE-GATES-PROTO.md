@@ -23,6 +23,10 @@ phase_override:
   skip_blueprint: true
   reason: "PROTO atom + its predicate are M8a self-similar; the M8a BLUEPRINT--PROTO-LOADER covers the loader contract this predicate plugs into"
 created_at: 2026-05-05T18:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M8b — [[PROTO--PHASE-GATES]] (draft)

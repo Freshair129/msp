@@ -15,6 +15,10 @@ tags:
   - escalation
 crosslinks: {"references":["CONCEPT--CODEGEN-MICROTASK-CONTRACT","ADR--CODEGEN-FORBIDDEN-PATTERNS"]}
 created_at: 2026-05-03T14:08:42.580+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — codegen retry policy

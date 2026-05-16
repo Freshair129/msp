@@ -24,6 +24,10 @@ phase_override:
   skip_blueprint: true
   reason: "Implementation surface is already covered by BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT (reader injection) + BLUEPRINT--PROTO-LOADER (predicate scaffold). Audit closes them out."
 created_at: 2026-05-16T01:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Symbol-graph trace invariants

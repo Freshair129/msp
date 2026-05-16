@@ -16,6 +16,10 @@ tags:
   - decision
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--NAMED-PROJECT-REGISTRY","ADR--PATH-ENCODING"]}
 created_at: 2026-05-09T07:00:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — global vs workspace storage

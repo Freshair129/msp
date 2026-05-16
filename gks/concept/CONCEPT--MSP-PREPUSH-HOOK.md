@@ -15,6 +15,10 @@ tags:
   - automation
 crosslinks: {"references":["FEAT--MSP-PRECOMMIT-HOOK","FEAT--MSP-VALIDATOR"]}
 created_at: 2026-05-03T17:39:27.384+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — MSP pre-push hook

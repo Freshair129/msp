@@ -13,6 +13,10 @@ tags:
   - episodic
 crosslinks: {"references":["CONCEPT--MEMORY-SUBSYSTEM","CONCEPT--MEMORY-SESSIONS"]}
 created_at: 2026-05-03T14:01:53.831+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — memory episodic

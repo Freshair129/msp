@@ -16,6 +16,10 @@ tags:
   - decision
 crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH"]}
 created_at: 2026-05-09T16:50:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Symbol Graph persistence

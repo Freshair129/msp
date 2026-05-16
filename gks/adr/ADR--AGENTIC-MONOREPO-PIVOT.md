@@ -10,6 +10,10 @@ title: Drop standalone publish; cognitive_system monorepo IS the product (agenti
 tags: [msp, gks, monorepo, agentic, pivot, decision, foundation]
 crosslinks: {"references":["ADR--MONOREPO-STRUCTURE","FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC"],"supersedes":[]}
 created_at: 2026-05-13T18:35:00+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # [[ADR--AGENTIC-MONOREPO-PIVOT]]

@@ -19,6 +19,10 @@ crosslinks:
     - SPEC--GENESIS-BLOCK-MANIFEST
     - PROTO--GENESIS-BLOCK-MEMBERSHIP
 created_at: 2026-05-14T21:30:00+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Identity Engine Atoms

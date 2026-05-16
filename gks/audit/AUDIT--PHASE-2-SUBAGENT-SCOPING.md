@@ -17,6 +17,10 @@ crosslinks:
     - FEAT--SUBAGENT-SCOPE-FILTERING
     - CONCEPT--SUBAGENT-CONTEXT-SCOPING
 created_at: 2026-05-14T22:00:00+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — UCF Phase 2: Subagent Scope Filtering

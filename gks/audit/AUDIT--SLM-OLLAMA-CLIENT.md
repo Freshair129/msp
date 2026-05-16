@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/slm/errors.ts"}
   - {"file":"packages/msp/src/codegen/slm/types.ts"}
 created_at: 2026-05-03T16:24:58.170+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Ollama SLM client

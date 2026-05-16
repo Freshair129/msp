@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/src/memory/sessions/schema.ts"}
   - {"file":"packages/msp/src/memory/sessions/types.ts"}
 created_at: 2026-05-03T15:43:38.014+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — memory sessions writer

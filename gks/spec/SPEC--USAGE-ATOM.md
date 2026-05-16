@@ -21,6 +21,10 @@ crosslinks:
     - ADR--AGENT-TIER-COST-POLICY
     - BLUEPRINT--COST-TRACKING
 created_at: 2026-05-14T03:45:00.000+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
 ---
 
 # SPEC — Usage Atom

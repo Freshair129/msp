@@ -14,6 +14,10 @@ tags:
   - atomic
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--CODEGEN-MICROTASK-CONTRACT","SPEC--ATOM-REGISTRY-SCHEMA"]}
 created_at: 2026-05-03T14:01:51.814+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — atomic write contract

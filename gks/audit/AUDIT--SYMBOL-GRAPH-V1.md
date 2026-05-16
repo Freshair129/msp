@@ -15,6 +15,10 @@ tags:
   - upstream-gks
 crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE","ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION","FEAT--MSP-SYMBOL-MCP","FEAT--MSP-GRAPH-CLI","FEAT--SYMBOLS-WEB-TAB","BLUEPRINT--SYMBOL-GRAPH-CORE"]}
 created_at: 2026-05-09T19:30:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Symbol Graph v1 shipped

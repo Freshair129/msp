@@ -16,6 +16,10 @@ crosslinks:
     - ADR--BRAIN-PATH-RESOLUTION
     - ADR--EPISODE-GC-POLICY
 created_at: 2026-05-14T03:00:00.000+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
 ---
 
 # SPEC — Episode Atom

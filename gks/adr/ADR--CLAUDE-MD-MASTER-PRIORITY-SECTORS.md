@@ -18,6 +18,10 @@ tags:
   - decision
 crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","CONCEPT--MASTER-PRIORITY-SECTORS","SPEC--GENESIS-BLOCK-MANIFEST","MASTER--MSP-DOC-TO-CODE","MASTER--ATOM-CONTRADICTION-POLICY","MASTER--ROOT-CAUSE-ANALYSIS","ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-17T02:35:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — adopt P0–P4 sector structure in CLAUDE.md MASTER BLOCKS

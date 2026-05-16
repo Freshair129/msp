@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/test/genesis/executor.test.ts"}
   - {"file":".gitignore"}
 created_at: 2026-05-14T05:08:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Phase F1 Master ↔ Genesis runtime wiring

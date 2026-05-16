@@ -16,6 +16,10 @@ tags:
   - m9f
 crosslinks: {"references":["FEAT--MEMORY-SESSIONS-WRITER","CONCEPT--MEMORY-SESSIONS"]}
 created_at: 2026-05-05T16:22:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — session lock cross-platform parity

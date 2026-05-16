@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/orchestrator/compressor/trim.ts"}
   - {"file":"packages/msp/src/orchestrator/compressor/resummarise.ts"}
 created_at: 2026-05-05T16:11:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # Context compressor — three-tier shrink-to-fit for token-budgeted episodes

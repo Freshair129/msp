@@ -12,6 +12,10 @@ tier: genesis
 links:
   - CONCEPT--EMBEDDING-STRATEGY
   - ADR--NOMIC-EMBEDDER
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Implementation plan for nomic-embed-text-v1.5 embedder

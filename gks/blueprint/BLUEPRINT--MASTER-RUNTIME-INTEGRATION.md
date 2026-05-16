@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/test/genesis/executor.test.ts"}
   - {"file":".gitignore"}
 created_at: 2026-05-14T05:05:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Master ↔ Genesis runtime wiring (Phase F1)

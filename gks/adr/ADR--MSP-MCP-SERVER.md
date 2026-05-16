@@ -14,6 +14,10 @@ tags:
   - server
 crosslinks: {"references":["CONCEPT--MSP-MCP-SERVER","FEAT--MSP-VALIDATOR","FEAT--CODEGEN-MICROTASK-RUNNER"]}
 created_at: 2026-05-03T18:13:54.288+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — MSP MCP server shape

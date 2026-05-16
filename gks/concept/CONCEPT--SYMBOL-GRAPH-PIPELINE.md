@@ -15,6 +15,10 @@ tags:
   - dag
 crosslinks: {"references":["CONCEPT--SYMBOL-GRAPH","FRAMEWORK--SYMBOL-GRAPH","SPEC--GENESIS-GRAPH-BACKEND"]}
 created_at: 2026-05-13T19:45:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Symbol Graph Processing Pipeline

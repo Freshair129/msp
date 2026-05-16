@@ -15,6 +15,10 @@ tags:
   - adr
 crosslinks: {"implements":["FEAT--SYMBOLS-MULTI-LANG"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
 created_at: 2026-05-12T05:00:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Using Tree-sitter for Python symbol extraction

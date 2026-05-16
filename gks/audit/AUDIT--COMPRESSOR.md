@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/test/orchestrator/compressor/resummarise.test.ts"}
   - {"file":"packages/msp/test/orchestrator/compressor/index.test.ts"}
 created_at: 2026-05-05T16:32:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M7d — context compressor implementation (three-tier shrink-to-fit)

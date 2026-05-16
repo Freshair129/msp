@@ -17,6 +17,10 @@ tags:
   - governance
 crosslinks: {"references":["CONCEPT--ATOM-CONTRADICTION-DETECTION","ADR--ANTI-HALLUCINATION-RULES","ADR--HUMAN-REVIEW-GATES","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-08T17:32:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — contradiction detection stack

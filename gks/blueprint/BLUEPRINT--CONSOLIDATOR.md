@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/test/orchestrator/consolidator/summarise.test.ts"}
   - {"file":"packages/msp/test/orchestrator/consolidator/index.test.ts"}
 created_at: 2026-05-04T17:06:30.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — consolidator implementation plan

@@ -23,6 +23,10 @@ linked_symbols:
   - {"file":"web/src/api.ts"}
   - {"file":"packages/msp/src/index.ts"}
 created_at: 2026-05-09T16:54:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Knowledge Browser Symbols tab

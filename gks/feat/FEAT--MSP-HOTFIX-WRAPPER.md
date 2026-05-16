@@ -18,6 +18,10 @@ linked_symbols:
   - {"file":"package.json"}
   - {"file":"packages/msp/test/hooks/pre-commit.test.ts"}
 created_at: 2026-05-03T17:45:50.058+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — hotfix wrapper

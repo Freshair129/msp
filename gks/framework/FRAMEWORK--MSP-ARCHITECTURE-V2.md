@@ -15,6 +15,10 @@ tags:
   - supersede
 crosslinks: {"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","CONCEPT--EMBEDDING-STRATEGY","CONCEPT--AGENT-AGNOSTIC","CONCEPT--AGENT-INTEGRATION-PATTERNS","ADR--MSP-OBSIDIAN-INTEGRATION","ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS","ADR--GLOBAL-VS-WORKSPACE"],"supersedes":["FRAMEWORK--MSP-ARCHITECTURE"]}
 created_at: 2026-05-03T23:55:07.217+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAMEWORK — MSP architecture v2

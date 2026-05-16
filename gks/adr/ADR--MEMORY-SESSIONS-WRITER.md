@@ -15,6 +15,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--MEMORY-SESSIONS-WRITER","CONCEPT--MEMORY-SESSIONS"]}
 created_at: 2026-05-03T14:16:38.566+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — sessions writer concurrency model

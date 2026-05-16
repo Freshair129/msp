@@ -10,6 +10,10 @@ tags:
   - usage
   - rollup
   - 2026-W19
+aliases:
+  - USAGE
+  - memory
+  - Usage metrics rollup
 ---
 
 # Usage Roll-up — 2026-W19

@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/package.json"}
   - {"file":"gks/inbound/"}
 created_at: 2026-05-13T10:05:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Master Block promotion pipeline

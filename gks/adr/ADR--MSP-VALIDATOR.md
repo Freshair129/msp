@@ -16,6 +16,10 @@ tags:
   - contract
 crosslinks: {"references":["CONCEPT--MSP-VALIDATOR"]}
 created_at: 2026-05-03T13:24:24.437+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — MSP validator runs as a CLI gate

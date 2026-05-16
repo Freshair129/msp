@@ -15,6 +15,10 @@ linked_symbols:
   - { file: "src/memory/vector/index.ts" }
   - { file: "src/memory/episodic.ts" }
   - { file: "src/memory/obsidian-mcp.ts" }
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — Four-layer storage model

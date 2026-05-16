@@ -16,6 +16,10 @@ tags:
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","CONCEPT--MSP-OBSERVE-HOT-PATH","CONCEPT--NAMED-PROJECT-REGISTRY"]}
 linked_symbols: []
 created_at: 2026-05-09T07:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Architecture-doc cleanup (2026-05-09)

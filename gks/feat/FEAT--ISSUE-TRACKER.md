@@ -15,6 +15,10 @@ linked_symbols:
   - { file: "src/issue/store.ts" }
   - { file: "src/issue/types.ts" }
   - { file: "bin/gks.ts", fn: cmdIssue }
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Self-hosted issue tracker

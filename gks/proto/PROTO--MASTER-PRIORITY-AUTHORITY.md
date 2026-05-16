@@ -17,6 +17,10 @@ tags:
   - validator
 crosslinks: {"references":["ADR--CLAUDE-MD-MASTER-PRIORITY-SECTORS","CONCEPT--MASTER-PRIORITY-SECTORS","FRAMEWORK--KNOWLEDGE-3-TIER","ADR--AGENT-WRITE-BOUNDARIES"]}
 created_at: 2026-05-17T02:55:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — MASTER-PRIORITY-AUTHORITY

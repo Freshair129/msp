@@ -15,6 +15,10 @@ tags:
   - framework
 crosslinks: {"references":["CONCEPT--IDENTITY-LAYER","FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK"]}
 created_at: 2026-05-14T20:00:00+07:00
+aliases:
+  - COGNITIVE
+  - implementation_flow
+  - Mental model / interpretive lens
 ---
 
 # COGNITIVE — Ego Death Passport

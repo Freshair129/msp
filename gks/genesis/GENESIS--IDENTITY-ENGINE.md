@@ -46,6 +46,10 @@ crosslinks:
     - STACK--MSP-NODE-RUNTIME
     - SAFETY--PII-REDACTION
 created_at: 2026-05-14T21:10:00+07:00
+aliases:
+  - GENESIS
+  - implementation_flow
+  - Block Manifest (v2.3+)
 ---
 
 # GENESIS — Identity Engine

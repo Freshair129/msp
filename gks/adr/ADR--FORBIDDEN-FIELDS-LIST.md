@@ -14,6 +14,10 @@ tags:
   - anti-hallucination
 crosslinks: {"references":["CONCEPT--ATOMIC-WRITE-CONTRACT"],"implements":["FEAT--MSP-VALIDATOR"]}
 created_at: 2026-05-03T14:08:40.802+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — forbidden frontmatter fields

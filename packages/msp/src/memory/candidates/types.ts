@@ -25,6 +25,7 @@ export interface CandidateFrontmatter {
   status: 'candidate'
   proposed_at: string
   proposed_by: 'agent' | 'human'
+  aliases?: string[]
   rationale?: string
   confidence?: number
 }

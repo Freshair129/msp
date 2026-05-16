@@ -15,6 +15,10 @@ tags:
   - foundation
 crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER"]}
 created_at: 2026-05-17T02:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Root Cause Analysis

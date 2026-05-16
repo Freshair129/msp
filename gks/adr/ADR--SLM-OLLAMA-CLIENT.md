@@ -15,6 +15,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--SLM-OLLAMA-CLIENT","ADR--CODEGEN-RETRY-POLICY"]}
 created_at: 2026-05-03T16:22:30.900+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Ollama client shape

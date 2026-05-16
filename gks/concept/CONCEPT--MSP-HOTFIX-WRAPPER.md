@@ -14,6 +14,10 @@ tags:
   - automation
 crosslinks: {"references":["ADR--HOTFIX-ESCAPE-HATCH","FEAT--MSP-PRECOMMIT-HOOK"]}
 created_at: 2026-05-03T17:45:48.892+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — MSP hotfix wrapper

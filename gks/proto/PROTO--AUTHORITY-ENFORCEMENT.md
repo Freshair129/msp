@@ -19,6 +19,10 @@ crosslinks: {"enforces":["FRAMEWORK--AUTHORITY-MATRIX"],"references":["CONCEPT--
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/authority-enforcement.ts"}
 created_at: 2026-05-05T18:10:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — AUTHORITY-ENFORCEMENT

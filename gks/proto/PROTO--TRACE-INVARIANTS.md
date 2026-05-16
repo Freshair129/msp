@@ -16,6 +16,10 @@ tags:
 crosslinks:
   superseded_by: ["PROTO--SYMBOLS-TRACE-INVARIANTS"]
 created_at: 2026-05-13T19:47:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — Trace Invariants (SUPERSEDED)

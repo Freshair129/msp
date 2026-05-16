@@ -17,6 +17,10 @@ crosslinks: {"references":["CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT","CONCEPT--
 linked_symbols:
   - {"file":"packages/msp/src/policy/types.ts"}
 created_at: 2026-05-14T22:21:52.048+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Phase 0: plumbing

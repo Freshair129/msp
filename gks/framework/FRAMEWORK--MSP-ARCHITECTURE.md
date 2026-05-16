@@ -17,6 +17,10 @@ crosslinks:
   references: []
   superseded_by: [FRAMEWORK--MSP-ARCHITECTURE-V2]
 created_at: 2026-05-03T14:01:47.791+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 > ⚠️ **SUPERSEDED — DO NOT USE AS REFERENCE** ⚠️

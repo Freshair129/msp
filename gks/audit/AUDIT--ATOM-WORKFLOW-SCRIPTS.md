@@ -23,6 +23,10 @@ phase_override:
   skip_blueprint: true
   reason: "Small atom-authoring CLI helper scripts (atom-date / scaffold-atom / supersede) — developer tooling, not a feature surface; a per-script phase-3 blueprint would be doc theater."
 created_at: 2026-05-12T22:05:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — atom workflow scripts (PR-C closure)

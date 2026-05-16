@@ -17,6 +17,10 @@ tags:
   - least-privilege
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","CONCEPT--ABAC-POLICY-ENGINE","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT","CONCEPT--RESOLUTION-GRADIENT"]}
 created_at: 2026-05-13T17:22:03.289+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Subagent context scoping

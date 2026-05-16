@@ -17,6 +17,10 @@ tags:
   - upstream-gks
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","FRAMEWORK--KNOWLEDGE-3-TIER","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--SYMBOL-GRAPH-PIPELINE","ADR--SYMBOL-GRAPH-PROCESSING-STAGES","PROTO--TRACE-INVARIANTS"]}
 created_at: 2026-05-09T16:30:00.000+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — Symbol Graph

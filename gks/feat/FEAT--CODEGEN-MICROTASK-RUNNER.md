@@ -20,6 +20,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/forbidden-patterns.ts"}
   - {"file":"src/codegen/escalate.ts"}
 created_at: 2026-05-03T14:16:37.122+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — msp:run-task

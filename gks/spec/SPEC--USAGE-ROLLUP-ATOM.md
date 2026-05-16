@@ -21,6 +21,10 @@ crosslinks:
     - CONCEPT--COST-TRACKING
     - ADR--AGENT-TIER-COST-POLICY
 created_at: 2026-05-14T05:01:00.000+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
 ---
 
 # SPEC — Usage Roll-up Atom

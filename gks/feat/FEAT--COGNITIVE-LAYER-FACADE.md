@@ -23,6 +23,10 @@ linked_symbols:
   - {"file":"packages/msp/src/cognitive/audit-only.ts"}
   - {"file":"packages/msp/src/cognitive/compose.ts"}
 created_at: 2026-05-12T22:50:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — createCognitiveLayer

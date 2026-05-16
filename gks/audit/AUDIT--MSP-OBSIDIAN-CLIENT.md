@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/src/obsidian/types.ts"}
   - {"file":"packages/msp/test/obsidian/client.test.ts"}
 created_at: 2026-05-04T12:29:16.095+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M7a — Obsidian client wrapper (REST adapter delegate + filesystem fallback)

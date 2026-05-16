@@ -15,6 +15,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--ACCEPTANCE-VITEST-RUNNER","ADR--CODEGEN-RETRY-POLICY"]}
 created_at: 2026-05-03T16:27:17.914+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — vitest acceptance runner shape

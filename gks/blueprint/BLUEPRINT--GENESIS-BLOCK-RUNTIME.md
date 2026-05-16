@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/src/genesis/executor.ts"}
   - {"file":"packages/msp/src/genesis/cli.ts"}
 created_at: 2026-05-14T03:35:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Genesis Block Runtime

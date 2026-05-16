@@ -18,6 +18,10 @@ crosslinks:
     - FEAT--VAULT-COMPOSITION
     - FEAT--RESOLUTION-EXPAND-ON-DEMAND
 created_at: 2026-05-14T23:00:00+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT - UCF Phase 3: Vaults & Resolution Gradient

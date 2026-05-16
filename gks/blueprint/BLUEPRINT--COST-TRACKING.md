@@ -26,6 +26,10 @@ linked_symbols:
   - {"file":"packages/msp/src/agents/usage-recorder.ts"}
   - {"file":"packages/msp/src/agents/dispatch.ts"}
 created_at: 2026-05-14T03:46:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Cost Tracking

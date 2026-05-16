@@ -16,6 +16,10 @@ tags:
   - m7b
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--MEMORY-EPISODIC","CONCEPT--MEMORY-SESSIONS"]}
 created_at: 2026-05-04T17:05:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — consolidator

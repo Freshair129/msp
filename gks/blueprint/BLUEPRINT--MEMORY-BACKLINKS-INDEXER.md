@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/memory/backlinks/atomic-write.ts"}
   - {"file":"packages/msp/src/memory/backlinks/cli.ts"}
 created_at: 2026-05-03T14:16:43.374+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — backlinks indexer

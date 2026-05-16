@@ -1,3 +1,5 @@
+import { parse as yamlParse } from 'yaml'
+import { buildAliases } from '../../validator/utils/registry.js'
 import {
   CandidateIdError,
   type CandidateFrontmatter,
@@ -24,6 +26,11 @@ export function composeFrontmatter(
   lines.push(`proposed_id: ${input.proposed_id}`)
   lines.push(`type: ${input.type}`)
   lines.push(`status: candidate`)
+  const aliases = buildAliases(input.proposed_id, undefined, process.cwd())
+  lines.push('aliases:')
+  for (const alias of aliases) {
+    lines.push(`  - ${alias}`)
+  }
   lines.push(`proposed_at: ${proposedAt}`)
   lines.push(`proposed_by: ${proposedBy}`)
   if (input.rationale !== undefined) lines.push(`rationale: ${yamlScalar(input.rationale)}`)
@@ -35,21 +42,13 @@ export function composeFrontmatter(
 export function parseFrontmatter(raw: string): { fm: CandidateFrontmatter; body: string } {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/)
   if (!match) throw new Error('Candidate file: missing or malformed frontmatter')
-  const yaml = match[1]!
+  const yamlText = match[1]!
   const body = match[2] ?? ''
-  const fm: Record<string, unknown> = {}
-  for (const line of yaml.split(/\r?\n/)) {
-    const m = line.match(/^([a-z_]+):\s*(.*)$/i)
-    if (!m) continue
-    const key = m[1]!
-    const rawVal = m[2]!
-    if (key === 'confidence') {
-      fm[key] = Number(rawVal)
-    } else if (rawVal.startsWith('"') && rawVal.endsWith('"')) {
-      fm[key] = JSON.parse(rawVal)
-    } else {
-      fm[key] = rawVal
-    }
+  let fm: any
+  try {
+    fm = yamlParse(yamlText)
+  } catch (err: any) {
+    throw new Error(`Candidate file: invalid YAML frontmatter: ${err.message}`)
   }
   return { fm: fm as unknown as CandidateFrontmatter, body }
 }

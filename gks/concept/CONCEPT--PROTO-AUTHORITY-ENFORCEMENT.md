@@ -16,6 +16,10 @@ tags:
   - m8e
 crosslinks: {"references":["CONCEPT--PROTO-PATTERN","FRAMEWORK--AUTHORITY-MATRIX","ADR--HUMAN-REVIEW-GATES"]}
 created_at: 2026-05-05T16:28:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — [[PROTO--AUTHORITY-ENFORCEMENT]]

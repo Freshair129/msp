@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/acceptance/parse-results.ts"}
   - {"file":"packages/msp/src/codegen/acceptance/types.ts"}
 created_at: 2026-05-03T16:30:27.474+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — vitest acceptance runner

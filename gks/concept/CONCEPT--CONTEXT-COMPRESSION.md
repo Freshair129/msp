@@ -15,6 +15,10 @@ tags:
   - m7d
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--CONSOLIDATOR","FEAT--CONSOLIDATOR"]}
 created_at: 2026-05-05T16:10:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — context compression

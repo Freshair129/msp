@@ -16,6 +16,10 @@ tags:
 crosslinks: {"references":["CONCEPT--REAL-CLI-WIRING"]}
 linked_symbols: []
 created_at: 2026-05-14T04:05:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Phase E1 real CLI wiring

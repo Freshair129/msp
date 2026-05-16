@@ -7,6 +7,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { parse as yamlParse } from 'yaml'
 
+import { buildAliases } from '../../packages/msp/src/validator/utils/registry.ts'
+
 interface Args {
   command?: string
   type?: string
@@ -64,7 +66,7 @@ try {
 const type = args.type.toLowerCase()
 
 // Flatten taxonomy for quick lookup
-const TYPE_CONFIG: Record<string, { phase: number; folder: string; tier: string; sections: string[] }> = {}
+const TYPE_CONFIG: Record<string, { phase: number; folder: string; tier: string; sections: string[]; db_id?: string }> = {}
 for (const cluster of Object.values(registry.taxonomy.clusters) as any[]) {
   for (const [id, config] of Object.entries(cluster.types) as [string, any][]) {
     TYPE_CONFIG[id.toLowerCase()] = config
@@ -157,15 +159,24 @@ if (args.command === 'create') {
     // It's already markdown
   }
 
-  const frontmatter = `---
+  const aliases = buildAliases(id, undefined, rootDir)
+  const aliasesText = aliases.map(a => `  - ${a}`).join('\n')
+
+  let frontmatter = `---
 id: ${id}
-phase: ${config.phase}
+`
+  if (config.db_id) {
+    frontmatter += `${config.db_id}: ${id}\n`
+  }
+  frontmatter += `phase: ${config.phase}
 type: ${type}
 status: draft
 tier: ${config.tier}
 source_type: axiomatic
 vault_id: default
 title: ${title}
+aliases:
+${aliasesText}
 tags:
   - msp
 crosslinks: {}
@@ -184,15 +195,24 @@ created_at: ${isoTH}
 
 // MODE C: SCAFFOLD (Legacy)
 if (args.command === 'scaffold') {
-  const frontmatter = `---
+  const aliases = buildAliases(id, undefined, rootDir)
+  const aliasesText = aliases.map(a => `  - ${a}`).join('\n')
+
+  let frontmatter = `---
 id: ${id}
-phase: ${config.phase}
+`
+  if (config.db_id) {
+    frontmatter += `${config.db_id}: ${id}\n`
+  }
+  frontmatter += `phase: ${config.phase}
 type: ${type}
 status: draft
 tier: ${config.tier}
 source_type: axiomatic
 vault_id: default
 title: ${title}
+aliases:
+${aliasesText}
 tags:
   - msp
 crosslinks: {}

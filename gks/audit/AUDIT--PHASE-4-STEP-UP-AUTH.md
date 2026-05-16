@@ -17,6 +17,10 @@ crosslinks:
     - CONCEPT--STEP-UP-AUTH
     - FEAT--STEP-UP-AUTH-PIN
 created_at: 2026-05-14T23:30:00+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT - UCF Phase 4: Step-up Auth & User ABAC

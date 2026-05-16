@@ -14,6 +14,10 @@ tags:
   - passport
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-14T20:50:00+07:00
+aliases:
+  - GUARD
+  - agent_governance
+  - Structural / behavioural guardrail
 ---
 
 # GUARD — Passport Non-Null

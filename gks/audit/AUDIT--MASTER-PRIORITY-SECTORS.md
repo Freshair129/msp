@@ -28,6 +28,10 @@ linked_symbols:
   - {"file":"gks/blueprint/BLUEPRINT--MSP-MASTER-COMPOSE-LOADER.md"}
   - {"file":"gks/proto/PROTO--MASTER-PRIORITY-AUTHORITY.md"}
 created_at: 2026-05-17T03:05:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 ## Scope

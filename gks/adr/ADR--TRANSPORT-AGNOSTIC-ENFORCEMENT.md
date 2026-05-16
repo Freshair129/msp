@@ -16,6 +16,10 @@ tags:
   - enforcement
 crosslinks: {"references":["CONCEPT--ABAC-POLICY-ENGINE","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT","FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK"]}
 created_at: 2026-05-14T18:37:52.572+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Transport-agnostic enforcement

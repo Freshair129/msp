@@ -20,6 +20,10 @@ crosslinks:
 linked_symbols:
   - {"file":"packages/msp/src/brain/resolver.ts"}
 created_at: 2026-05-14T02:00:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Brain Merge Strategy

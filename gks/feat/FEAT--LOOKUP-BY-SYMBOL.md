@@ -16,6 +16,10 @@ linked_symbols:
   - { file: "src/memory/gks.ts", fn: searchBySymbol }
   - { file: "bin/gks.ts", fn: cmdLookupBySymbol }
   - { file: "src/mcp-server/index.ts" }
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — lookupBySymbol

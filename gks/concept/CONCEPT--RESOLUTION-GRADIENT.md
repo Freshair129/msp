@@ -19,6 +19,10 @@ tags:
   - context-window
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","CONCEPT--NAMESPACE-VAULT-BRAIN","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--CONTEXT-COMPRESSION"]}
 created_at: 2026-05-13T17:22:00.850+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Resolution gradient

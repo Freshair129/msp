@@ -16,6 +16,10 @@ tags:
   - decomposition
 crosslinks: {"references":["CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS","FRAMEWORK--SYMBOL-GRAPH"],"supersedes":["FEAT--SYMBOLS-FRAMEWORK-AWARENESS"]}
 created_at: 2026-05-12T05:36:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Symbol graph framework awareness

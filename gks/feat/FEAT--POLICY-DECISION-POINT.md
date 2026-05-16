@@ -15,6 +15,10 @@ tags:
   - pdp
 crosslinks: {"references":["CONCEPT--ABAC-POLICY-ENGINE","ADR--POLICY-AS-DATA-NOT-CODE","ADR--DEFAULT-POLICY-POSTURE","ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT"]}
 created_at: 2026-05-14T19:42:01.331+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Policy Decision Point

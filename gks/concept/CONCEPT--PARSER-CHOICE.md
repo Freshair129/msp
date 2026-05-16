@@ -16,6 +16,10 @@ tags:
   - tradeoff
 crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH"]}
 created_at: 2026-05-09T16:32:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Parser choice for Symbol Graph

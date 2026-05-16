@@ -18,6 +18,10 @@ linked_symbols:
   - {"file":"packages/msp/src/memory/backlinks/indexer.ts"}
   - {"file":"packages/msp/src/memory/backlinks/cli.ts"}
 created_at: 2026-05-03T14:16:42.851+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — backlinks indexer

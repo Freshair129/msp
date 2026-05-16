@@ -20,6 +20,10 @@ linked_symbols:
   - {"file":".github/pull_request_template.md"}
   - {"file":"ROADMAP.md"}
 created_at: 2026-05-08T18:50:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # Contradiction detection Layer 0 — shipped

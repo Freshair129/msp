@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"packages/msp/src/memory/sessions/types.ts"}
   - {"file":"packages/msp/src/memory/sessions/lock.ts"}
 created_at: 2026-05-03T14:16:39.008+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — sessions writer

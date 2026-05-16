@@ -26,6 +26,10 @@ linked_symbols:
   - {"file":"packages/msp/test/orchestrator/consolidator/llm.test.ts"}
   - {"file":"packages/msp/test/orchestrator/consolidator/index.test.ts"}
 created_at: 2026-05-04T23:29:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M7b — consolidator implementation (hybrid scoring + boundary detection + summariser)

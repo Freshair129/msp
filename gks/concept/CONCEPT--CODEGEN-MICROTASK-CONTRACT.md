@@ -15,6 +15,10 @@ tags:
   - contract
 crosslinks: {"references":["FRAMEWORK--PHASE-GOVERNANCE","CONCEPT--ATOMIC-WRITE-CONTRACT"]}
 created_at: 2026-05-03T14:01:52.308+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — codegen microtask contract

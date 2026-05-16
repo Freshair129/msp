@@ -19,6 +19,10 @@ crosslinks: {"enforces":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["CONCEP
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/valid-until.ts"}
 created_at: 2026-05-05T18:10:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — VALID-UNTIL

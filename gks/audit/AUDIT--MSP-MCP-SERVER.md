@@ -25,6 +25,10 @@ linked_symbols:
   - {"file":"packages/msp/src/mcp/tools/episode-append.ts"}
   - {"file":"packages/msp/src/mcp/tools/backlinks-rebuild.ts"}
 created_at: 2026-05-03T18:20:24.061+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — MSP MCP server (M6)

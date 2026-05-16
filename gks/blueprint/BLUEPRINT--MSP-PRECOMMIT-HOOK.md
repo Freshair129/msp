@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"examples/hooks/README.md"}
   - {"file":"packages/msp/test/hooks/pre-commit.test.ts"}
 created_at: 2026-05-03T14:39:05.783+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — pre-commit hook

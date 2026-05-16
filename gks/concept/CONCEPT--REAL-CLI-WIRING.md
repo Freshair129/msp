@@ -15,6 +15,10 @@ tags:
   - integration-test
 crosslinks: {"references":["AUDIT--PHASE-E1-REAL-CLI-WIRING","CONCEPT--TIER-3-DEFERRED"]}
 created_at: 2026-05-14T04:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Real CLI wiring for T1/T2/T3 adapters

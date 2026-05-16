@@ -28,6 +28,10 @@ linked_symbols:
   - {"file":"packages/msp/test/identity/preferences.test.ts"}
   - {"file":"packages/msp/test/identity/index.test.ts"}
 created_at: 2026-05-05T00:26:30.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — identity layer implementation plan

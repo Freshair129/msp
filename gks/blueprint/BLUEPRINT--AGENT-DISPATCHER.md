@@ -21,6 +21,10 @@ crosslinks:
 linked_symbols:
   - {"file":"packages/msp/src/agents/dispatch.ts"}
 created_at: 2026-05-14T01:35:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Agent Dispatcher

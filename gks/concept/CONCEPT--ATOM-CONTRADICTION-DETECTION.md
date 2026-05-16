@@ -17,6 +17,10 @@ tags:
   - governance
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","ADR--ANTI-HALLUCINATION-RULES","CONCEPT--MSP-VALIDATOR","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
 created_at: 2026-05-08T17:30:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — atom contradiction detection

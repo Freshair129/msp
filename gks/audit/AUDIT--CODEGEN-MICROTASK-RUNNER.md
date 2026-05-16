@@ -24,6 +24,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/cli.ts"}
   - {"file":"packages/msp/src/codegen/types.ts"}
 created_at: 2026-05-03T15:43:39.217+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — codegen microtask runner

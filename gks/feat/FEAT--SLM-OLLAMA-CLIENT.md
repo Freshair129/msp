@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/slm/factory.ts"}
   - {"file":"packages/msp/src/codegen/slm/types.ts"}
 created_at: 2026-05-03T16:22:31.444+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Ollama SLM client

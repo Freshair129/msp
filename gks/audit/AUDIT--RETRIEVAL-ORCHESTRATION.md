@@ -30,6 +30,10 @@ linked_symbols:
   - {"file":"packages/msp/test/orchestrator/retrieval/sources/backlinks.test.ts"}
   - {"file":"packages/msp/test/orchestrator/retrieval/index.test.ts"}
 created_at: 2026-05-05T16:18:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # M7c — retrieval orchestration implementation (RRF fusion across 4 sources)

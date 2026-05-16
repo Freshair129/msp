@@ -27,6 +27,10 @@ linked_symbols:
   - {"file":"packages/msp/src/validator/atomic-index.ts"}
   - {"file":"packages/msp/src/validator/cli.ts"}
 created_at: 2026-05-03T13:24:25.656+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — MSP validator implementation plan

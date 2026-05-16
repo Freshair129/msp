@@ -14,6 +14,10 @@ tags:
   - algorithm
 crosslinks: {"implements":["ADR--SYMBOLS-PROCESS-TRACING"]}
 created_at: 2026-05-12T15:52:00.000+07:00
+aliases:
+  - ALGO
+  - implementation_flow
+  - Algorithm definition
 ---
 
 # ALGO — Call graph traversal

@@ -23,6 +23,10 @@ phase_override:
   skip_blueprint: true
   reason: "Wiring fix + a one-line type correction on the already-blueprinted PROTO loader scaffold (BLUEPRINT--PROTO-LOADER); no new code surface."
 created_at: 2026-05-14T19:40:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — wire [[PROTO--SYMBOLS-TRACE-INVARIANTS]]

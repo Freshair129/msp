@@ -18,6 +18,10 @@ tags:
   - provenance
 crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES","FRAMEWORK--AUTHORITY-MATRIX"]}
 created_at: 2026-05-09T14:30:00.000+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — Knowledge 3-Tier model

@@ -32,6 +32,10 @@ linked_symbols:
   - {"file":"msp_spec.md"}
   - {"file":"CLAUDE.md"}
 created_at: 2026-05-08T17:02:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — inbound to candidates migration

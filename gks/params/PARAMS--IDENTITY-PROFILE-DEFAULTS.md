@@ -14,6 +14,10 @@ tags:
   - configuration
 crosslinks: {"references":["CONCEPT--IDENTITY-LAYER"]}
 created_at: 2026-05-14T20:30:00+07:00
+aliases:
+  - PARAMS
+  - implementation_flow
+  - Constants / business config
 ---
 
 # PARAMS — Identity Profile Defaults

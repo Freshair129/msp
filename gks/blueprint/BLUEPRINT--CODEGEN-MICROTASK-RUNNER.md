@@ -26,6 +26,10 @@ linked_symbols:
   - {"file":"src/codegen/escalate.ts"}
   - {"file":"packages/msp/src/codegen/cli.ts"}
 created_at: 2026-05-03T14:16:37.606+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — codegen microtask runner

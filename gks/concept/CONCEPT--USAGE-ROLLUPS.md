@@ -21,6 +21,10 @@ crosslinks:
     - SPEC--USAGE-ROLLUP-ATOM
     - BLUEPRINT--COST-TRACKING
 created_at: 2026-05-14T05:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Usage Roll-ups

@@ -21,6 +21,10 @@ crosslinks:
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/trace-invariants.ts"}
 created_at: 2026-05-14T20:00:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — Trace Invariants

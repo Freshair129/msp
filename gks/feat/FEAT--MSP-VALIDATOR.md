@@ -20,6 +20,10 @@ linked_symbols:
   - {"file":"src/validator/rules/id-uniqueness.ts"}
   - {"file":"packages/msp/src/validator/cli.ts"}
 created_at: 2026-05-03T13:24:25.043+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — msp:validate

@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/examples/hooks/README.md"}
   - {"file":"packages/msp/test/hooks/pre-push.test.ts"}
 created_at: 2026-05-03T18:01:44.663+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — pre-push hook (M5a)

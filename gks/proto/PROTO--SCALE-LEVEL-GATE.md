@@ -18,6 +18,10 @@ crosslinks: {"enforces":["FRAMEWORK--MSP-ARCHITECTURE-V2"],"references":["CONCEP
 linked_symbols:
   - {"file":"packages/msp/src/cognitive/scale-gate.ts","symbol":"enforceScaleGate"}
 created_at: 2026-05-12T22:52:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — SCALE-LEVEL-GATE

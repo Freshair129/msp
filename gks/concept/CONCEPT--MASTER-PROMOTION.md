@@ -16,6 +16,10 @@ tags:
   - phase-e4
 crosslinks: {"references":["SPEC--GENESIS-BLOCK-MANIFEST","CONCEPT--TAXONOMY-V2-3","ADR--MASTER-PROMOTION-DOC-TO-CODE","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY","FRAMEWORK--KNOWLEDGE-3-TIER"]}
 created_at: 2026-05-13T10:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Master Block promotion

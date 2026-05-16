@@ -18,6 +18,10 @@ crosslinks: {"enforces":["FRAMEWORK--PHASE-GOVERNANCE"],"references":["CONCEPT--
 linked_symbols:
   - {"file":"packages/msp/src/validator/proto/phase-gates.ts"}
 created_at: 2026-05-05T18:00:00.000+07:00
+aliases:
+  - PROTO
+  - implementation_flow
+  - Machine-enforced invariant
 ---
 
 # PROTO — PHASE-GATES

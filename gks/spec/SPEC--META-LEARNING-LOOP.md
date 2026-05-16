@@ -7,6 +7,10 @@ status: draft
 tier: process
 created_at: 2026-05-13T23:44:00.000+07:00
 framework: FRAMEWORK--MSP-ARCHITECTURE-V2
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
 ---
 # SPEC — Meta Learning Loop (MLL) Implementation
 

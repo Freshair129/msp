@@ -24,6 +24,10 @@ linked_symbols:
   - {"file":"packages/msp/src/orchestrator/retrieval/sources/episodic.ts"}
   - {"file":"packages/msp/src/orchestrator/retrieval/sources/backlinks.ts"}
 created_at: 2026-05-05T15:56:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # Retrieval orchestration — `recall(query)` fans out across 4 sources, fuses via RRF

@@ -20,6 +20,10 @@ crosslinks:
     - CONCEPT--NAMESPACE-VAULT-BRAIN
     - SPEC--EPISODE-ATOM
 created_at: 2026-05-14T01:55:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Brain Path Resolution

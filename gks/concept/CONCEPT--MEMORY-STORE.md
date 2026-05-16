@@ -15,6 +15,10 @@ linked_symbols:
   - { file: "src/memory/api.ts", fn: retain }
   - { file: "src/memory/api.ts", fn: recall }
   - { file: "src/memory/api.ts", fn: reflect }
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — MemoryStore

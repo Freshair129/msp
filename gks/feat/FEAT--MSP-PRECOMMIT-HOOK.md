@@ -18,6 +18,10 @@ linked_symbols:
   - {"file":"examples/hooks/install.sh"}
   - {"file":"examples/hooks/README.md"}
 created_at: 2026-05-03T14:39:05.322+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — pre-commit hook

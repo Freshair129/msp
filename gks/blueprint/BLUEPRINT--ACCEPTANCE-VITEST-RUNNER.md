@@ -22,6 +22,10 @@ linked_symbols:
   - {"file":"packages/msp/src/codegen/acceptance/parse-results.ts"}
   - {"file":"packages/msp/src/codegen/acceptance/types.ts"}
 created_at: 2026-05-03T16:27:18.868+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — vitest acceptance runner

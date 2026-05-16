@@ -20,6 +20,10 @@ crosslinks:
     - SPEC--USAGE-ATOM
     - SPEC--EPISODE-ATOM
 created_at: 2026-05-14T03:44:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Cost Tracking

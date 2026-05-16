@@ -14,6 +14,10 @@ tags:
   - foundation
 crosslinks: {"references":["CONCEPT--ATOMIC-WRITE-CONTRACT"]}
 created_at: 2026-05-03T14:01:49.773+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
 ---
 
 # FRAME — crosslinks vocabulary

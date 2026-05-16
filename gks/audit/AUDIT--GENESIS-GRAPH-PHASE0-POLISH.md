@@ -26,6 +26,10 @@ linked_symbols:
   - {"file":"apps/qwen/strip_fence.py"}
   - {"file":"apps/qwen/run_microtask.sh"}
 created_at: 2026-05-16T14:30:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Genesis Graph Phase 0 polish

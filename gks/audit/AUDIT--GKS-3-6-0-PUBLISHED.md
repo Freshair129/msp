@@ -17,6 +17,10 @@ tags:
 crosslinks: {"references":["AUDIT--GKS-UPSTREAM-PROPOSALS-FILED","AUDIT--TWO-REPO-VALIDATION","ADR--EMBEDDING-MODEL-PARITY"]}
 linked_symbols: ["package.json","tsconfig.json","tsconfig.build.json","packages/msp/src/index.ts","packages/msp/src/memory.ts"]
 created_at: 2026-05-07T03:55:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — GKS 3.6.0 published to npm

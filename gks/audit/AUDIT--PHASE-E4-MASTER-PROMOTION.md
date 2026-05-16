@@ -25,6 +25,10 @@ linked_symbols:
   - {"file":"packages/msp/test/master/cli.test.ts"}
   - {"file":"packages/msp/package.json"}
 created_at: 2026-05-13T11:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — Phase E4 Master Block promotion pipeline

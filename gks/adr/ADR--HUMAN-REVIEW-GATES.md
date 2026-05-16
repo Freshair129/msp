@@ -14,6 +14,10 @@ tags:
   - decision
 crosslinks: {"references":["ADR--AGENT-WRITE-BOUNDARIES","FRAMEWORK--AUTHORITY-MATRIX","FRAMEWORK--SCALING-LEVELS","CONCEPT--MASTER-PROMOTION"]}
 created_at: 2026-05-03T17:36:08.623+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — human review gates

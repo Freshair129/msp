@@ -25,6 +25,10 @@ linked_symbols:
   - {"file":"packages/msp/src/symbols/store/jsonl.ts"}
   - {"file":"packages/msp/src/symbols/communities/leiden.ts"}
 created_at: 2026-05-09T17:00:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Symbol Graph core

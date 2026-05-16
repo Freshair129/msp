@@ -19,6 +19,10 @@ linked_symbols:
   - {"file":"scripts/msp/propose.mjs"}
   - {"file":"test/scripts/propose.test.ts"}
 created_at: 2026-05-03T15:43:36.230+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — msp:propose phase-6 wrapper

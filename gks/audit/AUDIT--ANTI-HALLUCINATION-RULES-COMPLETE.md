@@ -21,6 +21,10 @@ linked_symbols:
   - {"file":"packages/msp/src/validator/rules/cite-or-mark-inferred.ts"}
   - {"file":"packages/msp/src/validator/index.ts"}
 created_at: 2026-05-03T18:01:45.959+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
 ---
 
 # AUDIT — anti-hallucination rules complete

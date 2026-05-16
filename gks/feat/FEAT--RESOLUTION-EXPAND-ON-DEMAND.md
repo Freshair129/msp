@@ -16,6 +16,10 @@ tags:
   - mcp
 crosslinks: {"references":["CONCEPT--RESOLUTION-GRADIENT","ADR--RESOLUTION-TIER-COUNT","FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK"]}
 created_at: 2026-05-14T19:42:02.796+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
 ---
 
 # FEAT — Resolution expand-on-demand

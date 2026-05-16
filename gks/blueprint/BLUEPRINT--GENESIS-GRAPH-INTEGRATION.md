@@ -25,6 +25,10 @@ linked_symbols:
   - { file: "packages/gks/src/memory/graph/cypher-v0.ts" }
   - { file: "packages/gks/src/memory/graph/genesis-graph-errors.ts" }
 created_at: 2026-05-12T11:59:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
 ---
 
 # BLUEPRINT — Genesis Block backend integration

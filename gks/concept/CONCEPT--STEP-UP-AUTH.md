@@ -16,6 +16,10 @@ tags:
   - security
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","CONCEPT--ABAC-POLICY-ENGINE","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT"]}
 created_at: 2026-05-13T17:22:02.427+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 ---
 
 # CONCEPT — Step-up authentication

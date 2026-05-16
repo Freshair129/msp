@@ -14,6 +14,10 @@ tags:
   - decision
 crosslinks: {"references":["CONCEPT--SYMBOLS-PROCESS-TRACING"]}
 created_at: 2026-05-12T15:51:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 ---
 
 # ADR — Process tracing traversal strategy

@@ -15,6 +15,10 @@ tags:
   - identity
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK"]}
 created_at: 2026-05-14T21:00:00+07:00
+aliases:
+  - SAFETY
+  - implementation_flow
+  - Ethical safety / AI alignment
 ---
 
 # SAFETY — PII Redaction

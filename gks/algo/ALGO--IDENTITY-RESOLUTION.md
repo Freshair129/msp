@@ -10,6 +10,10 @@ title: Identity Resolution Algorithm — Global vs Project Layering
 tags: [msp, identity, resolution, merging, layering]
 crosslinks: {"references":["CONCEPT--IDENTITY-LAYER","ADR--GLOBAL-VS-WORKSPACE"]}
 created_at: 2026-05-11T10:28:00.000Z
+aliases:
+  - ALGO
+  - implementation_flow
+  - Algorithm definition
 ---
 
 # ALGORITHM — Identity Resolution
