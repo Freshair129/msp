@@ -380,4 +380,8 @@ export interface GraphBackend {
   retractEdge(id: string, at?: string): Promise<GraphEdge | null>
   query(q?: GraphQuery): Promise<GraphEdge[]> | GraphEdge[]
   neighbors(seed: string, q?: NeighborQuery): Promise<NeighborResult[]> | NeighborResult[]
+  flush?(): Promise<void>
+  close?(): Promise<void>
 }
+
+export * from './graph/genesis-block-native.js'
