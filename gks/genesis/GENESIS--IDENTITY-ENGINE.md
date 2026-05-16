@@ -73,7 +73,7 @@ Decisions regarding the Identity Engine are driven by `[[MOD--IDENTITY]]`. High-
 - [[PROTOCOL--IDENTITY-API]]
 - [[STACK--MSP-NODE-RUNTIME]]
 - [[SAFETY--PII-REDACTION]]
-- [[PERSONA--T2-IMPLEMENTER]]
-- [[ENTITY--MSP-USERS]]
+- \[\[PERSONA--T2-IMPLEMENTER\]\]
+- \[\[ENTITY--MSP-USERS\]\]
 - [[SPEC--GENESIS-BLOCK-MANIFEST]]
 

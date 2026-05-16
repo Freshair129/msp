@@ -79,7 +79,7 @@ Unlike consolidator (where mock LLM is fine for tests), an auto-ADR generator's 
 
 ### M10b — Optional Kuzu / Neo4j graph backend
 
-**What**: Replace `backlinks.jsonl` with a real graph DB for multi-hop queries (e.g. "show me all atoms 2-3 hops from [[ADR--X]]").
+**What**: Replace `backlinks.jsonl` with a real graph DB for multi-hop queries (e.g. "show me all atoms 2-3 hops from \[\[ADR--X\]\]").
 
 **Defer reason**: Scale trigger not met. Per `[[CONCEPT--MSP-ROADMAP]]` §4: "Triggered when crosslinks > 50,000 or multi-hop on hot path." Current crosslinks: ~400 (125× under threshold). 1-hop queries from `backlinks.jsonl` complete in < 5ms.
 

@@ -79,7 +79,6 @@ The id is unique per (bucket, date) — exactly one atom per day per vault.
 
 The body MUST contain a fenced `json` summary block delimited by HTML comment markers so it can be parsed and rewritten safely:
 
-```
 <!-- USAGE-SUMMARY-START -->
 ```json
 {

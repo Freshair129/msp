@@ -447,6 +447,6 @@ implementation_order:
 - Anthropic Messages API docs — Layer 4 dependency
 
 ## Connections
-- [[PROTO--RECIPROCAL-SUPERSESSION]]
-- [[PROTO--DOMAIN-UNIQUENESS]]
+- \[\[PROTO--RECIPROCAL-SUPERSESSION\]\]
+- \[\[PROTO--DOMAIN-UNIQUENESS\]\]
 

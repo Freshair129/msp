@@ -42,7 +42,7 @@ CI workflow + `npm run msp:validate --all`. As a PROTO atom (per M8a), it lives 
 
 ## What this CONCEPT does NOT decide
 
-- Predicate impl details (lives in [[BLUEPRINT--PHASE-GATES]], future work)
+- Predicate impl details (lives in \[\[BLUEPRINT--PHASE-GATES\]\], future work)
 - The exact FRAME atom this PROTO `enforces:` (likely `[[FRAMEWORK--PHASE-GOVERNANCE]]`)
 - Override field shape — to be designed when impl PR opens
 

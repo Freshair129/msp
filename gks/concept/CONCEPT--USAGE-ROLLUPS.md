@@ -71,7 +71,7 @@ The `msp-usage` binary surfaces the aggregator's output:
 
 | Sub-command | Behaviour |
 |---|---|
-| `msp-usage today` | Today's daily totals (one-shot read of today's [[USAGE--DAILY]] atom). |
+| `msp-usage today` | Today's daily totals (one-shot read of today's \[\[USAGE--DAILY\]\] atom). |
 | `msp-usage week [--iso=...]` | Aggregate of the ISO week (default: current week). |
 | `msp-usage month [--iso=...]` | Aggregate of the calendar month (default: current month). |
 | `msp-usage rollup-week --iso=... --write` | Aggregate **and** write the weekly atom. |

@@ -86,7 +86,6 @@ The id is unique per (bucket, period) — exactly one atom per ISO week, one per
 
 The body MUST contain a fenced `json` summary block delimited by HTML comment markers, identical to `[[SPEC--USAGE-ATOM]]` §4 but with a roll-up-specific payload shape:
 
-```
 <!-- USAGE-SUMMARY-START -->
 ```json
 {
@@ -104,7 +103,6 @@ The body MUST contain a fenced `json` summary block delimited by HTML comment ma
 }
 ```
 <!-- USAGE-SUMMARY-END -->
-```
 
 For monthly atoms, `bucket` is `"monthly"` and `iso_period` is `"2026-05"`; the rest of the shape is identical.
 

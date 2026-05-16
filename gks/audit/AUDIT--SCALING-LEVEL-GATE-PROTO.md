@@ -95,7 +95,7 @@ PROTO promotes from `draft` to `stable`.
 ## Out of scope
 
 - PR-diff line/file count classification (CI workflow concern).
-- Heuristic threshold tuning ([[PARAM--SCALING-LEVEL-THRESHOLDS]] — future).
+- Heuristic threshold tuning (\[\[PARAM--SCALING-LEVEL-THRESHOLDS\]\] — future).
 - AUDIT chain coverage (separate PROTO).
 - Promoting to `stable` (gradual rollout — happens after the corpus is
   audited and any real violations are fixed).
