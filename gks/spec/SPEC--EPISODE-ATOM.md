@@ -4,7 +4,7 @@ phase: 2
 type: spec
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: SPEC — Episode Atom — runtime-generated dispatch record contract
 tags: [msp, agents, episode, spec, runtime]

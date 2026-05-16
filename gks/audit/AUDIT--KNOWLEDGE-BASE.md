@@ -1,6 +1,6 @@
 ---
 id: AUDIT--KNOWLEDGE-BASE
-phase: 5
+phase: 6
 type: audit
 status: stable
 vault_id: default

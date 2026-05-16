@@ -1,6 +1,6 @@
 ---
 id: STACK--MSP-NODE-RUNTIME
-phase: 1
+phase: 2
 type: stack
 status: stable
 tier: process

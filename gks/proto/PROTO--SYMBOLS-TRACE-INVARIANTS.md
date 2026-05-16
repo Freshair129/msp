@@ -4,7 +4,7 @@ phase: 2
 type: proto
 status: stable
 severity: error
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: Structural invariants for execution traces and atom graphs

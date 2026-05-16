@@ -1,6 +1,6 @@
 ---
 id: BLUEPRINT--NOMIC-EMBEDDER
-phase: 2
+phase: 3
 type: blueprint
 scale_level: L2
 status: stable

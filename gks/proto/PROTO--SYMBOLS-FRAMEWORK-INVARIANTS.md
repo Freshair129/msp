@@ -3,7 +3,7 @@ id: PROTO--SYMBOLS-FRAMEWORK-INVARIANTS
 phase: 2
 type: proto
 status: active
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: Structural invariants for framework-aware symbols

@@ -1,6 +1,6 @@
 ---
 id: PARAMS--IDENTITY-PROFILE-DEFAULTS
-phase: 1
+phase: 2
 type: params
 status: stable
 tier: process

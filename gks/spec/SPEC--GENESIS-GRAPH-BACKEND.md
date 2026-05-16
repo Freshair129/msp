@@ -4,7 +4,7 @@ phase: 2
 type: spec
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Genesis Graph Backend — High-Performance Storage Specification
 tags:

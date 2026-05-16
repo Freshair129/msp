@@ -9,7 +9,7 @@ tier: genesis
 title: Extended atomic taxonomy + ISSUE-- as self-hosted tracker
 tags: [taxonomy, governance, issue-tracking, scope]
 crosslinks:
-  references: [FRAMEWORK--FOUR-LAYERS, ADR--FLAT-ATOM-LAYOUT, CONCEPT--TAXONOMY-V2-3]
+  references: [FRAMEWORK--FOUR-LAYERS, ADR--FLAT-ATOM-LAYOUT, CONCEPT--TAXONOMY-V2-3, ADR--REGISTRY-DRIVEN-SCAFFOLDING]
   resolves: []
 ---
 
@@ -52,7 +52,7 @@ Mitigated by `docs/KNOWLEDGE-TYPES.md` + `examples/atom-templates/`.
 
 ## What ships in this ADR
 
-- `docs/KNOWLEDGE-TYPES.md` — canonical reference
+- `docs/KNOWLEDGE-TYPES.md` — canonical reference (Note: Superseded by `atom_registry.yaml` per `[[ADR--REGISTRY-DRIVEN-SCAFFOLDING]]`)
 - `examples/atom-templates/` — 17 starter `.md` templates
 - This ADR records the decision; the ISSUE-- CLI is shipped separately
   (closed in 3.5.4).

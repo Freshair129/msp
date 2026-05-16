@@ -13,6 +13,7 @@ import { idFormat } from './rules/id-format.js'
 import { masterRequiresPromotion } from './rules/master-requires-promotion.js'
 import { noInventedVersions } from './rules/no-invented-versions.js'
 import { phaseStatus } from './rules/phase-status.js'
+import { registryDrift } from './rules/registry-drift.js'
 import { requiredFields } from './rules/required-fields.js'
 import { summaryMin } from './rules/summary-min.js'
 import { tierEnum } from './rules/tier-enum.js'
@@ -33,6 +34,7 @@ export const HARD_RULES: Rule[] = [
   futureDate,
   summaryMin,
   phaseStatus,
+  registryDrift,
   noInventedVersions,
   evidenceForDecisions,
   masterRequiresPromotion,

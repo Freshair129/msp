@@ -1,6 +1,6 @@
 ---
 id: BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
-phase: 4
+phase: 3
 type: blueprint
 status: draft
 tier: process

@@ -1,6 +1,6 @@
 ---
 id: FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
-phase: 2
+phase: 0
 type: framework
 status: draft
 tier: process

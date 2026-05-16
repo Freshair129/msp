@@ -1,9 +1,9 @@
 ---
 id: GUARD--PASSPORT-NONNULL
-phase: 1
+phase: 2
 type: guard
 status: stable
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: Passport Non-Null Guard — ensure mandatory identity presence

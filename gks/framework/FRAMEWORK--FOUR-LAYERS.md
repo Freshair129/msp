@@ -1,6 +1,6 @@
 ---
 id: FRAMEWORK--FOUR-LAYERS
-phase: 2
+phase: 0
 type: framework
 status: stable
 created_at: 2026-05-13T12:00:00+07:00

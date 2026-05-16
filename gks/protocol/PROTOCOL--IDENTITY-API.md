@@ -4,7 +4,7 @@ phase: 2
 type: protocol
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Identity API Protocol — Get/Set Soul Passport sub-fields
 tags: [msp, identity, api, soul, profile, voice, preferences]

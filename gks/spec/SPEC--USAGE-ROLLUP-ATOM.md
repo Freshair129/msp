@@ -4,7 +4,7 @@ phase: 2
 type: spec
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: SPEC — Usage Roll-up Atom — weekly + monthly cost-aggregation contract
 tags:

@@ -3,7 +3,7 @@ id: SPEC--GENESIS-BLOCK-MANIFEST
 phase: 2
 type: spec
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: Genesis Block manifest — frontmatter contract for GENESIS-- atoms (v2.3+)

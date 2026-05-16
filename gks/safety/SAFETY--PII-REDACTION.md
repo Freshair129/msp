@@ -1,9 +1,9 @@
 ---
 id: SAFETY--PII-REDACTION
-phase: 1
+phase: 0
 type: safety
 status: stable
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: PII Redaction Safety — protect sensitive identity data

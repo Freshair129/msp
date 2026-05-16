@@ -1,9 +1,9 @@
 ---
 id: GUARD--IDENTITY-SCHEMA
-phase: 1
+phase: 2
 type: guard
 status: stable
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: Identity Schema Guard — structural invariants for identity.json

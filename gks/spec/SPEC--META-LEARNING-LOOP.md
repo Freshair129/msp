@@ -4,7 +4,7 @@ title: Meta Learning Loop (MLL) Technical Specification
 type: spec
 phase: 2
 status: draft
-tier: genesis
+tier: process
 created_at: 2026-05-13T23:44:00.000+07:00
 framework: FRAMEWORK--MSP-ARCHITECTURE-V2
 ---

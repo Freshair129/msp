@@ -1,6 +1,6 @@
 ---
 id: CONCEPT--MEMORY-STORE
-phase: 2
+phase: 1
 type: concept
 status: stable
 created_at: 2026-05-13T12:00:00+07:00

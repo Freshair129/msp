@@ -1,6 +1,6 @@
 ---
 id: RUNBOOK--IDENTITY-MIGRATION
-phase: 1
+phase: 6
 type: runbook
 status: stable
 tier: process

@@ -1,6 +1,6 @@
 ---
 id: CONCEPT--SYMBOLS-PROCESS-TRACING
-phase: 2
+phase: 1
 type: concept
 status: active
 tier: process

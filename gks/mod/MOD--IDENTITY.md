@@ -4,7 +4,7 @@ phase: 2
 type: mod
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Identity Module — Genesis Block for the "Soul" Passport
 tags: [msp, identity, genesis, module, composition]
