@@ -16,8 +16,9 @@ coverage/
 .brain/**/audit/
 .brain/**/graph/*.jsonl
 .brain/**/graph/manifest.json
-*.genesis-block.jsonl
-genesis-block.jsonl
+*.genesis-graph.jsonl
+genesis-graph.jsonl
+.brain/**/graph/genesis-graph.jsonl
 
 # example smoke-test side effects
 examples/**/fixtures/.brain/

@@ -838,10 +838,7 @@ export { createPgGraphBackend } from './graph/pg.js'
 export type { PgGraphBackendOptions } from './graph/pg.js'
 export { createGenesisGraphBackend, GenesisGraphBackend } from './graph/genesis-graph.js'
 export type { GenesisGraphBackendOptions } from './graph/genesis-graph.js'
-export {
-  GenesisGraphUnsupportedCypher,
-  GenesisGraphSchemaMismatchError,
-} from './graph/genesis-graph-errors.js'
+export { GenesisGraphUnsupportedCypher } from './graph/genesis-graph-errors.js'
 export { EpisodicLayer } from './episodic.js'
 export { InboundQueue } from './inbound.js'
 export { ATOMIC_ID_PATTERN, isAtomicId, assertAtomicId } from './atomic-id.js'
