@@ -45,7 +45,11 @@ jobs:
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             triple: linux-x64-gnu
-          - host: macos-latest
+          - host: macos-13
+            # macos-13 is Intel hardware. macos-latest is now M-series (arm64);
+            # building x64 there and then loading it on arm64 Node makes
+            # napi-rs's runtime loader look for `genesis-block.darwin-arm64.node`
+            # while the build only produced the `.darwin-x64.node` file.
             target: x86_64-apple-darwin
             triple: darwin-x64
           - host: macos-latest
