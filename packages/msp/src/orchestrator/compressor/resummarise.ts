@@ -1,11 +1,11 @@
+import { joinTurns } from './text.js'
 import { DEFAULT_TOKENISER, estimateText } from './tokens.js'
 import {
   DEFAULT_LLM_TIMEOUT_MS,
   type CompressorEpisode,
+  type LlmClient,
   type Tokeniser,
 } from './types.js'
-import type { SlmClient as LlmClient } from '../../codegen/slm/types.js' // Explicitly import and rename SlmClient to LlmClient
-import type { Turn } from '../consolidator/types.js' // Explicitly import Turn
 
 const PROMPT_HEAD = `Re-summarise the following conversation chunk in approximately`
 const PROMPT_BODY_HEAD = `tokens. Preserve key decisions, facts, and code references. Drop greetings, dead ends, and conversational filler.
@@ -25,11 +25,8 @@ export function buildResummarisePrompt(
   episode: CompressorEpisode,
   targetTokens: number,
 ): string {
-  const conversation = episode.turns.map((turn) => `${turn.speaker}: ${turn.text}`).join('\n')
-  return `${PROMPT_HEAD} ${targetTokens} ${PROMPT_BODY_HEAD}
-${conversation}
-${PROMPT_TAIL}
-`
+  const body = joinTurns(episode.turns)
+  return `${PROMPT_HEAD} ${targetTokens} ${PROMPT_BODY_HEAD}\n${body}\n${PROMPT_TAIL}\n`
 }
 
 /**
@@ -41,7 +38,7 @@ export function cleanLlmText(text: string): string {
   let out = text.trim()
 
   // Strip a single fenced block if the entire body is wrapped.
-  const fence = out.match(/^```(?:[a-zA-Z]+)?\s*\n([\\s\\S]*?)\n```\s*$/)
+  const fence = out.match(/^```(?:[a-zA-Z]+)?\s*\n([\s\S]*?)\n```\s*$/)
   if (fence) {
     out = fence[1]!.trim()
   }
@@ -159,7 +156,7 @@ export function truncate(
 
   for (let i = turns.length - 1; i >= 0; i--) {
     const candidate = turns.slice(i, turns.length)
-    const text = candidate.map((t) => `[${t.speaker}] ${t.text}`).join('\n')
+    const text = candidate.map((t) => `[${t.speakerId}] ${t.content}`).join('\n')
     const tokens = estimateText(text, tokeniser)
     if (tokens > target) break
     firstKeptIdx = i

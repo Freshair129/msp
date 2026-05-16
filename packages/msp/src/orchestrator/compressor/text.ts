@@ -6,5 +6,5 @@ import type { Turn } from '../consolidator/types.js'
  * (`[speakerId] content`, joined with newlines).
  */
 export function joinTurns(turns: Turn[]): string {
-  return turns.map((t) => `[${t.speaker}] ${t.text}`).join('\n')
+  return turns.map((t) => `[${t.speakerId}] ${t.content}`).join('\n')
 }

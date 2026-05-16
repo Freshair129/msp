@@ -1,5 +1,5 @@
-import type { Turn, SessionStats, Thresholds, Verdict } from './types.js'
-import { DEFAULT_THRESHOLDS } from './config.js'
+import type { Turn, SessionStats, Thresholds, Tier1Result, Verdict } from './types.js'
+import { DEFAULT_THRESHOLDS } from './types.js'
 import { bagCosine, tokenise } from './boundary.js'
 
 /**
@@ -83,7 +83,7 @@ export function numericSpecificity(text: string): number {
  */
 export function lengthNormalised(chunk: Turn[], stats: SessionStats): number {
   if (chunk.length === 0) return 0
-  const totalBytes = chunk.reduce((acc, t) => acc + t.text.length, 0)
+  const totalBytes = chunk.reduce((acc, t) => acc + t.content.length, 0)
   const meanChunkBytes = totalBytes / chunk.length
   if (stats.meanTurnBytes <= 0) return 0
   const ratio = meanChunkBytes / stats.meanTurnBytes
@@ -103,8 +103,8 @@ export function lengthNormalised(chunk: Turn[], stats: SessionStats): number {
  */
 export function topicContinuity(chunk: Turn[], prevChunk: Turn[] | null): number {
   if (!prevChunk || prevChunk.length === 0) return 0.5
-  const cur = chunk.flatMap((t) => tokenise(t.text))
-  const prev = prevChunk.flatMap((t) => tokenise(t.text))
+  const cur = chunk.flatMap((t) => tokenise(t.content))
+  const prev = prevChunk.flatMap((t) => tokenise(t.content))
   return bagCosine(cur, prev)
 }
 
@@ -139,7 +139,7 @@ export function computeSessionStats(turns: Turn[]): SessionStats {
   if (turns.length === 0) {
     return { turnCount: 0, meanTurnBytes: 0, stddevTurnBytes: 0 }
   }
-  const lens = turns.map((t) => t.text.length)
+  const lens = turns.map((t) => t.content.length)
   const sum = lens.reduce((a, b) => a + b, 0)
   const mean = sum / lens.length
   const variance =
@@ -164,10 +164,10 @@ function clamp01(n: number): number {
 export function scoreChunk(
   chunk: Turn[],
   stats: SessionStats,
-  thresholds: Partial<Thresholds> = {},
+  thresholds: Thresholds = {},
   prevChunk: Turn[] | null = null,
-): { score: number; verdict: Verdict; breakdown: Record<string, number> } {
-  const text = chunk.map((t) => t.text).join('\n')
+): Tier1Result {
+  const text = chunk.map((t) => t.content).join('\n')
   const breakdown = {
     decision_markers: decisionMarkers(text),
     code_artifact_mentions: codeArtifactMentions(text),
