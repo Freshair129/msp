@@ -1,6 +1,6 @@
 import React from 'react';
 import { NOTE_BY_ID, GKS_DATA } from '../data/mockData';
-import type { Note } from '../types/gks';
+import type { Note, Edge } from '../types/gks';
 import { TYPE_META } from '../types/gks';
 
 export function snippet(text: string, len = 110): string {

@@ -36,6 +36,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
   const transform = useRef({ x: 0, y: 0, k: 1 });
   const drag = useRef<{ lx: number; ly: number; node: SimNode | null }>({ lx: 0, ly: 0, node: null });
   const [isDragging, setIsDragging] = useState(false);
+  const [hover, setHover] = useState<{ id: string; x: number; y: number; title?: string } | null>(null);
   const alphaRef = useRef(1.0); // Simulation energy level
 
   // Initialize simulation
@@ -67,8 +68,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
         }
         return null;
       })
-      .filter((l): l is SimLink[] => !!l)
-      .flat();
+      .filter((l): l is SimLink => !!l);
 
     simRef.current = { nodes: simNodes, links: simLinks };
   }, [notes, edges, showTags, showOrphans]);
