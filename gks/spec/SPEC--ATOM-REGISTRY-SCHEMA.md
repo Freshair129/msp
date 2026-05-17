@@ -2,7 +2,7 @@
 id: SPEC--ATOM-REGISTRY-SCHEMA
 phase: 2
 type: spec
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
