@@ -46,7 +46,23 @@ jobs:
         # which is exported via `dist/src/memory/index.d.ts` per packages/gks/package.json#exports.
         # On a fresh `npm ci` checkout there is no dist/ yet, so typecheck fails to resolve
         # GKS types unless we build first.
-        run: npm run build
+        #
+        # Per-workspace invocation so a failure is attributed to the correct
+        # workspace. `npm run build --workspaces` swallows the workspace name
+        # in stack traces, which made a recent "graph not in RetrievalTimings"
+        # error impossible to attribute (was it msp? gks? gks-cli? It turned
+        # out to be irreproducible — but the per-workspace split keeps any
+        # future regression actionable on first read of the log.)
+        run: |
+          echo "::group::node + tsc versions"
+          node --version
+          npx tsc --version
+          echo "::endgroup::"
+          for ws in @freshair129/gks msp @freshair129/gks-cli @freshair129/gks-mcp @freshair129/gks-tui @freshair129/genesis-ui; do
+            echo "::group::build $ws"
+            npm run build --workspace="$ws" --if-present
+            echo "::endgroup::"
+          done
 
       - name: typecheck
         run: npm run typecheck
