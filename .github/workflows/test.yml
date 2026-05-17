@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -84,6 +88,42 @@ jobs:
           name: build-logs-node${{ matrix.node-version }}
           path: build-logs/
           if-no-files-found: ignore
+
+      - name: post build logs to PR on failure
+        # Posts a comment containing the full build-logs/ contents so the
+        # full tsc diagnostic is visible without artifact-download auth.
+        # Only fires on a real PR (event_name) and only when the build step
+        # actually failed (job.status == 'failure' implies a downstream step
+        # set it; we use `steps.<id>.outcome` but we don't have ids — guard
+        # by checking the logs dir exists with a non-empty per-workspace log).
+        if: failure() && github.event_name == 'pull_request' && matrix.node-version == 20
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const dir = 'build-logs';
+            if (!fs.existsSync(dir)) return;
+            const files = fs.readdirSync(dir).filter(f => f.endsWith('.log'));
+            const parts = [];
+            parts.push(`<!-- ci-build-diag -->`);
+            parts.push(`## CI build diagnostic (node ${process.env.NODE_VERSION || '20'})`);
+            parts.push(`Triggered by failure on \`${context.sha}\`.`);
+            parts.push('');
+            for (const f of files) {
+              const full = path.join(dir, f);
+              const body = fs.readFileSync(full, 'utf8');
+              // tail 80 lines so we stay under GH's comment size limit
+              const tail = body.split('\n').slice(-80).join('\n');
+              parts.push(`<details><summary><code>${f}</code> (last 80 lines)</summary>\n\n\`\`\`\n${tail}\n\`\`\`\n</details>`);
+            }
+            const body = parts.join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
 
       - name: typecheck
         run: npm run typecheck
