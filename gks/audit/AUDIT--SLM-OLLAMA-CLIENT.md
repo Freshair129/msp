@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M4b — Ollama SLM client acceptance audit
-tags:
+tags: &a1
   - msp
   - m4
   - m4b
@@ -15,26 +15,72 @@ tags:
   - codegen
   - slm
   - ollama
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--SLM-OLLAMA-CLIENT
     - BLUEPRINT--SLM-OLLAMA-CLIENT
     - ADR--SLM-OLLAMA-CLIENT
     - FEAT--CODEGEN-MICROTASK-RUNNER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/codegen/slm/ollama.ts
   - file: packages/msp/src/codegen/slm/factory.ts
   - file: packages/msp/src/codegen/slm/errors.ts
   - file: packages/msp/src/codegen/slm/types.ts
 created_at: 2026-05-03T16:24:58.170+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--SLM-OLLAMA-CLIENT
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M4b — Ollama SLM client acceptance audit
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T16:24:58.170+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--SLM-OLLAMA-CLIENT
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M4b — Ollama SLM client acceptance audit
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T16:24:58.170+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # AUDIT — Ollama SLM client

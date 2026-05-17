@@ -7,23 +7,67 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Call graph traversal algorithm with cycle and depth guards
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - algo
   - algorithm
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--SYMBOLS-PROCESS-TRACING
 created_at: 2026-05-12T15:52:00.000+07:00
-aliases:
+aliases: &a3
   - ALGO
   - implementation_flow
   - Algorithm definition
 cluster: implementation_flow
 role: Algorithm definition
 attributes:
+  id: ALGO--SYMBOLS-CALL-GRAPH-TRAVERSAL
+  phase: 2
+  type: algo
+  status: active
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Call graph traversal algorithm with cycle and depth guards
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-12T15:52:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Algorithm definition
+  attributes:
+    id: ALGO--SYMBOLS-CALL-GRAPH-TRAVERSAL
+    phase: 2
+    type: algo
+    status: active
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Call graph traversal algorithm with cycle and depth guards
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-12T15:52:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Algorithm definition
+    attributes:
+      domain: algo
+    domain: algo
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: algo
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ALGO — Call graph traversal

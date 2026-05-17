@@ -9,19 +9,19 @@ source_type: axiomatic
 vault_id: default
 title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
   of msp_propose + propose.mjs + inbound infra)
-tags:
+tags: &a1
   - msp
   - inbound
   - candidates
   - migration
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--KNOWLEDGE-LAYERS-V2
     - ADR--AGENT-WRITE-BOUNDARIES
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols:
+linked_symbols: &a3
   - file: src/mcp/tools/propose.ts
   - file: packages/msp/src/mcp/tools/candidate.ts
   - file: packages/msp/src/memory/candidates/writer.ts
@@ -37,14 +37,66 @@ linked_symbols:
   - file: msp_spec.md
   - file: CLAUDE.md
 created_at: 2026-05-08T17:02:00.000+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
+    of msp_propose + propose.mjs + inbound infra)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-08T17:02:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
+      of msp_propose + propose.mjs + inbound infra)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-08T17:02:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — inbound to candidates migration

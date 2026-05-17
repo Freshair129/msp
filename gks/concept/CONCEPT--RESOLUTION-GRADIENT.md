@@ -8,23 +8,77 @@ source_type: axiomatic
 vault_id: default
 title: Resolution gradient — graded retrieval with FULL / MENTION + expand-on-demand
 attributes:
-  domain: [ucf, msp]
-tags:
-  - msp
-  - ucf
-  - concept
-  - retrieval
-  - resolution
-  - tokens
-  - context-window
-crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","CONCEPT--NAMESPACE-VAULT-BRAIN","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--CONTEXT-COMPRESSION"]}
+  id: CONCEPT--RESOLUTION-GRADIENT
+  phase: 1
+  type: concept
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Resolution gradient — graded retrieval with FULL / MENTION + expand-on-demand
+  attributes:
+    id: CONCEPT--RESOLUTION-GRADIENT
+    phase: 1
+    type: concept
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Resolution gradient — graded retrieval with FULL / MENTION +
+      expand-on-demand
+    attributes:
+      domain:
+        - ucf
+        - msp
+    tags: &a1
+      - msp
+      - ucf
+      - concept
+      - retrieval
+      - resolution
+      - tokens
+      - context-window
+    crosslinks: &a2
+      references:
+        - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
+        - CONCEPT--NAMESPACE-VAULT-BRAIN
+        - CONCEPT--KNOWLEDGE-LAYERS-V2
+        - CONCEPT--CONTEXT-COMPRESSION
+    created_at: 2026-05-13T17:22:00.850+07:00
+    aliases: &a3
+      - CONCEPT
+      - implementation_flow
+      - Strategic intent / PRD
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-13T17:22:00.850+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
+tags: *a1
+crosslinks: *a2
 created_at: 2026-05-13T17:22:00.850+07:00
-aliases:
-  - CONCEPT
-  - implementation_flow
-  - Strategic intent / PRD
+aliases: *a3
 cluster: implementation_flow
-role: "Strategic intent / PRD"
+role: Strategic intent / PRD
 ---
 
 # CONCEPT — Resolution gradient

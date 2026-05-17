@@ -9,20 +9,20 @@ vault_id: default
 scale_level: L2
 title: "BLUEPRINT — Phase 5 step-up auth: the StepUpProvider interface + PIN
   provider, policy-triggered"
-aliases:
+aliases: &a1
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
-tags:
+tags: &a2
   - msp
   - ucf
   - blueprint
   - phase-5
   - auth
   - step-up
-crosslinks:
+crosslinks: &a3
   implements:
     - FEAT--STEP-UP-AUTH-PIN
   references:
@@ -30,13 +30,65 @@ crosslinks:
     - CONCEPT--ABAC-POLICY-ENGINE
     - FEAT--POLICY-DECISION-POINT
     - BLUEPRINT--PHASE-4-USER-ABAC
-linked_symbols:
+linked_symbols: &a4
   - file: packages/msp/src/policy/step-up/provider.ts
   - file: packages/msp/src/policy/step-up/pin-provider.ts
   - file: packages/msp/src/policy/step-up/challenge-store.ts
 created_at: 2026-05-14T23:46:17.000+07:00
 attributes:
+  id: BLUEPRINT--PHASE-5-STEP-UP-AUTH
+  phase: 3
+  type: blueprint
+  status: draft
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  scale_level: L2
+  title: "BLUEPRINT — Phase 5 step-up auth: the StepUpProvider interface + PIN
+    provider, policy-triggered"
+  aliases: *a1
+  cluster: implementation_flow
+  role: Implementation plan
+  tags: *a2
+  crosslinks: *a3
+  linked_symbols: *a4
+  created_at: 2026-05-14T23:46:17.000+07:00
+  attributes:
+    id: BLUEPRINT--PHASE-5-STEP-UP-AUTH
+    phase: 3
+    type: blueprint
+    status: draft
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    scale_level: L2
+    title: "BLUEPRINT — Phase 5 step-up auth: the StepUpProvider interface + PIN
+      provider, policy-triggered"
+    aliases: *a1
+    cluster: implementation_flow
+    role: Implementation plan
+    tags: *a2
+    crosslinks: *a3
+    linked_symbols: *a4
+    created_at: 2026-05-14T23:46:17.000+07:00
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — Phase 5: step-up auth

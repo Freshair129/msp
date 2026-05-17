@@ -7,26 +7,74 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: 5 GKS upstream proposals filed (2026-05-07)
-tags:
+tags: &a1
   - msp
   - gks
   - audit
   - upstream
   - handoff
-crosslinks:
+crosslinks: &a2
   references:
     - AUDIT--TWO-REPO-VALIDATION
     - ADR--EMBEDDING-MODEL-PARITY
-linked_symbols: []
+linked_symbols: &a3 []
 created_at: 2026-05-07T03:00:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--GKS-UPSTREAM-PROPOSALS-FILED
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: 5 GKS upstream proposals filed (2026-05-07)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-07T03:00:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--GKS-UPSTREAM-PROPOSALS-FILED
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: 5 GKS upstream proposals filed (2026-05-07)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-07T03:00:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — GKS upstream proposals filed

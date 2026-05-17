@@ -8,33 +8,83 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — episodic writer implementation plan
-tags:
+tags: &a1
   - msp
   - memory
   - episodic
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--MEMORY-EPISODIC-WRITER
   references:
     - ADR--MEMORY-EPISODIC-WRITER
     - CONCEPT--MEMORY-EPISODIC
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/memory/episodic/writer.ts
   - file: packages/msp/src/memory/episodic/types.ts
   - file: packages/msp/src/memory/episodic/schema.ts
   - file: packages/msp/src/memory/episodic/atomic-write.ts
   - file: packages/msp/src/memory/episodic/summarisers/heuristic.ts
 created_at: 2026-05-03T14:16:41.255+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--MEMORY-EPISODIC-WRITER
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — episodic writer implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T14:16:41.255+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--MEMORY-EPISODIC-WRITER
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — episodic writer implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T14:16:41.255+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — episodic writer

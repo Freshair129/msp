@@ -8,32 +8,80 @@ tier: process
 source_type: axiomatic
 title: PROTO loader — discovers PROTO-- atoms and runs their predicates as part
   of msp:validate
-tags:
+tags: &a1
   - msp
   - proto
   - validator
   - loader
   - m8a
   - user-facing
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--PROTO-ATOM-TYPE
   references:
     - CONCEPT--PROTO-PATTERN
     - FEAT--MSP-VALIDATOR
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/loader.ts
   - file: packages/msp/src/validator/proto/types.ts
   - file: packages/msp/src/validator/proto/sample.ts
 created_at: 2026-05-05T16:18:00.000+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--PROTO-LOADER
+  phase: 2
+  type: feat
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: PROTO loader — discovers PROTO-- atoms and runs their predicates as part
+    of msp:validate
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T16:18:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--PROTO-LOADER
+    phase: 2
+    type: feat
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: PROTO loader — discovers PROTO-- atoms and runs their predicates as part
+      of msp:validate
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T16:18:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # FEAT — PROTO loader

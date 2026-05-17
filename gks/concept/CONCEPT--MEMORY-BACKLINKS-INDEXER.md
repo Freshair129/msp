@@ -7,25 +7,72 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Memory backlinks indexer — derive vector/backlinks.jsonl from atom crosslinks
-tags:
+tags: &a1
   - msp
   - memory
   - backlinks
   - vector
   - indexer
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--MEMORY-VECTOR-BACKLINKS
     - FRAMEWORK--CROSSLINKS-VOCABULARY
 created_at: 2026-05-03T14:16:41.740+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--MEMORY-BACKLINKS-INDEXER
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Memory backlinks indexer — derive vector/backlinks.jsonl from atom crosslinks
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:16:41.740+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--MEMORY-BACKLINKS-INDEXER
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Memory backlinks indexer — derive vector/backlinks.jsonl from atom
+      crosslinks
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:16:41.740+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # CONCEPT — backlinks indexer

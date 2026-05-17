@@ -8,7 +8,7 @@ source_type: axiomatic
 vault_id: default
 title: Promoted-Block Registry — first-class runnable status for Master-tier
   Genesis Blocks
-tags:
+tags: &a1
   - msp
   - master
   - promotion
@@ -16,7 +16,7 @@ tags:
   - genesis-block
   - runtime
   - phase-f1
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--MASTER-PROMOTION
     - SPEC--GENESIS-BLOCK-MANIFEST
@@ -25,14 +25,62 @@ crosslinks:
     - ADR--MASTER-PROMOTION-DOC-TO-CODE
     - ADR--HUMAN-REVIEW-GATES
 created_at: 2026-05-14T05:00:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--PROMOTED-BLOCK-REGISTRY
+  phase: 1
+  type: concept
+  status: draft
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Promoted-Block Registry — first-class runnable status for Master-tier
+    Genesis Blocks
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T05:00:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--PROMOTED-BLOCK-REGISTRY
+    phase: 1
+    type: concept
+    status: draft
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Promoted-Block Registry — first-class runnable status for Master-tier
+      Genesis Blocks
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T05:00:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # CONCEPT — Promoted-Block Registry

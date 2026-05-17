@@ -7,34 +7,80 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Context compressor — three-tier shrink-to-fit for token-budgeted episodes
-tags:
+tags: &a1
   - msp
   - compression
   - compressor
   - token-budget
   - m7d
   - user-facing
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--COMPRESSOR-THREE-TIER
   references:
     - CONCEPT--CONTEXT-COMPRESSION
     - FEAT--CONSOLIDATOR
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/orchestrator/compressor/index.ts
   - file: packages/msp/src/orchestrator/compressor/types.ts
   - file: packages/msp/src/orchestrator/compressor/tokens.ts
   - file: packages/msp/src/orchestrator/compressor/trim.ts
   - file: packages/msp/src/orchestrator/compressor/resummarise.ts
 created_at: 2026-05-05T16:11:00.000+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--COMPRESSOR
+  phase: 2
+  type: feat
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Context compressor — three-tier shrink-to-fit for token-budgeted episodes
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T16:11:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--COMPRESSOR
+    phase: 2
+    type: feat
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Context compressor — three-tier shrink-to-fit for token-budgeted episodes
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T16:11:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # Context compressor — three-tier shrink-to-fit for token-budgeted episodes

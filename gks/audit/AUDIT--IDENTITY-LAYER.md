@@ -8,7 +8,7 @@ tier: process
 source_type: axiomatic
 title: M7e — identity layer implementation (profile / voice / preferences with
   atomic JSON store)
-tags:
+tags: &a1
   - msp
   - identity
   - soul
@@ -17,7 +17,7 @@ tags:
   - preferences
   - m7e
   - audit
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--IDENTITY-LAYER
     - BLUEPRINT--IDENTITY-LAYER
@@ -27,7 +27,7 @@ crosslinks:
     - MOD--IDENTITY
     - PROTOCOL--IDENTITY-API
     - ALGO--IDENTITY-RESOLUTION
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/identity/index.ts
   - file: packages/msp/src/identity/types.ts
   - file: packages/msp/src/identity/store.ts
@@ -40,14 +40,62 @@ linked_symbols:
   - file: packages/msp/test/identity/preferences.test.ts
   - file: packages/msp/test/identity/index.test.ts
 created_at: 2026-05-05T12:00:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--IDENTITY-LAYER
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M7e — identity layer implementation (profile / voice / preferences with
+    atomic JSON store)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T12:00:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--IDENTITY-LAYER
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M7e — identity layer implementation (profile / voice / preferences with
+      atomic JSON store)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T12:00:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # M7e — identity layer implementation (profile / voice / preferences with atomic JSON store)

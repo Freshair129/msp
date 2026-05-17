@@ -8,30 +8,82 @@ vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--SCALE-LEVEL-GATE — codegen refuses to run L2+ tasks without stable atoms
-tags:
+tags: &a1
   - msp
   - proto
   - codegen
   - scale-gate
   - framework-spec-7.7.2
-crosslinks:
+crosslinks: &a2
   enforces:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
   references:
     - CONCEPT--COGNITIVE-LAYER-FACADE
     - CONCEPT--CODEGEN-MICROTASK-RUNNER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/cognitive/scale-gate.ts
     symbol: enforceScaleGate
 created_at: 2026-05-12T22:52:00.000+07:00
-aliases:
+aliases: &a4
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
+  id: PROTO--SCALE-LEVEL-GATE
+  phase: 2
+  type: proto
+  status: draft
+  severity: warning
+  vault_id: default
+  tier: safety
+  source_type: axiomatic
+  title: PROTO--SCALE-LEVEL-GATE — codegen refuses to run L2+ tasks without stable
+    atoms
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-12T22:52:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Machine-enforced invariant
+  attributes:
+    id: PROTO--SCALE-LEVEL-GATE
+    phase: 2
+    type: proto
+    status: draft
+    severity: warning
+    vault_id: default
+    tier: safety
+    source_type: axiomatic
+    title: PROTO--SCALE-LEVEL-GATE — codegen refuses to run L2+ tasks without stable
+      atoms
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-12T22:52:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Machine-enforced invariant
+    attributes:
+      domain: proto
+    domain: proto
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: proto
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # PROTO — SCALE-LEVEL-GATE

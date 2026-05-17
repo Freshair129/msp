@@ -7,27 +7,71 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Cost Tracking — per-tier price estimates + USAGE bucket aggregation
-tags:
+tags: &a1
   - msp
   - agents
   - cost
   - usage
   - observability
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--AGENT-TIER-ROUTING
     - ADR--AGENT-TIER-COST-POLICY
     - SPEC--USAGE-ATOM
     - SPEC--EPISODE-ATOM
 created_at: 2026-05-14T03:44:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--COST-TRACKING
+  phase: 1
+  type: concept
+  status: draft
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Cost Tracking — per-tier price estimates + USAGE bucket aggregation
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T03:44:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--COST-TRACKING
+    phase: 1
+    type: concept
+    status: draft
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Cost Tracking — per-tier price estimates + USAGE bucket aggregation
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T03:44:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — Cost Tracking

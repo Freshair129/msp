@@ -8,19 +8,19 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — consolidator implementation plan
-tags:
+tags: &a1
   - msp
   - consolidator
   - blueprint
   - implementation
   - m7b
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--CONSOLIDATOR
   references:
     - ADR--CONSOLIDATOR-HYBRID-SCORING
     - CONCEPT--CONSOLIDATOR
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/orchestrator/consolidator/index.ts
   - file: packages/msp/src/orchestrator/consolidator/types.ts
   - file: packages/msp/src/orchestrator/consolidator/score.ts
@@ -32,14 +32,64 @@ linked_symbols:
   - file: packages/msp/test/orchestrator/consolidator/summarise.test.ts
   - file: packages/msp/test/orchestrator/consolidator/index.test.ts
 created_at: 2026-05-04T17:06:30.000+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--CONSOLIDATOR
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — consolidator implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-04T17:06:30.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--CONSOLIDATOR
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — consolidator implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-04T17:06:30.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — consolidator implementation plan

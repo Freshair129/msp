@@ -7,27 +7,71 @@ vault_id: default
 tier: genesis
 source_type: learned
 title: Project = first-class — named registry resolved from CLI / env / .mspconfig
-tags:
+tags: &a1
   - msp
   - project
   - registry
   - cherry-pick
   - agent-agnostic
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - CONCEPT--AGENT-AGNOSTIC
     - ADR--PATH-ENCODING
     - ADR--GLOBAL-VS-WORKSPACE
 created_at: 2026-05-09T07:00:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--NAMED-PROJECT-REGISTRY
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: learned
+  title: Project = first-class — named registry resolved from CLI / env / .mspconfig
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-09T07:00:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--NAMED-PROJECT-REGISTRY
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: learned
+    title: Project = first-class — named registry resolved from CLI / env / .mspconfig
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-09T07:00:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — Named-project registry

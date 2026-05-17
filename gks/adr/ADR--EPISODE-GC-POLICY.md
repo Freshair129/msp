@@ -8,7 +8,7 @@ tier: process
 source_type: axiomatic
 title: ADR — Episode GC policy — 30-day window + error preservation +
   archive-by-default
-tags:
+tags: &a1
   - msp
   - phase-f4
   - agents
@@ -16,20 +16,68 @@ tags:
   - retention
   - gc
   - decision
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--EPISODE-RETENTION
     - SPEC--EPISODE-ATOM
     - AUDIT--PHASE-F4-EPISODE-GC
 created_at: 2026-05-14T05:05:00.000+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--EPISODE-GC-POLICY
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: ADR — Episode GC policy — 30-day window + error preservation +
+    archive-by-default
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T05:05:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--EPISODE-GC-POLICY
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: ADR — Episode GC policy — 30-day window + error preservation +
+      archive-by-default
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T05:05:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — Episode GC policy

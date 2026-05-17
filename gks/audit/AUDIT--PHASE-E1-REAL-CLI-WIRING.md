@@ -7,25 +7,73 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Phase E1 — real CLI wiring for T1/T2/T3 adapters + opt-in integration tests
-tags:
+tags: &a1
   - msp
   - phase-e1
   - audit
   - tier-adapters
   - integration-test
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--REAL-CLI-WIRING
-linked_symbols: []
+linked_symbols: &a3 []
 created_at: 2026-05-14T04:05:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--PHASE-E1-REAL-CLI-WIRING
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Phase E1 — real CLI wiring for T1/T2/T3 adapters + opt-in integration tests
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-14T04:05:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--PHASE-E1-REAL-CLI-WIRING
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Phase E1 — real CLI wiring for T1/T2/T3 adapters + opt-in integration tests
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-14T04:05:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — Phase E1 real CLI wiring

@@ -8,26 +8,72 @@ tier: genesis
 source_type: axiomatic
 title: Session lock cross-platform parity — max-age safeguard for Windows +
   zombie PIDs
-tags:
+tags: &a1
   - msp
   - sessions
   - lock
   - windows
   - cross-platform
   - m9f
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--MEMORY-SESSIONS-WRITER
     - CONCEPT--MEMORY-SESSIONS
 created_at: 2026-05-05T16:22:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--SESSION-LOCK-CROSS-PLATFORM
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Session lock cross-platform parity — max-age safeguard for Windows +
+    zombie PIDs
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-05T16:22:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--SESSION-LOCK-CROSS-PLATFORM
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Session lock cross-platform parity — max-age safeguard for Windows +
+      zombie PIDs
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-05T16:22:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — session lock cross-platform parity

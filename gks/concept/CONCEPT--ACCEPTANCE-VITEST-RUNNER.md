@@ -7,25 +7,69 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Vitest acceptance runner — sandbox candidate + spawn vitest
-tags:
+tags: &a1
   - msp
   - codegen
   - acceptance
   - vitest
   - runtime
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--CODEGEN-MICROTASK-RUNNER
     - ADR--CODEGEN-RETRY-POLICY
 created_at: 2026-05-03T16:27:17.430+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--ACCEPTANCE-VITEST-RUNNER
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Vitest acceptance runner — sandbox candidate + spawn vitest
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T16:27:17.430+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--ACCEPTANCE-VITEST-RUNNER
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Vitest acceptance runner — sandbox candidate + spawn vitest
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T16:27:17.430+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — vitest acceptance runner

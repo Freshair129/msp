@@ -7,14 +7,14 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Master audit — every M milestone status as of v0.3.0
-tags:
+tags: &a1
   - msp
   - audit
   - master
   - roadmap
   - all-m
   - v0.3.0
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - CONCEPT--MSP-ROADMAP
@@ -27,16 +27,64 @@ crosslinks:
     - AUDIT--COMPRESSOR
     - AUDIT--IDENTITY-LAYER
     - AUDIT--MSP-MCP-TOOL-EXPANSION
-linked_symbols: []
+linked_symbols: &a3 []
 created_at: 2026-05-05T16:50:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--ALL-M-MILESTONES
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Master audit — every M milestone status as of v0.3.0
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T16:50:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--ALL-M-MILESTONES
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Master audit — every M milestone status as of v0.3.0
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T16:50:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — every M milestone status (v0.3.0 close-out)

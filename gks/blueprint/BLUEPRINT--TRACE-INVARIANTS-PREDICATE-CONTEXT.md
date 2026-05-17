@@ -5,24 +5,66 @@ type: blueprint
 status: draft
 tier: process
 title: BLUEPRINT — Extend PredicateContext with Symbol Graph Reader
-crosslinks:
+crosslinks: &a1
   implements:
     - PROTO--SYMBOLS-TRACE-INVARIANTS
     - FRAMEWORK--MSP-ARCHITECTURE-V2
   parent_blueprint:
     - BLUEPRINT--PROTO-LOADER
-linked_symbols:
+linked_symbols: &a2
   - file: packages/msp/src/validator/proto/types.ts
   - file: packages/msp/src/validator/proto/loader.ts
 created_at: 2026-05-16T01:00:00.000+07:00
-aliases:
+aliases: &a3
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
+  phase: 3
+  type: blueprint
+  status: draft
+  tier: process
+  title: BLUEPRINT — Extend PredicateContext with Symbol Graph Reader
+  crosslinks: *a1
+  linked_symbols: *a2
+  created_at: 2026-05-16T01:00:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
+    phase: 3
+    type: blueprint
+    status: draft
+    tier: process
+    title: BLUEPRINT — Extend PredicateContext with Symbol Graph Reader
+    crosslinks: *a1
+    linked_symbols: *a2
+    created_at: 2026-05-16T01:00:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — Predicate Context Extension for Symbol Graph

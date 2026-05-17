@@ -8,32 +8,82 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — sessions writer implementation plan
-tags:
+tags: &a1
   - msp
   - memory
   - sessions
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--MEMORY-SESSIONS-WRITER
   references:
     - ADR--MEMORY-SESSIONS-WRITER
     - CONCEPT--MEMORY-SESSIONS
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/memory/sessions/writer.ts
   - file: packages/msp/src/memory/sessions/types.ts
   - file: packages/msp/src/memory/sessions/lock.ts
   - file: packages/msp/src/memory/sessions/schema.ts
 created_at: 2026-05-03T14:16:39.446+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--MEMORY-SESSIONS-WRITER
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — sessions writer implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T14:16:39.446+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--MEMORY-SESSIONS-WRITER
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — sessions writer implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T14:16:39.446+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — sessions writer

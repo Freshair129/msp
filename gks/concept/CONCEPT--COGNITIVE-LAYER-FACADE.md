@@ -7,26 +7,72 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Cognitive Layer facade — one-line memoryOS entry for any agent
-tags:
+tags: &a1
   - msp
   - cognitive-layer
   - facade
   - memoryos
   - agent-agnostic
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--AGENT-AGNOSTIC
     - CONCEPT--AGENT-INTEGRATION-PATTERNS
     - FRAMEWORK--MSP-ARCHITECTURE-V2
 created_at: 2026-05-12T22:45:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--COGNITIVE-LAYER-FACADE
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Cognitive Layer facade — one-line memoryOS entry for any agent
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-12T22:45:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--COGNITIVE-LAYER-FACADE
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Cognitive Layer facade — one-line memoryOS entry for any agent
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-12T22:45:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # CONCEPT — Cognitive Layer facade

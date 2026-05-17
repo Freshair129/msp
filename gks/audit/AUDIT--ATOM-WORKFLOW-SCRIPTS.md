@@ -8,35 +8,87 @@ source_type: axiomatic
 vault_id: default
 title: AUDIT — atom workflow scripts (atom-date, scaffold-atom, supersede)
   verification
-tags:
+tags: &a1
   - msp
   - audit
   - tooling
   - scripts
   - dx
-crosslinks:
+crosslinks: &a2
   references:
     - MASTER--ATOM-CONTRADICTION-POLICY
     - PROTO--SCALING-LEVEL-GATE
-linked_symbols:
+linked_symbols: &a3
   - file: scripts/msp/atom-date.ts
   - file: scripts/msp/scaffold-atom.ts
   - file: scripts/msp/supersede.ts
   - file: packages/msp/test/scripts/workflow-scripts.test.ts
-phase_override:
+phase_override: &a4
   skip_blueprint: true
   reason: Small atom-authoring CLI helper scripts (atom-date / scaffold-atom /
     supersede) — developer tooling, not a feature surface; a per-script phase-3
     blueprint would be doc theater.
 created_at: 2026-05-12T22:05:00.000+07:00
-aliases:
+aliases: &a5
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--ATOM-WORKFLOW-SCRIPTS
+  phase: 6
+  type: audit
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: AUDIT — atom workflow scripts (atom-date, scaffold-atom, supersede)
+    verification
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  phase_override: *a4
+  created_at: 2026-05-12T22:05:00.000+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--ATOM-WORKFLOW-SCRIPTS
+    phase: 6
+    type: audit
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: AUDIT — atom workflow scripts (atom-date, scaffold-atom, supersede)
+      verification
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    phase_override: *a4
+    created_at: 2026-05-12T22:05:00.000+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — atom workflow scripts (PR-C closure)

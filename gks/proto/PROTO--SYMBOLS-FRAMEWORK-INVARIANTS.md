@@ -7,30 +7,78 @@ tier: safety
 source_type: axiomatic
 vault_id: default
 title: Structural invariants for framework-aware symbols
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - protocol
   - invariants
   - nextjs
   - prisma
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--SYMBOLS-FRAMEWORK-AWARENESS
   references:
     - CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS
     - ALGO--SYMBOLS-FRAMEWORK-RECOGNITION
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/framework-invariants.ts
 created_at: 2026-05-12T12:38:00.000+07:00
-aliases:
+aliases: &a4
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
+  id: PROTO--SYMBOLS-FRAMEWORK-INVARIANTS
+  phase: 2
+  type: proto
+  status: active
+  tier: safety
+  source_type: axiomatic
+  vault_id: default
+  title: Structural invariants for framework-aware symbols
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-12T12:38:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Machine-enforced invariant
+  attributes:
+    id: PROTO--SYMBOLS-FRAMEWORK-INVARIANTS
+    phase: 2
+    type: proto
+    status: active
+    tier: safety
+    source_type: axiomatic
+    vault_id: default
+    title: Structural invariants for framework-aware symbols
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-12T12:38:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Machine-enforced invariant
+    attributes:
+      domain: proto
+    domain: proto
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: proto
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # PROTO — Framework-aware symbol invariants

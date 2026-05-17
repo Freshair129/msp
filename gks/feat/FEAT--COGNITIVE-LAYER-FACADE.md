@@ -7,13 +7,13 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: createCognitiveLayer — one-line memoryOS entry for any cognitive-layer agent
-tags:
+tags: &a1
   - msp
   - cognitive-layer
   - facade
   - memoryos
   - user-facing
-crosslinks:
+crosslinks: &a2
   implements:
     - CONCEPT--COGNITIVE-LAYER-FACADE
   references:
@@ -21,7 +21,7 @@ crosslinks:
     - ADR--MEMORY-STORE-GRAPH-WIRING
     - ADR--GEMINI-AS-SLM-PROVIDER
     - ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/cognitive/index.ts
   - file: packages/msp/src/cognitive/types.ts
   - file: packages/msp/src/cognitive/fts.ts
@@ -30,14 +30,63 @@ linked_symbols:
   - file: packages/msp/src/cognitive/audit-only.ts
   - file: packages/msp/src/cognitive/compose.ts
 created_at: 2026-05-12T22:50:00.000+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--COGNITIVE-LAYER-FACADE
+  phase: 2
+  type: feat
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: createCognitiveLayer — one-line memoryOS entry for any cognitive-layer agent
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-12T22:50:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--COGNITIVE-LAYER-FACADE
+    phase: 2
+    type: feat
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: createCognitiveLayer — one-line memoryOS entry for any cognitive-layer
+      agent
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-12T22:50:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # FEAT — createCognitiveLayer

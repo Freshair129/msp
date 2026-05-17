@@ -8,31 +8,81 @@ vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--AUTHORITY-ENFORCEMENT — sanity-check `.brain/msp/authority.yaml`
-tags:
+tags: &a1
   - msp
   - proto
   - authority
   - tier
   - governance
   - m8e
-crosslinks:
+crosslinks: &a2
   enforces:
     - FRAMEWORK--AUTHORITY-MATRIX
   references:
     - CONCEPT--PROTO-AUTHORITY-ENFORCEMENT
     - ADR--DELEGATION-POLICY
     - FEAT--PROTO-LOADER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/authority-enforcement.ts
 created_at: 2026-05-05T18:10:00.000+07:00
-aliases:
+aliases: &a4
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
+  id: PROTO--AUTHORITY-ENFORCEMENT
+  phase: 2
+  type: proto
+  status: draft
+  severity: error
+  vault_id: default
+  tier: safety
+  source_type: axiomatic
+  title: PROTO--AUTHORITY-ENFORCEMENT — sanity-check `.brain/msp/authority.yaml`
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T18:10:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Machine-enforced invariant
+  attributes:
+    id: PROTO--AUTHORITY-ENFORCEMENT
+    phase: 2
+    type: proto
+    status: draft
+    severity: error
+    vault_id: default
+    tier: safety
+    source_type: axiomatic
+    title: PROTO--AUTHORITY-ENFORCEMENT — sanity-check `.brain/msp/authority.yaml`
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T18:10:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Machine-enforced invariant
+    attributes:
+      domain: proto
+    domain: proto
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: proto
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # PROTO — AUTHORITY-ENFORCEMENT

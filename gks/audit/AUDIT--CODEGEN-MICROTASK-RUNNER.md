@@ -7,14 +7,14 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M3c-4 codegen microtask runner acceptance audit
-tags:
+tags: &a1
   - msp
   - m3
   - m3c
   - audit
   - codegen
   - runner
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--CODEGEN-MICROTASK-RUNNER
     - BLUEPRINT--CODEGEN-MICROTASK-RUNNER
@@ -22,7 +22,7 @@ crosslinks:
     - ADR--CODEGEN-POST-PROCESSING
     - ADR--CODEGEN-FORBIDDEN-PATTERNS
     - ADR--CODEGEN-RETRY-POLICY
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/codegen/runner.ts
   - file: packages/msp/src/codegen/load-task.ts
   - file: packages/msp/src/codegen/post-process.ts
@@ -31,14 +31,62 @@ linked_symbols:
   - file: packages/msp/src/codegen/cli.ts
   - file: packages/msp/src/codegen/types.ts
 created_at: 2026-05-03T15:43:39.217+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--CODEGEN-MICROTASK-RUNNER
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M3c-4 codegen microtask runner acceptance audit
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T15:43:39.217+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--CODEGEN-MICROTASK-RUNNER
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M3c-4 codegen microtask runner acceptance audit
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T15:43:39.217+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — codegen microtask runner

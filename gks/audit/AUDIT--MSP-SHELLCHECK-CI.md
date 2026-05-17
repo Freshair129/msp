@@ -7,32 +7,80 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M5f shellcheck CI step audit
-tags:
+tags: &a1
   - msp
   - m5
   - m5f
   - audit
   - ci
   - shellcheck
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--MSP-PRECOMMIT-HOOK
     - FEAT--MSP-PREPUSH-HOOK
-linked_symbols:
+linked_symbols: &a3
   - file: .github/workflows/test.yml
-phase_override:
+phase_override: &a4
   skip_blueprint: true
   reason: M5f added a single shellcheck step to the CI workflow — a config change,
     not code; governed by FEAT--MSP-PRECOMMIT-HOOK / FEAT--MSP-PREPUSH-HOOK.
 created_at: 2026-05-03T18:01:44.015+07:00
-aliases:
+aliases: &a5
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--MSP-SHELLCHECK-CI
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M5f shellcheck CI step audit
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  phase_override: *a4
+  created_at: 2026-05-03T18:01:44.015+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--MSP-SHELLCHECK-CI
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M5f shellcheck CI step audit
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    phase_override: *a4
+    created_at: 2026-05-03T18:01:44.015+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # AUDIT — M5f

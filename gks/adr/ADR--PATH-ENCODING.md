@@ -7,24 +7,70 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Project path encoding — bare name (per script) over D-- prefix (per spec)
-tags:
+tags: &a1
   - msp
   - path-encoding
   - convention
   - decision
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - CONCEPT--TAXONOMY-V2-3
 created_at: 2026-05-03T14:08:44.405+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--PATH-ENCODING
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Project path encoding — bare name (per script) over D-- prefix (per spec)
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:08:44.405+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--PATH-ENCODING
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Project path encoding — bare name (per script) over D-- prefix (per spec)
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:08:44.405+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — project path encoding

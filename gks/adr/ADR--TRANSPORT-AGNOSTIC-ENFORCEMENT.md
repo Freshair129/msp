@@ -7,27 +7,73 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Transport-agnostic enforcement — one PEP per entry surface, one shared PDP
-tags:
+tags: &a1
   - msp
   - ucf
   - adr
   - abac
   - pep
   - enforcement
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--ABAC-POLICY-ENGINE
     - CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
 created_at: 2026-05-14T18:37:52.572+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT
+  phase: 2
+  type: adr
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Transport-agnostic enforcement — one PEP per entry surface, one shared PDP
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T18:37:52.572+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT
+    phase: 2
+    type: adr
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Transport-agnostic enforcement — one PEP per entry surface, one shared PDP
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T18:37:52.572+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — Transport-agnostic enforcement

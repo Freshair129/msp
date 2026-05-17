@@ -8,23 +8,75 @@ source_type: axiomatic
 vault_id: default
 title: Namespace, Vault, and Brain — three layers of isolation and composition
 attributes:
-  domain: [ucf, msp]
-tags:
-  - msp
-  - ucf
-  - concept
-  - namespace
-  - vault
-  - brain
-  - isolation
-crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--IDENTITY-LAYER"]}
+  id: CONCEPT--NAMESPACE-VAULT-BRAIN
+  phase: 1
+  type: concept
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Namespace, Vault, and Brain — three layers of isolation and composition
+  attributes:
+    id: CONCEPT--NAMESPACE-VAULT-BRAIN
+    phase: 1
+    type: concept
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Namespace, Vault, and Brain — three layers of isolation and composition
+    attributes:
+      domain:
+        - ucf
+        - msp
+    tags: &a1
+      - msp
+      - ucf
+      - concept
+      - namespace
+      - vault
+      - brain
+      - isolation
+    crosslinks: &a2
+      references:
+        - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
+        - FRAMEWORK--MSP-ARCHITECTURE-V2
+        - CONCEPT--IDENTITY-LAYER
+    created_at: 2026-05-13T08:59:41.079+07:00
+    aliases: &a3
+      - CONCEPT
+      - implementation_flow
+      - Strategic intent / PRD
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-13T08:59:41.079+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
+tags: *a1
+crosslinks: *a2
 created_at: 2026-05-13T08:59:41.079+07:00
-aliases:
-  - CONCEPT
-  - implementation_flow
-  - Strategic intent / PRD
+aliases: *a3
 cluster: implementation_flow
-role: "Strategic intent / PRD"
+role: Strategic intent / PRD
 ---
 
 # CONCEPT — Namespace, Vault, and Brain

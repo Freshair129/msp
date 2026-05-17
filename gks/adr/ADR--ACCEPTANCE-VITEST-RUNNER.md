@@ -7,23 +7,67 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Spawn vitest in tmp sandbox; parse JSON reporter output
-tags:
+tags: &a1
   - msp
   - codegen
   - acceptance
   - vitest
   - decision
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--ACCEPTANCE-VITEST-RUNNER
     - ADR--CODEGEN-RETRY-POLICY
 created_at: 2026-05-03T16:27:17.914+07:00
-aliases:
+aliases: &a3
   - ADR
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--ACCEPTANCE-VITEST-RUNNER
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Spawn vitest in tmp sandbox; parse JSON reporter output
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T16:27:17.914+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--ACCEPTANCE-VITEST-RUNNER
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Spawn vitest in tmp sandbox; parse JSON reporter output
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T16:27:17.914+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ADR — vitest acceptance runner shape

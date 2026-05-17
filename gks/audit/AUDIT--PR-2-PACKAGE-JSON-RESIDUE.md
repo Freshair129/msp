@@ -7,25 +7,71 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: AUDIT — PR
-tags:
+tags: &a1
   - msp
   - audit
   - cleanup
   - package-json
   - inbound-removal
-crosslinks:
+crosslinks: &a2
   references:
     - BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
     - AUDIT--INBOUND-TO-CANDIDATES-MIGRATION-COMPLETE
 created_at: 2026-05-09T16:00:00.000+07:00
-aliases:
+aliases: &a3
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--PR-2-PACKAGE-JSON-RESIDUE
+  phase: 6
+  type: audit
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: AUDIT — PR
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-09T16:00:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--PR-2-PACKAGE-JSON-RESIDUE
+    phase: 6
+    type: audit
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: AUDIT — PR
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-09T16:00:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — PR #50 package.json residue cleaned up

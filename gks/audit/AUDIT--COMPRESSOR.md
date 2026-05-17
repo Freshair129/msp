@@ -7,21 +7,21 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M7d — context compressor implementation (three-tier shrink-to-fit)
-tags:
+tags: &a1
   - msp
   - compressor
   - compression
   - token-budget
   - m7d
   - audit
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--COMPRESSOR
     - BLUEPRINT--COMPRESSOR
     - ADR--COMPRESSOR-THREE-TIER
     - CONCEPT--CONTEXT-COMPRESSION
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/orchestrator/compressor/index.ts
   - file: packages/msp/src/orchestrator/compressor/types.ts
   - file: packages/msp/src/orchestrator/compressor/tokens.ts
@@ -33,14 +33,62 @@ linked_symbols:
   - file: packages/msp/test/orchestrator/compressor/resummarise.test.ts
   - file: packages/msp/test/orchestrator/compressor/index.test.ts
 created_at: 2026-05-05T16:32:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--COMPRESSOR
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M7d — context compressor implementation (three-tier shrink-to-fit)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T16:32:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--COMPRESSOR
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M7d — context compressor implementation (three-tier shrink-to-fit)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T16:32:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # M7d — context compressor implementation (three-tier shrink-to-fit)

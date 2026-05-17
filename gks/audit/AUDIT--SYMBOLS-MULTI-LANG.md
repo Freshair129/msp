@@ -8,7 +8,7 @@ source_type: axiomatic
 vault_id: default
 title: AUDIT — Multi-language symbol parsing (Python tree-sitter + COBOL regex)
   verification
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - multi-lang
@@ -16,28 +16,78 @@ tags:
   - cobol
   - audit
   - tree-sitter
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--SYMBOLS-MULTI-LANG
     - BLUEPRINT--SYMBOLS-MULTI-LANG
     - ADR--SYMBOLS-PYTHON-PARSER
     - ADR--SYMBOLS-COBOL-STRATEGY
     - FRAMEWORK--SYMBOL-GRAPH
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/symbols/parser/python.ts
   - file: packages/msp/src/symbols/parser/cobol.ts
   - file: packages/msp/src/symbols/parser/index.ts
   - file: packages/msp/test/symbols/parser-python.test.ts
   - file: packages/msp/test/symbols/parser-cobol.test.ts
 created_at: 2026-05-12T05:12:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--SYMBOLS-MULTI-LANG
+  phase: 6
+  type: audit
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: AUDIT — Multi-language symbol parsing (Python tree-sitter + COBOL regex)
+    verification
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-12T05:12:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--SYMBOLS-MULTI-LANG
+    phase: 6
+    type: audit
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: AUDIT — Multi-language symbol parsing (Python tree-sitter + COBOL regex)
+      verification
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-12T05:12:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — Multi-language symbol parsing

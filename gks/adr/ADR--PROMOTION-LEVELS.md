@@ -7,27 +7,73 @@ tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Promotion levels — L0 raw / L1 validated / L2 reviewed
-tags:
+tags: &a1
   - msp
   - promotion
   - levels
   - lifecycle
   - superseded
-crosslinks:
+crosslinks: &a2
   references:
     - ADR--PROMOTION-WORKFLOW
     - CONCEPT--INBOUND-QUEUE
   superseded_by:
     - ADR--AGENT-WRITE-BOUNDARIES
 created_at: 2026-05-03T14:08:43.030+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--PROMOTION-LEVELS
+  phase: 2
+  type: adr
+  status: superseded
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Promotion levels — L0 raw / L1 validated / L2 reviewed
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:08:43.030+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--PROMOTION-LEVELS
+    phase: 2
+    type: adr
+    status: superseded
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Promotion levels — L0 raw / L1 validated / L2 reviewed
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:08:43.030+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 > ⚠️ **Superseded by [`[[ADR--AGENT-WRITE-BOUNDARIES]]`](./[[ADR--AGENT-WRITE-BOUNDARIES]].md)** (Phase 4 of `[[BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION]]`, 2026-05-09). The L0/L1/L2 promotion-level model is replaced by a simple two-state model: `status: candidate` (in `.brain/.../candidates/`) → `status: stable` (in `gks/<type>/` after human PR + CI). Body preserved as historical context.

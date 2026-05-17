@@ -8,29 +8,79 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — hotfix wrapper implementation plan
-tags:
+tags: &a1
   - msp
   - hotfix
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--MSP-HOTFIX-WRAPPER
   references:
     - ADR--MSP-HOTFIX-WRAPPER
-linked_symbols:
+linked_symbols: &a3
   - file: examples/hooks/pre-commit-validator.sh
   - file: package.json
   - file: packages/msp/test/hooks/pre-commit.test.ts
 created_at: 2026-05-03T17:45:50.637+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--MSP-HOTFIX-WRAPPER
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — hotfix wrapper implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T17:45:50.637+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--MSP-HOTFIX-WRAPPER
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — hotfix wrapper implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T17:45:50.637+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — hotfix wrapper

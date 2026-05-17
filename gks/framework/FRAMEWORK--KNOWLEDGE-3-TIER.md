@@ -7,7 +7,7 @@ tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Knowledge 3-Tier model — Safety / Master / Genesis (with epistemic provenance)
-tags:
+tags: &a1
   - msp
   - knowledge
   - tier
@@ -16,21 +16,69 @@ tags:
   - safety
   - epistemic
   - provenance
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - CONCEPT--KNOWLEDGE-LAYERS-V2
     - ADR--AGENT-WRITE-BOUNDARIES
     - FRAMEWORK--AUTHORITY-MATRIX
 created_at: 2026-05-09T14:30:00.000+07:00
-aliases:
+aliases: &a3
   - FRAMEWORK
   - implementation_flow
   - Governance / architectural framework
 cluster: implementation_flow
 role: Governance / architectural framework
 attributes:
+  id: FRAMEWORK--KNOWLEDGE-3-TIER
+  phase: 0
+  type: framework
+  status: stable
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Knowledge 3-Tier model — Safety / Master / Genesis (with epistemic
+    provenance)
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-09T14:30:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Governance / architectural framework
+  attributes:
+    id: FRAMEWORK--KNOWLEDGE-3-TIER
+    phase: 0
+    type: framework
+    status: stable
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Knowledge 3-Tier model — Safety / Master / Genesis (with epistemic
+      provenance)
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-09T14:30:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Governance / architectural framework
+    attributes:
+      domain: framework
+    domain: framework
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: framework
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # FRAME — Knowledge 3-Tier model

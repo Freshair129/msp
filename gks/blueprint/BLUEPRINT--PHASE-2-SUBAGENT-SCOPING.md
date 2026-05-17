@@ -9,31 +9,83 @@ vault_id: default
 scale_level: L2
 title: "BLUEPRINT — Phase 2 subagent scope filtering: first enforced PEP, with
   escalation"
-tags:
+tags: &a1
   - msp
   - ucf
   - blueprint
   - phase-2
   - subagent
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--SUBAGENT-SCOPE-FILTERING
   references:
     - CONCEPT--SUBAGENT-CONTEXT-SCOPING
     - ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT
     - BLUEPRINT--PHASE-1-PDP-SHADOW
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/policy/task-scope.ts
   - file: packages/msp/src/policy/escalation.ts
 created_at: 2026-05-14T22:21:53.742+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--PHASE-2-SUBAGENT-SCOPING
+  phase: 3
+  type: blueprint
+  status: active
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  scale_level: L2
+  title: "BLUEPRINT — Phase 2 subagent scope filtering: first enforced PEP, with
+    escalation"
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-14T22:21:53.742+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--PHASE-2-SUBAGENT-SCOPING
+    phase: 3
+    type: blueprint
+    status: active
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    scale_level: L2
+    title: "BLUEPRINT — Phase 2 subagent scope filtering: first enforced PEP, with
+      escalation"
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-14T22:21:53.742+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — Phase 2: subagent scope filtering

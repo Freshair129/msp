@@ -8,18 +8,18 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — codegen microtask runner implementation plan
-tags:
+tags: &a1
   - msp
   - codegen
   - runner
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--CODEGEN-MICROTASK-RUNNER
   references:
     - ADR--CODEGEN-MICROTASK-RUNNER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/codegen/runner.ts
   - file: packages/msp/src/codegen/load-task.ts
   - file: packages/msp/src/codegen/prompt-builder.ts
@@ -30,14 +30,64 @@ linked_symbols:
   - file: src/codegen/escalate.ts
   - file: packages/msp/src/codegen/cli.ts
 created_at: 2026-05-03T14:16:37.606+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--CODEGEN-MICROTASK-RUNNER
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — codegen microtask runner implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T14:16:37.606+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--CODEGEN-MICROTASK-RUNNER
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — codegen microtask runner implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T14:16:37.606+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — codegen microtask runner

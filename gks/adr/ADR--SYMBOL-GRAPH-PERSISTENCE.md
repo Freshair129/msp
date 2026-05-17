@@ -8,26 +8,72 @@ source_type: axiomatic
 vault_id: default
 title: Symbol Graph persistence — SQLite for queries + JSONL exports for git
   diff visibility
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - persistence
   - sqlite
   - jsonl
   - decision
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--SYMBOL-GRAPH
     - CONCEPT--SYMBOL-GRAPH
 created_at: 2026-05-09T16:50:00.000+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--SYMBOL-GRAPH-PERSISTENCE
+  phase: 2
+  type: adr
+  status: stable
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Symbol Graph persistence — SQLite for queries + JSONL exports for git
+    diff visibility
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-09T16:50:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--SYMBOL-GRAPH-PERSISTENCE
+    phase: 2
+    type: adr
+    status: stable
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Symbol Graph persistence — SQLite for queries + JSONL exports for git
+      diff visibility
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-09T16:50:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ADR — Symbol Graph persistence

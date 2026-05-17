@@ -8,13 +8,13 @@ tier: process
 source_type: axiomatic
 title: M7f — MCP tool expansion (4 of 5 passport tools shipped; msp_compress
   deferred pending M7d)
-tags:
+tags: &a1
   - msp
   - mcp
   - tools
   - m7f
   - audit
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--MSP-MCP-TOOL-EXPANSION
     - BLUEPRINT--MSP-MCP-TOOL-EXPANSION
@@ -24,7 +24,7 @@ crosslinks:
     - FEAT--RETRIEVAL-ORCHESTRATION
     - FEAT--IDENTITY-LAYER
     - FEAT--COMPRESSOR
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/mcp/server.ts
   - file: packages/msp/src/mcp/tools/recall.ts
   - file: packages/msp/src/mcp/tools/remember.ts
@@ -37,14 +37,64 @@ linked_symbols:
   - file: packages/msp/test/mcp/server.test.ts
   - file: packages/msp/test/mcp/bin.test.ts
 created_at: 2026-05-05T16:35:30.812+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--MSP-MCP-TOOL-EXPANSION
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M7f — MCP tool expansion (4 of 5 passport tools shipped; msp_compress
+    deferred pending M7d)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T16:35:30.812+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--MSP-MCP-TOOL-EXPANSION
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M7f — MCP tool expansion (4 of 5 passport tools shipped; msp_compress
+      deferred pending M7d)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T16:35:30.812+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # M7f — MCP tool expansion (4 of 5 passport tools shipped; msp_compress deferred)

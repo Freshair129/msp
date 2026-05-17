@@ -8,14 +8,14 @@ tier: process
 source_type: direct_experience
 title: AUDIT — Cognitive Layer V0 (Genesis Block + PgGraph + Gemini-as-subagent
   + createCognitiveLayer facade)
-tags:
+tags: &a1
   - msp
   - gks
   - cognitive-layer
   - genesis-block
   - gemini
   - audit
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--COGNITIVE-LAYER-FACADE
     - CONCEPT--HYBRID-RETRIEVAL-FTS-LAYER
@@ -24,7 +24,7 @@ crosslinks:
     - ADR--MEMORY-STORE-GRAPH-WIRING
     - BLUEPRINT--GENESIS-GRAPH-TS-FIRST
     - FEAT--COGNITIVE-LAYER-FACADE
-linked_symbols:
+linked_symbols: &a3
   - file: packages/gks/src/memory/graph/genesis-graph.ts
   - file: packages/gks/src/memory/graph/cypher-v0.ts
   - file: packages/gks/src/memory/graph/genesis-graph-errors.ts
@@ -40,14 +40,64 @@ linked_symbols:
   - file: packages/msp/src/codegen/runner.ts
   - file: packages/msp/examples/cognitive-layer-quickstart.ts
 created_at: 2026-05-12T22:55:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--COGNITIVE-LAYER-V0
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: direct_experience
+  title: AUDIT — Cognitive Layer V0 (Genesis Block + PgGraph + Gemini-as-subagent
+    + createCognitiveLayer facade)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-12T22:55:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--COGNITIVE-LAYER-V0
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: direct_experience
+    title: AUDIT — Cognitive Layer V0 (Genesis Block + PgGraph + Gemini-as-subagent
+      + createCognitiveLayer facade)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-12T22:55:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — Cognitive Layer V0

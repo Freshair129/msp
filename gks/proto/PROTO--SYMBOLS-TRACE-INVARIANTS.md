@@ -8,30 +8,80 @@ tier: safety
 source_type: axiomatic
 vault_id: default
 title: Structural invariants for execution traces and atom graphs
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - proto
   - invariants
   - atom-graph
-crosslinks:
+crosslinks: &a2
   enforces:
     - ADR--SYMBOLS-PROCESS-TRACING
   implements:
     - ADR--SYMBOLS-PROCESS-TRACING
   supersedes:
     - PROTO--TRACE-INVARIANTS
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/trace-invariants.ts
 created_at: 2026-05-14T20:00:00.000+07:00
-aliases:
+aliases: &a4
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
+  id: PROTO--SYMBOLS-TRACE-INVARIANTS
+  phase: 2
+  type: proto
+  status: stable
+  severity: error
+  tier: safety
+  source_type: axiomatic
+  vault_id: default
+  title: Structural invariants for execution traces and atom graphs
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-14T20:00:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Machine-enforced invariant
+  attributes:
+    id: PROTO--SYMBOLS-TRACE-INVARIANTS
+    phase: 2
+    type: proto
+    status: stable
+    severity: error
+    tier: safety
+    source_type: axiomatic
+    vault_id: default
+    title: Structural invariants for execution traces and atom graphs
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-14T20:00:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Machine-enforced invariant
+    attributes:
+      domain: proto
+    domain: proto
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: proto
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # PROTO — Trace Invariants

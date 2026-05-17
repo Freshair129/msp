@@ -7,13 +7,13 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: SPEC — Episode Atom — runtime-generated dispatch record contract
-tags:
+tags: &a1
   - msp
   - agents
   - episode
   - spec
   - runtime
-crosslinks:
+crosslinks: &a2
   references:
     - BLUEPRINT--AGENT-DISPATCHER
     - ADR--AGENT-TIER-COST-POLICY
@@ -21,14 +21,60 @@ crosslinks:
     - ADR--BRAIN-PATH-RESOLUTION
     - ADR--EPISODE-GC-POLICY
 created_at: 2026-05-14T03:00:00.000+07:00
-aliases:
+aliases: &a3
   - SPEC
   - implementation_flow
   - Technical specification
 cluster: implementation_flow
 role: Technical specification
 attributes:
+  id: SPEC--EPISODE-ATOM
+  phase: 2
+  type: spec
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: SPEC — Episode Atom — runtime-generated dispatch record contract
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T03:00:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Technical specification
+  attributes:
+    id: SPEC--EPISODE-ATOM
+    phase: 2
+    type: spec
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: SPEC — Episode Atom — runtime-generated dispatch record contract
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T03:00:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Technical specification
+    attributes:
+      domain: spec
+    domain: spec
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: spec
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # SPEC — Episode Atom

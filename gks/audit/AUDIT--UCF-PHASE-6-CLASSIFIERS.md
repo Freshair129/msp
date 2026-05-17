@@ -7,17 +7,65 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: AUDIT — UCF Phase 6 — Classifier plugins and auto-tagging
-tags:
+tags: &a1
   - msp
   - ucf
   - classifier
   - audit
-crosslinks: {"implements":["BLUEPRINT--PHASE-6-CLASSIFIERS"],"references":["FEAT--CLASSIFIER-PLUGINS"]}
+crosslinks: &a2
+  implements:
+    - BLUEPRINT--PHASE-6-CLASSIFIERS
+  references:
+    - FEAT--CLASSIFIER-PLUGINS
 created_at: 2026-05-17T09:00:00+07:00
 aliases:
   - AUDIT
 cluster: implementation_flow
-role: "Test results / quality report"
+role: Test results / quality report
+attributes:
+  id: AUDIT--UCF-PHASE-6-CLASSIFIERS
+  phase: 6
+  type: audit
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: AUDIT — UCF Phase 6 — Classifier plugins and auto-tagging
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-17T09:00:00+07:00
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--UCF-PHASE-6-CLASSIFIERS
+    phase: 6
+    type: audit
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: AUDIT — UCF Phase 6 — Classifier plugins and auto-tagging
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-17T09:00:00+07:00
+    cluster: implementation_flow
+    role: Test results / quality report
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
+  domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — UCF Phase 6 (Classifiers)

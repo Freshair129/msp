@@ -7,26 +7,70 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: PROTO--PHASE-GATES — enforce P0 → P6 ordering at PR-time
-tags:
+tags: &a1
   - msp
   - proto
   - phase-gates
   - governance
   - m8b
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--PROTO-PATTERN
     - FRAMEWORK--PHASE-GOVERNANCE
     - FEAT--PROTO-LOADER
 created_at: 2026-05-05T16:28:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--PROTO-PHASE-GATES
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: PROTO--PHASE-GATES — enforce P0 → P6 ordering at PR-time
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-05T16:28:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--PROTO-PHASE-GATES
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: PROTO--PHASE-GATES — enforce P0 → P6 ordering at PR-time
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-05T16:28:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — [[PROTO--PHASE-GATES]]

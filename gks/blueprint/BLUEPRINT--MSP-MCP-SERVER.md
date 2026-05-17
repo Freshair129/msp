@@ -8,18 +8,18 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — MSP MCP server implementation plan
-tags:
+tags: &a1
   - msp
   - mcp
   - server
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--MSP-MCP-SERVER
   references:
     - ADR--MSP-MCP-SERVER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/mcp/server.ts
   - file: packages/msp/src/mcp/types.ts
   - file: packages/msp/src/mcp/tools/validate.ts
@@ -29,14 +29,64 @@ linked_symbols:
   - file: packages/msp/src/mcp/tools/episode-append.ts
   - file: packages/msp/src/mcp/tools/backlinks-rebuild.ts
 created_at: 2026-05-03T18:13:55.210+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--MSP-MCP-SERVER
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — MSP MCP server implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T18:13:55.210+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--MSP-MCP-SERVER
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — MSP MCP server implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T18:13:55.210+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — MSP MCP server

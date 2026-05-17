@@ -8,20 +8,20 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — MSP MCP tool expansion implementation plan
-tags:
+tags: &a1
   - msp
   - mcp
   - tools
   - blueprint
   - implementation
   - m7f
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--MSP-MCP-TOOL-EXPANSION
   references:
     - CONCEPT--MSP-MCP-TOOL-EXPANSION
     - FEAT--MSP-MCP-SERVER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/mcp/server.ts
   - file: packages/msp/src/mcp/tools/recall.ts
   - file: packages/msp/src/mcp/tools/remember.ts
@@ -34,14 +34,64 @@ linked_symbols:
   - file: packages/msp/test/mcp/tools/identity-get.test.ts
   - file: packages/msp/test/mcp/tools/identity-set.test.ts
 created_at: 2026-05-05T16:15:00.000+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--MSP-MCP-TOOL-EXPANSION
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — MSP MCP tool expansion implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T16:15:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--MSP-MCP-TOOL-EXPANSION
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — MSP MCP tool expansion implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T16:15:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — MSP MCP tool expansion

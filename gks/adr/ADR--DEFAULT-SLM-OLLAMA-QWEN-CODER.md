@@ -8,7 +8,7 @@ tier: process
 source_type: axiomatic
 title: Default codegen SLM is Ollama + qwen2.5-coder (drop the qwen-CLI fallback
   in runner)
-tags:
+tags: &a1
   - msp
   - codegen
   - slm
@@ -18,19 +18,67 @@ tags:
   - cli
   - coder
   - local
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--CODEGEN-MICROTASK-RUNNER
     - CONCEPT--CODEGEN-MICROTASK-CONTRACT
 created_at: 2026-05-12T22:46:00.000+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Default codegen SLM is Ollama + qwen2.5-coder (drop the qwen-CLI fallback
+    in runner)
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-12T22:46:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--DEFAULT-SLM-OLLAMA-QWEN-CODER
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Default codegen SLM is Ollama + qwen2.5-coder (drop the qwen-CLI fallback
+      in runner)
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-12T22:46:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — Default codegen SLM is Ollama + qwen2.5-coder

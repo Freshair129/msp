@@ -8,27 +8,75 @@ tier: process
 source_type: axiomatic
 title: Episode retention — bounded growth of <root>/gks/episode/ via age-based
   GC with error preservation
-tags:
+tags: &a1
   - msp
   - phase-f4
   - agents
   - episode
   - retention
   - gc
-crosslinks:
+crosslinks: &a2
   references:
     - SPEC--EPISODE-ATOM
     - ADR--EPISODE-GC-POLICY
     - ADR--BRAIN-PATH-RESOLUTION
 created_at: 2026-05-14T05:00:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--EPISODE-RETENTION
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Episode retention — bounded growth of <root>/gks/episode/ via age-based
+    GC with error preservation
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T05:00:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--EPISODE-RETENTION
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Episode retention — bounded growth of <root>/gks/episode/ via age-based
+      GC with error preservation
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T05:00:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # CONCEPT — Episode retention

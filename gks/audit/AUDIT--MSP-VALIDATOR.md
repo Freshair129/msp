@@ -7,17 +7,17 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: MSP validator M2 acceptance audit
-tags:
+tags: &a1
   - msp
   - validator
   - audit
   - dogfood
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--MSP-VALIDATOR
     - BLUEPRINT--MSP-VALIDATOR
     - ADR--MSP-VALIDATOR
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/index.ts
   - file: packages/msp/src/validator/cli.ts
   - file: packages/msp/src/validator/parse.ts
@@ -31,14 +31,62 @@ linked_symbols:
   - file: packages/msp/src/validator/rules/summary-min.ts
   - file: packages/msp/src/validator/rules/phase-status.ts
 created_at: 2026-05-03T13:34:05.276+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--MSP-VALIDATOR
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: MSP validator M2 acceptance audit
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T13:34:05.276+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--MSP-VALIDATOR
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: MSP validator M2 acceptance audit
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T13:34:05.276+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — MSP validator M2 acceptance

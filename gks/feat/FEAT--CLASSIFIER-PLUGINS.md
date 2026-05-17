@@ -7,25 +7,69 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: FEAT — Classifier plugins for automatic attribute tagging
-tags:
+tags: &a1
   - msp
   - ucf
   - classifier
   - tagging
   - attributes
-crosslinks:
+crosslinks: &a2
   implements:
     - CONCEPT--ATTRIBUTE-BAG-MODEL
   references:
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
 created_at: 2026-05-17T08:50:00+07:00
 cluster: implementation_flow
-role: "Feature spec"
-aliases:
+role: Feature spec
+aliases: &a3
   - FEAT
   - implementation_flow
 attributes:
+  id: FEAT--CLASSIFIER-PLUGINS
+  phase: 2
+  type: feat
+  status: active
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: FEAT — Classifier plugins for automatic attribute tagging
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-17T08:50:00+07:00
+  cluster: implementation_flow
+  role: Feature spec
+  aliases: *a3
+  attributes:
+    id: FEAT--CLASSIFIER-PLUGINS
+    phase: 2
+    type: feat
+    status: active
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: FEAT — Classifier plugins for automatic attribute tagging
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-17T08:50:00+07:00
+    cluster: implementation_flow
+    role: Feature spec
+    aliases: *a3
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # FEAT — Classifier Plugins

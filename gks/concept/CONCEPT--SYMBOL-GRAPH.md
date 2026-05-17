@@ -7,24 +7,68 @@ tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Symbol Graph — extracted structural knowledge over source code
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - structural
   - prior-art
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--SYMBOL-GRAPH
     - FRAMEWORK--MSP-ARCHITECTURE-V2
 created_at: 2026-05-09T16:31:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--SYMBOL-GRAPH
+  phase: 1
+  type: concept
+  status: stable
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Symbol Graph — extracted structural knowledge over source code
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-09T16:31:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--SYMBOL-GRAPH
+    phase: 1
+    type: concept
+    status: stable
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Symbol Graph — extracted structural knowledge over source code
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-09T16:31:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — Symbol Graph

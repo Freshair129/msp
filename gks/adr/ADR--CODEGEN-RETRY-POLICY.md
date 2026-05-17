@@ -7,25 +7,71 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Codegen retry policy — max 3 SLM then Gemini then Opus
-tags:
+tags: &a1
   - msp
   - codegen
   - retry
   - slm
   - escalation
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--CODEGEN-MICROTASK-CONTRACT
     - ADR--CODEGEN-FORBIDDEN-PATTERNS
 created_at: 2026-05-03T14:08:42.580+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--CODEGEN-RETRY-POLICY
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Codegen retry policy — max 3 SLM then Gemini then Opus
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:08:42.580+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--CODEGEN-RETRY-POLICY
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Codegen retry policy — max 3 SLM then Gemini then Opus
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:08:42.580+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — codegen retry policy

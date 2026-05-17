@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — monorepo migration phased implementation plan
-tags:
+tags: &a1
   - monorepo
   - workspace
   - migration
@@ -15,12 +15,12 @@ tags:
   - implementation
   - msp
   - gks
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--MONOREPO-MIGRATION
     - ADR--MONOREPO-STRUCTURE
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols:
+linked_symbols: &a3
   - file: package.json
   - file: packages/gks/package.json
   - file: packages/msp/package.json
@@ -31,14 +31,62 @@ linked_symbols:
   - file: scripts/msp/propose.mjs
   - file: packages/msp/src/memory/backlinks/
 created_at: 2026-05-08T13:22:00.000+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--MONOREPO-MIGRATION
+  phase: 3
+  type: blueprint
+  status: draft
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — monorepo migration phased implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-08T13:22:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--MONOREPO-MIGRATION
+    phase: 3
+    type: blueprint
+    status: draft
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — monorepo migration phased implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-08T13:22:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — monorepo migration

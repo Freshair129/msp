@@ -7,30 +7,76 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: "BLUEPRINT — Phase 6: Classifier plugins + auto-tagging"
-tags:
+tags: &a1
   - msp
   - ucf
   - classifier
   - blueprint
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--CLASSIFIER-PLUGINS
   references:
     - CONCEPT--ATTRIBUTE-BAG-MODEL
 created_at: 2026-05-17T08:52:00+07:00
 cluster: implementation_flow
-role: "Implementation plan"
-linked_symbols:
-  - { file: "packages/msp/src/policy/classifiers/types.ts" }
-  - { file: "packages/msp/src/policy/classifiers/engine.ts" }
-  - { file: "packages/msp/src/policy/classifiers/path.ts" }
-  - { file: "packages/msp/src/policy/classifiers/content.ts" }
-  - { file: "packages/msp/src/policy/classifiers/cli.ts" }
-aliases:
+role: Implementation plan
+linked_symbols: &a3
+  - file: packages/msp/src/policy/classifiers/types.ts
+  - file: packages/msp/src/policy/classifiers/engine.ts
+  - file: packages/msp/src/policy/classifiers/path.ts
+  - file: packages/msp/src/policy/classifiers/content.ts
+  - file: packages/msp/src/policy/classifiers/cli.ts
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
 attributes:
+  id: BLUEPRINT--PHASE-6-CLASSIFIERS
+  phase: 3
+  type: blueprint
+  status: draft
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: "BLUEPRINT — Phase 6: Classifier plugins + auto-tagging"
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-17T08:52:00+07:00
+  cluster: implementation_flow
+  role: Implementation plan
+  linked_symbols: *a3
+  aliases: *a4
+  attributes:
+    id: BLUEPRINT--PHASE-6-CLASSIFIERS
+    phase: 3
+    type: blueprint
+    status: draft
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: "BLUEPRINT — Phase 6: Classifier plugins + auto-tagging"
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-17T08:52:00+07:00
+    cluster: implementation_flow
+    role: Implementation plan
+    linked_symbols: *a3
+    aliases: *a4
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # BLUEPRINT — Phase 6: Classifiers

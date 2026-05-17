@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M8d — PROTO--ALGO-PARAM-COUPLING acceptance audit
-tags:
+tags: &a1
   - msp
   - m8
   - m8d
@@ -16,18 +16,18 @@ tags:
   - algo
   - param
   - governance
-crosslinks:
+crosslinks: &a2
   references:
     - PROTO--ALGO-PARAM-COUPLING
     - CONCEPT--PROTO-ALGO-PARAM-COUPLING
     - ADR--GRAPH-IS-GKS-DOMAIN
     - FRAMEWORK--CROSSLINKS-VOCABULARY
     - CONCEPT--PROTO-PATTERN
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/algo-param-coupling.ts
   - file: packages/msp/test/validator/proto/algo-param-coupling.test.ts
   - file: gks/proto/PROTO--ALGO-PARAM-COUPLING.md
-phase_override:
+phase_override: &a4
   skip_blueprint: true
   reason: "Incremental PROTO rule plugged into the already-blueprinted loader
     scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain:
@@ -35,14 +35,64 @@ phase_override:
     predicate -> this audit; per-rule predicates do not each warrant a separate
     phase-3 blueprint."
 created_at: 2026-05-05T18:11:00.000+07:00
-aliases:
+aliases: &a5
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--ALGO-PARAM-COUPLING-PROTO
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M8d — PROTO--ALGO-PARAM-COUPLING acceptance audit
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  phase_override: *a4
+  created_at: 2026-05-05T18:11:00.000+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--ALGO-PARAM-COUPLING-PROTO
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M8d — PROTO--ALGO-PARAM-COUPLING acceptance audit
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    phase_override: *a4
+    created_at: 2026-05-05T18:11:00.000+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — [[PROTO--ALGO-PARAM-COUPLING]] (M8d)

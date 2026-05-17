@@ -7,28 +7,74 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Genesis Block manifest — frontmatter contract for GENESIS-- atoms (v2.3+)
-tags:
+tags: &a1
   - msp
   - spec
   - knowledge-block
   - manifest
   - taxonomy
   - foundation
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--TAXONOMY-V2-3
     - ADR--TAXONOMY-V2-3-MIGRATION
     - FRAMEWORK--AUTHORITY-MATRIX
     - CONCEPT--GENESIS-GRAPH-BACKEND
 created_at: 2026-05-13T13:14:43+07:00
-aliases:
+aliases: &a3
   - SPEC
   - implementation_flow
   - Technical specification
 cluster: implementation_flow
 role: Technical specification
 attributes:
+  id: SPEC--GENESIS-BLOCK-MANIFEST
+  phase: 2
+  type: spec
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Genesis Block manifest — frontmatter contract for GENESIS-- atoms (v2.3+)
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-13T13:14:43+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Technical specification
+  attributes:
+    id: SPEC--GENESIS-BLOCK-MANIFEST
+    phase: 2
+    type: spec
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Genesis Block manifest — frontmatter contract for GENESIS-- atoms (v2.3+)
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-13T13:14:43+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Technical specification
+    attributes:
+      domain: spec
+    domain: spec
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: spec
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # SPEC — Genesis Block manifest

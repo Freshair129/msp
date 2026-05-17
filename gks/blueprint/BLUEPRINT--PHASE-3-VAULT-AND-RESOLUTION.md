@@ -9,14 +9,14 @@ vault_id: default
 scale_level: L2
 title: BLUEPRINT — Phase 3 vault composition + 2-tier resolution gradient, first
   default-deny flip
-tags:
+tags: &a1
   - msp
   - ucf
   - blueprint
   - phase-3
   - vault
   - resolution
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--VAULT-COMPOSITION
     - FEAT--RESOLUTION-EXPAND-ON-DEMAND
@@ -25,20 +25,72 @@ crosslinks:
     - ADR--RESOLUTION-TIER-COUNT
     - ADR--DEFAULT-POLICY-POSTURE
     - BLUEPRINT--PHASE-2-SUBAGENT-SCOPING
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/vault/registry.ts
   - file: packages/msp/src/vault/types.ts
   - file: packages/msp/src/orchestrator/resolution/tier.ts
   - file: packages/msp/src/orchestrator/resolution/budget.ts
 created_at: 2026-05-14T22:21:54.630+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--PHASE-3-VAULT-AND-RESOLUTION
+  phase: 3
+  type: blueprint
+  status: active
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  scale_level: L2
+  title: BLUEPRINT — Phase 3 vault composition + 2-tier resolution gradient, first
+    default-deny flip
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-14T22:21:54.630+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--PHASE-3-VAULT-AND-RESOLUTION
+    phase: 3
+    type: blueprint
+    status: active
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    scale_level: L2
+    title: BLUEPRINT — Phase 3 vault composition + 2-tier resolution gradient, first
+      default-deny flip
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-14T22:21:54.630+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — Phase 3: vault composition + resolution gradient

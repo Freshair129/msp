@@ -7,25 +7,71 @@ tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Proposal types — new_atomic / update_atomic / supersede / deprecate
-tags:
+tags: &a1
   - msp
   - inbound
   - proposal-types
   - superseded
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--SUBMISSION-ENVELOPE
   superseded_by:
     - CONCEPT--KNOWLEDGE-LAYERS-V2
 created_at: 2026-05-03T14:01:51.322+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--PROPOSAL-TYPES
+  phase: 1
+  type: concept
+  status: superseded
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Proposal types — new_atomic / update_atomic / supersede / deprecate
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:01:51.322+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--PROPOSAL-TYPES
+    phase: 1
+    type: concept
+    status: superseded
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Proposal types — new_atomic / update_atomic / supersede / deprecate
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:01:51.322+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 > ⚠️ **Superseded by [`[[CONCEPT--KNOWLEDGE-LAYERS-V2]]`](./[[CONCEPT--KNOWLEDGE-LAYERS-V2]].md)** (Phase 4 of `[[BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION]]`, 2026-05-09). The new candidates layer doesn't use a proposal-type discriminator — every candidate is just a `${proposed_id}.md` file in `.brain/.../candidates/`. Body preserved as historical context.

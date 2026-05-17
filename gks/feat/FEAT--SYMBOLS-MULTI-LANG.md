@@ -8,33 +8,83 @@ source_type: axiomatic
 vault_id: default
 title: Multi-language symbol support — adding Python and legacy COBOL parsers to
   MSP graph
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - multi-lang
   - python
   - cobol
   - feat
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
   references:
     - FRAMEWORK--SYMBOL-GRAPH
     - CONCEPT--SYMBOL-GRAPH
     - FEAT--MSP-SYMBOL-MCP
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/symbols/parser/python.ts
   - file: packages/msp/src/symbols/parser/cobol.ts
   - file: packages/msp/src/symbols/api.ts
 created_at: 2026-05-12T04:48:00.000+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--SYMBOLS-MULTI-LANG
+  phase: 2
+  type: feat
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Multi-language symbol support — adding Python and legacy COBOL parsers to
+    MSP graph
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-12T04:48:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--SYMBOLS-MULTI-LANG
+    phase: 2
+    type: feat
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Multi-language symbol support — adding Python and legacy COBOL parsers to
+      MSP graph
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-12T04:48:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # FEAT — Multi-language symbol support

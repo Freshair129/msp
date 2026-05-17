@@ -7,13 +7,13 @@ created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
 tier: genesis
 title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
-tags:
+tags: &a1
   - workflow
   - enforcement
   - agent-rule
   - hotfix
   - msp-gatekeeper
-crosslinks:
+crosslinks: &a2
   references:
     - ADR--EXTENDED-TAXONOMY
     - ADR--FLAT-ATOM-LAYOUT
@@ -21,7 +21,7 @@ crosslinks:
     - CONCEPT--MASTER-PROMOTION
   partially_superseded_by:
     - ADR--TASK-TRACKING-AT-ORCHESTRATOR
-linked_symbols:
+linked_symbols: &a3
   - file: packages/gks/src/memory/types.ts
     fn: normaliseStatus
   - file: packages/gks/src/memory/types.ts
@@ -42,14 +42,60 @@ linked_symbols:
     fn: cmdNewFeature
   - file: packages/gks/bin/gks.ts
     fn: cmdHotfix
-aliases:
+aliases: &a4
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--DOC-TO-CODE-ENFORCEMENT
+  phase: 2
+  type: adr
+  status: stable
+  created_at: 2026-05-13T12:00:00+07:00
+  vault_id: GKS-CORE
+  tier: genesis
+  title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  aliases: *a4
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--DOC-TO-CODE-ENFORCEMENT
+    phase: 2
+    type: adr
+    status: stable
+    created_at: 2026-05-13T12:00:00+07:00
+    vault_id: GKS-CORE
+    tier: genesis
+    title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    aliases: *a4
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — Doc-to-code enforcement model

@@ -8,27 +8,73 @@ tier: genesis
 source_type: axiomatic
 title: Semantic search — GKS canonical, Smart Connections in-Obsidian browse
   (parity-locked model)
-tags:
+tags: &a1
   - msp
   - gks
   - semantic-search
   - smart-connections
   - obsidian
   - decision
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--EMBEDDING-STRATEGY
     - ADR--EMBEDDING-MODEL-PARITY
     - ADR--MSP-OBSIDIAN-INTEGRATION
 created_at: 2026-05-03T23:55:06.784+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Semantic search — GKS canonical, Smart Connections in-Obsidian browse
+    (parity-locked model)
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T23:55:06.784+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Semantic search — GKS canonical, Smart Connections in-Obsidian browse
+      (parity-locked model)
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T23:55:06.784+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ADR — semantic search topology

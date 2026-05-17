@@ -8,18 +8,18 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — MSP validator implementation plan
-tags:
+tags: &a1
   - msp
   - validator
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--MSP-VALIDATOR
   references:
     - ADR--MSP-VALIDATOR
     - CONCEPT--MSP-VALIDATOR
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/index.ts
   - file: packages/msp/src/validator/types.ts
   - file: packages/msp/src/validator/parse.ts
@@ -32,14 +32,64 @@ linked_symbols:
   - file: packages/msp/src/validator/atomic-index.ts
   - file: packages/msp/src/validator/cli.ts
 created_at: 2026-05-03T13:24:25.656+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--MSP-VALIDATOR
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — MSP validator implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T13:24:25.656+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--MSP-VALIDATOR
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — MSP validator implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T13:24:25.656+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — MSP validator implementation plan

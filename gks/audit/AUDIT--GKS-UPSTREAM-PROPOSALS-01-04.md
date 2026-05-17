@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: GKS upstream proposals 01–04 merged in v3.7.0
-tags:
+tags: &a1
   - msp
   - upstream
   - gks
@@ -16,17 +16,63 @@ tags:
   - verify-flow
   - embedder
 created_at: 2026-05-11T07:00:00.000+07:00
-crosslinks:
+crosslinks: &a2
   references:
     - AUDIT--GKS-UPSTREAM-PROPOSALS-FILED
-aliases:
+aliases: &a3
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--GKS-UPSTREAM-PROPOSALS-01-04
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: GKS upstream proposals 01–04 merged in v3.7.0
+  tags: *a1
+  created_at: 2026-05-11T07:00:00.000+07:00
+  crosslinks: *a2
+  aliases: *a3
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--GKS-UPSTREAM-PROPOSALS-01-04
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: GKS upstream proposals 01–04 merged in v3.7.0
+    tags: *a1
+    created_at: 2026-05-11T07:00:00.000+07:00
+    crosslinks: *a2
+    aliases: *a3
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — GKS upstream proposals 01–04 merged (v3.7.0)

@@ -7,28 +7,72 @@ created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
 tier: genesis
 title: Self-hosted issue tracker (light-tier)
-tags:
+tags: &a1
   - user-facing
   - ops
   - issue-tracking
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--EXTENDED-TAXONOMY
   references:
     - CONCEPT--MEMORY-STORE
-linked_symbols:
+linked_symbols: &a3
   - file: packages/gks/src/issue/store.ts
   - file: packages/gks/src/issue/types.ts
   - file: packages/gks/bin/gks.ts
     fn: cmdIssue
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--ISSUE-TRACKER
+  phase: 2
+  type: feat
+  status: stable
+  created_at: 2026-05-13T12:00:00+07:00
+  vault_id: GKS-CORE
+  tier: genesis
+  title: Self-hosted issue tracker (light-tier)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--ISSUE-TRACKER
+    phase: 2
+    type: feat
+    status: stable
+    created_at: 2026-05-13T12:00:00+07:00
+    vault_id: GKS-CORE
+    tier: genesis
+    title: Self-hosted issue tracker (light-tier)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # FEAT — Self-hosted issue tracker

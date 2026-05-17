@@ -7,31 +7,77 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Episodic writer API — appendEpisode + summariser plugin
-tags:
+tags: &a1
   - msp
   - memory
   - episodic
   - writer
   - user-facing
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--MEMORY-EPISODIC-WRITER
   references:
     - CONCEPT--MEMORY-EPISODIC-WRITER
     - CONCEPT--MEMORY-EPISODIC
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/memory/episodic/writer.ts
   - file: packages/msp/src/memory/episodic/types.ts
   - file: packages/msp/src/memory/episodic/summarisers/heuristic.ts
 created_at: 2026-05-03T14:16:40.829+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--MEMORY-EPISODIC-WRITER
+  phase: 2
+  type: feat
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Episodic writer API — appendEpisode + summariser plugin
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T14:16:40.829+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--MEMORY-EPISODIC-WRITER
+    phase: 2
+    type: feat
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Episodic writer API — appendEpisode + summariser plugin
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T14:16:40.829+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # FEAT — episodic writer

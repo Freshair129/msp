@@ -7,13 +7,13 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: MSP MCP tools — recall / remember / compress / identity-get / identity-set
-tags:
+tags: &a1
   - msp
   - mcp
   - tools
   - m7f
   - user-facing
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--MSP-MCP-TOOL-EXPANSION
     - FEAT--MSP-MCP-SERVER
@@ -21,7 +21,7 @@ crosslinks:
     - FEAT--RETRIEVAL-ORCHESTRATION
     - FEAT--COMPRESSOR
     - FEAT--IDENTITY-LAYER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/mcp/server.ts
   - file: packages/msp/src/mcp/tools/recall.ts
   - file: packages/msp/src/mcp/tools/remember.ts
@@ -29,14 +29,60 @@ linked_symbols:
   - file: packages/msp/src/mcp/tools/identity-get.ts
   - file: packages/msp/src/mcp/tools/identity-set.ts
 created_at: 2026-05-05T16:15:00.000+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--MSP-MCP-TOOL-EXPANSION
+  phase: 2
+  type: feat
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: MSP MCP tools — recall / remember / compress / identity-get / identity-set
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T16:15:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--MSP-MCP-TOOL-EXPANSION
+    phase: 2
+    type: feat
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: MSP MCP tools — recall / remember / compress / identity-get / identity-set
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T16:15:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # MSP MCP tools — passport-side surface (M7f)

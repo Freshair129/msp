@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M9a — PROTO--VALID-UNTIL decision atrophy guard (draft)
-tags:
+tags: &a1
   - msp
   - proto
   - lifecycle
@@ -15,17 +15,17 @@ tags:
   - atrophy
   - audit
   - m9a
-crosslinks:
+crosslinks: &a2
   references:
     - PROTO--VALID-UNTIL
     - CONCEPT--DECISION-ATROPHY-GUARDS
     - FEAT--PROTO-LOADER
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/valid-until.ts
   - file: gks/proto/PROTO--VALID-UNTIL.md
   - file: packages/msp/test/validator/proto/valid-until.test.ts
-phase_override:
+phase_override: &a4
   skip_blueprint: true
   reason: "Incremental PROTO rule plugged into the already-blueprinted loader
     scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain:
@@ -33,14 +33,64 @@ phase_override:
     audit; per-rule predicates do not each warrant a separate phase-3
     blueprint."
 created_at: 2026-05-05T18:11:00.000+07:00
-aliases:
+aliases: &a5
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--VALID-UNTIL-PROTO
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M9a — PROTO--VALID-UNTIL decision atrophy guard (draft)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  phase_override: *a4
+  created_at: 2026-05-05T18:11:00.000+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--VALID-UNTIL-PROTO
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M9a — PROTO--VALID-UNTIL decision atrophy guard (draft)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    phase_override: *a4
+    created_at: 2026-05-05T18:11:00.000+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # M9a — [[PROTO--VALID-UNTIL]] (draft)

@@ -7,25 +7,71 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: MSP architecture — gatekeeper layers + write flow
-tags:
+tags: &a1
   - msp
   - architecture
   - gatekeeper
   - foundation
   - superseded
-crosslinks:
+crosslinks: &a2
   references: []
   superseded_by:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
 created_at: 2026-05-03T14:01:47.791+07:00
-aliases:
+aliases: &a3
   - FRAMEWORK
   - implementation_flow
   - Governance / architectural framework
 cluster: implementation_flow
 role: Governance / architectural framework
 attributes:
+  id: FRAMEWORK--MSP-ARCHITECTURE
+  phase: 0
+  type: framework
+  status: superseded
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: MSP architecture — gatekeeper layers + write flow
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:01:47.791+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Governance / architectural framework
+  attributes:
+    id: FRAMEWORK--MSP-ARCHITECTURE
+    phase: 0
+    type: framework
+    status: superseded
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: MSP architecture — gatekeeper layers + write flow
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:01:47.791+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Governance / architectural framework
+    attributes:
+      domain: framework
+    domain: framework
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: framework
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 > ⚠️ **SUPERSEDED — DO NOT USE AS REFERENCE** ⚠️

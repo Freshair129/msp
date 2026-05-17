@@ -8,13 +8,13 @@ source_type: axiomatic
 vault_id: default
 scale_level: L2
 title: "BLUEPRINT — Phase 1 PDP in shadow mode: evaluate and log, never enforce"
-tags:
+tags: &a1
   - msp
   - ucf
   - blueprint
   - phase-1
   - abac
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--POLICY-DECISION-POINT
   references:
@@ -22,20 +22,70 @@ crosslinks:
     - ADR--POLICY-AS-DATA-NOT-CODE
     - ADR--DEFAULT-POLICY-POSTURE
     - BLUEPRINT--PHASE-0-PLUMBING
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/policy/pdp.ts
   - file: packages/msp/src/policy/loader.ts
   - file: packages/msp/src/policy/operators.ts
   - file: packages/msp/src/policy/shadow-log.ts
 created_at: 2026-05-14T22:21:52.912+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--PHASE-1-PDP-SHADOW
+  phase: 3
+  type: blueprint
+  status: active
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  scale_level: L2
+  title: "BLUEPRINT — Phase 1 PDP in shadow mode: evaluate and log, never enforce"
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-14T22:21:52.912+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--PHASE-1-PDP-SHADOW
+    phase: 3
+    type: blueprint
+    status: active
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    scale_level: L2
+    title: "BLUEPRINT — Phase 1 PDP in shadow mode: evaluate and log, never enforce"
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-14T22:21:52.912+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — Phase 1: PDP in shadow mode

@@ -7,27 +7,71 @@ created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
 tier: genesis
 title: Atom folders by type, not by phase
-tags:
+tags: &a1
   - filesystem-layout
   - taxonomy
   - governance
-crosslinks:
+crosslinks: &a2
   references:
     - ADR--EXTENDED-TAXONOMY
     - FRAMEWORK--FOUR-LAYERS
     - CONCEPT--TAXONOMY-V2-3
-linked_symbols:
+linked_symbols: &a3
   - file: scripts/msp/re-indexer.ts
   - file: packages/gks/src/memory/gks.ts
     fn: readBody
-aliases:
+aliases: &a4
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--FLAT-ATOM-LAYOUT
+  phase: 2
+  type: adr
+  status: stable
+  created_at: 2026-05-13T12:00:00+07:00
+  vault_id: GKS-CORE
+  tier: genesis
+  title: Atom folders by type, not by phase
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  aliases: *a4
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--FLAT-ATOM-LAYOUT
+    phase: 2
+    type: adr
+    status: stable
+    created_at: 2026-05-13T12:00:00+07:00
+    vault_id: GKS-CORE
+    tier: genesis
+    title: Atom folders by type, not by phase
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    aliases: *a4
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ADR — Atom folders by type, not by phase

@@ -7,32 +7,78 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M5b hotfix wrapper acceptance audit + id-format hex fix
-tags:
+tags: &a1
   - msp
   - m5
   - m5b
   - audit
   - hotfix
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--MSP-HOTFIX-WRAPPER
     - BLUEPRINT--MSP-HOTFIX-WRAPPER
     - ADR--MSP-HOTFIX-WRAPPER
     - ADR--HOTFIX-ESCAPE-HATCH
     - FEAT--MSP-PRECOMMIT-HOOK
-linked_symbols:
+linked_symbols: &a3
   - file: examples/hooks/pre-commit-validator.sh
   - file: package.json
   - file: packages/msp/src/validator/rules/id-format.ts
 created_at: 2026-05-03T18:01:45.299+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--MSP-HOTFIX-WRAPPER
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M5b hotfix wrapper acceptance audit + id-format hex fix
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T18:01:45.299+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--MSP-HOTFIX-WRAPPER
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M5b hotfix wrapper acceptance audit + id-format hex fix
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T18:01:45.299+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # AUDIT — hotfix wrapper (M5b)

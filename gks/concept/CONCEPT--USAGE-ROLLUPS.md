@@ -7,28 +7,74 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Usage Roll-ups — weekly + monthly aggregates over daily USAGE atoms
-tags:
+tags: &a1
   - msp
   - agents
   - cost
   - usage
   - rollup
   - observability
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--COST-TRACKING
     - SPEC--USAGE-ATOM
     - SPEC--USAGE-ROLLUP-ATOM
     - BLUEPRINT--COST-TRACKING
 created_at: 2026-05-14T05:00:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--USAGE-ROLLUPS
+  phase: 1
+  type: concept
+  status: draft
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Usage Roll-ups — weekly + monthly aggregates over daily USAGE atoms
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T05:00:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--USAGE-ROLLUPS
+    phase: 1
+    type: concept
+    status: draft
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Usage Roll-ups — weekly + monthly aggregates over daily USAGE atoms
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T05:00:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # CONCEPT — Usage Roll-ups

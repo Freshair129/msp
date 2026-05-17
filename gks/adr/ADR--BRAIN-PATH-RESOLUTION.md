@@ -8,27 +8,73 @@ tier: genesis
 source_type: axiomatic
 title: ADR — Brain Path Resolution — deterministic per-type routing between
   ~/.brain/ and <repo>/gks/
-tags:
+tags: &a1
   - msp
   - storage
   - two-brain
   - path-resolution
   - decision
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--TWO-BRAIN-ARCHITECTURE
     - ADR--GLOBAL-VS-WORKSPACE
     - CONCEPT--NAMESPACE-VAULT-BRAIN
     - SPEC--EPISODE-ATOM
 created_at: 2026-05-14T01:55:00.000+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--BRAIN-PATH-RESOLUTION
+  phase: 2
+  type: adr
+  status: draft
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: ADR — Brain Path Resolution — deterministic per-type routing between
+    ~/.brain/ and <repo>/gks/
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T01:55:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--BRAIN-PATH-RESOLUTION
+    phase: 2
+    type: adr
+    status: draft
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: ADR — Brain Path Resolution — deterministic per-type routing between
+      ~/.brain/ and <repo>/gks/
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T01:55:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ADR — Brain Path Resolution

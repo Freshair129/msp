@@ -8,31 +8,81 @@ tier: process
 source_type: axiomatic
 title: AUDIT — wire PROTO--SYMBOLS-TRACE-INVARIANTS to its predicate + fix
   ProtoStatus 'active'
-tags:
+tags: &a1
   - msp
   - proto
   - validator
   - symbol-graph
   - audit
-crosslinks:
+crosslinks: &a2
   references:
     - PROTO--SYMBOLS-TRACE-INVARIANTS
     - ADR--SYMBOLS-PROCESS-TRACING
     - BLUEPRINT--PROTO-LOADER
     - AUDIT--PROTO-LINKED-SYMBOLS-PATH-DRIFT
-phase_override:
+phase_override: &a3
   skip_blueprint: true
   reason: Wiring fix + a one-line type correction on the already-blueprinted PROTO
     loader scaffold (BLUEPRINT--PROTO-LOADER); no new code surface.
 created_at: 2026-05-14T19:40:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--WIRE-TRACE-INVARIANTS-PROTO
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: AUDIT — wire PROTO--SYMBOLS-TRACE-INVARIANTS to its predicate + fix
+    ProtoStatus 'active'
+  tags: *a1
+  crosslinks: *a2
+  phase_override: *a3
+  created_at: 2026-05-14T19:40:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--WIRE-TRACE-INVARIANTS-PROTO
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: AUDIT — wire PROTO--SYMBOLS-TRACE-INVARIANTS to its predicate + fix
+      ProtoStatus 'active'
+    tags: *a1
+    crosslinks: *a2
+    phase_override: *a3
+    created_at: 2026-05-14T19:40:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: aws_secret
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — wire [[PROTO--SYMBOLS-TRACE-INVARIANTS]]

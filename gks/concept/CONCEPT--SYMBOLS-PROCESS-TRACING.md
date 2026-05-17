@@ -7,24 +7,68 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: End-to-end process tracing — following execution flows
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - concept
   - tracing
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--SYMBOL-GRAPH
     - CONCEPT--SYMBOL-GRAPH
 created_at: 2026-05-12T15:50:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--SYMBOLS-PROCESS-TRACING
+  phase: 1
+  type: concept
+  status: active
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: End-to-end process tracing — following execution flows
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-12T15:50:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--SYMBOLS-PROCESS-TRACING
+    phase: 1
+    type: concept
+    status: active
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: End-to-end process tracing — following execution flows
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-12T15:50:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — End-to-end process tracing

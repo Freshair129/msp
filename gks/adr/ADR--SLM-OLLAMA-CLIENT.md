@@ -7,25 +7,69 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Ollama via fetch with env-var config + injectable transport
-tags:
+tags: &a1
   - msp
   - codegen
   - slm
   - ollama
   - decision
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--SLM-OLLAMA-CLIENT
     - ADR--CODEGEN-RETRY-POLICY
 created_at: 2026-05-03T16:22:30.900+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--SLM-OLLAMA-CLIENT
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Ollama via fetch with env-var config + injectable transport
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T16:22:30.900+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--SLM-OLLAMA-CLIENT
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Ollama via fetch with env-var config + injectable transport
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T16:22:30.900+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ADR — Ollama client shape

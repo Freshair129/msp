@@ -7,27 +7,71 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: PROTO--AUTHORITY-ENFORCEMENT — git author tier ↔ touched paths
-tags:
+tags: &a1
   - msp
   - proto
   - authority
   - tier
   - governance
   - m8e
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--PROTO-PATTERN
     - FRAMEWORK--AUTHORITY-MATRIX
     - ADR--HUMAN-REVIEW-GATES
 created_at: 2026-05-05T16:28:00.000+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--PROTO-AUTHORITY-ENFORCEMENT
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: PROTO--AUTHORITY-ENFORCEMENT — git author tier ↔ touched paths
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-05T16:28:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--PROTO-AUTHORITY-ENFORCEMENT
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: PROTO--AUTHORITY-ENFORCEMENT — git author tier ↔ touched paths
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-05T16:28:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # CONCEPT — [[PROTO--AUTHORITY-ENFORCEMENT]]

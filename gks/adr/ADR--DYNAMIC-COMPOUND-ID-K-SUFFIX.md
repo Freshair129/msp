@@ -7,14 +7,62 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
-aliases:
+aliases: &a1
   - ADR
 cluster: implementation_flow
 role: Architecture decision record
-tags:
+tags: &a2
   - msp
-crosslinks: {}
+crosslinks: &a3 {}
 created_at: 2026-05-17T09:50:53.301+07:00
+attributes:
+  id: ADR-376--DYNAMIC-COMPOUND-ID-K-SUFFIX--K3
+  knowledgeId: DYNAMIC-COMPOUND-ID-K-SUFFIX
+  phase: 2
+  type: adr
+  status: draft
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
+  aliases: *a1
+  cluster: implementation_flow
+  role: Architecture decision record
+  tags: *a2
+  crosslinks: *a3
+  created_at: 2026-05-17T09:50:53.301+07:00
+  attributes:
+    id: ADR-376--DYNAMIC-COMPOUND-ID-K-SUFFIX--K3
+    knowledgeId: DYNAMIC-COMPOUND-ID-K-SUFFIX
+    phase: 2
+    type: adr
+    status: draft
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
+    aliases: *a1
+    cluster: implementation_flow
+    role: Architecture decision record
+    tags: *a2
+    crosslinks: *a3
+    created_at: 2026-05-17T09:50:53.301+07:00
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
+  domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — Dynamic Compound ID Suffix with Phase-Layer K Numbering

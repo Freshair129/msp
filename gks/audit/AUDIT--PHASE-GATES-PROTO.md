@@ -7,13 +7,13 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M8b — PROTO--PHASE-GATES — enforce P0..P6 ordering at PR-time (ships as draft)
-tags:
+tags: &a1
   - msp
   - proto
   - phase-gates
   - audit
   - m8b
-crosslinks:
+crosslinks: &a2
   references:
     - PROTO--PHASE-GATES
     - CONCEPT--PROTO-PHASE-GATES
@@ -21,24 +21,74 @@ crosslinks:
     - FEAT--PROTO-LOADER
     - BLUEPRINT--PROTO-LOADER
     - CONCEPT--PROTO-PATTERN
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/phase-gates.ts
   - file: gks/proto/PROTO--PHASE-GATES.md
   - file: packages/msp/test/validator/proto/phase-gates.test.ts
   - file: scripts/msp/propose.mjs
-phase_override:
+phase_override: &a4
   skip_blueprint: true
   reason: PROTO atom + its predicate are M8a self-similar; the M8a
     BLUEPRINT--PROTO-LOADER covers the loader contract this predicate plugs into
 created_at: 2026-05-05T18:00:00.000+07:00
-aliases:
+aliases: &a5
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--PHASE-GATES-PROTO
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: M8b — PROTO--PHASE-GATES — enforce P0..P6 ordering at PR-time (ships as
+    draft)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  phase_override: *a4
+  created_at: 2026-05-05T18:00:00.000+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--PHASE-GATES-PROTO
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: M8b — PROTO--PHASE-GATES — enforce P0..P6 ordering at PR-time (ships as
+      draft)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    phase_override: *a4
+    created_at: 2026-05-05T18:00:00.000+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # M8b — [[PROTO--PHASE-GATES]] (draft)

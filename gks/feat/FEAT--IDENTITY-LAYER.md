@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Identity layer — namespaced JSON store with profile / voice / preferences
-tags:
+tags: &a1
   - msp
   - identity
   - soul
@@ -16,12 +16,12 @@ tags:
   - preferences
   - m7e
   - user-facing
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--IDENTITY-STORAGE-SHAPE
   references:
     - CONCEPT--IDENTITY-LAYER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/identity/index.ts
   - file: packages/msp/src/identity/types.ts
   - file: packages/msp/src/identity/profile.ts
@@ -29,14 +29,60 @@ linked_symbols:
   - file: packages/msp/src/identity/preferences.ts
   - file: packages/msp/src/identity/store.ts
 created_at: 2026-05-05T00:26:00.000+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--IDENTITY-LAYER
+  phase: 2
+  type: feat
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Identity layer — namespaced JSON store with profile / voice / preferences
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-05T00:26:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--IDENTITY-LAYER
+    phase: 2
+    type: feat
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Identity layer — namespaced JSON store with profile / voice / preferences
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-05T00:26:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # Identity layer — namespaced JSON store with profile / voice / preferences

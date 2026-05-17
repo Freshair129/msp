@@ -7,13 +7,13 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Identity Engine — passport-bound agent identity resolution
-tags:
+tags: &a1
   - msp
   - knowledge-block
   - identity
   - manifest
 manifest_version: 1.0.0
-members:
+members: &a2
   core:
     cognitive:
       - COGNITIVE--EGO-DEATH-PASSPORT
@@ -37,7 +37,7 @@ members:
       - SAFETY--PII-REDACTION
     mod:
       - MOD--IDENTITY
-daci:
+daci: &a3
   driver: MOD--IDENTITY
   approver:
     - PERSONA--T3-ARCHITECT
@@ -45,7 +45,7 @@ daci:
     - PERSONA--T2-IMPLEMENTER
   informed:
     - ENTITY--MSP-USERS
-crosslinks:
+crosslinks: &a4
   references:
     - SPEC--GENESIS-BLOCK-MANIFEST
     - MOD--IDENTITY
@@ -60,14 +60,66 @@ crosslinks:
     - STACK--MSP-NODE-RUNTIME
     - SAFETY--PII-REDACTION
 created_at: 2026-05-14T21:10:00+07:00
-aliases:
+aliases: &a5
   - GENESIS
   - implementation_flow
   - Block Manifest (v2.3+)
 cluster: implementation_flow
 role: Block Manifest (v2.3+)
 attributes:
+  id: GENESIS--IDENTITY-ENGINE
+  phase: 0
+  type: genesis
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Identity Engine — passport-bound agent identity resolution
+  tags: *a1
+  manifest_version: 1.0.0
+  members: *a2
+  daci: *a3
+  crosslinks: *a4
+  created_at: 2026-05-14T21:10:00+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Block Manifest (v2.3+)
+  attributes:
+    id: GENESIS--IDENTITY-ENGINE
+    phase: 0
+    type: genesis
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Identity Engine — passport-bound agent identity resolution
+    tags: *a1
+    manifest_version: 1.0.0
+    members: *a2
+    daci: *a3
+    crosslinks: *a4
+    created_at: 2026-05-14T21:10:00+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Block Manifest (v2.3+)
+    attributes:
+      domain: genesis
+    domain: genesis
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: genesis
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # GENESIS — Identity Engine

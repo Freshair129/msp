@@ -7,14 +7,52 @@ status: draft
 tier: genesis
 created_at: 2026-05-13T23:43:00.000+07:00
 owner: Genesis Architect (Antigravity)
-aliases:
+aliases: &a1
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--META-LEARNING-LOOP
+  title: Meta Learning Loop (MLL)
+  type: feat
+  phase: 2
+  status: draft
+  tier: genesis
+  created_at: 2026-05-13T23:43:00.000+07:00
+  owner: Genesis Architect (Antigravity)
+  aliases: *a1
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--META-LEARNING-LOOP
+    title: Meta Learning Loop (MLL)
+    type: feat
+    phase: 2
+    status: draft
+    tier: genesis
+    created_at: 2026-05-13T23:43:00.000+07:00
+    owner: Genesis Architect (Antigravity)
+    aliases: *a1
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 # FEAT — Meta Learning Loop (MLL)
 **Reference:** `d:\The Human Algorithm\T2\meta_learning_loop_technical_manual.md`

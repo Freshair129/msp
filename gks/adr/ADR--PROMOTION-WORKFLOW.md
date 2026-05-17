@@ -7,13 +7,13 @@ tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Promotion workflow — three gates between agent draft and gks/
-tags:
+tags: &a1
   - msp
   - promotion
   - workflow
   - governance
   - superseded
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--INBOUND-QUEUE
     - CONCEPT--PROPOSAL-TYPES
@@ -21,14 +21,60 @@ crosslinks:
   superseded_by:
     - ADR--AGENT-WRITE-BOUNDARIES
 created_at: 2026-05-03T14:08:40.359+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--PROMOTION-WORKFLOW
+  phase: 2
+  type: adr
+  status: superseded
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Promotion workflow — three gates between agent draft and gks/
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:08:40.359+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--PROMOTION-WORKFLOW
+    phase: 2
+    type: adr
+    status: superseded
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Promotion workflow — three gates between agent draft and gks/
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:08:40.359+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 > ⚠️ **Superseded by [`[[ADR--AGENT-WRITE-BOUNDARIES]]`](./[[ADR--AGENT-WRITE-BOUNDARIES]].md)** (Phase 4 of `[[BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION]]`, 2026-05-09). The three-gate inbound workflow has been replaced with: agents write to `.brain/.../candidates/` via `msp_candidate`, promotion to `gks/<type>/` is a human PR action gated by CI. The body below is preserved as historical context.

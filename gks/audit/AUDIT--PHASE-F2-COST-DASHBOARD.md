@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Phase F2 — Cost Dashboard + USAGE roll-ups — what shipped
-tags:
+tags: &a1
   - msp
   - phase-f2
   - cost
@@ -15,31 +15,81 @@ tags:
   - rollup
   - dashboard
   - audit
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--USAGE-ROLLUPS
     - SPEC--USAGE-ROLLUP-ATOM
     - SPEC--USAGE-ATOM
     - CONCEPT--COST-TRACKING
     - BLUEPRINT--COST-TRACKING
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/usage/aggregator.ts
   - file: packages/msp/src/usage/rollup-writer.ts
   - file: packages/msp/src/usage/cli.ts
-phase_override:
+phase_override: &a4
   skip_blueprint: true
   reason: Phase F2 refinement stream — planned via CONCEPT--USAGE-ROLLUPS +
     SPEC--USAGE-ROLLUP-ATOM (the doc-to-code chain) rather than a separate
     phase-3 blueprint.
 created_at: 2026-05-14T05:10:00.000+07:00
-aliases:
+aliases: &a5
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--PHASE-F2-COST-DASHBOARD
+  phase: 6
+  type: audit
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: Phase F2 — Cost Dashboard + USAGE roll-ups — what shipped
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  phase_override: *a4
+  created_at: 2026-05-14T05:10:00.000+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--PHASE-F2-COST-DASHBOARD
+    phase: 6
+    type: audit
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: Phase F2 — Cost Dashboard + USAGE roll-ups — what shipped
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    phase_override: *a4
+    created_at: 2026-05-14T05:10:00.000+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — Phase F2 Cost Dashboard + USAGE Roll-ups

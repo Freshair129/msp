@@ -8,20 +8,20 @@ source_type: axiomatic
 vault_id: default
 title: AUDIT — Phase E4 Master Block promotion pipeline (4-of-5 analyzer +
   proposal generator)
-tags:
+tags: &a1
   - msp
   - master
   - promotion
   - phase-e4
   - audit
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--MASTER-PROMOTION
     - BLUEPRINT--MASTER-PROMOTION-PIPELINE
     - SPEC--GENESIS-BLOCK-MANIFEST
     - ADR--MASTER-PROMOTION-DOC-TO-CODE
     - ADR--HUMAN-REVIEW-GATES
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/master/dimensions.ts
   - file: packages/msp/src/master/scanner.ts
   - file: packages/msp/src/master/promote.ts
@@ -32,14 +32,62 @@ linked_symbols:
   - file: packages/msp/test/master/cli.test.ts
   - file: packages/msp/package.json
 created_at: 2026-05-13T11:00:00.000+07:00
-aliases:
+aliases: &a4
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--PHASE-E4-MASTER-PROMOTION
+  phase: 6
+  type: audit
+  status: draft
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: AUDIT — Phase E4 Master Block promotion pipeline (4-of-5 analyzer +
+    proposal generator)
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-13T11:00:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--PHASE-E4-MASTER-PROMOTION
+    phase: 6
+    type: audit
+    status: draft
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: AUDIT — Phase E4 Master Block promotion pipeline (4-of-5 analyzer +
+      proposal generator)
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-13T11:00:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # AUDIT — Phase E4 Master Block promotion pipeline

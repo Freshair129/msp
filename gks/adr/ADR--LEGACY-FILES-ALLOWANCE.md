@@ -7,25 +7,70 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Legacy files allowance — exempt from strict validation with frontmatter flag
-tags:
+tags: &a1
   - msp
   - legacy
   - exemption
   - validator
-crosslinks:
+crosslinks: &a2
   references:
     - ADR--ANTI-HALLUCINATION-RULES
     - ADR--FORBIDDEN-FIELDS-LIST
     - CONCEPT--MSP-VALIDATOR
 created_at: 2026-05-03T14:08:43.977+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--LEGACY-FILES-ALLOWANCE
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Legacy files allowance — exempt from strict validation with frontmatter flag
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T14:08:43.977+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--LEGACY-FILES-ALLOWANCE
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Legacy files allowance — exempt from strict validation with frontmatter
+      flag
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T14:08:43.977+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # ADR — legacy files allowance

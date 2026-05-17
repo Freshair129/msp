@@ -8,14 +8,14 @@ source_type: axiomatic
 vault_id: default
 title: AUDIT — Decompose FEAT--SYMBOLS-FRAMEWORK-AWARENESS into CONCEPT + ADR +
   ALGO + PROTO; harden FEAT→ADR validator rule
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - audit
   - decomposition
   - atom-policy
   - validator
-crosslinks:
+crosslinks: &a2
   references:
     - ADR--SYMBOLS-FRAMEWORK-AWARENESS
     - CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS
@@ -23,23 +23,75 @@ crosslinks:
     - PROTO--SYMBOLS-FRAMEWORK-INVARIANTS
     - FEAT--SYMBOLS-FRAMEWORK-AWARENESS
     - PROTO--SCALING-LEVEL-GATE
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/validator/proto/scaling-level-gate.ts
-phase_override:
+phase_override: &a4
   skip_blueprint: true
   reason: The one touched file is a PROTO predicate on the already-blueprinted
     loader scaffold (BLUEPRINT--PROTO-LOADER); the decomposition work itself is
     governed by ADR--SYMBOLS-FRAMEWORK-AWARENESS +
     CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS.
 created_at: 2026-05-12T05:42:00.000+07:00
-aliases:
+aliases: &a5
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
+  id: AUDIT--SYMBOLS-FRAMEWORK-AWARENESS-DECOMPOSITION
+  phase: 6
+  type: audit
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: AUDIT — Decompose FEAT--SYMBOLS-FRAMEWORK-AWARENESS into CONCEPT + ADR +
+    ALGO + PROTO; harden FEAT→ADR validator rule
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  phase_override: *a4
+  created_at: 2026-05-12T05:42:00.000+07:00
+  aliases: *a5
+  cluster: implementation_flow
+  role: Test results / quality report
+  attributes:
+    id: AUDIT--SYMBOLS-FRAMEWORK-AWARENESS-DECOMPOSITION
+    phase: 6
+    type: audit
+    status: stable
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: AUDIT — Decompose FEAT--SYMBOLS-FRAMEWORK-AWARENESS into CONCEPT + ADR +
+      ALGO + PROTO; harden FEAT→ADR validator rule
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    phase_override: *a4
+    created_at: 2026-05-12T05:42:00.000+07:00
+    aliases: *a5
+    cluster: implementation_flow
+    role: Test results / quality report
+    attributes:
+      domain: audit
+    domain: audit
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — FEAT decomposition + validator hardening

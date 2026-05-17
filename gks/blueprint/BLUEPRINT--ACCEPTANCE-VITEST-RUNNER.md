@@ -8,32 +8,82 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — vitest acceptance runner implementation plan
-tags:
+tags: &a1
   - msp
   - codegen
   - acceptance
   - vitest
   - blueprint
   - implementation
-crosslinks:
+crosslinks: &a2
   implements:
     - FEAT--ACCEPTANCE-VITEST-RUNNER
   references:
     - ADR--ACCEPTANCE-VITEST-RUNNER
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/codegen/acceptance/vitest.ts
   - file: packages/msp/src/codegen/acceptance/sandbox.ts
   - file: packages/msp/src/codegen/acceptance/parse-results.ts
   - file: packages/msp/src/codegen/acceptance/types.ts
 created_at: 2026-05-03T16:27:18.868+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--ACCEPTANCE-VITEST-RUNNER
+  phase: 3
+  type: blueprint
+  scale_level: L2
+  status: stable
+  vault_id: default
+  tier: process
+  source_type: axiomatic
+  title: BLUEPRINT — vitest acceptance runner implementation plan
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-03T16:27:18.868+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--ACCEPTANCE-VITEST-RUNNER
+    phase: 3
+    type: blueprint
+    scale_level: L2
+    status: stable
+    vault_id: default
+    tier: process
+    source_type: axiomatic
+    title: BLUEPRINT — vitest acceptance runner implementation plan
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-03T16:27:18.868+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — vitest acceptance runner

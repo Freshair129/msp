@@ -7,25 +7,71 @@ tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Ego Death Passport — mental framework for externalised identity
-tags:
+tags: &a1
   - msp
   - identity
   - cognitive
   - ego-death
   - framework
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--IDENTITY-LAYER
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
 created_at: 2026-05-14T20:00:00+07:00
-aliases:
+aliases: &a3
   - COGNITIVE
   - implementation_flow
   - Mental model / interpretive lens
 cluster: implementation_flow
 role: Mental model / interpretive lens
 attributes:
+  id: COGNITIVE--EGO-DEATH-PASSPORT
+  phase: 1
+  type: cognitive
+  status: stable
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Ego Death Passport — mental framework for externalised identity
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-14T20:00:00+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Mental model / interpretive lens
+  attributes:
+    id: COGNITIVE--EGO-DEATH-PASSPORT
+    phase: 1
+    type: cognitive
+    status: stable
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Ego Death Passport — mental framework for externalised identity
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-14T20:00:00+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Mental model / interpretive lens
+    attributes:
+      domain: cognitive
+    domain: cognitive
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: cognitive
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # COGNITIVE — Ego Death Passport

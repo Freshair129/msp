@@ -7,7 +7,7 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: Identity profile — add guardrails and extensions fields (M7e follow-up)
-tags:
+tags: &a1
   - msp
   - identity
   - profile
@@ -15,21 +15,67 @@ tags:
   - extensions
   - decision
   - m7e
-crosslinks:
+crosslinks: &a2
   references:
     - FEAT--IDENTITY-LAYER
     - ADR--IDENTITY-STORAGE-SHAPE
     - CONCEPT--IDENTITY-LAYER
     - ADR--ANTI-HALLUCINATION-RULES
 created_at: 2026-05-05T12:30:00.000+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--IDENTITY-GUARDRAILS-AND-EXTENSIONS
+  phase: 2
+  type: adr
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: Identity profile — add guardrails and extensions fields (M7e follow-up)
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-05T12:30:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--IDENTITY-GUARDRAILS-AND-EXTENSIONS
+    phase: 2
+    type: adr
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: Identity profile — add guardrails and extensions fields (M7e follow-up)
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-05T12:30:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — identity profile guardrails + extensions

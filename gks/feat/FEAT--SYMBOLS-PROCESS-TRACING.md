@@ -8,14 +8,14 @@ source_type: axiomatic
 vault_id: default
 title: End-to-end process tracing — following execution flows from entry points
   to leaf functions
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - data-flow
   - trace
   - impact-analysis
   - feat
-crosslinks:
+crosslinks: &a2
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
   references:
@@ -27,18 +27,68 @@ crosslinks:
     - ADR--SYMBOLS-PROCESS-TRACING
     - ALGO--SYMBOLS-CALL-GRAPH-TRAVERSAL
     - PROTO--SYMBOLS-TRACE-INVARIANTS
-linked_symbols:
+linked_symbols: &a3
   - file: packages/msp/src/symbols/tracer.ts
   - file: packages/msp/src/mcp/tools/symbol-trace.ts
 created_at: 2026-05-12T04:48:00.000+07:00
-aliases:
+aliases: &a4
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
+  id: FEAT--SYMBOLS-PROCESS-TRACING
+  phase: 2
+  type: feat
+  status: superseded
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: End-to-end process tracing — following execution flows from entry points
+    to leaf functions
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-12T04:48:00.000+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Feature spec
+  attributes:
+    id: FEAT--SYMBOLS-PROCESS-TRACING
+    phase: 2
+    type: feat
+    status: superseded
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: End-to-end process tracing — following execution flows from entry points
+      to leaf functions
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-12T04:48:00.000+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Feature spec
+    attributes:
+      domain: feat
+    domain: feat
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # FEAT — End-to-end process tracing

@@ -7,24 +7,70 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: MSP hotfix wrapper — npm scripts + pre-commit gate for overdue hotfixes
-tags:
+tags: &a1
   - msp
   - hotfix
   - escape-hatch
   - automation
-crosslinks:
+crosslinks: &a2
   references:
     - ADR--HOTFIX-ESCAPE-HATCH
     - FEAT--MSP-PRECOMMIT-HOOK
 created_at: 2026-05-03T17:45:48.892+07:00
-aliases:
+aliases: &a3
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
+  id: CONCEPT--MSP-HOTFIX-WRAPPER
+  phase: 1
+  type: concept
+  status: stable
+  vault_id: default
+  tier: genesis
+  source_type: axiomatic
+  title: MSP hotfix wrapper — npm scripts + pre-commit gate for overdue hotfixes
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-03T17:45:48.892+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Strategic intent / PRD
+  attributes:
+    id: CONCEPT--MSP-HOTFIX-WRAPPER
+    phase: 1
+    type: concept
+    status: stable
+    vault_id: default
+    tier: genesis
+    source_type: axiomatic
+    title: MSP hotfix wrapper — npm scripts + pre-commit gate for overdue hotfixes
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-03T17:45:48.892+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    attributes:
+      domain: concept
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: concept
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # CONCEPT — MSP hotfix wrapper

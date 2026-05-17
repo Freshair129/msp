@@ -7,7 +7,7 @@ tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Symbol Graph — structural code knowledge axis (orthogonal to 3-tier atom model)
-tags:
+tags: &a1
   - msp
   - symbol-graph
   - architecture
@@ -15,7 +15,7 @@ tags:
   - tree-sitter
   - leiden
   - upstream-gks
-crosslinks:
+crosslinks: &a2
   references:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - FRAMEWORK--KNOWLEDGE-3-TIER
@@ -24,14 +24,62 @@ crosslinks:
     - ADR--SYMBOL-GRAPH-PROCESSING-STAGES
     - PROTO--TRACE-INVARIANTS
 created_at: 2026-05-09T16:30:00.000+07:00
-aliases:
+aliases: &a3
   - FRAMEWORK
   - implementation_flow
   - Governance / architectural framework
 cluster: implementation_flow
 role: Governance / architectural framework
 attributes:
+  id: FRAMEWORK--SYMBOL-GRAPH
+  phase: 0
+  type: framework
+  status: stable
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Symbol Graph — structural code knowledge axis (orthogonal to 3-tier atom
+    model)
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-09T16:30:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Governance / architectural framework
+  attributes:
+    id: FRAMEWORK--SYMBOL-GRAPH
+    phase: 0
+    type: framework
+    status: stable
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Symbol Graph — structural code knowledge axis (orthogonal to 3-tier atom
+      model)
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-09T16:30:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Governance / architectural framework
+    attributes:
+      domain: framework
+    domain: framework
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: framework
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # FRAME — Symbol Graph

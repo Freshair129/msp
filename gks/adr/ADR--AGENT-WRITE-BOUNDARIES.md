@@ -8,14 +8,14 @@ source_type: axiomatic
 vault_id: default
 title: Agent write boundaries — agents may write anywhere under `.brain/`; canon
   (`gks/`) reachable only via PR + CI
-tags:
+tags: &a1
   - msp
   - agent
   - boundary
   - authority
   - decision
   - inbound-removal
-crosslinks:
+crosslinks: &a2
   references:
     - CONCEPT--KNOWLEDGE-LAYERS-V2
     - FRAMEWORK--MSP-ARCHITECTURE-V2
@@ -24,14 +24,62 @@ crosslinks:
     - ADR--PROMOTION-WORKFLOW
     - ADR--PROMOTION-LEVELS
 created_at: 2026-05-08T17:01:00.000+07:00
-aliases:
+aliases: &a3
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
+  id: ADR--AGENT-WRITE-BOUNDARIES
+  phase: 2
+  type: adr
+  status: stable
+  tier: genesis
+  source_type: axiomatic
+  vault_id: default
+  title: Agent write boundaries — agents may write anywhere under `.brain/`; canon
+    (`gks/`) reachable only via PR + CI
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-08T17:01:00.000+07:00
+  aliases: *a3
+  cluster: implementation_flow
+  role: Architecture decision record
+  attributes:
+    id: ADR--AGENT-WRITE-BOUNDARIES
+    phase: 2
+    type: adr
+    status: stable
+    tier: genesis
+    source_type: axiomatic
+    vault_id: default
+    title: Agent write boundaries — agents may write anywhere under `.brain/`; canon
+      (`gks/`) reachable only via PR + CI
+    tags: *a1
+    crosslinks: *a2
+    created_at: 2026-05-08T17:01:00.000+07:00
+    aliases: *a3
+    cluster: implementation_flow
+    role: Architecture decision record
+    attributes:
+      domain: adr
+    domain: adr
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: adr
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # ADR — agent write boundaries

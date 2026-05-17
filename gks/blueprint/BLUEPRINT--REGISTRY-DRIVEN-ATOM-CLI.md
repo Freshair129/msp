@@ -7,22 +7,68 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Registry-Driven Atom CLI
-tags:
+tags: &a1
   - msp
-crosslinks: {}
-linked_symbols:
+crosslinks: &a2 {}
+linked_symbols: &a3
   - file: scripts/msp/msp-atom.ts
   - file: scripts/msp/codegen-schemas.ts
   - file: packages/msp/src/validator/rules/registry-drift.ts
 created_at: 2026-05-17T04:07:42.521+07:00
-aliases:
+aliases: &a4
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
+  id: BLUEPRINT--REGISTRY-DRIVEN-ATOM-CLI
+  phase: 3
+  type: blueprint
+  status: draft
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: Registry-Driven Atom CLI
+  tags: *a1
+  crosslinks: *a2
+  linked_symbols: *a3
+  created_at: 2026-05-17T04:07:42.521+07:00
+  aliases: *a4
+  cluster: implementation_flow
+  role: Implementation plan
+  attributes:
+    id: BLUEPRINT--REGISTRY-DRIVEN-ATOM-CLI
+    phase: 3
+    type: blueprint
+    status: draft
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Registry-Driven Atom CLI
+    tags: *a1
+    crosslinks: *a2
+    linked_symbols: *a3
+    created_at: 2026-05-17T04:07:42.521+07:00
+    aliases: *a4
+    cluster: implementation_flow
+    role: Implementation plan
+    attributes:
+      domain: blueprint
+    domain: blueprint
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: false
+    leak_risk: low
+    encryption_level: none
   domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # BLUEPRINT — Registry-Driven Atom CLI
