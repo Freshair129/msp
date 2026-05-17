@@ -6,7 +6,8 @@ status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
-title: Default codegen SLM is Ollama + qwen2.5-coder (drop the qwen-CLI fallback in runner)
+title: Default codegen SLM is Ollama + qwen2.5-coder (drop the qwen-CLI fallback
+  in runner)
 tags:
   - msp
   - codegen
@@ -14,8 +15,22 @@ tags:
   - ollama
   - qwen
   - decision
-crosslinks: {"references":["CONCEPT--CODEGEN-MICROTASK-RUNNER","CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
+  - cli
+  - coder
+  - local
+crosslinks:
+  references:
+    - CONCEPT--CODEGEN-MICROTASK-RUNNER
+    - CONCEPT--CODEGEN-MICROTASK-CONTRACT
 created_at: 2026-05-12T22:46:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
+cluster: implementation_flow
+role: Architecture decision record
+attributes:
+  domain: adr
 ---
 
 # ADR — Default codegen SLM is Ollama + qwen2.5-coder

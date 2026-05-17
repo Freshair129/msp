@@ -50,6 +50,14 @@ export interface Profile {
    * (e.g. `"claude-code/notes"`) to avoid collisions across harnesses.
    */
   extensions: Record<string, unknown>
+  /** UCF Phase 4: Roles assigned to this identity (e.g. ['admin', 'researcher']). */
+  roles: string[]
+  /** UCF Phase 4: Numeric clearance level (0-100). */
+  clearance: number
+  /** UCF Phase 4: Whether MFA is currently active for this identity. */
+  mfaStatus: boolean
+  /** UCF Phase 4: Tenants this identity belongs to. */
+  tenantIds: string[]
 }
 
 /**
@@ -127,6 +135,10 @@ export function defaultProfile(): Profile {
     createdAt: '',
     guardrails: [],
     extensions: {},
+    roles: [],
+    clearance: 0,
+    mfaStatus: false,
+    tenantIds: [],
   }
 }
 

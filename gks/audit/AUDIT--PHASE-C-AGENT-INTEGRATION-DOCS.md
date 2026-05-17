@@ -13,9 +13,23 @@ tags:
   - agent-agnostic
   - integration
   - docs
-crosslinks: {"references":["CONCEPT--AGENT-INTEGRATION-PATTERNS","CONCEPT--AGENT-AGNOSTIC","CONCEPT--NAMED-PROJECT-REGISTRY","ADR--GLOBAL-VS-WORKSPACE","AUDIT--ARCH-DOC-CLEANUP"]}
+crosslinks:
+  references:
+    - CONCEPT--AGENT-INTEGRATION-PATTERNS
+    - CONCEPT--AGENT-AGNOSTIC
+    - CONCEPT--NAMED-PROJECT-REGISTRY
+    - ADR--GLOBAL-VS-WORKSPACE
+    - AUDIT--ARCH-DOC-CLEANUP
 linked_symbols: []
 created_at: 2026-05-10T07:00:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
+cluster: implementation_flow
+role: Test results / quality report
+attributes:
+  domain: audit
 ---
 
 # AUDIT — Phase C agent integration docs (2026-05-10)

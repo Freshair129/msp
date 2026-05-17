@@ -13,7 +13,7 @@ import {
   DEFAULT_LLM_TIMEOUT_MS,
   DEFAULT_MAX_LLM_CALLS,
   DEFAULT_THRESHOLDS,
-} from './types.js'
+} from './config.js'
 import type {
   ConsolidateOptions,
   Episode,
@@ -77,7 +77,7 @@ export async function readSessionTurns(
   } catch (err) {
     if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err
   }
-  // Stable ordering by turnId to defend against out-of-order writes.
+  // Stable ordering by numeric turnId to defend against out-of-order writes.
   out.sort((a, b) => a.turnId - b.turnId)
   return out
 }
@@ -145,8 +145,6 @@ export async function consolidate(
         timeoutMs: llmTimeoutMs,
       })
       llmCallsUsed += 1
-      // Only keep if the LLM agreed (≥ 0.5) — or the call failed (default-keep
-      // in which case we still keep, per ADR failure-modes).
       if (t2.source === 'tier2-default') {
         episodes.push(
           makeEpisode({
@@ -154,7 +152,7 @@ export async function consolidate(
             turnRange: [start, end],
             summary: deterministicSummary(chunk),
             tags: extractDeterministicTags(chunk),
-            score: tier1.score, // keep tier-1 score; LLM didn't disagree
+            score: tier1.score,
             scoreSource: 'tier2-default',
             createdAt: now().toISOString(),
           }),

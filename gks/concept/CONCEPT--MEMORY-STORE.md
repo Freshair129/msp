@@ -1,20 +1,36 @@
 ---
 id: CONCEPT--MEMORY-STORE
-phase: 2
+phase: 1
 type: concept
 status: stable
 created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
 tier: genesis
 title: MemoryStore — the unified four-layer façade
-tags: [architecture, core, api]
+tags:
+  - architecture
+  - core
+  - api
 crosslinks:
-  references: [FRAMEWORK--FOUR-LAYERS, FEAT--LOOKUP-BY-SYMBOL]
+  references:
+    - FRAMEWORK--FOUR-LAYERS
+    - FEAT--LOOKUP-BY-SYMBOL
 linked_symbols:
-  - { file: "src/memory/index.ts" }
-  - { file: "src/memory/api.ts", fn: retain }
-  - { file: "src/memory/api.ts", fn: recall }
-  - { file: "src/memory/api.ts", fn: reflect }
+  - file: packages/gks/src/memory/index.ts
+  - file: packages/gks/src/memory/api.ts
+    fn: retain
+  - file: packages/gks/src/memory/api.ts
+    fn: recall
+  - file: packages/gks/src/memory/api.ts
+    fn: reflect
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
+cluster: implementation_flow
+role: Strategic intent / PRD
+attributes:
+  domain: concept
 ---
 
 # CONCEPT — MemoryStore

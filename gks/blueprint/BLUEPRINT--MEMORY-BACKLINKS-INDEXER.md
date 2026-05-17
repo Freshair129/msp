@@ -14,14 +14,27 @@ tags:
   - backlinks
   - blueprint
   - implementation
-crosslinks: {"implements":["FEAT--MEMORY-BACKLINKS-INDEXER"],"references":["ADR--MEMORY-BACKLINKS-INDEXER","CONCEPT--MEMORY-VECTOR-BACKLINKS"]}
+crosslinks:
+  implements:
+    - FEAT--MEMORY-BACKLINKS-INDEXER
+  references:
+    - ADR--MEMORY-BACKLINKS-INDEXER
+    - CONCEPT--MEMORY-VECTOR-BACKLINKS
 linked_symbols:
-  - {"file":"packages/msp/src/memory/backlinks/indexer.ts"}
-  - {"file":"packages/msp/src/memory/backlinks/walk.ts"}
-  - {"file":"packages/msp/src/memory/backlinks/edges.ts"}
-  - {"file":"packages/msp/src/memory/backlinks/atomic-write.ts"}
-  - {"file":"packages/msp/src/memory/backlinks/cli.ts"}
+  - file: packages/msp/src/memory/backlinks/indexer.ts
+  - file: packages/msp/src/memory/backlinks/walk.ts
+  - file: packages/msp/src/memory/backlinks/edges.ts
+  - file: packages/msp/src/memory/backlinks/atomic-write.ts
+  - file: packages/msp/src/memory/backlinks/cli.ts
 created_at: 2026-05-03T14:16:43.374+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — backlinks indexer
@@ -55,14 +68,14 @@ data_logic: |
     9. return { atomCount, edgeCount, changed }
 
 geography:
-  - "src/memory/backlinks/walk.ts"
-  - "src/memory/backlinks/edges.ts"
-  - "src/memory/backlinks/atomic-write.ts"
-  - "src/memory/backlinks/indexer.ts"
-  - "src/memory/backlinks/cli.ts"
-  - "src/memory/backlinks/types.ts"
-  - "test/memory/backlinks/edges.test.ts"
-  - "test/memory/backlinks/indexer.test.ts"
+  - "packages/msp/src/memory/backlinks/walk.ts"
+  - "packages/msp/src/memory/backlinks/edges.ts"
+  - "packages/msp/src/memory/backlinks/atomic-write.ts"
+  - "packages/msp/src/memory/backlinks/indexer.ts"
+  - "packages/msp/src/memory/backlinks/cli.ts"
+  - "packages/msp/src/memory/backlinks/types.ts"
+  - "packages/msp/test/memory/backlinks/edges.test.ts"
+  - "packages/msp/test/memory/backlinks/indexer.test.ts"
   - "test/memory/backlinks/cli.test.ts"
 
 api_contracts:

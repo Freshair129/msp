@@ -14,17 +14,29 @@ tags:
   - server
   - blueprint
   - implementation
-crosslinks: {"implements":["FEAT--MSP-MCP-SERVER"],"references":["ADR--MSP-MCP-SERVER"]}
+crosslinks:
+  implements:
+    - FEAT--MSP-MCP-SERVER
+  references:
+    - ADR--MSP-MCP-SERVER
 linked_symbols:
-  - {"file":"packages/msp/src/mcp/server.ts"}
-  - {"file":"packages/msp/src/mcp/types.ts"}
-  - {"file":"packages/msp/src/mcp/tools/validate.ts"}
-  - {"file":"src/mcp/tools/propose.ts"}
-  - {"file":"packages/msp/src/mcp/tools/run-task.ts"}
-  - {"file":"packages/msp/src/mcp/tools/session-append.ts"}
-  - {"file":"packages/msp/src/mcp/tools/episode-append.ts"}
-  - {"file":"packages/msp/src/mcp/tools/backlinks-rebuild.ts"}
+  - file: packages/msp/src/mcp/server.ts
+  - file: packages/msp/src/mcp/types.ts
+  - file: packages/msp/src/mcp/tools/validate.ts
+  - file: src/mcp/tools/propose.ts
+  - file: packages/msp/src/mcp/tools/run-task.ts
+  - file: packages/msp/src/mcp/tools/session-append.ts
+  - file: packages/msp/src/mcp/tools/episode-append.ts
+  - file: packages/msp/src/mcp/tools/backlinks-rebuild.ts
 created_at: 2026-05-03T18:13:55.210+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — MSP MCP server
@@ -44,13 +56,13 @@ architectural_pattern: |
   logic in src/mcp/.
 
 data_logic: |
-  bin/msp-mcp-server.ts:
-    1. import createMspMcpServer from '../src/mcp/server.js'
+  packages/msp/src/mcp/bin.ts:
+    1. import { createMspMcpServer } from './server.js'
     2. const server = createMspMcpServer()
     3. const transport = new StdioServerTransport()
     4. await server.connect(transport)
 
-  src/mcp/server.ts:
+  packages/msp/src/mcp/server.ts:
     function createMspMcpServer({ root? } = {}): Server
       - new Server({ name: 'msp', version: '0.1.0' }, { capabilities: { tools: {} } })
       - for each tool in [validate, propose, runTask, sessionAppend,
@@ -65,16 +77,16 @@ data_logic: |
     export function handler(ctx) { return async (args) => {...} }
 
 geography:
-  - "src/mcp/types.ts"          # ToolDef, ToolHandlerCtx
-  - "src/mcp/server.ts"         # createMspMcpServer
-  - "src/mcp/tools/validate.ts"
+  - "packages/msp/src/mcp/types.ts"          # ToolDef, ToolHandlerCtx
+  - "packages/msp/src/mcp/server.ts"         # createMspMcpServer
+  - "packages/msp/src/mcp/tools/validate.ts"
   - "src/mcp/tools/propose.ts"
-  - "src/mcp/tools/run-task.ts"
-  - "src/mcp/tools/session-append.ts"
-  - "src/mcp/tools/episode-append.ts"
-  - "src/mcp/tools/backlinks-rebuild.ts"
-  - "bin/msp-mcp-server.ts"
-  - "test/mcp/server.test.ts"
+  - "packages/msp/src/mcp/tools/run-task.ts"
+  - "packages/msp/src/mcp/tools/session-append.ts"
+  - "packages/msp/src/mcp/tools/episode-append.ts"
+  - "packages/msp/src/mcp/tools/backlinks-rebuild.ts"
+  - "packages/msp/src/mcp/bin.ts"
+  - "packages/msp/test/mcp/server.test.ts"
   - "test/mcp/tools/*.test.ts"
 
 api_contracts:

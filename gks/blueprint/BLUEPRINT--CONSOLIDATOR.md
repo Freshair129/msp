@@ -14,19 +14,32 @@ tags:
   - blueprint
   - implementation
   - m7b
-crosslinks: {"implements":["FEAT--CONSOLIDATOR"],"references":["ADR--CONSOLIDATOR-HYBRID-SCORING","CONCEPT--CONSOLIDATOR"]}
+crosslinks:
+  implements:
+    - FEAT--CONSOLIDATOR
+  references:
+    - ADR--CONSOLIDATOR-HYBRID-SCORING
+    - CONCEPT--CONSOLIDATOR
 linked_symbols:
-  - {"file":"packages/msp/src/orchestrator/consolidator/index.ts"}
-  - {"file":"packages/msp/src/orchestrator/consolidator/types.ts"}
-  - {"file":"packages/msp/src/orchestrator/consolidator/score.ts"}
-  - {"file":"packages/msp/src/orchestrator/consolidator/boundary.ts"}
-  - {"file":"packages/msp/src/orchestrator/consolidator/summarise.ts"}
-  - {"file":"packages/msp/src/orchestrator/consolidator/llm.ts"}
-  - {"file":"packages/msp/test/orchestrator/consolidator/score.test.ts"}
-  - {"file":"packages/msp/test/orchestrator/consolidator/boundary.test.ts"}
-  - {"file":"packages/msp/test/orchestrator/consolidator/summarise.test.ts"}
-  - {"file":"packages/msp/test/orchestrator/consolidator/index.test.ts"}
+  - file: packages/msp/src/orchestrator/consolidator/index.ts
+  - file: packages/msp/src/orchestrator/consolidator/types.ts
+  - file: packages/msp/src/orchestrator/consolidator/score.ts
+  - file: packages/msp/src/orchestrator/consolidator/boundary.ts
+  - file: packages/msp/src/orchestrator/consolidator/summarise.ts
+  - file: packages/msp/src/orchestrator/consolidator/llm.ts
+  - file: packages/msp/test/orchestrator/consolidator/score.test.ts
+  - file: packages/msp/test/orchestrator/consolidator/boundary.test.ts
+  - file: packages/msp/test/orchestrator/consolidator/summarise.test.ts
+  - file: packages/msp/test/orchestrator/consolidator/index.test.ts
 created_at: 2026-05-04T17:06:30.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — consolidator implementation plan
@@ -114,17 +127,17 @@ data_logic: |
       5. return Episode[]
 
 geography:
-  - "src/orchestrator/consolidator/index.ts"
-  - "src/orchestrator/consolidator/types.ts"
-  - "src/orchestrator/consolidator/score.ts"
-  - "src/orchestrator/consolidator/boundary.ts"
-  - "src/orchestrator/consolidator/llm.ts"
-  - "src/orchestrator/consolidator/summarise.ts"
-  - "test/orchestrator/consolidator/score.test.ts"        # ~10 tests, 7 features + thresholds
-  - "test/orchestrator/consolidator/boundary.test.ts"     # ~5 tests, single-topic / topic-shift / cliff
-  - "test/orchestrator/consolidator/llm.test.ts"          # ~10 tests, success / timeout / parse-error / no-provider / budget cap
-  - "test/orchestrator/consolidator/summarise.test.ts"    # ~5 tests, sentence pick / fallback / tag extraction
-  - "test/orchestrator/consolidator/index.test.ts"        # ~5 fixture-driven end-to-end (mock LLM)
+  - "packages/msp/src/orchestrator/consolidator/index.ts"
+  - "packages/msp/src/orchestrator/consolidator/types.ts"
+  - "packages/msp/src/orchestrator/consolidator/score.ts"
+  - "packages/msp/src/orchestrator/consolidator/boundary.ts"
+  - "packages/msp/src/orchestrator/consolidator/llm.ts"
+  - "packages/msp/src/orchestrator/consolidator/summarise.ts"
+  - "packages/msp/test/orchestrator/consolidator/score.test.ts"        # ~10 tests, 7 features + thresholds
+  - "packages/msp/test/orchestrator/consolidator/boundary.test.ts"     # ~5 tests, single-topic / topic-shift / cliff
+  - "packages/msp/test/orchestrator/consolidator/llm.test.ts"          # ~10 tests, success / timeout / parse-error / no-provider / budget cap
+  - "packages/msp/test/orchestrator/consolidator/summarise.test.ts"    # ~5 tests, sentence pick / fallback / tag extraction
+  - "packages/msp/test/orchestrator/consolidator/index.test.ts"        # ~5 fixture-driven end-to-end (mock LLM)
 
 api_contracts:
   - name: consolidate

@@ -66,4 +66,107 @@ describe('requiredFields', () => {
     const errs = requiredFields(atom({}), ctx(cfg))
     for (const e of errs) expect(e.rule).toBe('required-fields')
   })
+
+  describe('aliases validation', () => {
+    const aliasCfg: RequiredFieldsConfig = {
+      default: ['aliases'],
+      byType: new Map([
+        ['concept', ['aliases']],
+      ]),
+    }
+
+    it('passes when aliases is present, is a non-empty array of strings, and primary matches type prefix', () => {
+      expect(
+        requiredFields(
+          atom({ id: 'CONCEPT--FOO', aliases: ['CONCEPT', 'custom'] }),
+          ctx(aliasCfg),
+        ),
+      ).toEqual([])
+    })
+
+    it('flags missing aliases', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO' }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.offending).toBe('aliases')
+    })
+
+    it('flags aliases that is not an array', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO', aliases: 'not-an-array' }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain('must be a non-empty string array')
+    })
+
+    it('flags empty aliases array', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO', aliases: [] }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain("missing required field 'aliases'")
+    })
+
+    it('flags aliases array where first item is not string', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO', aliases: [123] }), ctx(aliasCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain('must be a non-empty string array')
+    })
+
+    it('flags aliases array where primary alias does not match ID type prefix', () => {
+      const errs = requiredFields(
+        atom({ id: 'CONCEPT--FOO', aliases: ['FEAT'] }),
+        ctx(aliasCfg),
+      )
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain("alias at index 0 must match the expected 'CONCEPT'")
+    })
+
+    it('checks proposed_id prefix if id is not present (for candidates)', () => {
+      expect(
+        requiredFields(
+          atom({ proposed_id: 'CONCEPT--FOO', aliases: ['CONCEPT'] }),
+          ctx(aliasCfg),
+        ),
+      ).toEqual([])
+    })
+  })
+
+  describe('cluster and role validation', () => {
+    const metaCfg: RequiredFieldsConfig = {
+      default: ['cluster', 'role'],
+      byType: new Map([
+        ['concept', ['cluster', 'role']],
+      ]),
+    }
+
+    it('passes when cluster and role match the registry', () => {
+      expect(
+        requiredFields(
+          atom({ id: 'CONCEPT--FOO', cluster: 'implementation_flow', role: 'Strategic intent / PRD' }),
+          ctx(metaCfg),
+        ),
+      ).toEqual([])
+    })
+
+    it('flags missing cluster or role', () => {
+      const errs = requiredFields(atom({ id: 'CONCEPT--FOO', role: 'Strategic intent / PRD' }), ctx(metaCfg))
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.offending).toBe('cluster')
+    })
+
+    it('flags incorrect cluster value', () => {
+      const errs = requiredFields(
+        atom({ id: 'CONCEPT--FOO', cluster: 'incorrect_cluster', role: 'Strategic intent / PRD' }),
+        ctx(metaCfg),
+      )
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain("field 'cluster' must match registry value 'implementation_flow'")
+    })
+
+    it('flags incorrect role value', () => {
+      const errs = requiredFields(
+        atom({ id: 'CONCEPT--FOO', cluster: 'implementation_flow', role: 'Incorrect Role' }),
+        ctx(metaCfg),
+      )
+      expect(errs).toHaveLength(1)
+      expect(errs[0]!.message).toContain("field 'role' must match registry value 'Strategic intent / PRD'")
+    })
+  })
 })
+

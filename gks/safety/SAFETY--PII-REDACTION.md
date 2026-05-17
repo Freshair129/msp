@@ -1,9 +1,9 @@
 ---
 id: SAFETY--PII-REDACTION
-phase: 1
+phase: 0
 type: safety
 status: stable
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: PII Redaction Safety — protect sensitive identity data
@@ -13,8 +13,18 @@ tags:
   - pii
   - redaction
   - identity
-crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK"]}
+crosslinks:
+  references:
+    - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
 created_at: 2026-05-14T21:00:00+07:00
+aliases:
+  - SAFETY
+  - implementation_flow
+  - Ethical safety / AI alignment
+cluster: implementation_flow
+role: Ethical safety / AI alignment
+attributes:
+  domain: safety
 ---
 
 # SAFETY — PII Redaction

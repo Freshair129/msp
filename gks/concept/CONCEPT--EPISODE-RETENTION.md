@@ -6,7 +6,8 @@ status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
-title: Episode retention — bounded growth of <root>/gks/episode/ via age-based GC with error preservation
+title: Episode retention — bounded growth of <root>/gks/episode/ via age-based
+  GC with error preservation
 tags:
   - msp
   - phase-f4
@@ -20,6 +21,14 @@ crosslinks:
     - ADR--EPISODE-GC-POLICY
     - ADR--BRAIN-PATH-RESOLUTION
 created_at: 2026-05-14T05:00:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
+cluster: implementation_flow
+role: Strategic intent / PRD
+attributes:
+  domain: concept
 ---
 
 # CONCEPT — Episode retention

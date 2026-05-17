@@ -46,6 +46,7 @@ export interface ValidationContext {
   forbiddenFields?: ReadonlySet<string>
   requiredFields?: RequiredFieldsConfig
   now?: Date
+  root?: string
 }
 
 export interface ValidationResult {

@@ -25,6 +25,7 @@ export interface CandidateFrontmatter {
   status: 'candidate'
   proposed_at: string
   proposed_by: 'agent' | 'human'
+  aliases?: string[]
   rationale?: string
   confidence?: number
 }
@@ -52,7 +53,7 @@ export interface CandidateWriterOpts {
 export class CandidateIdError extends Error {
   constructor(id: string) {
     super(
-      `Invalid proposed_id "${id}" — must match /^(CONCEPT|ADR|FEAT|BLUEPRINT|FRAME|AUDIT|PROTO)--[A-Z0-9-]+$/`,
+      `Invalid proposed_id "${id}" — must match /^[A-Z]+--[A-Z0-9-]+$/`,
     )
     this.name = 'CandidateIdError'
   }

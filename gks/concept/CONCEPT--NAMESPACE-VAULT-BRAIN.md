@@ -19,6 +19,12 @@ tags:
   - isolation
 crosslinks: {"references":["FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK","FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--IDENTITY-LAYER"]}
 created_at: 2026-05-13T08:59:41.079+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
+cluster: implementation_flow
+role: "Strategic intent / PRD"
 ---
 
 # CONCEPT — Namespace, Vault, and Brain

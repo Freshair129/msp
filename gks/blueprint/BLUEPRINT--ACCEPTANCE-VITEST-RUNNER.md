@@ -15,13 +15,25 @@ tags:
   - vitest
   - blueprint
   - implementation
-crosslinks: {"implements":["FEAT--ACCEPTANCE-VITEST-RUNNER"],"references":["ADR--ACCEPTANCE-VITEST-RUNNER"]}
+crosslinks:
+  implements:
+    - FEAT--ACCEPTANCE-VITEST-RUNNER
+  references:
+    - ADR--ACCEPTANCE-VITEST-RUNNER
 linked_symbols:
-  - {"file":"packages/msp/src/codegen/acceptance/vitest.ts"}
-  - {"file":"packages/msp/src/codegen/acceptance/sandbox.ts"}
-  - {"file":"packages/msp/src/codegen/acceptance/parse-results.ts"}
-  - {"file":"packages/msp/src/codegen/acceptance/types.ts"}
+  - file: packages/msp/src/codegen/acceptance/vitest.ts
+  - file: packages/msp/src/codegen/acceptance/sandbox.ts
+  - file: packages/msp/src/codegen/acceptance/parse-results.ts
+  - file: packages/msp/src/codegen/acceptance/types.ts
 created_at: 2026-05-03T16:27:18.868+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — vitest acceptance runner
@@ -55,13 +67,13 @@ data_logic: |
     }
 
 geography:
-  - "src/codegen/acceptance/types.ts"
-  - "src/codegen/acceptance/sandbox.ts"
-  - "src/codegen/acceptance/parse-results.ts"
-  - "src/codegen/acceptance/vitest.ts"
-  - "test/codegen/acceptance/sandbox.test.ts"
-  - "test/codegen/acceptance/parse-results.test.ts"
-  - "test/codegen/acceptance/vitest.test.ts"
+  - "packages/msp/src/codegen/acceptance/types.ts"
+  - "packages/msp/src/codegen/acceptance/sandbox.ts"
+  - "packages/msp/src/codegen/acceptance/parse-results.ts"
+  - "packages/msp/src/codegen/acceptance/vitest.ts"
+  - "packages/msp/test/codegen/acceptance/sandbox.test.ts"
+  - "packages/msp/test/codegen/acceptance/parse-results.test.ts"
+  - "packages/msp/test/codegen/acceptance/vitest.test.ts"
 
 api_contracts:
   - name: createVitestAcceptance

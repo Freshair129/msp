@@ -9,7 +9,18 @@ promoted_from: BLUEPRINT--CONTRADICTION-DETECTION-IMPL
 promoted_at: 2026-05-09T08:01:00.000Z
 promotion_adr: ADR--MASTER-PROMOTION-CONTRADICTION-POLICY
 vault_id: default
-title: Atom contradiction policy — supersession is explicit, reciprocal, in the same PR
+priority: P0
+constituents:
+  required:
+    framework:
+      - FRAMEWORK--KNOWLEDGE-3-TIER
+    adr:
+      - ADR--MASTER-PROMOTION-CONTRADICTION-POLICY
+    blueprint:
+      - BLUEPRINT--CONTRADICTION-DETECTION-IMPL
+  optional: {}
+title: Atom contradiction policy — supersession is explicit, reciprocal, in the
+  same PR
 tags:
   - msp
   - master
@@ -17,8 +28,20 @@ tags:
   - supersession
   - governance
   - instinct
-crosslinks: {"references":["FRAMEWORK--KNOWLEDGE-3-TIER","ADR--MASTER-PROMOTION-CONTRADICTION-POLICY","BLUEPRINT--CONTRADICTION-DETECTION-IMPL"]}
+crosslinks:
+  references:
+    - FRAMEWORK--KNOWLEDGE-3-TIER
+    - ADR--MASTER-PROMOTION-CONTRADICTION-POLICY
+    - BLUEPRINT--CONTRADICTION-DETECTION-IMPL
 created_at: 2026-05-09T15:01:30.000+07:00
+aliases:
+  - MASTER
+  - implementation_flow
+  - Root-level policy / genesis rule
+cluster: implementation_flow
+role: Root-level policy / genesis rule
+attributes:
+  domain: master
 ---
 
 # MASTER — Atom contradiction policy (Layer 0 supersession discipline)

@@ -1,11 +1,11 @@
-import { joinTurns } from './text.js'
 import { DEFAULT_TOKENISER, estimateText } from './tokens.js'
 import {
   DEFAULT_LLM_TIMEOUT_MS,
   type CompressorEpisode,
-  type LlmClient,
   type Tokeniser,
 } from './types.js'
+import type { SlmClient as LlmClient } from '../../codegen/slm/types.js' // Explicitly import and rename SlmClient to LlmClient
+import type { Turn } from '../consolidator/types.js' // Explicitly import Turn
 
 const PROMPT_HEAD = `Re-summarise the following conversation chunk in approximately`
 const PROMPT_BODY_HEAD = `tokens. Preserve key decisions, facts, and code references. Drop greetings, dead ends, and conversational filler.
@@ -25,8 +25,11 @@ export function buildResummarisePrompt(
   episode: CompressorEpisode,
   targetTokens: number,
 ): string {
-  const body = joinTurns(episode.turns)
-  return `${PROMPT_HEAD} ${targetTokens} ${PROMPT_BODY_HEAD}\n${body}\n${PROMPT_TAIL}\n`
+  const conversation = episode.turns.map((turn) => `[${turn.speakerId}] ${turn.content}`).join('\n')
+  return `${PROMPT_HEAD} ${targetTokens} ${PROMPT_BODY_HEAD}
+${conversation}
+${PROMPT_TAIL}
+`
 }
 
 /**

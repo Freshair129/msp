@@ -4,7 +4,7 @@ phase: 2
 type: spec
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: SPEC — Usage Roll-up Atom — weekly + monthly cost-aggregation contract
 tags:
@@ -21,6 +21,14 @@ crosslinks:
     - CONCEPT--COST-TRACKING
     - ADR--AGENT-TIER-COST-POLICY
 created_at: 2026-05-14T05:01:00.000+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
+cluster: implementation_flow
+role: Technical specification
+attributes:
+  domain: spec
 ---
 
 # SPEC — Usage Roll-up Atom

@@ -4,7 +4,7 @@ phase: 2
 type: spec
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: SPEC — Usage Atom — daily cost-aggregation atom contract
 tags:
@@ -21,6 +21,14 @@ crosslinks:
     - ADR--AGENT-TIER-COST-POLICY
     - BLUEPRINT--COST-TRACKING
 created_at: 2026-05-14T03:45:00.000+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
+cluster: implementation_flow
+role: Technical specification
+attributes:
+  domain: spec
 ---
 
 # SPEC — Usage Atom

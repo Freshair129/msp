@@ -14,15 +14,28 @@ tags:
   - client
   - blueprint
   - implementation
-crosslinks: {"implements":["FEAT--MSP-OBSIDIAN-CLIENT"],"references":["ADR--MSP-OBSIDIAN-INTEGRATION","CONCEPT--OBSIDIAN-AS-RUNTIME"]}
+crosslinks:
+  implements:
+    - FEAT--MSP-OBSIDIAN-CLIENT
+  references:
+    - ADR--MSP-OBSIDIAN-INTEGRATION
+    - CONCEPT--OBSIDIAN-AS-RUNTIME
 linked_symbols:
-  - {"file":"packages/msp/src/obsidian/client.ts"}
-  - {"file":"packages/msp/src/obsidian/types.ts"}
-  - {"file":"packages/msp/src/obsidian/rest.ts"}
-  - {"file":"packages/msp/src/obsidian/filesystem.ts"}
-  - {"file":"packages/msp/src/obsidian/env.ts"}
-  - {"file":"packages/msp/test/obsidian/client.test.ts"}
+  - file: packages/msp/src/obsidian/client.ts
+  - file: packages/msp/src/obsidian/types.ts
+  - file: packages/msp/src/obsidian/rest.ts
+  - file: packages/msp/src/obsidian/filesystem.ts
+  - file: packages/msp/src/obsidian/env.ts
+  - file: packages/msp/test/obsidian/client.test.ts
 created_at: 2026-05-04T12:25:22.543+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — MSP Obsidian client implementation plan
@@ -69,12 +82,12 @@ data_logic: |
     - smartViewDeepLink = undefined (no Obsidian to link to)
 
 geography:
-  - "src/obsidian/client.ts"        # createObsidianClient factory
-  - "src/obsidian/types.ts"         # ObsidianClient, ClientOpts
-  - "src/obsidian/rest.ts"          # makeRestClient (wraps GKS adapter)
-  - "src/obsidian/filesystem.ts"    # makeFilesystemClient
-  - "src/obsidian/env.ts"           # resolveEnv (handles OBSIDIAN_HOST deprecation)
-  - "test/obsidian/client.test.ts"  # both modes + deprecation + deep-link
+  - "packages/msp/src/obsidian/client.ts"        # createObsidianClient factory
+  - "packages/msp/src/obsidian/types.ts"         # ObsidianClient, ClientOpts
+  - "packages/msp/src/obsidian/rest.ts"          # makeRestClient (wraps GKS adapter)
+  - "packages/msp/src/obsidian/filesystem.ts"    # makeFilesystemClient
+  - "packages/msp/src/obsidian/env.ts"           # resolveEnv (handles OBSIDIAN_HOST deprecation)
+  - "packages/msp/test/obsidian/client.test.ts"  # both modes + deprecation + deep-link
 
 api_contracts:
   - name: createObsidianClient

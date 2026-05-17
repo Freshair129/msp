@@ -1,12 +1,13 @@
 ---
 id: FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
-phase: 2
+phase: 0
 type: framework
 status: draft
 tier: process
 source_type: axiomatic
 vault_id: default
-title: Universal context framework — identity-aware, policy-controlled, graded-resolution retrieval
+title: Universal context framework — identity-aware, policy-controlled,
+  graded-resolution retrieval
 tags:
   - msp
   - framework
@@ -15,8 +16,23 @@ tags:
   - abac
   - vault
   - resolution
-crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT","CONCEPT--ATTRIBUTE-BAG-MODEL","CONCEPT--NAMESPACE-VAULT-BRAIN","CONCEPT--COGNITIVE-LAYER-FACADE","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
+crosslinks:
+  references:
+    - FRAMEWORK--MSP-ARCHITECTURE-V2
+    - CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
+    - CONCEPT--ATTRIBUTE-BAG-MODEL
+    - CONCEPT--NAMESPACE-VAULT-BRAIN
+    - CONCEPT--COGNITIVE-LAYER-FACADE
+    - CONCEPT--KNOWLEDGE-LAYERS-V2
 created_at: 2026-05-13T08:59:37.161+07:00
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
+cluster: implementation_flow
+role: Governance / architectural framework
+attributes:
+  domain: framework
 ---
 
 # FRAME — Universal Context Framework

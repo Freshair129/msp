@@ -1,6 +1,6 @@
 ---
 id: RUNBOOK--IDENTITY-MIGRATION
-phase: 1
+phase: 6
 type: runbook
 status: stable
 tier: process
@@ -13,8 +13,19 @@ tags:
   - migration
   - sop
   - projects
-crosslinks: {"references":["ADR--GLOBAL-VS-WORKSPACE","ALGO--IDENTITY-RESOLUTION"]}
+crosslinks:
+  references:
+    - ADR--GLOBAL-VS-WORKSPACE
+    - ALGO--IDENTITY-RESOLUTION
 created_at: 2026-05-14T20:10:00+07:00
+aliases:
+  - RUNBOOK
+  - ops
+  - Operational response guide
+cluster: ops
+role: Operational response guide
+attributes:
+  domain: runbook
 ---
 
 # RUNBOOK — Identity Migration

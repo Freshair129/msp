@@ -1,20 +1,32 @@
 ---
 id: FRAMEWORK--FOUR-LAYERS
-phase: 2
+phase: 0
 type: framework
 status: stable
 created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
 tier: genesis
 title: Four-layer storage model
-tags: [architecture, framework, core]
+tags:
+  - architecture
+  - framework
+  - core
 crosslinks:
-  references: [CONCEPT--MEMORY-STORE]
+  references:
+    - CONCEPT--MEMORY-STORE
 linked_symbols:
-  - { file: "src/memory/gks.ts" }
-  - { file: "src/memory/vector/index.ts" }
-  - { file: "src/memory/episodic.ts" }
-  - { file: "src/memory/obsidian-mcp.ts" }
+  - file: packages/gks/src/memory/gks.ts
+  - file: packages/gks/src/memory/vector/index.ts
+  - file: packages/gks/src/memory/episodic.ts
+  - file: packages/gks/src/memory/obsidian-mcp.ts
+aliases:
+  - FRAMEWORK
+  - implementation_flow
+  - Governance / architectural framework
+cluster: implementation_flow
+role: Governance / architectural framework
+attributes:
+  domain: framework
 ---
 
 # FRAME — Four-layer storage model

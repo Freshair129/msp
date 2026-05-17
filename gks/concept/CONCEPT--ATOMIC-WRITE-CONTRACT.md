@@ -12,8 +12,21 @@ tags:
   - contract
   - schema
   - atomic
-crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
+crosslinks:
+  references:
+    - FRAMEWORK--MSP-ARCHITECTURE-V2
+    - CONCEPT--KNOWLEDGE-LAYERS-V2
+    - CONCEPT--CODEGEN-MICROTASK-CONTRACT
+    - SPEC--ATOM-REGISTRY-SCHEMA
 created_at: 2026-05-03T14:01:51.814+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
+cluster: implementation_flow
+role: Strategic intent / PRD
+attributes:
+  domain: concept
 ---
 
 # CONCEPT — atomic write contract
@@ -24,7 +37,7 @@ Every file in `gks/<type>/` obeys a single schema: required frontmatter fields, 
 
 | Part | Source | Atom |
 |---|---|---|
-| Required fields | §4.1 | `[[ADR--ATOMIC-CONTRACT-SCHEMA]]` (TBD M3) |
+| Required fields | §4.1 | `[[ADR--ATOMIC-CONTRACT-SCHEMA]]` (TBD M3) and `[[SPEC--ATOM-REGISTRY-SCHEMA]]` |
 | Conditional fields | §4.2 | same |
 | Forbidden fields | §4.3 | `[[ADR--FORBIDDEN-FIELDS-LIST]]` |
 | Field constraints | §4.4 | same |

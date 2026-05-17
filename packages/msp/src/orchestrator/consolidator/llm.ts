@@ -1,5 +1,5 @@
 import type { LlmClient, Tier2Result, Turn } from './types.js'
-import { DEFAULT_LLM_TIMEOUT_MS } from './types.js'
+import { DEFAULT_LLM_TIMEOUT_MS } from './config.js'
 
 const PROMPT_HEAD = `You are scoring the importance of an agent conversation chunk for long-term memory.
 

@@ -1,121 +1,95 @@
 import type { Turn, Thresholds } from './types.js'
-import { DEFAULT_THRESHOLDS } from './types.js'
+import { DEFAULT_THRESHOLDS } from './config.js'
 
-const STOPWORDS = new Set([
-  'the','a','an','and','or','but','if','then','else','of','in','on','at',
-  'to','for','from','by','with','is','are','was','were','be','been','being',
-  'have','has','had','do','does','did','will','would','could','should','may',
-  'might','this','that','these','those','it','its','i','you','we','they',
-  'he','she','him','her','them','our','your','my','me','us','as','so','not',
-  'no','yes','can','about','into','out','up','down','over','under','also',
-  'than','too','very','just','only','any','all','some','more','most','other',
-  'such','what','which','who','whom','when','where','why','how',
+// Common function words stripped before similarity comparison.
+const STOP = new Set([
+  'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'being',
+  'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'should',
+  'could', 'can', 'may', 'might', 'shall', 'must',
+  'in', 'on', 'at', 'to', 'for', 'of', 'and', 'or', 'but', 'not', 'no',
+  'this', 'that', 'these', 'those', 'it', 'its',
+  'i', 'you', 'he', 'she', 'we', 'they',
+  'with', 'as', 'if', 'from', 'by', 'into', 'about',
 ])
 
 /**
- * Break a string into normalised content tokens (lowercase, alphanumeric,
- * stopwords removed, length ≥ 2).
+ * Tokenise text into a filtered word array. Strips stop-words and
+ * tokens shorter than 3 characters so that function words do not
+ * dominate cosine similarity.
  */
 export function tokenise(text: string): string[] {
-  if (!text) return []
-  const out: string[] = []
-  const matches = text.toLowerCase().match(/[a-z0-9_-]+/g)
-  if (!matches) return []
-  for (const m of matches) {
-    if (m.length < 2) continue
-    if (STOPWORDS.has(m)) continue
-    out.push(m)
-  }
-  return out
+  return (text.toLowerCase().match(/\w+/g) ?? []).filter(
+    (w) => w.length > 2 && !STOP.has(w),
+  )
 }
 
 /**
- * Cosine similarity between two token bags. Returns 0..1.
- * Empty bags → 0 (treated as a topic shift / boundary).
+ * Cosine similarity between two token arrays (bag-of-words model).
+ * Returns 0 when either array is empty.
  */
 export function bagCosine(a: string[], b: string[]): number {
   if (a.length === 0 || b.length === 0) return 0
-  const fa: Record<string, number> = {}
-  const fb: Record<string, number> = {}
-  for (const t of a) fa[t] = (fa[t] ?? 0) + 1
-  for (const t of b) fb[t] = (fb[t] ?? 0) + 1
+
+  const freqA = new Map<string, number>()
+  const freqB = new Map<string, number>()
+  for (const w of a) freqA.set(w, (freqA.get(w) ?? 0) + 1)
+  for (const w of b) freqB.set(w, (freqB.get(w) ?? 0) + 1)
+
+  const all = new Set([...freqA.keys(), ...freqB.keys()])
   let dot = 0
-  let na = 0
-  let nb = 0
-  for (const k of Object.keys(fa)) {
-    na += fa[k]! * fa[k]!
-    if (fb[k] !== undefined) dot += fa[k]! * fb[k]!
+  let mag1 = 0
+  let mag2 = 0
+  for (const w of all) {
+    const c1 = freqA.get(w) ?? 0
+    const c2 = freqB.get(w) ?? 0
+    dot += c1 * c2
+    mag1 += c1 * c1
+    mag2 += c2 * c2
   }
-  for (const k of Object.keys(fb)) nb += fb[k]! * fb[k]!
-  if (na === 0 || nb === 0) return 0
-  return dot / (Math.sqrt(na) * Math.sqrt(nb))
+  if (mag1 === 0 || mag2 === 0) return 0
+  return dot / (Math.sqrt(mag1) * Math.sqrt(mag2))
 }
 
-export interface BoundaryOptions {
-  /** Sliding window size in turns. Defaults to 3. */
+export interface DetectBoundariesOpts {
+  /** Number of preceding turns used as context for comparison. Default: 2. */
   window?: number
-  /** Topic-continuity threshold below which we cut. Defaults from ADR (0.25). */
-  thresholds?: Thresholds
+  thresholds?: Partial<Thresholds>
 }
 
 /**
- * Detect episode boundaries via windowed topic-continuity.
+ * Partition `turns` into topic-coherent episode ranges using a sliding
+ * bag-of-words window. Returns an array of non-overlapping [start, end]
+ * index pairs that together cover the full turn array.
  *
- * Algorithm (windowed cosine drop):
- *   1. Slide a window of `window` turns over the session.
- *   2. For each step, compare the window token bag to the previous window's.
- *   3. If cosine < boundary_threshold AND the next window starts a new
- *      contiguous span, emit a boundary at that point.
- *   4. Always emit the start (0) and end (turns.length-1) bookends.
- *
- * Returns inclusive [startIdx, endIdx] tuples covering the full session
- * partition (no overlaps, no gaps).
+ * A boundary is inserted before turn i when the cosine similarity between
+ * the combined tokens of the preceding `window` turns and turn i falls
+ * below `thresholds.boundary`.
  */
 export function detectBoundaries(
   turns: Turn[],
-  opts: BoundaryOptions = {},
+  opts: DetectBoundariesOpts = {},
 ): Array<[number, number]> {
   if (turns.length === 0) return []
-  if (turns.length === 1) return [[0, 0]]
 
-  const window = Math.max(1, opts.window ?? 3)
   const threshold = opts.thresholds?.boundary ?? DEFAULT_THRESHOLDS.boundary
+  const window = opts.window ?? 2
 
-  // For very short sessions: a single chunk.
-  if (turns.length <= window) return [[0, turns.length - 1]]
+  const ranges: Array<[number, number]> = []
+  let currentStart = 0
 
-  // Per-turn token bags so we can rebuild window bags cheaply.
-  const turnTokens: string[][] = turns.map((t) => tokenise(t.content))
+  for (let i = window; i < turns.length; i++) {
+    const prevTokens = turns
+      .slice(i - window, i)
+      .flatMap((t) => tokenise(t.content))
+    const curTokens = tokenise(turns[i]!.content)
+    const similarity = bagCosine(prevTokens, curTokens)
 
-  function windowBag(start: number, end: number): string[] {
-    const out: string[] = []
-    for (let i = start; i <= end && i < turns.length; i++) out.push(...turnTokens[i]!)
-    return out
-  }
-
-  const cuts: number[] = [0]
-  // Step the window's right-edge through the session; compare each new
-  // window of `window` turns to the previous adjacent window. To avoid
-  // spurious cuts at the tail (where the forward window would be smaller
-  // than `window`), we only consider boundaries while a full forward
-  // window is available.
-  for (let i = window; i + window - 1 < turns.length; i++) {
-    const prev = windowBag(i - window, i - 1)
-    const cur = windowBag(i, i + window - 1)
-    const sim = bagCosine(prev, cur)
-    if (sim < threshold) {
-      // Cut at boundary `i` (i becomes start of the next chunk).
-      // Avoid emitting a degenerate split if previous cut was just emitted.
-      if (cuts[cuts.length - 1]! < i) cuts.push(i)
+    if (similarity < threshold) {
+      ranges.push([currentStart, i - 1])
+      currentStart = i
     }
   }
 
-  // Convert cut points → inclusive [start, end] ranges.
-  const ranges: Array<[number, number]> = []
-  for (let i = 0; i < cuts.length; i++) {
-    const start = cuts[i]!
-    const end = i + 1 < cuts.length ? cuts[i + 1]! - 1 : turns.length - 1
-    ranges.push([start, end])
-  }
+  ranges.push([currentStart, turns.length - 1])
   return ranges
 }

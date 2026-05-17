@@ -20,6 +20,14 @@ crosslinks:
     - CONCEPT--AGENT-TIER-ROUTING
     - BLUEPRINT--AGENT-DISPATCHER
 created_at: 2026-05-14T03:30:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
+cluster: implementation_flow
+role: Strategic intent / PRD
+attributes:
+  domain: concept
 ---
 
 # CONCEPT — Genesis Block Runtime

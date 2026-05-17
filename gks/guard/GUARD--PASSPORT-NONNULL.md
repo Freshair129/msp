@@ -1,9 +1,9 @@
 ---
 id: GUARD--PASSPORT-NONNULL
-phase: 1
+phase: 2
 type: guard
 status: stable
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: Passport Non-Null Guard — ensure mandatory identity presence
@@ -12,8 +12,18 @@ tags:
   - guard
   - integrity
   - passport
-crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
+crosslinks:
+  references:
+    - FRAMEWORK--MSP-ARCHITECTURE-V2
 created_at: 2026-05-14T20:50:00+07:00
+aliases:
+  - GUARD
+  - agent_governance
+  - Structural / behavioural guardrail
+cluster: agent_governance
+role: Structural / behavioural guardrail
+attributes:
+  domain: guard
 ---
 
 # GUARD — Passport Non-Null

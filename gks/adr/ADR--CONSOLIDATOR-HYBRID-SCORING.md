@@ -14,8 +14,20 @@ tags:
   - llm
   - decision
   - m7b
-crosslinks: {"references":["CONCEPT--CONSOLIDATOR","CONCEPT--MEMORY-EPISODIC","CONCEPT--SLM-OLLAMA-CLIENT"]}
+crosslinks:
+  references:
+    - CONCEPT--CONSOLIDATOR
+    - CONCEPT--MEMORY-EPISODIC
+    - CONCEPT--SLM-OLLAMA-CLIENT
 created_at: 2026-05-04T17:05:30.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
+cluster: implementation_flow
+role: Architecture decision record
+attributes:
+  domain: adr
 ---
 
 # ADR — consolidator hybrid scoring

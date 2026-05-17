@@ -1,9 +1,9 @@
 ---
 id: GUARD--IDENTITY-SCHEMA
-phase: 1
+phase: 2
 type: guard
 status: stable
-tier: process
+tier: safety
 source_type: axiomatic
 vault_id: default
 title: Identity Schema Guard — structural invariants for identity.json
@@ -13,8 +13,18 @@ tags:
   - schema
   - validation
   - identity
-crosslinks: {"references":["CONCEPT--IDENTITY-LAYER"]}
+crosslinks:
+  references:
+    - CONCEPT--IDENTITY-LAYER
 created_at: 2026-05-14T20:40:00+07:00
+aliases:
+  - GUARD
+  - agent_governance
+  - Structural / behavioural guardrail
+cluster: agent_governance
+role: Structural / behavioural guardrail
+attributes:
+  domain: guard
 ---
 
 # GUARD — Identity Schema

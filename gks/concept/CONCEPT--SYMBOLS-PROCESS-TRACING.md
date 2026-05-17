@@ -1,6 +1,6 @@
 ---
 id: CONCEPT--SYMBOLS-PROCESS-TRACING
-phase: 2
+phase: 1
 type: concept
 status: active
 tier: process
@@ -12,8 +12,19 @@ tags:
   - symbol-graph
   - concept
   - tracing
-crosslinks: {"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH"]}
+crosslinks:
+  references:
+    - FRAMEWORK--SYMBOL-GRAPH
+    - CONCEPT--SYMBOL-GRAPH
 created_at: 2026-05-12T15:50:00.000+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
+cluster: implementation_flow
+role: Strategic intent / PRD
+attributes:
+  domain: concept
 ---
 
 # CONCEPT — End-to-end process tracing

@@ -14,18 +14,31 @@ tags:
   - blueprint
   - implementation
   - m7d
-crosslinks: {"implements":["FEAT--COMPRESSOR"],"references":["ADR--COMPRESSOR-THREE-TIER","CONCEPT--CONTEXT-COMPRESSION"]}
+crosslinks:
+  implements:
+    - FEAT--COMPRESSOR
+  references:
+    - ADR--COMPRESSOR-THREE-TIER
+    - CONCEPT--CONTEXT-COMPRESSION
 linked_symbols:
-  - {"file":"packages/msp/src/orchestrator/compressor/index.ts"}
-  - {"file":"packages/msp/src/orchestrator/compressor/types.ts"}
-  - {"file":"packages/msp/src/orchestrator/compressor/tokens.ts"}
-  - {"file":"packages/msp/src/orchestrator/compressor/trim.ts"}
-  - {"file":"packages/msp/src/orchestrator/compressor/resummarise.ts"}
-  - {"file":"packages/msp/test/orchestrator/compressor/tokens.test.ts"}
-  - {"file":"packages/msp/test/orchestrator/compressor/trim.test.ts"}
-  - {"file":"packages/msp/test/orchestrator/compressor/resummarise.test.ts"}
-  - {"file":"packages/msp/test/orchestrator/compressor/index.test.ts"}
+  - file: packages/msp/src/orchestrator/compressor/index.ts
+  - file: packages/msp/src/orchestrator/compressor/types.ts
+  - file: packages/msp/src/orchestrator/compressor/tokens.ts
+  - file: packages/msp/src/orchestrator/compressor/trim.ts
+  - file: packages/msp/src/orchestrator/compressor/resummarise.ts
+  - file: packages/msp/test/orchestrator/compressor/tokens.test.ts
+  - file: packages/msp/test/orchestrator/compressor/trim.test.ts
+  - file: packages/msp/test/orchestrator/compressor/resummarise.test.ts
+  - file: packages/msp/test/orchestrator/compressor/index.test.ts
 created_at: 2026-05-05T16:11:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — compressor implementation plan
@@ -160,15 +173,15 @@ data_logic: |
       return { compressed, totalTokensUsed: tokensUsed, tierCounts }
 
 geography:
-  - "src/orchestrator/compressor/index.ts"
-  - "src/orchestrator/compressor/types.ts"
-  - "src/orchestrator/compressor/tokens.ts"
-  - "src/orchestrator/compressor/trim.ts"
-  - "src/orchestrator/compressor/resummarise.ts"
-  - "test/orchestrator/compressor/tokens.test.ts"        # ~5 tests
-  - "test/orchestrator/compressor/trim.test.ts"          # ~7 tests
-  - "test/orchestrator/compressor/resummarise.test.ts"   # ~10 tests (LLM success / timeout / parse / truncate fallback)
-  - "test/orchestrator/compressor/index.test.ts"         # ~13 end-to-end (mocks)
+  - "packages/msp/src/orchestrator/compressor/index.ts"
+  - "packages/msp/src/orchestrator/compressor/types.ts"
+  - "packages/msp/src/orchestrator/compressor/tokens.ts"
+  - "packages/msp/src/orchestrator/compressor/trim.ts"
+  - "packages/msp/src/orchestrator/compressor/resummarise.ts"
+  - "packages/msp/test/orchestrator/compressor/tokens.test.ts"        # ~5 tests
+  - "packages/msp/test/orchestrator/compressor/trim.test.ts"          # ~7 tests
+  - "packages/msp/test/orchestrator/compressor/resummarise.test.ts"   # ~10 tests (LLM success / timeout / parse / truncate fallback)
+  - "packages/msp/test/orchestrator/compressor/index.test.ts"         # ~13 end-to-end (mocks)
 
 api_contracts:
   - name: compress

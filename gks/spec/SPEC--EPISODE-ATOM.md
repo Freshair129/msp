@@ -4,10 +4,15 @@ phase: 2
 type: spec
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: SPEC — Episode Atom — runtime-generated dispatch record contract
-tags: [msp, agents, episode, spec, runtime]
+tags:
+  - msp
+  - agents
+  - episode
+  - spec
+  - runtime
 crosslinks:
   references:
     - BLUEPRINT--AGENT-DISPATCHER
@@ -16,6 +21,14 @@ crosslinks:
     - ADR--BRAIN-PATH-RESOLUTION
     - ADR--EPISODE-GC-POLICY
 created_at: 2026-05-14T03:00:00.000+07:00
+aliases:
+  - SPEC
+  - implementation_flow
+  - Technical specification
+cluster: implementation_flow
+role: Technical specification
+attributes:
+  domain: spec
 ---
 
 # SPEC — Episode Atom

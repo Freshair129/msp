@@ -14,20 +14,33 @@ tags:
   - blueprint
   - implementation
   - m7e
-crosslinks: {"implements":["FEAT--IDENTITY-LAYER"],"references":["ADR--IDENTITY-STORAGE-SHAPE","CONCEPT--IDENTITY-LAYER"]}
+crosslinks:
+  implements:
+    - FEAT--IDENTITY-LAYER
+  references:
+    - ADR--IDENTITY-STORAGE-SHAPE
+    - CONCEPT--IDENTITY-LAYER
 linked_symbols:
-  - {"file":"packages/msp/src/identity/index.ts"}
-  - {"file":"packages/msp/src/identity/types.ts"}
-  - {"file":"packages/msp/src/identity/store.ts"}
-  - {"file":"packages/msp/src/identity/profile.ts"}
-  - {"file":"packages/msp/src/identity/voice.ts"}
-  - {"file":"packages/msp/src/identity/preferences.ts"}
-  - {"file":"packages/msp/test/identity/store.test.ts"}
-  - {"file":"packages/msp/test/identity/profile.test.ts"}
-  - {"file":"packages/msp/test/identity/voice.test.ts"}
-  - {"file":"packages/msp/test/identity/preferences.test.ts"}
-  - {"file":"packages/msp/test/identity/index.test.ts"}
+  - file: packages/msp/src/identity/index.ts
+  - file: packages/msp/src/identity/types.ts
+  - file: packages/msp/src/identity/store.ts
+  - file: packages/msp/src/identity/profile.ts
+  - file: packages/msp/src/identity/voice.ts
+  - file: packages/msp/src/identity/preferences.ts
+  - file: packages/msp/test/identity/store.test.ts
+  - file: packages/msp/test/identity/profile.test.ts
+  - file: packages/msp/test/identity/voice.test.ts
+  - file: packages/msp/test/identity/preferences.test.ts
+  - file: packages/msp/test/identity/index.test.ts
 created_at: 2026-05-05T00:26:30.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — identity layer implementation plan
@@ -119,17 +132,17 @@ data_logic: |
     export async function getIdentity(opts) = readIdentity(opts)
 
 geography:
-  - "src/identity/types.ts"          # ~30 lines
-  - "src/identity/store.ts"          # ~80 lines (atomic write + default)
-  - "src/identity/profile.ts"        # ~30 lines
-  - "src/identity/voice.ts"          # ~25 lines
-  - "src/identity/preferences.ts"    # ~70 lines (TTL logic)
-  - "src/identity/index.ts"          # ~30 lines (re-exports)
-  - "test/identity/store.test.ts"
-  - "test/identity/profile.test.ts"
-  - "test/identity/voice.test.ts"
-  - "test/identity/preferences.test.ts"
-  - "test/identity/index.test.ts"
+  - "packages/msp/src/identity/types.ts"          # ~30 lines
+  - "packages/msp/src/identity/store.ts"          # ~80 lines (atomic write + default)
+  - "packages/msp/src/identity/profile.ts"        # ~30 lines
+  - "packages/msp/src/identity/voice.ts"          # ~25 lines
+  - "packages/msp/src/identity/preferences.ts"    # ~70 lines (TTL logic)
+  - "packages/msp/src/identity/index.ts"          # ~30 lines (re-exports)
+  - "packages/msp/test/identity/store.test.ts"
+  - "packages/msp/test/identity/profile.test.ts"
+  - "packages/msp/test/identity/voice.test.ts"
+  - "packages/msp/test/identity/preferences.test.ts"
+  - "packages/msp/test/identity/index.test.ts"
 
 api_contracts:
   - name: getIdentity

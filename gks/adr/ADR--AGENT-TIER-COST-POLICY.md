@@ -16,6 +16,14 @@ crosslinks:
   references:
     - CONCEPT--AGENT-TIER-ROUTING
 created_at: 2026-05-13T22:52:00+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
+cluster: implementation_flow
+role: Architecture decision record
+attributes:
+  domain: adr
 ---
 
 # ADR — Agent Tier Cost Policy

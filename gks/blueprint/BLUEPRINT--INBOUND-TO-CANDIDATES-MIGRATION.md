@@ -7,7 +7,8 @@ status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
-title: BLUEPRINT — replace inbound queue with candidates layer (phased removal of msp_propose + propose.mjs + inbound infra)
+title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
+  of msp_propose + propose.mjs + inbound infra)
 tags:
   - msp
   - inbound
@@ -15,23 +16,35 @@ tags:
   - migration
   - blueprint
   - implementation
-crosslinks: {"references":["CONCEPT--KNOWLEDGE-LAYERS-V2","ADR--AGENT-WRITE-BOUNDARIES","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
+crosslinks:
+  references:
+    - CONCEPT--KNOWLEDGE-LAYERS-V2
+    - ADR--AGENT-WRITE-BOUNDARIES
+    - FRAMEWORK--MSP-ARCHITECTURE-V2
 linked_symbols:
-  - {"file":"src/mcp/tools/propose.ts"}
-  - {"file":"packages/msp/src/mcp/tools/candidate.ts"}
-  - {"file":"packages/msp/src/memory/candidates/writer.ts"}
-  - {"file":"scripts/msp/propose.mjs"}
-  - {"file":"test/scripts/propose.test.ts"}
-  - {"file":"test/mcp/tools/propose.test.ts"}
-  - {"file":"packages/msp/test/mcp/tools/candidate.test.ts"}
-  - {"file":"packages/msp/test/memory/candidates/writer.test.ts"}
-  - {"file":"web/src/components/CandidatesList.tsx"}
-  - {"file":"web/src/api.ts"}
-  - {"file":"packages/msp/src/mcp/server.ts"}
-  - {"file":"package.json"}
-  - {"file":"msp_spec.md"}
-  - {"file":"CLAUDE.md"}
+  - file: src/mcp/tools/propose.ts
+  - file: packages/msp/src/mcp/tools/candidate.ts
+  - file: packages/msp/src/memory/candidates/writer.ts
+  - file: scripts/msp/propose.mjs
+  - file: test/scripts/propose.test.ts
+  - file: test/mcp/tools/propose.test.ts
+  - file: packages/msp/test/mcp/tools/candidate.test.ts
+  - file: packages/msp/test/memory/candidates/writer.test.ts
+  - file: web/src/components/CandidatesList.tsx
+  - file: web/src/api.ts
+  - file: packages/msp/src/mcp/server.ts
+  - file: package.json
+  - file: msp_spec.md
+  - file: CLAUDE.md
 created_at: 2026-05-08T17:02:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — inbound to candidates migration
@@ -115,13 +128,13 @@ phase_1_additive:
                           gks/<type>/ and opening a PR. CI will validate."
 
     1.6 Tests
-        - test/memory/candidates/writer.test.ts (~10 tests):
+        - packages/msp/test/memory/candidates/writer.test.ts (~10 tests):
             * happy path: writes file with right frontmatter
             * id validation rejects bad patterns
             * overwrite emits flag
             * list returns sorted summaries
             * delete removes file
-        - test/mcp/tools/candidate.test.ts (~5 tests):
+        - packages/msp/test/mcp/tools/candidate.test.ts (~5 tests):
             * registers under name msp_candidate
             * happy path with tmpdir root
             * rejects malformed id
@@ -236,21 +249,21 @@ phase_4_audit_supersede:
     - grep "inbound" gks/ → only superseded CONCEPT or audit history mentions
 
 geography:
-  - "src/memory/candidates/writer.ts"                            # NEW
-  - "src/mcp/tools/candidate.ts"                                 # NEW
-  - "test/memory/candidates/writer.test.ts"                      # NEW
-  - "test/mcp/tools/candidate.test.ts"                           # NEW
+  - "packages/msp/src/memory/candidates/writer.ts"                            # NEW
+  - "packages/msp/src/mcp/tools/candidate.ts"                                 # NEW
+  - "packages/msp/test/memory/candidates/writer.test.ts"                      # NEW
+  - "packages/msp/test/mcp/tools/candidate.test.ts"                           # NEW
   - "web/src/components/CandidatesList.tsx"                      # NEW
   - "web/src/api.ts"                                             # MODIFIED — add candidate endpoints
-  - "src/mcp/server.ts"                                          # MODIFIED phase 1 + phase 3
+  - "packages/msp/src/mcp/server.ts"                                          # MODIFIED phase 1 + phase 3
   - "src/mcp/tools/propose.ts"                                   # MODIFIED phase 2, DELETED phase 3
   - "test/mcp/tools/propose.test.ts"                             # MODIFIED phase 2, DELETED phase 3
   - "scripts/msp/propose.mjs"                                    # DELETED phase 3
   - "test/scripts/propose.test.ts"                               # DELETED phase 3
   - "package.json"                                               # MODIFIED phase 3 (drop msp:propose / msp:list / msp:promote)
-  - "src/validator/cli.ts"                                       # MODIFIED phase 3 (drop inbound walk)
-  - "test/mcp/server.test.ts"                                    # MODIFIED phase 3 (asserts new tool list)
-  - "test/mcp/bin.test.ts"                                       # MODIFIED phase 3
+  - "packages/msp/src/validator/cli.ts"                                       # MODIFIED phase 3 (drop inbound walk)
+  - "packages/msp/test/mcp/server.test.ts"                                    # MODIFIED phase 3 (asserts new tool list)
+  - "packages/msp/test/mcp/bin.test.ts"                                       # MODIFIED phase 3
   - "msp_spec.md"                                                # MODIFIED phase 3
   - "CLAUDE.md"                                                  # MODIFIED phase 3
   - "ROADMAP.md"                                                 # MODIFIED phase 2 (deprecation), phase 3 (final)

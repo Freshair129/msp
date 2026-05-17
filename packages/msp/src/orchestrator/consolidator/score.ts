@@ -1,5 +1,5 @@
 import type { Turn, SessionStats, Thresholds, Tier1Result, Verdict } from './types.js'
-import { DEFAULT_THRESHOLDS } from './types.js'
+import { DEFAULT_THRESHOLDS } from './config.js'
 import { bagCosine, tokenise } from './boundary.js'
 
 /**
@@ -164,7 +164,7 @@ function clamp01(n: number): number {
 export function scoreChunk(
   chunk: Turn[],
   stats: SessionStats,
-  thresholds: Thresholds = {},
+  thresholds: Partial<Thresholds> = {},
   prevChunk: Turn[] | null = null,
 ): Tier1Result {
   const text = chunk.map((t) => t.content).join('\n')

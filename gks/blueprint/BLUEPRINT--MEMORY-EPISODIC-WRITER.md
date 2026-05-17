@@ -14,14 +14,27 @@ tags:
   - episodic
   - blueprint
   - implementation
-crosslinks: {"implements":["FEAT--MEMORY-EPISODIC-WRITER"],"references":["ADR--MEMORY-EPISODIC-WRITER","CONCEPT--MEMORY-EPISODIC"]}
+crosslinks:
+  implements:
+    - FEAT--MEMORY-EPISODIC-WRITER
+  references:
+    - ADR--MEMORY-EPISODIC-WRITER
+    - CONCEPT--MEMORY-EPISODIC
 linked_symbols:
-  - {"file":"packages/msp/src/memory/episodic/writer.ts"}
-  - {"file":"packages/msp/src/memory/episodic/types.ts"}
-  - {"file":"packages/msp/src/memory/episodic/schema.ts"}
-  - {"file":"packages/msp/src/memory/episodic/atomic-write.ts"}
-  - {"file":"packages/msp/src/memory/episodic/summarisers/heuristic.ts"}
+  - file: packages/msp/src/memory/episodic/writer.ts
+  - file: packages/msp/src/memory/episodic/types.ts
+  - file: packages/msp/src/memory/episodic/schema.ts
+  - file: packages/msp/src/memory/episodic/atomic-write.ts
+  - file: packages/msp/src/memory/episodic/summarisers/heuristic.ts
 created_at: 2026-05-03T14:16:41.255+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — episodic writer
@@ -53,13 +66,13 @@ data_logic: |
     4. assemble episode object + call appendEpisode
 
 geography:
-  - "src/memory/episodic/writer.ts"             # public API
-  - "src/memory/episodic/schema.ts"             # validate(episode)
-  - "src/memory/episodic/atomic-write.ts"       # tmp + rename
-  - "src/memory/episodic/summarisers/heuristic.ts"
-  - "src/memory/episodic/types.ts"
-  - "test/memory/episodic/writer.test.ts"
-  - "test/memory/episodic/schema.test.ts"
+  - "packages/msp/src/memory/episodic/writer.ts"             # public API
+  - "packages/msp/src/memory/episodic/schema.ts"             # validate(episode)
+  - "packages/msp/src/memory/episodic/atomic-write.ts"       # tmp + rename
+  - "packages/msp/src/memory/episodic/summarisers/heuristic.ts"
+  - "packages/msp/src/memory/episodic/types.ts"
+  - "packages/msp/test/memory/episodic/writer.test.ts"
+  - "packages/msp/test/memory/episodic/schema.test.ts"
   - "test/memory/episodic/atomic-write.test.ts"
 
 api_contracts:

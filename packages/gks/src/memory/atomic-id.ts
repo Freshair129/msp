@@ -9,7 +9,7 @@
  */
 
 /** Canonical atomic ID pattern: TYPE--SLUG. */
-export const ATOMIC_ID_PATTERN = /^[A-Z][A-Z0-9_]*--[A-Z0-9][A-Z0-9_-]*$/
+export const ATOMIC_ID_PATTERN = /^[A-Z][A-Z0-9_]*(?:-[a-zA-Z0-9-]+)?--[A-Z0-9][A-Z0-9_-]*(?:--K\d+)?$/
 
 export function isAtomicId(s: string): boolean {
   return ATOMIC_ID_PATTERN.test(s)

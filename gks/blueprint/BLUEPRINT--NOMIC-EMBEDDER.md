@@ -1,17 +1,25 @@
 ---
 id: BLUEPRINT--NOMIC-EMBEDDER
-phase: 2
+phase: 3
 type: blueprint
 scale_level: L2
 status: stable
 title: Implementation plan for nomic-embed-text-v1.5 embedder
 created_at: 2026-04-29T12:00:00+07:00
 linked_symbols:
-  - { file: "packages/gks/src/memory/vector/embedder-nomic.ts" }
+  - file: packages/gks/src/memory/vector/embedder-nomic.ts
 tier: genesis
 links:
   - CONCEPT--EMBEDDING-STRATEGY
   - ADR--NOMIC-EMBEDDER
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — Implementation plan for nomic-embed-text-v1.5 embedder

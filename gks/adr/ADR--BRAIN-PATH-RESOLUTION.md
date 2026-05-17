@@ -6,7 +6,8 @@ status: draft
 vault_id: default
 tier: genesis
 source_type: axiomatic
-title: ADR — Brain Path Resolution — deterministic per-type routing between ~/.brain/ and <repo>/gks/
+title: ADR — Brain Path Resolution — deterministic per-type routing between
+  ~/.brain/ and <repo>/gks/
 tags:
   - msp
   - storage
@@ -20,6 +21,14 @@ crosslinks:
     - CONCEPT--NAMESPACE-VAULT-BRAIN
     - SPEC--EPISODE-ATOM
 created_at: 2026-05-14T01:55:00.000+07:00
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
+cluster: implementation_flow
+role: Architecture decision record
+attributes:
+  domain: adr
 ---
 
 # ADR — Brain Path Resolution

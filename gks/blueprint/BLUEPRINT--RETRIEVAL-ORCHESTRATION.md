@@ -14,16 +14,29 @@ tags:
   - blueprint
   - implementation
   - m7c
-crosslinks: {"implements":["FEAT--RETRIEVAL-ORCHESTRATION"],"references":["ADR--RETRIEVAL-RRF-FUSION","CONCEPT--RETRIEVAL-ORCHESTRATION"]}
+crosslinks:
+  implements:
+    - FEAT--RETRIEVAL-ORCHESTRATION
+  references:
+    - ADR--RETRIEVAL-RRF-FUSION
+    - CONCEPT--RETRIEVAL-ORCHESTRATION
 linked_symbols:
-  - {"file":"packages/msp/src/orchestrator/retrieval/index.ts"}
-  - {"file":"packages/msp/src/orchestrator/retrieval/types.ts"}
-  - {"file":"packages/msp/src/orchestrator/retrieval/fusion.ts"}
-  - {"file":"packages/msp/src/orchestrator/retrieval/sources/vector.ts"}
-  - {"file":"packages/msp/src/orchestrator/retrieval/sources/obsidian.ts"}
-  - {"file":"packages/msp/src/orchestrator/retrieval/sources/episodic.ts"}
-  - {"file":"packages/msp/src/orchestrator/retrieval/sources/backlinks.ts"}
+  - file: packages/msp/src/orchestrator/retrieval/index.ts
+  - file: packages/msp/src/orchestrator/retrieval/types.ts
+  - file: packages/msp/src/orchestrator/retrieval/fusion.ts
+  - file: packages/msp/src/orchestrator/retrieval/sources/vector.ts
+  - file: packages/msp/src/orchestrator/retrieval/sources/obsidian.ts
+  - file: packages/msp/src/orchestrator/retrieval/sources/episodic.ts
+  - file: packages/msp/src/orchestrator/retrieval/sources/backlinks.ts
 created_at: 2026-05-05T15:56:30.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — retrieval orchestration implementation plan
@@ -153,19 +166,19 @@ data_logic: |
       }
 
 geography:
-  - "src/orchestrator/retrieval/index.ts"
-  - "src/orchestrator/retrieval/types.ts"
-  - "src/orchestrator/retrieval/fusion.ts"
-  - "src/orchestrator/retrieval/sources/vector.ts"
-  - "src/orchestrator/retrieval/sources/obsidian.ts"
-  - "src/orchestrator/retrieval/sources/episodic.ts"
-  - "src/orchestrator/retrieval/sources/backlinks.ts"
-  - "test/orchestrator/retrieval/fusion.test.ts"          # ~12 tests
-  - "test/orchestrator/retrieval/sources/vector.test.ts"  # ~5 (mock embedder + backend)
-  - "test/orchestrator/retrieval/sources/obsidian.test.ts" # ~6 (mock client both modes)
-  - "test/orchestrator/retrieval/sources/episodic.test.ts" # ~6 (fixture episodic memory)
-  - "test/orchestrator/retrieval/sources/backlinks.test.ts" # ~6 (fixture backlinks.jsonl)
-  - "test/orchestrator/retrieval/index.test.ts"          # ~10 end-to-end (mocks)
+  - "packages/msp/src/orchestrator/retrieval/index.ts"
+  - "packages/msp/src/orchestrator/retrieval/types.ts"
+  - "packages/msp/src/orchestrator/retrieval/fusion.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/vector.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/obsidian.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/episodic.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/backlinks.ts"
+  - "packages/msp/test/orchestrator/retrieval/fusion.test.ts"          # ~12 tests
+  - "packages/msp/test/orchestrator/retrieval/sources/vector.test.ts"  # ~5 (mock embedder + backend)
+  - "packages/msp/test/orchestrator/retrieval/sources/obsidian.test.ts" # ~6 (mock client both modes)
+  - "packages/msp/test/orchestrator/retrieval/sources/episodic.test.ts" # ~6 (fixture episodic memory)
+  - "packages/msp/test/orchestrator/retrieval/sources/backlinks.test.ts" # ~6 (fixture backlinks.jsonl)
+  - "packages/msp/test/orchestrator/retrieval/index.test.ts"          # ~10 end-to-end (mocks)
 
 api_contracts:
   - name: recall

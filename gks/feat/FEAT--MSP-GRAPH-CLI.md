@@ -6,18 +6,34 @@ status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
-title: msp:graph CLI — build / query / community / impact / stats / dump-jsonl subcommands
+title: msp:graph CLI — build / query / community / impact / stats / dump-jsonl
+  subcommands
 tags:
   - msp
   - symbol-graph
   - cli
   - feat
   - bin
-crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
+crosslinks:
+  implements:
+    - ADR--SYMBOL-GRAPH-PERSISTENCE
+    - ADR--LEIDEN-COMMUNITY-DETECTION
+  references:
+    - FRAMEWORK--SYMBOL-GRAPH
+    - CONCEPT--PARSER-CHOICE
 linked_symbols:
-  - {"file":"packages/msp/src/symbols/cli.ts"}
-  - {"file":"package.json"}
+  - file: packages/msp/src/symbols/cli.ts
+  - file: package.json
 created_at: 2026-05-09T16:53:00.000+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
+  - Feature
+cluster: implementation_flow
+role: Feature spec
+attributes:
+  domain: feat
 ---
 
 # FEAT — msp:graph CLI

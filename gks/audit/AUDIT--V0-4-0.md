@@ -14,9 +14,23 @@ tags:
   - tier-2
   - proto
   - close-out
-crosslinks: {"references":["AUDIT--ALL-M-MILESTONES","AUDIT--PROTO-LOADER","AUDIT--RULES-PROMOTED-TO-PROTOS","CONCEPT--TIER-3-DEFERRED","CONCEPT--MSP-ROADMAP"]}
+crosslinks:
+  references:
+    - AUDIT--ALL-M-MILESTONES
+    - AUDIT--PROTO-LOADER
+    - AUDIT--RULES-PROMOTED-TO-PROTOS
+    - CONCEPT--TIER-3-DEFERRED
+    - CONCEPT--MSP-ROADMAP
 linked_symbols: []
 created_at: 2026-05-05T20:25:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
+cluster: implementation_flow
+role: Test results / quality report
+attributes:
+  domain: audit
 ---
 
 # v0.4.0 close-out — Tier 2 PROTOs + M9a + Tier 3 defer

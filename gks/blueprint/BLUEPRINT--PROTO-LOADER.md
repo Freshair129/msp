@@ -15,16 +15,29 @@ tags:
   - blueprint
   - implementation
   - m8a
-crosslinks: {"implements":["FEAT--PROTO-LOADER"],"references":["ADR--PROTO-ATOM-TYPE","CONCEPT--PROTO-PATTERN"]}
+crosslinks:
+  implements:
+    - FEAT--PROTO-LOADER
+  references:
+    - ADR--PROTO-ATOM-TYPE
+    - CONCEPT--PROTO-PATTERN
 linked_symbols:
-  - {"file":"packages/msp/src/validator/proto/loader.ts"}
-  - {"file":"packages/msp/src/validator/proto/types.ts"}
-  - {"file":"packages/msp/src/validator/proto/sample.ts"}
-  - {"file":"packages/msp/src/validator/contract.ts"}
-  - {"file":"packages/msp/src/validator/cli.ts"}
-  - {"file":"packages/msp/test/validator/proto/loader.test.ts"}
-  - {"file":"packages/msp/test/validator/proto/sample.test.ts"}
+  - file: packages/msp/src/validator/proto/loader.ts
+  - file: packages/msp/src/validator/proto/types.ts
+  - file: packages/msp/src/validator/proto/sample.ts
+  - file: packages/msp/src/validator/contract.ts
+  - file: packages/msp/src/validator/cli.ts
+  - file: packages/msp/test/validator/proto/loader.test.ts
+  - file: packages/msp/test/validator/proto/sample.test.ts
 created_at: 2026-05-05T16:18:00.000+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — PROTO loader
@@ -138,15 +151,15 @@ data_logic: |
     body: brief explanation of what the rule does
 
 geography:
-  - "src/validator/proto/types.ts"
-  - "src/validator/proto/loader.ts"
-  - "src/validator/proto/sample.ts"
-  - "src/validator/contract.ts"                  # ← MODIFIED
-  - "src/validator/cli.ts"                       # ← MODIFIED
+  - "packages/msp/src/validator/proto/types.ts"
+  - "packages/msp/src/validator/proto/loader.ts"
+  - "packages/msp/src/validator/proto/sample.ts"
+  - "packages/msp/src/validator/contract.ts"                  # ← MODIFIED
+  - "packages/msp/src/validator/cli.ts"                       # ← MODIFIED
   - "gks/proto/PROTO--SAMPLE-RULE.md"            # NEW directory + atom
-  - "test/validator/proto/loader.test.ts"        # ~9 tests
-  - "test/validator/proto/sample.test.ts"        # ~3 tests
-  - "test/validator/cli.test.ts"                 # ← MODIFIED for new summary line + 3 new tests
+  - "packages/msp/test/validator/proto/loader.test.ts"        # ~9 tests
+  - "packages/msp/test/validator/proto/sample.test.ts"        # ~3 tests
+  - "packages/msp/test/validator/cli.test.ts"                 # ← MODIFIED for new summary line + 3 new tests
 
 verification_plan:
   - vitest types: trivial (no logic; just type imports compile)

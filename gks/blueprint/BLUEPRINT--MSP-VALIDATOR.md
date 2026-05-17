@@ -13,20 +13,33 @@ tags:
   - validator
   - blueprint
   - implementation
-crosslinks: {"implements":["FEAT--MSP-VALIDATOR"],"references":["ADR--MSP-VALIDATOR","CONCEPT--MSP-VALIDATOR"]}
+crosslinks:
+  implements:
+    - FEAT--MSP-VALIDATOR
+  references:
+    - ADR--MSP-VALIDATOR
+    - CONCEPT--MSP-VALIDATOR
 linked_symbols:
-  - {"file":"packages/msp/src/validator/index.ts"}
-  - {"file":"packages/msp/src/validator/types.ts"}
-  - {"file":"packages/msp/src/validator/parse.ts"}
-  - {"file":"packages/msp/src/validator/rules/forbidden-fields.ts"}
-  - {"file":"packages/msp/src/validator/rules/dangling-wikilinks.ts"}
-  - {"file":"src/validator/rules/id-uniqueness.ts"}
-  - {"file":"packages/msp/src/validator/rules/id-format.ts"}
-  - {"file":"packages/msp/src/validator/rules/future-date.ts"}
-  - {"file":"packages/msp/src/validator/rules/summary-min.ts"}
-  - {"file":"packages/msp/src/validator/atomic-index.ts"}
-  - {"file":"packages/msp/src/validator/cli.ts"}
+  - file: packages/msp/src/validator/index.ts
+  - file: packages/msp/src/validator/types.ts
+  - file: packages/msp/src/validator/parse.ts
+  - file: packages/msp/src/validator/rules/forbidden-fields.ts
+  - file: packages/msp/src/validator/rules/dangling-wikilinks.ts
+  - file: src/validator/rules/id-uniqueness.ts
+  - file: packages/msp/src/validator/rules/id-format.ts
+  - file: packages/msp/src/validator/rules/future-date.ts
+  - file: packages/msp/src/validator/rules/summary-min.ts
+  - file: packages/msp/src/validator/atomic-index.ts
+  - file: packages/msp/src/validator/cli.ts
 created_at: 2026-05-03T13:24:25.656+07:00
+aliases:
+  - BLUEPRINT
+  - implementation_flow
+  - Implementation plan
+cluster: implementation_flow
+role: Implementation plan
+attributes:
+  domain: blueprint
 ---
 
 # BLUEPRINT — MSP validator implementation plan
@@ -60,28 +73,28 @@ data_logic: |
 
 geography:
   # Core
-  - "src/validator/index.ts"           # public TS API: validate(filepath, ctx)
-  - "src/validator/types.ts"           # ValidationError, AtomicIndexEntry, Severity
-  - "src/validator/parse.ts"           # parseFrontmatter, extractWikilinks
-  - "src/validator/atomic-index.ts"    # loadAtomicIndex(path): Map<id, entry>
+  - "packages/msp/src/validator/index.ts"           # public TS API: validate(filepath, ctx)
+  - "packages/msp/src/validator/types.ts"           # ValidationError, AtomicIndexEntry, Severity
+  - "packages/msp/src/validator/parse.ts"           # parseFrontmatter, extractWikilinks
+  - "packages/msp/src/validator/atomic-index.ts"    # loadAtomicIndex(path): Map<id, entry>
   # Rules
-  - "src/validator/rules/forbidden-fields.ts"
-  - "src/validator/rules/id-format.ts"
-  - "src/validator/rules/id-filename-match.ts"
-  - "src/validator/rules/adr-monotonic.ts"
-  - "src/validator/rules/dangling-wikilinks.ts"
-  - "src/validator/rules/future-date.ts"
-  - "src/validator/rules/summary-min.ts"
-  - "src/validator/rules/phase-status.ts"
+  - "packages/msp/src/validator/rules/forbidden-fields.ts"
+  - "packages/msp/src/validator/rules/id-format.ts"
+  - "packages/msp/src/validator/rules/id-filename-match.ts"
+  - "packages/msp/src/validator/rules/adr-monotonic.ts"
+  - "packages/msp/src/validator/rules/dangling-wikilinks.ts"
+  - "packages/msp/src/validator/rules/future-date.ts"
+  - "packages/msp/src/validator/rules/summary-min.ts"
+  - "packages/msp/src/validator/rules/phase-status.ts"
   # Entrypoint
-  - "src/validator/cli.ts"             # bin entrypoint
+  - "packages/msp/src/validator/cli.ts"             # bin entrypoint
   # Tests
   - "test/validator/forbidden-fields.test.ts"
   - "test/validator/dangling-wikilinks.test.ts"
   - "test/validator/adr-monotonic.test.ts"
   - "test/validator/id-format.test.ts"
-  - "test/validator/cli.test.ts"
-  - "test/fixtures/"                   # sample valid/invalid atom files
+  - "packages/msp/test/validator/cli.test.ts"
+  - "packages/msp/test/fixtures/"                   # sample valid/invalid atom files
 
 api_contracts:
   - name: validate

@@ -6,7 +6,8 @@ status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
-title: AUDIT — PROTO linked_symbols path drift — 11 predicates rewired into msp:validate
+title: AUDIT — PROTO linked_symbols path drift — 11 predicates rewired into
+  msp:validate
 tags:
   - msp
   - proto
@@ -20,6 +21,14 @@ crosslinks:
     - CONCEPT--PROTO-PATTERN
     - ADR--MONOREPO-STRUCTURE
 created_at: 2026-05-14T19:10:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
+cluster: implementation_flow
+role: Test results / quality report
+attributes:
+  domain: audit
 ---
 
 # AUDIT — PROTO linked_symbols path drift

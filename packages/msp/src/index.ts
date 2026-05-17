@@ -5,6 +5,10 @@ import { getStore } from './memory.js'
 import { CandidateWriter } from './memory/candidates/writer.js'
 import { CandidateNotFoundError } from './memory/candidates/types.js'
 import { registerSymbolApi } from './symbols/api.js'
+import { readIdentity } from './identity/store.js'
+import { hydrateSubject } from './policy/subject.js'
+import { makeSubject, makeContext } from './policy/types.js'
+import type { Subject } from './policy/types.js'
 
 export { createCognitiveLayer } from './cognitive/index.js'
 export type {
@@ -26,6 +30,44 @@ app.use((req, res, next) => {
     'Content-Security-Policy',
     "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'"
   )
+  next()
+})
+
+app.use(async (req, res, next) => {
+  const forwardedUser = req.headers['x-forwarded-user'] as string | undefined
+  const forwardedGroups = req.headers['x-forwarded-groups'] as string | undefined
+
+  let subject: Subject
+
+  if (forwardedUser) {
+    // Reverse-proxy auth
+    subject = makeSubject('user', forwardedUser, {
+      roles: forwardedGroups ? forwardedGroups.split(',').map((g) => g.trim()) : [],
+      clearance: 0,
+      mfa_status: false,
+      tenant_ids: [],
+    })
+  } else {
+    // In-house identity (evaAI default namespace)
+    try {
+      const identity = await readIdentity({ root: getActiveRoot() })
+      if (identity.profile.name) {
+        subject = hydrateSubject(identity)
+      } else {
+        // Fallback to anonymous
+        subject = makeSubject('user', 'anonymous')
+      }
+    } catch {
+      subject = makeSubject('user', 'anonymous')
+    }
+  }
+
+  const context = makeContext('http', `req-${Date.now()}`)
+
+  // Attach to request for downstream PEPs
+  ;(req as any).subject = subject
+  ;(req as any).policyContext = context
+
   next()
 })
 

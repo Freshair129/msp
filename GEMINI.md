@@ -5,6 +5,34 @@
 
 ---
 
+# 🎯 MASTER BLOCKS
+
+> Stable cross-cutting directives. Body in `gks/master/<ID>.md`.
+> P0 always loaded. P1–P3 indexed; body fetched on trigger match.
+> P0/P1 assignment requires explicit user permission — agents must not self-promote.
+
+## P0 — Always loaded (foundation)
+
+### MASTER--ROOT-CAUSE-ANALYSIS
+- **Apply when:** bug, error, ambiguous request, failed previous attempt
+- **Directive:** identify and confirm root cause before any fix
+- → `gks/master/MASTER--ROOT-CAUSE-ANALYSIS.md`
+
+### MASTER--MSP-DOC-TO-CODE
+- **Apply when:** new branch, PR, file in `src/|test/|scripts/|web/`
+- **Directive:** atoms before code (FRAME→CONCEPT→ADR→BP→CODE→AUDIT)
+- → `gks/master/MASTER--MSP-DOC-TO-CODE.md`
+
+### MASTER--ATOM-CONTRADICTION-POLICY
+- **Apply when:** PR adds/edits atom in `gks/<type>/`
+- **Directive:** reciprocal supersession in same PR
+- → `gks/master/MASTER--ATOM-CONTRADICTION-POLICY.md`
+
+## P1–P4
+See `CLAUDE.md` § MASTER BLOCKS for the full sector layout. Gemini-relevant Masters are listed here when promoted.
+
+---
+
 ## 1. Role in This Repo
 
 Gemini CLI is the **T2 agent** — broad-context investigation, multi-file analysis, and
@@ -58,6 +86,22 @@ gemini --approval-mode plan -p "Analyze packages/gks/src/memory/graph/genesis-gr
 The Gemini binary on Windows is `gemini.cmd`. Code that spawns it programmatically must pass
 `shell: true` (Node) or `shell=True` (Python). On PowerShell, `&&` chaining is not available —
 use `;` or `if ($?) { ... }`.
+
+### Atom proposal via MSP (non-MCP path)
+
+Gemini CLI does not have MCP support. For proposing candidate atoms (CONCEPT, FEAT, ADR, BLUEPRINT), use the `msp-candidate` CLI which writes to the MSP candidates queue:
+
+```bash
+msp-candidate propose \
+  --id=FEAT--MY-FEATURE \
+  --type=feat \
+  --title="My feature title" \
+  --body="initial markdown body" \
+  --rationale="why this atom is proposed" \
+  --root=.
+```
+
+Never write directly to `gks/<type>/` — that path is human-via-PR only per `[[ADR--AGENT-WRITE-BOUNDARIES]]` and `[[ADR--MSP-CANDIDATE-CLI]]`.
 
 ---
 

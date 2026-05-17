@@ -1,5 +1,8 @@
 import type { Turn, LlmClient } from '../consolidator/types.js'
 
+export type { Turn } from '../consolidator/types.js'
+export type { SlmClient as LlmClient } from '../../codegen/slm/types.js'
+
 /**
  * Pluggable token estimator. The default is a conservative char-count
  * heuristic (`Math.ceil(s.length / 3.5)`) — see `tokens.ts`. Callers

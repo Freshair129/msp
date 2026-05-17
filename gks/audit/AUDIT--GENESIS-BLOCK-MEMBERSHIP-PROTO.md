@@ -20,6 +20,14 @@ crosslinks:
     - CONCEPT--PROTO-PATTERN
     - CONCEPT--TAXONOMY-V2-3
 created_at: 2026-05-14T18:35:00.000+07:00
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
+cluster: implementation_flow
+role: Test results / quality report
+attributes:
+  domain: audit
 ---
 
 # AUDIT — [[PROTO--GENESIS-BLOCK-MEMBERSHIP]]
