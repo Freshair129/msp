@@ -39,11 +39,11 @@ graph TD
         FEAT -->|แยกค่าคงที่ธุรกิจ| PARAMS["PARAMS-- (Constants)<br>(ค่าคงที่/Business Config)"]
         FEAT -->|แยกสิทธิ์การเข้าใช้งาน| ENTRYPOINT["ENTRYPOINT-- (Access Logic)<br>(Auth/Middleware)"]
         FEAT -->|กำหนดขอบเขตโค้ดโมดูล| MOD["MOD-- (Module Manifest)<br>(Module Boundary)"]
-        FEAT -->|แยกทักษะการรันเอเจนต์| SKILL["SKILL-- / MCP-- / PROTOCOL--<br>(ขีดความสามารถเอเจนต์)"]
+        FEAT -->|ควบคุมพฤติกรรมเอเจนต์| AGENT["PERSONA-- / LLM-- / SKILL-- / GUARD--<br>(การทำงานและตัวตนเอเจนต์)"]
     end
 
     subgraph Level 5: Action Plan
-        FEAT & ALGO & ENTITY & ENDPOINT & SPEC & FLOW & PARAMS & ENTRYPOINT & SKILL & API & MOD -->|รวบยอดทำแผนสร้างจริง| BLUEPRINT["BLUEPRINT-- (Implementation Plan)<br>(รายการชิ้นงานและ Tasks พัฒนา)"]
+        FEAT & ALGO & ENTITY & ENDPOINT & SPEC & FLOW & PARAMS & ENTRYPOINT & AGENT & API & MOD -->|รวบยอดทำแผนสร้างจริง| BLUEPRINT["BLUEPRINT-- (Implementation Plan)<br>(รายการชิ้นงานและ Tasks พัฒนา)"]
     end
 
     subgraph Level 6: Quality & Review
@@ -84,11 +84,18 @@ graph TD
         *   **──► `PARAMS--` (Constants)**: ค่าคงที่หรือค่าคอนฟิกธุรกิจของแอปพลิเคชัน
         *   **──► `ENTRYPOINT--` (Access Logic)**: รายละเอียดการกรองความปลอดภัยและการควบคุมสิทธิ์ผ่านมิดเดิลแวร์
         *   **──► `MOD--` (Module Manifest)**: กำหนดขอบเขตความเป็นเจ้าของโค้ด โครงสร้างโฟลเดอร์แพ็คเกจ และสิทธิ์เปิดใช้ฟังก์ชันของโมดูลย่อย
-        *   **──► `SKILL--` / `MCP--` / `PROTOCOL--`**: ขีดความสามารถพิเศษ เครื่องมือ หรือสัญญาสื่อสารของเอเจนต์ (ในกรณีที่ฟีเจอร์นั้นเป็นความสามารถของปัญญาประดิษฐ์)
+        *   **──► 🤖 Agent Governance Primitives (มีหรือไม่มีก็ได้ - Optional)**: สำหรับฟีเจอร์ที่ทำงานขับเคลื่อนด้วยเอเจนต์ AI เราจะ Decompose สเปคการควบคุมพฤติกรรมและความปลอดภัยออกมาดังนี้:
+            *   **`PERSONA--` (Agent Identity)**: นิยามตัวตน บทบาท และ Seed System Prompt ของเอเจนต์
+            *   **`LLM--` / `SLM--` (Reasoning/Execution Engine)**: ตัวกำหนดค่าสมอง คอนฟิกการคิด และพารามิเตอร์การเรียกใช้โมเดล
+            *   **`MCP--` (Context Tool)**: รายละเอียดเครื่องมือเชื่อมต่อผ่านโปรโตคอล Model Context Protocol
+            *   **`SKILL--` (Agent Capability)**: ทักษะและความสามารถพิเศษของเอเจนต์ที่ถูกจัดเตรียมไว้
+            *   **`GUARD--` / `POLICY--` (Guardrails & Policies)**: กฎความปลอดภัยเชิงโครงสร้าง/พฤติกรรมเอเจนต์ และนโยบายการรันเฉพาะทาง
+            *   **`PROTOCOL--` (Interaction Contract)**: สัญญาและรูปแบบข้อความสื่อสารระหว่างเอเจนต์ย่อยด้วยกัน
+            *   **`CMD--` (System Command)**: รายการคำสั่งระบบปฏิบัติการระดับล่างที่อนุญาตให้เอเจนต์เรียกใช้เพื่อความปลอดภัย
 
 #### **ระดับที่ 5: Action Plan (การร่างแผนงานพัฒนา)**
 *   **จากโครงสร้างทั้งหมด สู่ `BLUEPRINT--`**:
-    *   **`BLUEPRINT--` (แผนดำเนินงาน)**: รวบรวมและวิเคราะห์ความเชื่อมโยงของอะตอมในระดับเทคนิคทั้งหมด (FEAT, ALGO, ENTITY, SPEC, FLOW, PARAMS, ENTRYPOINT, SKILL, API, MOD) เพื่อจัดขั้นตอนการลงมือพัฒนาเชิงปฏิบัติ มีการจัดลำดับการทำงาน (Geography) และรายการตัวงานที่นักพัฒนาหรือเอเจนต์ T1/T3 สามารถนำไปเขียนโค้ดได้จริง
+    *   **`BLUEPRINT--` (แผนดำเนินงาน)**: รวบรวมและวิเคราะห์ความเชื่อมโยงของอะตอมในระดับเทคนิคและเอเจนต์ทั้งหมด (FEAT, ALGO, ENTITY, SPEC, FLOW, PARAMS, ENTRYPOINT, API, MOD, PERSONA, LLM, MCP, SKILL, GUARD, PROTOCOL) เพื่อจัดขั้นตอนการลงมือพัฒนาเชิงปฏิบัติ มีการจัดลำดับการทำงาน (Geography) และรายการตัวงานที่นักพัฒนาหรือเอเจนต์ T1/T3 สามารถนำไปเขียนโค้ดได้จริง
 
 #### **ระดับที่ 6: Quality & Verification (รายงานการตรวจสอบหลังพัฒนา)**
 *   **จากผลลัพธ์พัฒนา สู่ `AUDIT--`**:
