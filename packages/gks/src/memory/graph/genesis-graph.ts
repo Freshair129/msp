@@ -23,6 +23,7 @@
 
 import { mkdir } from 'node:fs/promises'
 import { createHash, randomUUID } from 'node:crypto'
+import { createRequire } from 'node:module'
 import { join } from 'node:path'
 
 import { appendJsonl, forEachJsonl, readJsonSafe, writeJson } from '../../lib/jsonl.js'
@@ -66,8 +67,228 @@ interface Manifest {
   schema_version: string
 }
 
-export function createGenesisGraphBackend(opts: GenesisGraphBackendOptions): GenesisGraphBackend {
+/**
+ * Factory: returns the native Rust-backed graph if its prebuilt `.node`
+ * binary is available for the host triple, otherwise the pure-TS fallback.
+ *
+ * The native module is resolved at call-time via `require()` and any failure
+ * — missing optional dep, missing platform binary, throwing constructor — is
+ * caught and logged once at info level. Callers always receive a working
+ * `GraphBackend`.
+ */
+export function createGenesisGraphBackend(
+  opts: GenesisGraphBackendOptions,
+): GraphBackend {
+  const native = tryLoadNativeBackend(opts)
+  if (native) return native
   return new GenesisGraphBackend(opts)
+}
+
+function tryLoadNativeBackend(
+  opts: GenesisGraphBackendOptions,
+): NativeGenesisGraphBackend | null {
+  try {
+    // Lazy CJS require — keeps the optional dep truly optional. Use
+    // `createRequire` because this file is compiled to ESM and `require`
+    // is not a top-level global there.
+    const requireFn = createRequire(import.meta.url)
+    const mod = requireFn('@freshair129/gks-genesis-block-native') as {
+      GenesisDatabase?: GenesisDatabaseCtor
+    }
+    if (!mod || typeof mod.GenesisDatabase?.open !== 'function') {
+      log.info('falling back to pure-TS backend', {
+        reason: 'native module loaded but GenesisDatabase.open is missing',
+      })
+      return null
+    }
+    const db = mod.GenesisDatabase.open({ path: opts.path })
+    return new NativeGenesisGraphBackend(db)
+  } catch (err) {
+    const reason = err instanceof Error ? err.message : String(err)
+    log.info('falling back to pure-TS backend', { reason })
+    return null
+  }
+}
+
+// ─── native adapter ─────────────────────────────────────────────────────────
+
+// Structural type sketch of the native surface we depend on. The real types
+// live in `packages/gks/native/genesis-block/index.d.ts` but we redeclare a
+// minimal mirror here so we don't import-link to an optional dep.
+
+interface NodeOutputLike {
+  id: string
+  labels: string[]
+  props: unknown
+}
+
+interface EdgeOutputLike {
+  id: string
+  from: string
+  to: string
+  rel: string
+  props: unknown
+  validFrom: string
+  validTo?: string | null
+  recordedAt: string
+  supersededBy?: string | null
+}
+
+interface NeighborOutputLike {
+  node: NodeOutputLike
+  path: EdgeOutputLike[]
+  depth: number
+}
+
+interface NodeInputLike {
+  id?: string
+  labels: string[]
+  props?: unknown
+}
+
+interface EdgeInputLike {
+  id?: string
+  from: string
+  to: string
+  rel: string
+  props?: unknown
+  validFrom?: string
+  supersede?: boolean
+}
+
+interface QueryInputLike {
+  from?: string
+  to?: string
+  rel?: string
+  asOf?: string
+  includeInvalid?: boolean
+  limit?: number
+}
+
+interface NeighborInputLike {
+  depth?: number
+  rel?: string
+  direction?: string
+  asOf?: string
+  includeInvalid?: boolean
+  limit?: number
+}
+
+interface GenesisDatabaseLike {
+  addNode(args: NodeInputLike): Promise<NodeOutputLike>
+  addEdge(args: EdgeInputLike): Promise<EdgeOutputLike>
+  retractEdge(id: string, at?: string | null): Promise<EdgeOutputLike | null>
+  query(args: QueryInputLike): Promise<EdgeOutputLike[]>
+  neighbors(seed: string, args: NeighborInputLike): Promise<NeighborOutputLike[]>
+}
+
+interface GenesisDatabaseCtor {
+  open(opts: { path: string }): GenesisDatabaseLike
+}
+
+class NativeGenesisGraphBackend implements GraphBackend {
+  private readonly nodeCount = { value: 0 }
+  private readonly edgeCount = { value: 0 }
+
+  constructor(private readonly db: GenesisDatabaseLike) {}
+
+  // Native `open` already loaded the JSONL log — nothing to do here.
+  async load(): Promise<void> {
+    return
+  }
+
+  // The native crate does not expose a counter; we report best-effort counts
+  // accumulated by this adapter. This is good enough for parity with the
+  // pure-TS backend's `size()` callers (currently informational only).
+  size(): { nodes: number; edges: number } {
+    return { nodes: this.nodeCount.value, edges: this.edgeCount.value }
+  }
+
+  async addNode(args: AddNodeArgs): Promise<GraphNode> {
+    const out = await this.db.addNode({
+      id: args.id,
+      labels: args.labels,
+      props: args.props ?? {},
+    })
+    this.nodeCount.value++
+    return toGraphNode(out)
+  }
+
+  async addEdge(args: AddEdgeArgs): Promise<GraphEdge> {
+    const out = await this.db.addEdge({
+      id: args.id,
+      from: args.from,
+      to: args.to,
+      rel: args.rel,
+      props: args.props ?? {},
+      validFrom: args.valid_from,
+      supersede: args.supersede,
+    })
+    this.edgeCount.value++
+    return toGraphEdge(out)
+  }
+
+  async retractEdge(id: string, at?: string): Promise<GraphEdge | null> {
+    const out = await this.db.retractEdge(id, at ?? null)
+    return out ? toGraphEdge(out) : null
+  }
+
+  async query(q: GraphQuery = {}): Promise<GraphEdge[]> {
+    const out = await this.db.query({
+      from: q.from,
+      to: q.to,
+      rel: q.rel,
+      asOf: q.asOf,
+      includeInvalid: q.includeInvalid,
+      limit: q.limit,
+    })
+    return out.map(toGraphEdge)
+  }
+
+  async neighbors(seed: string, q: NeighborQuery = {}): Promise<NeighborResult[]> {
+    const out = await this.db.neighbors(seed, {
+      depth: q.depth,
+      rel: q.rel,
+      direction: q.direction,
+      asOf: q.asOf,
+      includeInvalid: q.includeInvalid,
+      limit: q.limit,
+    })
+    return out.map(toNeighborResult)
+  }
+}
+
+// ─── boundary converters (camelCase ↔ snake_case) ───────────────────────────
+
+function toGraphNode(no: NodeOutputLike): GraphNode {
+  return {
+    id: no.id,
+    labels: no.labels,
+    props: (no.props ?? {}) as Record<string, unknown>,
+  }
+}
+
+function toGraphEdge(eo: EdgeOutputLike): GraphEdge {
+  const edge: GraphEdge = {
+    id: eo.id,
+    from: eo.from,
+    to: eo.to,
+    rel: eo.rel,
+    props: (eo.props ?? {}) as Record<string, unknown>,
+    valid_from: eo.validFrom,
+    valid_to: eo.validTo ?? null,
+    recorded_at: eo.recordedAt,
+  }
+  if (eo.supersededBy != null) edge.superseded_by = eo.supersededBy
+  return edge
+}
+
+function toNeighborResult(no: NeighborOutputLike): NeighborResult {
+  return {
+    node: toGraphNode(no.node),
+    path: no.path.map(toGraphEdge),
+    depth: no.depth,
+  }
 }
 
 export class GenesisGraphBackend implements GraphBackend {

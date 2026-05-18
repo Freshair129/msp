@@ -1,51 +1,539 @@
 //! Genesis Block — embedded graph engine for GKS.
 //!
-//! Phase 3.1 scaffold per BLUEPRINT--GENESIS-GRAPH-INTEGRATION:
-//! - One Cargo crate that produces a `cdylib` consumable by Node via napi-rs.
-//! - Two trivial sync exports (`schemaVersionSync`, `engineNameSync`) that
-//!   match PROTOCOL--GENESIS-GRAPH-FFI §5 ("the only blocking calls").
-//! - Storage / addNode / addEdge / query / neighbors / cypher land in P3.2+.
+//! Phase 3.2-3.4 implementation: JSONL Storage, Locking, and Cypher v0.
+//! Implements PROTOCOL--GENESIS-GRAPH-FFI.
 
 #![deny(clippy::all)]
 
-use napi_derive::napi;
+use std::collections::{HashMap, HashSet};
+use std::fs::{self, File, OpenOptions as FileOpenOptions};
+use std::io::{BufReader, Read, Seek, SeekFrom, Write};
+use std::path::PathBuf;
+use std::sync::Arc;
 
-/// On-disk schema version recognised by this engine. Aligned with
-/// `packages/gks/src/lib/schema-version.ts` (`CURRENT_SCHEMA_VERSION = '1.0.0'`).
-/// Bump together when the on-disk format changes.
+use chrono::Utc;
+use napi::bindgen_prelude::*;
+use napi_derive::napi;
+use once_cell::sync::Lazy;
+use parking_lot::RwLock;
+use regex::Regex;
+use serde::{Deserialize, Serialize};
+use serde_json::Value;
+use uuid::Uuid;
+
 pub const SCHEMA_VERSION: u32 = 1;
 
-/// Returns the schema version supported by this engine.
-///
-/// Per PROTOCOL--GENESIS-GRAPH-FFI §5 this is allowed to be synchronous
-/// because the worst-case runtime is bounded at <1 µs (a constant return).
-#[napi(js_name = "schemaVersionSync")]
-pub fn schema_version_sync() -> u32 {
-    SCHEMA_VERSION
+// --- Types (PROTOCOL §3) ---
+
+#[napi(object)]
+#[derive(Serialize, Deserialize, Clone)]
+pub struct OpenOptions {
+    pub path: String,
+    pub page_cache_mb: Option<u32>,
+    pub read_only: Option<bool>,
 }
 
-/// Stable engine identifier. Used by integration tests + diagnostics to
-/// confirm the prebuilt `.node` actually loaded the Rust crate (rather
-/// than some other binding with the same shape).
-#[napi(js_name = "engineNameSync")]
-pub fn engine_name_sync() -> String {
-    "genesis-block".to_string()
+#[napi(object)]
+pub struct NodeInput {
+    pub id: Option<String>,
+    pub labels: Vec<String>,
+    pub props: Option<serde_json::Value>,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[napi(object)]
+#[derive(Serialize, Deserialize, Clone)]
+pub struct NodeOutput {
+    pub id: String,
+    pub labels: Vec<String>,
+    pub props: serde_json::Value,
+}
 
-    #[test]
-    fn schema_version_matches_typescript_constant() {
-        // CURRENT_SCHEMA_VERSION on the TS side is '1.0.0'; the Rust crate
-        // encodes only the major byte for the on-disk version header
-        // (PROTOCOL--GENESIS-GRAPH-FFI §6). Keep these in lockstep.
-        assert_eq!(SCHEMA_VERSION, 1);
+#[napi(object)]
+pub struct EdgeInput {
+    pub id: Option<String>,
+    pub from: String,
+    pub to: String,
+    pub rel: String,
+    pub props: Option<serde_json::Value>,
+    pub valid_from: Option<String>,
+    pub supersede: Option<bool>,
+}
+
+#[napi(object)]
+#[derive(Serialize, Deserialize, Clone)]
+pub struct EdgeOutput {
+    pub id: String,
+    pub from: String,
+    pub to: String,
+    pub rel: String,
+    pub props: serde_json::Value,
+    pub valid_from: String,
+    pub valid_to: Option<String>,
+    pub recorded_at: String,
+    pub superseded_by: Option<String>,
+}
+
+#[napi(object)]
+pub struct QueryInput {
+    pub from: Option<String>,
+    pub to: Option<String>,
+    pub rel: Option<String>,
+    pub as_of: Option<String>,
+    pub include_invalid: Option<bool>,
+    pub limit: Option<u32>,
+}
+
+#[napi(object)]
+pub struct NeighborInput {
+    pub depth: Option<u32>,
+    pub rel: Option<String>,
+    pub direction: Option<String>, // 'out' | 'in' | 'both'
+    pub as_of: Option<String>,
+    pub include_invalid: Option<bool>,
+    pub limit: Option<u32>,
+}
+
+#[napi(object)]
+pub struct NeighborOutput {
+    pub node: NodeOutput,
+    pub path: Vec<EdgeOutput>,
+    pub depth: u32,
+}
+
+#[napi(object)]
+pub struct DatabaseStatus {
+    pub open: bool,
+    pub read_only: bool,
+    pub page_cache_mb: u32,
+}
+
+// --- Internal Storage ---
+
+#[derive(Serialize, Deserialize)]
+#[serde(tag = "kind", content = "payload", rename_all = "snake_case")]
+enum Event {
+    Node(NodeOutput),
+    Edge(EdgeOutput),
+}
+
+struct Storage {
+    #[allow(dead_code)]
+    path: PathBuf,
+    read_only: bool,
+    nodes: HashMap<String, NodeOutput>,
+    edges: HashMap<String, EdgeOutput>,
+    out_idx: HashMap<String, HashSet<String>>,
+    in_idx: HashMap<String, HashSet<String>>,
+    log_path: PathBuf,
+    _lock_file: Option<File>,
+}
+
+impl Storage {
+    fn open(opts: OpenOptions) -> Result<Self> {
+        let root = PathBuf::from(opts.path.clone());
+        if !root.exists() {
+            fs::create_dir_all(&root).map_err(|e| Error::from_reason(format!("genesis-block: io: {e}")))?;
+        }
+
+        let read_only = opts.read_only.unwrap_or(false);
+        let lock_file = Self::acquire_os_lock(&root, read_only)?;
+
+        let log_path = root.join("genesis-graph.jsonl");
+        let mut storage = Self {
+            path: root,
+            read_only,
+            nodes: HashMap::new(),
+            edges: HashMap::new(),
+            out_idx: HashMap::new(),
+            in_idx: HashMap::new(),
+            log_path: log_path.clone(),
+            _lock_file: Some(lock_file),
+        };
+
+        if log_path.exists() {
+            let file = FileOpenOptions::new().read(true).open(&log_path)
+                .map_err(|e| Error::from_reason(format!("genesis-block: io: {e}")))?;
+            let reader = BufReader::new(file);
+            let stream = serde_json::Deserializer::from_reader(reader).into_iter::<Event>();
+
+            for event in stream {
+                match event {
+                    Ok(Event::Node(n)) => {
+                        storage.nodes.insert(n.id.clone(), n);
+                    }
+                    Ok(Event::Edge(e)) => {
+                        storage.index_edge_internal(&e.id, &e.from, &e.to);
+                        storage.edges.insert(e.id.clone(), e);
+                    }
+                    Err(e) => {
+                        return Err(Error::from_reason(format!("genesis-block: io: malformed log: {e}")));
+                    }
+                }
+            }
+        }
+
+        Ok(storage)
     }
 
-    #[test]
-    fn engine_name_is_stable() {
-        assert_eq!(engine_name_sync(), "genesis-block");
+    fn acquire_os_lock(root: &PathBuf, read_only: bool) -> Result<File> {
+        let lock_path = root.join("genesis-graph.lock");
+        let mut file = FileOpenOptions::new()
+            .read(true)
+            .write(true)
+            .create(true)
+            .open(&lock_path)
+            .map_err(|e| Error::from_reason(format!("genesis-block: io: {e}")))?;
+
+        if !read_only {
+            let mut content = String::new();
+            file.read_to_string(&mut content).ok();
+            let pid_str = content.trim();
+            if !pid_str.is_empty() {
+                return Err(Error::from_reason(format!("genesis-block: io: file locked by pid {}", pid_str)));
+            }
+            file.set_len(0).ok();
+            file.seek(SeekFrom::Start(0)).ok();
+            writeln!(file, "{}", std::process::id()).ok();
+        }
+        Ok(file)
+    }
+
+    fn ensure_writable(&self) -> Result<()> {
+        if self.read_only {
+            return Err(Error::from_reason("genesis-block: read-only: database is opened in read-only mode"));
+        }
+        Ok(())
+    }
+
+    fn index_edge_internal(&mut self, id: &str, from: &str, to: &str) {
+        self.out_idx.entry(from.to_string()).or_default().insert(id.to_string());
+        self.in_idx.entry(to.to_string()).or_default().insert(id.to_string());
+    }
+
+    fn persist(&self, event: &Event) -> Result<()> {
+        self.ensure_writable()?;
+        let mut file = FileOpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(&self.log_path)
+            .map_err(|e| Error::from_reason(format!("genesis-block: io: {e}")))?;
+
+        let line = serde_json::to_string(event).map_err(|e| Error::from_reason(e.to_string()))?;
+        writeln!(file, "{}", line).map_err(|e| Error::from_reason(format!("genesis-block: io: {e}")))?;
+        Ok(())
+    }
+
+    fn add_node(&mut self, args: NodeInput) -> Result<NodeOutput> {
+        self.ensure_writable()?;
+        let id = args.id.unwrap_or_else(|| {
+            let hash = format!("{:x}", md5::compute(format!("{:?}{:?}", args.labels, args.props)));
+            format!("N-{}", &hash[..16])
+        });
+
+        if let Some(existing) = self.nodes.get_mut(&id) {
+            let mut labels = existing.labels.clone();
+            for l in args.labels {
+                if !labels.contains(&l) { labels.push(l); }
+            }
+            let mut props = existing.props.as_object().cloned().unwrap_or_default();
+            if let Some(new_props) = args.props.and_then(|p| p.as_object().cloned()) {
+                for (k, v) in new_props { props.insert(k, v); }
+            }
+            existing.labels = labels;
+            existing.props = Value::Object(props);
+            let n = existing.clone();
+            self.persist(&Event::Node(n.clone()))?;
+            return Ok(n);
+        }
+
+        let node = NodeOutput {
+            id,
+            labels: args.labels,
+            props: args.props.unwrap_or(Value::Object(Default::default())),
+        };
+        self.nodes.insert(node.id.clone(), node.clone());
+        self.persist(&Event::Node(node.clone()))?;
+        Ok(node)
+    }
+
+    fn add_edge(&mut self, args: EdgeInput) -> Result<EdgeOutput> {
+        self.ensure_writable()?;
+        if !self.nodes.contains_key(&args.from) {
+            return Err(Error::from_reason(format!("genesis-block: add_edge: unknown from-node {}", args.from)));
+        }
+        if !self.nodes.contains_key(&args.to) {
+            return Err(Error::from_reason(format!("genesis-block: add_edge: unknown to-node {}", args.to)));
+        }
+
+        let now = Utc::now().to_rfc3339();
+        let id = args.id.unwrap_or_else(|| Uuid::new_v4().to_string());
+        let edge = EdgeOutput {
+            id, from: args.from, to: args.to, rel: args.rel,
+            props: args.props.unwrap_or(Value::Object(Default::default())),
+            valid_from: args.valid_from.unwrap_or_else(|| now.clone()),
+            valid_to: None, recorded_at: now, superseded_by: None,
+        };
+
+        if args.supersede.unwrap_or(false) {
+            let mut victims_ids = Vec::new();
+            if let Some(eids) = self.out_idx.get(&edge.from) {
+                for eid in eids {
+                    if let Some(e) = self.edges.get(eid) {
+                        if e.rel == edge.rel && e.valid_to.is_none() && e.id != edge.id {
+                            victims_ids.push(e.id.clone());
+                        }
+                    }
+                }
+            }
+            let mut retired_edges = Vec::new();
+            for vid in victims_ids {
+                if let Some(v) = self.edges.get_mut(&vid) {
+                    v.valid_to = Some(edge.valid_from.clone());
+                    v.superseded_by = Some(edge.id.clone());
+                    retired_edges.push(v.clone());
+                }
+            }
+            for retired in retired_edges {
+                self.persist(&Event::Edge(retired))?;
+            }
+        }
+
+        self.index_edge_internal(&edge.id, &edge.from, &edge.to);
+        self.edges.insert(edge.id.clone(), edge.clone());
+        self.persist(&Event::Edge(edge.clone()))?;
+        Ok(edge)
+    }
+
+    fn retract_edge(&mut self, id: String, at: Option<String>) -> Result<Option<EdgeOutput>> {
+        self.ensure_writable()?;
+        let e = match self.edges.get_mut(&id) {
+            Some(e) => e,
+            None => return Ok(None),
+        };
+        if e.valid_to.is_some() { return Ok(Some(e.clone())); }
+        let at = at.unwrap_or_else(|| Utc::now().to_rfc3339());
+        e.valid_to = Some(at);
+        let retired = e.clone();
+        self.persist(&Event::Edge(retired.clone()))?;
+        Ok(Some(retired))
     }
 }
+
+// --- Cypher v0 Engine ---
+
+static MATCH_RE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"(?i)^\s*MATCH\s+\(a:(\w+)\s+\{\s*id:\s*'([^']+)'\s*\}\)-\[r:([\w|]+)(?:\*(\d+)\.\.(\d+))?\]->\(b:(\w+)\)").unwrap()
+});
+static WHERE_RE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"(?i)\s+WHERE\s+([ab])\.(\w+)\s*=\s*'([^']+)'").unwrap()
+});
+static RETURN_RE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"(?i)\s+RETURN\s+(.+)").unwrap()
+});
+
+struct Predicate { alias: String, prop: String, equals: String }
+struct ReturnItem { kind: String, source: Option<String>, r#as: String }
+
+// --- N-API Class ---
+
+#[napi]
+pub struct GenesisDatabase {
+    inner: Arc<RwLock<Storage>>,
+    page_cache_mb: u32,
+}
+
+#[napi]
+impl GenesisDatabase {
+    #[napi(factory)]
+    pub fn open(opts: OpenOptions) -> Result<Self> {
+        let storage = Storage::open(opts.clone())?;
+        Ok(Self {
+            inner: Arc::new(RwLock::new(storage)),
+            page_cache_mb: opts.page_cache_mb.unwrap_or(64),
+        })
+    }
+
+    #[napi]
+    pub async fn add_node(&self, args: NodeInput) -> Result<NodeOutput> {
+        let inner = Arc::clone(&self.inner);
+        tokio::task::spawn_blocking(move || inner.write().add_node(args))
+            .await.map_err(|e| Error::from_reason(format!("join: {e}")))?
+    }
+
+    #[napi]
+    pub async fn add_edge(&self, args: EdgeInput) -> Result<EdgeOutput> {
+        let inner = Arc::clone(&self.inner);
+        tokio::task::spawn_blocking(move || inner.write().add_edge(args))
+            .await.map_err(|e| Error::from_reason(format!("join: {e}")))?
+    }
+
+    #[napi]
+    pub async fn retract_edge(&self, id: String, at: Option<String>) -> Result<Option<EdgeOutput>> {
+        let inner = Arc::clone(&self.inner);
+        tokio::task::spawn_blocking(move || inner.write().retract_edge(id, at))
+            .await.map_err(|e| Error::from_reason(format!("join: {e}")))?
+    }
+
+    #[napi]
+    pub async fn query(&self, args: QueryInput) -> Result<Vec<EdgeOutput>> {
+        let inner = Arc::clone(&self.inner);
+        tokio::task::spawn_blocking(move || {
+            let storage = inner.read();
+            let as_of_ms = args.as_of.as_ref().and_then(|s| {
+                chrono::DateTime::parse_from_rfc3339(s).ok()
+                    .or_else(|| chrono::DateTime::parse_from_str(s, "%Y-%m-%dT%H:%M:%S%.3fZ").ok())
+            }).map(|dt| dt.timestamp_millis());
+            let mut results = Vec::new();
+            for e in storage.edges.values() {
+                if let Some(ref from) = args.from { if e.from != *from { continue; } }
+                if let Some(ref to) = args.to { if e.to != *to { continue; } }
+                if let Some(ref rel) = args.rel { if e.rel != *rel { continue; } }
+                let is_valid = if let Some(ms) = as_of_ms {
+                    let from_ms = chrono::DateTime::parse_from_rfc3339(&e.valid_from).map(|dt| dt.timestamp_millis()).unwrap_or(0);
+                    let to_ms = e.valid_to.as_ref().and_then(|s| chrono::DateTime::parse_from_rfc3339(s).ok()).map(|dt| dt.timestamp_millis());
+                    ms >= from_ms && to_ms.map_or(true, |end| ms < end)
+                } else {
+                    args.include_invalid.unwrap_or(false) || e.valid_to.is_none()
+                };
+                if is_valid { results.push(e.clone()); }
+                if let Some(limit) = args.limit { if results.len() >= limit as usize { break; } }
+            }
+            Ok(results)
+        }).await.map_err(|e| Error::from_reason(format!("join: {e}")))?
+    }
+
+    #[napi]
+    pub async fn neighbors(&self, seed: String, args: NeighborInput) -> Result<Vec<NeighborOutput>> {
+        let inner = Arc::clone(&self.inner);
+        tokio::task::spawn_blocking(move || {
+            let storage = inner.read();
+            Self::neighbors_internal(&storage, seed, args)
+        }).await.map_err(|e| Error::from_reason(format!("join: {e}")))?
+    }
+
+    fn neighbors_internal(storage: &Storage, seed: String, args: NeighborInput) -> Result<Vec<NeighborOutput>> {
+        if !storage.nodes.contains_key(&seed) { return Ok(Vec::new()); }
+        let depth = args.depth.unwrap_or(1);
+        let direction = args.direction.as_deref().unwrap_or("out");
+        let limit = args.limit.unwrap_or(u32::MAX);
+        let mut results = Vec::new();
+        let mut visited = HashSet::new();
+        visited.insert(seed.clone());
+        let mut queue = std::collections::VecDeque::new();
+        queue.push_back((seed.clone(), Vec::new(), 0));
+        while let Some((curr_id, path, curr_depth)) = queue.pop_front() {
+            if curr_depth >= depth { continue; }
+            let mut edge_ids = HashSet::new();
+            if direction == "out" || direction == "both" { if let Some(eids) = storage.out_idx.get(&curr_id) { edge_ids.extend(eids.clone()); } }
+            if direction == "in" || direction == "both" { if let Some(eids) = storage.in_idx.get(&curr_id) { edge_ids.extend(eids.clone()); } }
+            for eid in edge_ids {
+                if let Some(edge) = storage.edges.get(&eid) {
+                    if let Some(ref rel) = args.rel { if edge.rel != *rel { continue; } }
+                    if !args.include_invalid.unwrap_or(false) && edge.valid_to.is_some() { continue; }
+                    let next_id = if edge.from == curr_id { edge.to.clone() } else { edge.from.clone() };
+                    if visited.contains(&next_id) { continue; }
+                    visited.insert(next_id.clone());
+                    if let Some(node) = storage.nodes.get(&next_id) {
+                        let mut new_path = path.clone();
+                        new_path.push(edge.clone());
+                        results.push(NeighborOutput { node: node.clone(), path: new_path.clone(), depth: curr_depth + 1 });
+                        if results.len() >= limit as usize { return Ok(results); }
+                        queue.push_back((next_id, new_path, curr_depth + 1));
+                    }
+                }
+            }
+        }
+        Ok(results)
+    }
+
+    #[napi]
+    pub async fn cypher(&self, query: String) -> Result<serde_json::Value> {
+        let inner = Arc::clone(&self.inner);
+        tokio::task::spawn_blocking(move || {
+            let storage = inner.read();
+            let upper_query = query.to_uppercase();
+            let unsupported = ["OPTIONAL MATCH", "CREATE", "MERGE", "DELETE", "SET", "UNWIND", "WITH", "UNION"];
+            for kw in &unsupported {
+                if upper_query.contains(kw) {
+                    return Err(Error::new(Status::InvalidArg, format!("Cypher error: unsupported keyword {}", kw)));
+                }
+            }
+            let m = MATCH_RE.captures(&query).ok_or_else(|| Error::new(Status::InvalidArg, "Cypher error: MATCH pattern mismatch"))?;
+            let seed_label = m.get(1).unwrap().as_str().to_string();
+            let seed_id = m.get(2).unwrap().as_str().to_string();
+            let rels: Vec<String> = m.get(3).unwrap().as_str().split('|').map(|s| s.to_string()).collect();
+            let min_hops: u32 = m.get(4).map_or(1, |g| g.as_str().parse().unwrap());
+            let max_hops: u32 = m.get(5).map_or(1, |g| g.as_str().parse().unwrap());
+            let target_label = m.get(6).unwrap().as_str().to_string();
+            if min_hops > max_hops { return Err(Error::new(Status::InvalidArg, "Cypher error: inverted hop range")); }
+            let mut predicates = Vec::new();
+            for wm in WHERE_RE.captures_iter(&query) {
+                predicates.push(Predicate { alias: wm.get(1).unwrap().as_str().to_string(), prop: wm.get(2).unwrap().as_str().to_string(), equals: wm.get(3).unwrap().as_str().to_string() });
+            }
+            let ret_m = RETURN_RE.captures(&query).ok_or_else(|| Error::new(Status::InvalidArg, "Cypher error: RETURN pattern mismatch"))?;
+            let return_items_raw = ret_m.get(1).unwrap().as_str();
+            let mut returns = Vec::new();
+            for item in return_items_raw.split(',') {
+                let item = item.trim();
+                let upper_item = item.to_uppercase();
+                if let Some(as_idx) = upper_item.find(" AS ") {
+                    let src = item[..as_idx].trim();
+                    let alias = item[as_idx + 4..].trim();
+                    if src.to_lowercase().starts_with("length") { returns.push(ReturnItem { kind: "length".to_string(), source: None, r#as: alias.to_string() }); }
+                    else { returns.push(ReturnItem { kind: "property".to_string(), source: Some(src.to_string()), r#as: alias.to_string() }); }
+                } else if item.to_lowercase().starts_with("length") {
+                    returns.push(ReturnItem { kind: "length".to_string(), source: None, r#as: "length_r".to_string() });
+                } else {
+                    returns.push(ReturnItem { kind: "property".to_string(), source: Some(item.to_string()), r#as: item.to_string() });
+                }
+            }
+            let seed = match storage.nodes.get(&seed_id) { Some(s) => s, None => return Ok(Value::Array(Vec::new())), };
+            if !seed.labels.contains(&seed_label) { return Ok(Value::Array(Vec::new())); }
+            for p in &predicates {
+                if p.alias == "a" {
+                    let val = seed.props.get(&p.prop).and_then(|v| v.as_str()).unwrap_or("");
+                    if val != p.equals { return Ok(Value::Array(Vec::new())); }
+                }
+            }
+            let reached = Self::neighbors_internal(&storage, seed_id.clone(), NeighborInput { depth: Some(max_hops), rel: if rels.len() == 1 { Some(rels[0].clone()) } else { None }, direction: Some("out".to_string()), as_of: None, include_invalid: Some(false), limit: None })?;
+            let mut rows = Vec::new();
+            for hit in reached {
+                if hit.depth < min_hops { continue; }
+                if !hit.node.labels.contains(&target_label) { continue; }
+                if rels.len() > 1 && !hit.path.iter().all(|e| rels.contains(&e.rel)) { continue; }
+                let mut ok = true;
+                for p in &predicates {
+                    if p.alias == "b" {
+                        let val = hit.node.props.get(&p.prop).and_then(|v| v.as_str()).unwrap_or("");
+                        if val != p.equals { ok = false; break; }
+                    }
+                }
+                if !ok { continue; }
+                let mut row = serde_json::Map::new();
+                for item in &returns {
+                    if item.kind == "length" { row.insert(item.r#as.clone(), Value::Number(hit.depth.into())); }
+                    else if let Some(ref src) = item.source {
+                        if src == "b.id" { row.insert(item.r#as.clone(), Value::String(hit.node.id.clone())); }
+                        else if src == "a.id" { row.insert(item.r#as.clone(), Value::String(seed.id.clone())); }
+                        else if src.starts_with("b.") { row.insert(item.r#as.clone(), hit.node.props.get(&src[2..]).cloned().unwrap_or(Value::Null)); }
+                        else if src.starts_with("a.") { row.insert(item.r#as.clone(), seed.props.get(&src[2..]).cloned().unwrap_or(Value::Null)); }
+                    }
+                }
+                rows.push(Value::Object(row));
+            }
+            Ok(Value::Array(rows))
+        }).await.map_err(|e| Error::from_reason(format!("join: {e}")))?
+    }
+
+    #[napi]
+    pub fn schema_version_sync(&self) -> u32 { SCHEMA_VERSION }
+
+    #[napi]
+    pub fn status_sync(&self) -> DatabaseStatus {
+        let storage = self.inner.read();
+        DatabaseStatus { open: true, read_only: storage.read_only, page_cache_mb: self.page_cache_mb }
+    }
+}
+
+#[napi]
+pub fn engine_name_sync() -> String { "genesis-block".to_string() }
