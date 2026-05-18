@@ -12,10 +12,6 @@ vault_id: TEST
 title: Atom with a forbidden field
 commit_hash: deadbeef
 created_at: 2026-04-01T00:00:00Z
-aliases: [CONCEPT]
-cluster: implementation_flow
-role: Strategic intent / PRD
-tier: genesis
 ---
 
 # CONCEPT — atom with forbidden field

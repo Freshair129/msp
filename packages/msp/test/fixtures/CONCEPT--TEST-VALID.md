@@ -10,12 +10,9 @@ aliases:
   - CONCEPT
 vault_id: TEST
 title: Valid test atom
-tags: [test]
+tags:
+  - test
 created_at: 2026-04-01T00:00:00Z
-aliases: [CONCEPT]
-cluster: implementation_flow
-role: Strategic intent / PRD
-tier: genesis
 ---
 
 # CONCEPT — valid test atom
