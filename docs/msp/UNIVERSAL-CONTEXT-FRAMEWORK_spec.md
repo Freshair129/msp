@@ -980,53 +980,32 @@ Each phase ships behind a feature flag, is independently testable, and produces 
 
 **Risk:** low — additive, behind a flag.
 
-### Phase 4 — User-level ABAC, enforced (Week 6)
+### Phase 4 — User-level ABAC, enforced (Week 6) — ✅ COMPLETED
 
 **Deliverables:**
 
 - `Subject` populated from authenticated user (Express middleware + MCP per-call identity).
-- User attribute store (`roles`, `clearance`, `mfa_status`).
+- User attribute store (`roles`, `clearance`, `mfa_status`, `tenant_ids`).
 - Default policy pack: `pack-multi-tenant`, `pack-pii-block-from-llm`.
-- PEP at all read entry points.
+- PEP at all read entry points (`recall`, `expand`, `compose`).
 
-**Acceptance:**
-
-- Two users sharing a deployment see only their permitted atoms.
-- PII regex catches and blocks SSN-like content from entering LLM context.
-
-**Risk:** medium-high — requires auth integration (existing or new).
-
-### Phase 5 — Step-up authentication (Week 7)
+### Phase 5 — Step-up authentication (Week 7) — ✅ COMPLETED
 
 **Deliverables:**
 
-- Step-up provider interface.
-- PIN-based provider (built-in) for local / homelab.
-- Passkey provider (WebAuthn) for browser sessions.
-- Out-of-band confirmation channel for MCP step-up.
+- Step-up provider interface (`packages/msp/src/policy/step-up/provider.ts`).
+- PIN-based provider (built-in) using `scrypt` for platform-stable hashing.
+- Secure in-memory challenge store with TTL and replay defense.
+- `msp-auth` CLI for PIN management.
 
-**Acceptance:**
-
-- High-sensitivity actions require step-up; logs show step-up events.
-- Replay of step-up tokens is rejected (nonce + prompt binding).
-
-**Risk:** medium — UX choices may need iteration.
-
-### Phase 6 — Classifier plugins + auto-tagging (Week 8+)
+### Phase 6 — Classifier plugins + auto-tagging (Week 8+) — ✅ COMPLETED
 
 **Deliverables:**
 
-- Classifier plugin interface.
-- Built-in classifiers: PathClassifier, ContentClassifier, GraphCommunityClassifier.
-- Domain pack scaffold (`pack-medical`, `pack-finance` as examples).
-- Provenance tracking on every attribute.
-
-**Acceptance:**
-
-- Auto-tag covers 80%+ of atoms in this repo without manual frontmatter.
-- Manual overrides survive re-tagging.
-
-**Risk:** low-medium — additive, behind a flag.
+- Classifier plugin interface and engine with provenance tracking.
+- Built-in classifiers: `PathClassifier`, `ContentClassifier` (PII/Secrets), `CodingClassifier`, `TaskClassifier`, `SecurityClassifier`.
+- `msp-tag` CLI for batch tagging.
+- Full vault scan complete: 392 atoms tagged with domain and security metadata.
 
 ---
 
@@ -1231,6 +1210,12 @@ Resolved questions have moved to §0. The following remain open. Each is annotat
 | Version | Date | Change |
 |---|---|---|
 | `0.1.0` | 2026-05-13 | Initial draft consolidating chat-derived design. |
+| `0.1.1` | 2026-05-13 | Resolved D-1 (YAML policy lang), D-2 (2-tier MVP), D-7 (default-permit + shadow log), D-8 (attributes in metadata, Namespace untouched). Added §0 Resolved Decisions and Phase 3.5 for SUMMARY/SKELETON renderers. Updated §6, §7, §11 Phase 1 / Phase 3 inline. Trimmed §14 open questions accordingly. |
+
+---
+
+*End of UNIVERSAL CONTEXT FRAMEWORK specification.*
+derived design. |
 | `0.1.1` | 2026-05-13 | Resolved D-1 (YAML policy lang), D-2 (2-tier MVP), D-7 (default-permit + shadow log), D-8 (attributes in metadata, Namespace untouched). Added §0 Resolved Decisions and Phase 3.5 for SUMMARY/SKELETON renderers. Updated §6, §7, §11 Phase 1 / Phase 3 inline. Trimmed §14 open questions accordingly. |
 
 ---

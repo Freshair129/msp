@@ -193,7 +193,21 @@ imports from `packages/gks` directly.
 
 ---
 
-## 7. Atom Taxonomy (v2.3)
+## 7. MSP CLI Tools (UCF & Governance)
+
+The following tools are available for system orchestration and policy enforcement:
+
+| Command | Purpose | Usage Example |
+|---|---|---|
+| `msp-auth` | Step-up auth management (PIN) | `msp-auth set-pin` |
+| `msp-tag` | Automatic attribute tagging | `msp-tag gks/ --verbose` |
+| `msp-atrophy` | Identify expired/stale knowledge | `msp-atrophy scan --root=.` |
+| `msp-genesis-exec` | Execute a Genesis Block unit | `msp-genesis-exec IDENTITY-ENGINE` |
+| `msp-validate` | Atom and protocol validation | `npm run msp:validate` |
+
+---
+
+## 8. Atom Taxonomy (v2.3)
 
 See `AGENT.md §7` for the full table. Key prefixes Gemini handles:
 

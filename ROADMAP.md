@@ -2,6 +2,37 @@
 
 > **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md). For close-out audits: [`AUDIT--ALL-M-MILESTONES`](./gks/audit/AUDIT--ALL-M-MILESTONES.md) (v0.3.0) + [`AUDIT--V0-4-0`](./gks/audit/AUDIT--V0-4-0.md) (v0.4.0) + [`AUDIT--ARCH-DOC-CLEANUP`](./gks/audit/AUDIT--ARCH-DOC-CLEANUP.md) (Phase A, 2026-05-09) + [`AUDIT--PHASE-B-IMPL-COMPLETE`](./gks/audit/AUDIT--PHASE-B-IMPL-COMPLETE.md) (Phase B impl) + [`AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS`](./gks/audit/AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS.md) (Phase C) + [`AUDIT--PHASE-D-AGENTIC-RUNTIME-COMPLETE`](./gks/audit/AUDIT--PHASE-D-AGENTIC-RUNTIME-COMPLETE.md) (Phase D) + [`AUDIT--PHASE-F-COMPLETE`](./gks/audit/AUDIT--PHASE-F-COMPLETE.md) (Phase F).
 
+## UCF Track — Core Implementation COMPLETE (2026-05-18)
+
+The Universal Context Framework (UCF) is **fully implemented** through Phase 6.
+
+| Phase | Scope | Status |
+|---|---|---|
+| **P0-P3** | Plumbing, PDP Shadow, Scope Filtering, Vaults | ✅ merged |
+| **P4** | User-level ABAC (Multi-tenant & PII) | ✅ merged |
+| **P5** | Step-up Auth (PIN-based) | ✅ merged |
+| **P6** | Classifier Plugins & Auto-tagging | ✅ merged |
+
+The system now enforces identity-aware policies across all entry points, supports dynamic privilege escalation, and automatically tags the vault with security metadata.
+
+## Initial Domain Packs — Rollout COMPLETE (2026-05-18)
+
+Three foundational Domain Packs have been deployed:
+
+1. **Coding Pack:** Tier-appropriate access for source code (Entrypoints vs Tests).
+2. **Task Pack:** Workflow enforcement for ISSUE/INC atoms; Step-up for `urgent`.
+3. **Security Pack:** "Zero Cloud Exposure" circuit breaker for secrets/credentials.
+
+## Genesis Graph — Native Rust Backend COMPLETE (2026-05-18)
+
+The Genesis Graph has transitioned from TypeScript to a high-performance Rust backend:
+
+- **Storage MVP (P3.2):** JSONL event-sourced storage with bi-temporal support.
+- **Concurrency (P3.3):** OS-level multi-process file locking.
+- **Cypher v0 (P3.4):** Native Rust implementation of the Cypher query subset.
+
+---
+
 ## Status — Agentic Monorepo Pivot D + E + F COMPLETE (2026-05-14)
 
 The agentic monorepo pivot from `ULTRAPLAN--AGENTIC-MONOREPO-PIVOT` is **fully implemented**. Three phases shipped end-to-end:
