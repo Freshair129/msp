@@ -2,7 +2,7 @@
 id: FEAT--AUTO-ADR-GENERATOR
 phase: 2
 type: feat
-status: proposed
+status: draft
 vault_id: default
 tier: genesis
 source_type: axiomatic

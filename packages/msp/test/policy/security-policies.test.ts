@@ -3,10 +3,16 @@ import { enforcePolicy } from '../../src/policy/pep.js'
 import { makeSubject, makeResource, makeContext } from '../../src/policy/types.js'
 import { loadPolicies } from '../../src/policy/loader.js'
 import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+// Resolve repo root from the test file location, NOT process.cwd() — vitest
+// runs with cwd = packages/msp when invoked via the workspace test script, and
+// `policies/` lives at the repo root.
+const packageRoot = fileURLToPath(new URL('../..', import.meta.url))
+const root = resolve(packageRoot, '../..')
 
 describe('Security Domain Pack: Policies', () => {
   let policySet: any
-  const root = resolve(process.cwd())
 
   beforeAll(async () => {
     const policiesDir = resolve(root, 'policies')

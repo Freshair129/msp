@@ -2,7 +2,7 @@
 id: BLUEPRINT--AUTO-ADR-GENERATOR
 phase: 3
 type: blueprint
-status: proposed
+status: draft
 vault_id: default
 tier: genesis
 source_type: axiomatic
@@ -11,6 +11,10 @@ tags: [msp, governance, automation, adr, plan, m9e]
 aliases: [BLUEPRINT, implementation_flow, Implementation plan]
 cluster: implementation_flow
 role: Implementation plan
+linked_symbols:
+  - file: packages/msp/src/utils/git.ts
+  - file: packages/msp/src/generator/adr-engine.ts
+  - file: packages/msp/src/cli/adr-cli.ts
 crosslinks:
   references:
     - FEAT--AUTO-ADR-GENERATOR
