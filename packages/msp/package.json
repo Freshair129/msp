@@ -20,7 +20,8 @@
     "msp-auth": "./dist/policy/step-up/cli.js",
     "msp-tag": "./dist/policy/classifiers/cli.js",
     "msp-atrophy": "./dist/validator/atrophy-cli.js",
-    "msp-adr": "./dist/generator/adr-cli.js"
+    "msp-adr": "./dist/generator/adr-cli.js",
+    "msp-recall-bench": "./dist/orchestrator/retrieval/bench-cli.js"
   },
   "scripts": {
     "dev": "concurrently \"npm run build:watch\" \"npm run test:watch\"",
@@ -33,6 +34,7 @@
     "msp:validate": "tsx src/validator/cli.ts --all --root=../..",
     "msp:atrophy": "tsx src/validator/atrophy-cli.ts",
     "msp:adr": "tsx src/generator/adr-cli.ts",
+    "msp:recall:bench": "tsx src/orchestrator/retrieval/bench-cli.ts",
     "msp:backlinks": "tsx src/memory/backlinks/cli.ts",
     "msp:check-links": "gks validate --links --root=../..",
     "msp:dispatch": "tsx src/agents/cli.ts",
